@@ -13,9 +13,8 @@ use app\index\model\User as UserModel;
 use app\admin\model\Activity as ActivityModel;
 use app\admin\model\UserActivity as UserActivityModel;
 use think\App;
-use think\Controller;
 
-class ActivityRegistration extends Controller {
+class ActivityRegistration extends BaseController {
 
     /* 声明用户模型 */
     protected $user_model;
@@ -87,13 +86,13 @@ class ActivityRegistration extends Controller {
             $conditions[] = ['ta.id', '=', $activity_id];
         }
         if ($activity_name) {
-            $conditions[] = ['ta.name', 'like', '%' . $activity_name . '%'];
+            $conditions[] = ['ta.title', 'like', '%' . $activity_name . '%'];
         }
         if ($company) {
             $conditions[] = ['tu.company', 'like', '%' . $company . '%'];
         }
         if ($apply_start && $apply_end) {
-            $conditions[] = ['ua.apply', 'between time', [$apply_start, $apply_end]];
+            $conditions[] = ['ua.apply_time', 'between time', [$apply_start, $apply_end]];
         }
         if ($mobile) {
             $conditions[] = ['tu.mobile', 'like', '%' . $mobile . '%'];

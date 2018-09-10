@@ -9,6 +9,8 @@ use app\admin\model\Invoice;
 use app\admin\model\OrderWorkplace;
 use app\admin\model\Workplace;
 use app\admin\model\Contract;
+use think\Db;
+use workflow\Db\ProcessDb;
 
 class Order extends Controller
 {
@@ -53,12 +55,14 @@ class Order extends Controller
             ->with('team')
             ->order('status')
             ->order('create_time', 'desc')
-            ->field("id,order_no,total_price,status,create_time,team_id")
+//            ->field("id,order_no,total_price,status,create_time,team_id")
             ->paginate($page_size, false, ['page' => $jump_page])->each(function ($item) {
-                unset($item['team_id']);
+//                unset($item['team_id']);
                 return $item;
             });
-        return json(['code'=> 200, 'message' => '获取列表成功', 'data' => $order]);
+//        return json(['code'=> 200, 'message' => '获取列表成功', 'data' => $order]);
+        $this->assign('list', $order);
+        return $this->fetch();
     }
 
 
@@ -79,7 +83,7 @@ class Order extends Controller
         $custom_content = request()->param('custom_content');
         $discount = request()->param('discount');
         $remark = request()->param('remark');
-        $order_status = request()->param('order_status/d', -1);
+        $order_status = request()->param('order_status/d', 0);
         $total_price = request()->param('total_price');
         $invoice_no = 'IN' . uniqid();
         // 获取发票参数
@@ -91,7 +95,7 @@ class Order extends Controller
         $account = request()->param('account');
         $address = request()->param('address');
         $phone = request()->param('phone');
-        $invoice_status = request()->param('invoice_status/d', -1);
+        $invoice_status = request()->param('invoice_status/d', 0);
         // 获取工位参数
         $workplaces = request()->param('workplaces');
 
@@ -296,34 +300,27 @@ class Order extends Controller
     }
 
     /**
-     * 订单审核
+     * 流程进度
      *
      */
-    public function check()
+    public function progress()
     {
-        // 获取参数
-        $order_no = request()->param('order_no');
-        $status = request()->param('status', 1);
-        $data = [
-            'order_no' => $order_no,
-            'status' => $status
-        ];
-        $result = $this->validate($data, 'Order.check');
-        if (true !== $result) {
-            return json(['code' => 401, 'message' => $result]);
-        }
-        $order = new OrderModel();
-        $contract = new Contract();
-        $contract->startTrans();
-        try {
-            $order->save(['status' => $status],['order_no' => $order_no]);
-            // 同时更新合同状态
-            $contract->save(['status' => 1],['order_no' => $order_no]);
-            $contract->commit();
-            return json(['code' => 200, 'message' => '审核通过']);
-        } catch (\Exception $e) {
-            $contract->rollback();
-            return json(['code' => 401, 'message' => $e->getMessage()]);
-        }
+        $order_id = request()->param('id');
+        $data = [];
+        // 审核流程
+        $run_log = ProcessDb::RunLog($order_id, 'order');
+
+        return json(['data' => $run_log]);
+
+    }
+
+    /**
+     * 查看订单(审核时）
+     */
+    public function view()
+    {
+        $info = db('tb_order')->find(input('id'));
+        $this->assign('info', $info);
+        return $this->fetch();
     }
 }
