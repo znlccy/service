@@ -13,7 +13,7 @@ use think\App;
 use app\admin\model\Activity as ActivityModel;
 use think\Controller;
 
-class Activity extends Controller {
+class Activity extends BaseController {
 
     /* 声明活动模型 */
     protected $activity_model;
