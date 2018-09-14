@@ -9,14 +9,15 @@
 
 namespace app\admin\controller;
 
+use app\admin\model\Feedback;
 use app\admin\model\Investigate as InvestigateModel;
 use app\admin\model\Option as OptionModel;
 use app\admin\model\Option;
 use app\admin\model\Question as QuestionModel;
 use app\admin\model\Question;
+use app\admin\model\Feedback as FeedbackModel;
 use think\App;
 use think\Controller;
-use think\Db;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\ModelNotFoundException;
 use think\exception\DbException;
@@ -32,6 +33,9 @@ class Investigate extends Controller {
     /* 声明选项模型 */
     protected $option_model;
 
+    /* 声明反馈模型 */
+    protected $feedback_model;
+
     /* 声明调查分页器 */
     protected $investigate_page;
 
@@ -41,6 +45,7 @@ class Investigate extends Controller {
         $this->investigate_model = new InvestigateModel();
         $this->question_model = new QuestionModel();
         $this->option_model = new OptionModel();
+        $this->feedback_model = new FeedbackModel();
         $this->investigate_page = config('page.pagination');
     }
 
@@ -313,5 +318,73 @@ class Investigate extends Controller {
     /* 问卷调查反馈 */
     public function feedback() {
 
+        /* 接收客户端提交过来的数据 */
+        $investigate_id = $this->request->param('investigate_id');
+        $id = $this->request->param('id');
+        $mobile = $this->request->param('mobile');
+        $title = $this->request->param('title');
+        $feedback_start = $this->request->param('feedback_start');
+        $feedback_end = $this->request->param('feedback_end');
+        $page_size = $this->request->param('page_size', $this->investigate_page['PAGE_SIZE']);
+        $jump_page = $this->request->param('jump_page', $this->investigate_page['JUMP_PAGE']);
+
+        /* 验证数据 */
+        $validate_data = [
+            'investigate_id'    => $investigate_id,
+            'id'                => $id,
+            'mobile'            => $mobile,
+            'title'             => $title,
+            'feedback_start'    => $feedback_start,
+            'feedback_end'      => $feedback_end,
+            'page_size'         => $page_size,
+            'jump_page'         => $jump_page
+        ];
+
+        /* 验证结果 */
+        $result = $this->validate($validate_data, 'Investigate.feedback');
+
+        if (true !== $result) {
+            return json([
+                'code'      => '401',
+                'message'   => $result
+            ]);
+        }
+
+        /* 筛选条件 */
+        $conditions = [];
+        if ($id) {
+            $conditions[] = ['fm.id', '=', $id];
+        }
+        if ($mobile) {
+            $conditions[] = ['fm.mobile', 'like', '%' . $mobile . '%'];
+        }
+        if ($feedback_start && $feedback_end) {
+            $conditions[] = ['fm.create_time', 'between time', [$feedback_start, $feedback_end]];
+        }
+        if ($title) {
+            $conditions[] = ['ti.title', 'like', '%' . $title . '%'];
+        }
+
+        /* 返回数据 */
+        $feedback = $this->feedback_model
+            ->alias('fm')
+            ->where($conditions)
+            ->where('fm.investigate_id', $investigate_id)
+            ->order('id', 'desc')
+            ->join('tb_investigate ti', 'ti.id = fm.investigate_id')
+            ->field('fm.id, ti.title, ti.id as investigate_id, fm.mobile, fm.create_time as feedback_time')
+            ->paginate($page_size, false, ['page' => $jump_page]);
+        if ($feedback) {
+            return json([
+                'code'      => '200',
+                'message'   => '反馈成功',
+                'data'      => $feedback
+            ]);
+        } else {
+            return json([
+                'code'      => '401',
+                'message'   => '反馈失败'
+            ]);
+        }
     }
 }
