@@ -41,6 +41,6 @@ class Order extends BaseModel
      */
     public function operator()
     {
-        return $this->hasOne('Admin', 'id', 'operator_id');
+        return $this->hasOne('Admin', 'id', 'operator_id')->field('id,nickname');
     }
 }

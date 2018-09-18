@@ -148,7 +148,7 @@ class User extends BasisController {
             'verify' => $verify,
         ];
 
-        $result = $this->validate($validate_data, 'User.recover_pass');
+        $result = $this->validate($validate_data, 'User.recoverPass');
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
@@ -204,7 +204,7 @@ class User extends BasisController {
             'encrypted_str' => $encrypted_str,
         ];
 
-        $result = $this->validate($validate_data, 'User.change_pass');
+        $result = $this->validate($validate_data, 'User.changePass');
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
@@ -288,7 +288,7 @@ class User extends BasisController {
         ];
 
         //实例化验证器
-        $result = $this->validate($validate_data, 'User.modify_info');
+        $result = $this->validate($validate_data, 'User.modifyInfo');
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
@@ -426,7 +426,7 @@ class User extends BasisController {
             'id'        => $id,
         ];
 
-        $result = $this->validate($validate_data, 'User.notification_detail');
+        $result = $this->validate($validate_data, 'User.notificationDetail');
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }

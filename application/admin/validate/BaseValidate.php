@@ -12,7 +12,6 @@ namespace app\admin\validate;
 use think\Validate;
 
 class BaseValidate extends Validate {
-
     protected $regex = [
         'alphaDash'   => '/^[A-Za-z0-9\-\_]+$/',
         'chs'         => '/^[\x{4e00}-\x{9fa5}]+$/u',

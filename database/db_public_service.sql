@@ -1,79 +1,72 @@
 /*
-Navicat MySQL Data Transfer
+SQLyog Ultimate v12.08 (64 bit)
+MySQL - 5.7.22 : Database - db_public_service
+*********************************************************************
+*/
 
-Source Server         : localhost_v1
-Source Server Version : 50722
-Source Host           : localhost:3306
-Source Database       : db_public_service
+/*!40101 SET NAMES utf8 */;
 
-Target Server Type    : MYSQL
-Target Server Version : 50722
-File Encoding         : 65001
+/*!40101 SET SQL_MODE=''*/;
 
-Date: 2018-08-30 19:38:09
-*/
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_public_service` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-SET FOREIGN_KEY_CHECKS=0;
+USE `db_public_service`;
 
--- ----------------------------
--- Table structure for migrations
--- ----------------------------
+/*Table structure for table `migrations` */
+
 DROP TABLE IF EXISTS `migrations`;
+
 CREATE TABLE `migrations` (
   `version` bigint(20) NOT NULL,
   `migration_name` varchar(100) DEFAULT NULL,
-  `start_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `end_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `start_time` timestamp NULL DEFAULT NULL,
+  `end_time` timestamp NULL DEFAULT NULL,
   `breakpoint` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of migrations
--- ----------------------------
-INSERT INTO `migrations` VALUES ('20180815063134', 'Company', '2018-08-15 14:56:12', '2018-08-15 14:56:13', '0');
-INSERT INTO `migrations` VALUES ('20180816023917', 'Space', '2018-08-20 01:02:54', '2018-08-20 01:02:54', '0');
-INSERT INTO `migrations` VALUES ('20180816053848', 'OperationTeam', '2018-08-20 01:02:54', '2018-08-20 01:02:54', '0');
-INSERT INTO `migrations` VALUES ('20180816072435', 'OperationTeamUsers', '2018-08-20 01:02:54', '2018-08-20 01:02:54', '0');
-INSERT INTO `migrations` VALUES ('20180816072443', 'OperationTeamRoles', '2018-08-20 01:02:54', '2018-08-20 01:02:54', '0');
-INSERT INTO `migrations` VALUES ('20180816085058', 'OtRole', '2018-08-20 11:23:28', '2018-08-20 11:23:28', '0');
-INSERT INTO `migrations` VALUES ('20180816085068', 'OtUser', '2018-08-20 11:23:28', '2018-08-20 11:23:28', '0');
-INSERT INTO `migrations` VALUES ('20180820031818', 'AddColumnOperationTeamIdToTbAdmin', '2018-08-20 11:23:28', '2018-08-20 11:23:28', '0');
-INSERT INTO `migrations` VALUES ('20180820031819', 'AddColumnOperationTeamIdToTbAdmin', '2018-08-20 11:26:41', '2018-08-20 11:26:41', '0');
-INSERT INTO `migrations` VALUES ('20180820031825', 'AddColumnOperationTeamIdToTbAdmin', '2018-08-20 11:36:53', '2018-08-20 11:36:54', '0');
-INSERT INTO `migrations` VALUES ('20180820031829', 'AddColumnOperationTeamIdToTbAdmin', '2018-08-20 11:31:46', '2018-08-20 11:31:46', '0');
-INSERT INTO `migrations` VALUES ('20180820055032', 'AddColumnToTbRole', '2018-08-20 13:51:30', '2018-08-20 13:51:30', '0');
-INSERT INTO `migrations` VALUES ('20180821071615', 'Workplace', '2018-08-21 15:49:10', '2018-08-21 15:49:10', '0');
-INSERT INTO `migrations` VALUES ('20180821093452', 'WorkplaceGroup', '2018-08-21 17:36:20', '2018-08-21 17:36:20', '0');
-INSERT INTO `migrations` VALUES ('20180821151913', 'AddColumnToOperationTeam', '2018-08-21 23:20:45', '2018-08-21 23:20:45', '0');
-INSERT INTO `migrations` VALUES ('20180822024538', 'EnterTeam', '2018-08-22 13:40:18', '2018-08-22 13:40:18', '0');
-INSERT INTO `migrations` VALUES ('20180822070705', 'AddColumToEnterTeam', '2018-08-22 15:08:34', '2018-08-22 15:08:34', '0');
-INSERT INTO `migrations` VALUES ('20180822074150', 'EnterTeamMember', '2018-08-22 15:52:52', '2018-08-22 15:52:52', '0');
-INSERT INTO `migrations` VALUES ('20180822095612', 'Linkman', '2018-08-22 18:18:30', '2018-08-22 18:18:30', '0');
-INSERT INTO `migrations` VALUES ('20180822095613', 'Linkman', '2018-08-23 10:01:39', '2018-08-23 10:01:39', '0');
-INSERT INTO `migrations` VALUES ('20180822095614', 'Linkman', '2018-08-23 10:26:46', '2018-08-23 10:26:46', '0');
-INSERT INTO `migrations` VALUES ('20180823055426', 'Development', '2018-08-23 13:59:22', '2018-08-23 13:59:22', '0');
-INSERT INTO `migrations` VALUES ('20180823100401', 'Venue', '2018-08-23 19:51:25', '2018-08-23 19:51:25', '0');
-INSERT INTO `migrations` VALUES ('20180824073432', 'Reservation', '2018-08-24 15:41:40', '2018-08-24 15:41:40', '0');
-INSERT INTO `migrations` VALUES ('20180824092819', 'Equipment', '2018-08-24 17:43:44', '2018-08-24 17:43:44', '0');
-INSERT INTO `migrations` VALUES ('20180824094404', 'EquipmentType', '2018-08-24 17:45:11', '2018-08-24 17:45:11', '0');
-INSERT INTO `migrations` VALUES ('20180826060628', 'Department', '2018-08-26 14:09:53', '2018-08-26 14:09:53', '0');
-INSERT INTO `migrations` VALUES ('20180826071444', 'Repair', '2018-08-26 15:25:05', '2018-08-26 15:25:05', '0');
-INSERT INTO `migrations` VALUES ('20180826094118', 'Contract', '2018-08-27 11:58:16', '2018-08-27 11:58:16', '0');
-INSERT INTO `migrations` VALUES ('20180826094119', 'Contract', '2018-08-27 11:54:13', '2018-08-27 11:54:13', '0');
-INSERT INTO `migrations` VALUES ('20180826094128', 'Contract', '2018-08-27 11:59:52', '2018-08-27 11:59:52', '0');
-INSERT INTO `migrations` VALUES ('20180826094313', 'ContractTemplate', '2018-08-27 11:54:33', '2018-08-27 11:54:33', '0');
-INSERT INTO `migrations` VALUES ('20180826094314', 'ContractTemplate', '2018-08-27 11:58:16', '2018-08-27 11:58:16', '0');
-INSERT INTO `migrations` VALUES ('20180827032943', 'HistoryTemplate', '2018-08-27 11:56:51', '2018-08-27 11:56:51', '0');
-INSERT INTO `migrations` VALUES ('20180827032944', 'HistoryTemplate', '2018-08-27 11:58:16', '2018-08-27 11:58:16', '0');
-INSERT INTO `migrations` VALUES ('20180827083334', 'Order', '2018-08-27 18:09:25', '2018-08-27 18:09:25', '0');
-INSERT INTO `migrations` VALUES ('20180827094558', 'Invoice', '2018-08-27 18:09:25', '2018-08-27 18:09:25', '0');
-INSERT INTO `migrations` VALUES ('20180828035719', 'OrderWorkplace', '2018-08-28 13:34:39', '2018-08-28 13:34:39', '0');
+/*Data for the table `migrations` */
 
--- ----------------------------
--- Table structure for tb_admin
--- ----------------------------
+insert  into `migrations`(`version`,`migration_name`,`start_time`,`end_time`,`breakpoint`) values (20180816023917,'Space','2018-08-20 01:02:54','2018-08-20 01:02:54',0),(20180816053848,'OperationTeam','2018-08-20 01:02:54','2018-08-20 01:02:54',0),(20180816072435,'OperationTeamUsers','2018-08-20 01:02:54','2018-08-20 01:02:54',0),(20180816072443,'OperationTeamRoles','2018-08-20 01:02:54','2018-08-20 01:02:54',0),(20180816085058,'OtRole','2018-08-20 11:23:28','2018-08-20 11:23:28',0),(20180816085068,'OtUser','2018-08-20 11:23:28','2018-08-20 11:23:28',0),(20180820031818,'AddColumnOperationTeamIdToTbAdmin','2018-08-20 11:23:28','2018-08-20 11:23:28',0),(20180820031819,'AddColumnOperationTeamIdToTbAdmin','2018-08-20 11:26:41','2018-08-20 11:26:41',0),(20180820031825,'AddColumnOperationTeamIdToTbAdmin','2018-08-20 11:36:53','2018-08-20 11:36:54',0),(20180820031829,'AddColumnOperationTeamIdToTbAdmin','2018-08-20 11:31:46','2018-08-20 11:31:46',0),(20180820055032,'AddColumnToTbRole','2018-08-20 13:51:30','2018-08-20 13:51:30',0),(20180821071615,'Workplace','2018-08-21 15:49:10','2018-08-21 15:49:10',0),(20180821093452,'WorkplaceGroup','2018-08-21 17:36:20','2018-08-21 17:36:20',0),(20180821151913,'AddColumnToOperationTeam','2018-08-21 23:20:45','2018-08-21 23:20:45',0),(20180822024538,'EnterTeam','2018-08-22 13:40:18','2018-08-22 13:40:18',0),(20180822070705,'AddColumToEnterTeam','2018-08-22 15:08:34','2018-08-22 15:08:34',0),(20180822074150,'EnterTeamMember','2018-08-22 15:52:52','2018-08-22 15:52:52',0),(20180822095612,'Linkman','2018-08-22 18:18:30','2018-08-22 18:18:30',0),(20180822095613,'Linkman','2018-08-23 10:01:39','2018-08-23 10:01:39',0),(20180822095614,'Linkman','2018-08-23 10:26:46','2018-08-23 10:26:46',0),(20180823055426,'Development','2018-08-23 13:59:22','2018-08-23 13:59:22',0),(20180823100401,'Venue','2018-08-23 19:51:25','2018-08-23 19:51:25',0),(20180824073432,'Reservation','2018-08-24 15:41:40','2018-08-24 15:41:40',0),(20180824092819,'Equipment','2018-08-24 17:43:44','2018-08-24 17:43:44',0),(20180824094404,'EquipmentType','2018-08-24 17:45:11','2018-08-24 17:45:11',0),(20180826060628,'Department','2018-08-26 14:09:53','2018-08-26 14:09:53',0),(20180826071444,'Repair','2018-08-26 15:25:05','2018-08-26 15:25:05',0),(20180826094118,'Contract','2018-08-27 11:58:16','2018-08-27 11:58:16',0),(20180826094119,'Contract','2018-08-27 11:54:13','2018-08-27 11:54:13',0),(20180826094128,'Contract','2018-08-27 11:59:52','2018-08-27 11:59:52',0),(20180826094313,'ContractTemplate','2018-08-27 11:54:33','2018-08-27 11:54:33',0),(20180826094314,'ContractTemplate','2018-08-27 11:58:16','2018-08-27 11:58:16',0),(20180827032943,'HistoryTemplate','2018-08-27 11:56:51','2018-08-27 11:56:51',0),(20180827032944,'HistoryTemplate','2018-08-27 11:58:16','2018-08-27 11:58:16',0),(20180827083334,'Order','2018-08-27 18:09:25','2018-08-27 18:09:25',0),(20180827094558,'Invoice','2018-08-27 18:09:25','2018-08-27 18:09:25',0),(20180828035719,'OrderWorkplace','2018-08-28 13:34:39','2018-08-28 13:34:39',0),(20180904034026,'DepartmentUser','2018-09-04 11:51:00','2018-09-04 11:51:01',0),(20180905051327,'OrderFlow','2018-09-10 16:02:15','2018-09-10 16:02:15',0),(20180905051334,'CntFlow','2018-09-10 16:02:15','2018-09-10 16:02:15',0),(20180910054844,'Incidental','2018-09-10 16:02:15','2018-09-10 16:02:16',0),(20180910054845,'Incidental','2018-09-10 18:12:16','2018-09-10 18:12:16',0),(20180910060815,'IncidentalOrder','2018-09-10 16:02:16','2018-09-10 16:02:16',0);
+
+/*Table structure for table `tb_activity` */
+
+DROP TABLE IF EXISTS `tb_activity`;
+
+CREATE TABLE `tb_activity` (
+  `id` int(12) NOT NULL AUTO_INCREMENT COMMENT '活动主键',
+  `title` varchar(255) DEFAULT '' COMMENT '活动标题',
+  `content` text COMMENT '活动内容',
+  `limit` int(32) DEFAULT '0' COMMENT '限制人数',
+  `register` int(32) DEFAULT '0' COMMENT '注册人数',
+  `status` tinyint(2) DEFAULT '1' COMMENT '活动状态',
+  `recommend` tinyint(2) DEFAULT '1' COMMENT '活动推荐',
+  `picture` varchar(255) DEFAULT '' COMMENT '活动图片',
+  `address` varchar(255) DEFAULT '' COMMENT '简写地址',
+  `location` varchar(255) DEFAULT NULL COMMENT '详细地址',
+  `begin_time` datetime DEFAULT NULL COMMENT '开始时间',
+  `end_time` datetime DEFAULT NULL COMMENT '结束时间',
+  `apply_time` datetime DEFAULT NULL COMMENT '申请时间',
+  `publisher` varchar(255) DEFAULT '' COMMENT '活动发布者',
+  `auditor_method` tinyint(2) DEFAULT '0' COMMENT '审核方式',
+  `rich_text` text COMMENT '活动富文本',
+  `create_time` datetime DEFAULT NULL COMMENT '活动创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '活动更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_activity` */
+
+insert  into `tb_activity`(`id`,`title`,`content`,`limit`,`register`,`status`,`recommend`,`picture`,`address`,`location`,`begin_time`,`end_time`,`apply_time`,`publisher`,`auditor_method`,`rich_text`,`create_time`,`update_time`) values (1,'2区撒旦法','2asfasf',0,0,1,1,'/images/20180907/ba8caed132632bbc3a4b1a306731d435.png','',NULL,NULL,NULL,NULL,NULL,0,'werwerwr','2018-09-07 17:31:26','2018-09-07 17:31:26'),(2,'2区撒旦法','2asfasf',0,0,0,1,'/images/20180907/ba8caed132632bbc3a4b1a306731d435.png','',NULL,NULL,NULL,NULL,NULL,0,'werwerwr','2018-09-07 17:41:36','2018-09-07 17:43:16'),(3,'qwerqwre','q23rqwerwer',0,0,1,0,'/images/20180907/ba8caed132632bbc3a4b1a306731d435.png','',NULL,NULL,NULL,NULL,NULL,0,'werfwerwer','2018-09-07 17:44:14','2018-09-07 17:46:33'),(4,'沃尔沃去玩儿群翁','沃尔沃',NULL,0,1,1,'/images/20180914/dc2f8c281ebb0793a32b2d9f7f38c0b9.png',NULL,NULL,NULL,NULL,NULL,'',0,'23热是东方卫视地方','2018-09-14 15:35:14','2018-09-14 15:35:14');
+
+/*Table structure for table `tb_admin` */
+
 DROP TABLE IF EXISTS `tb_admin`;
+
 CREATE TABLE `tb_admin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL DEFAULT '' COMMENT '用户账号',
@@ -83,7 +76,7 @@ CREATE TABLE `tb_admin` (
   `email` varchar(50) NOT NULL DEFAULT '' COMMENT '邮箱',
   `real_name` varchar(50) NOT NULL DEFAULT '' COMMENT '真实姓名',
   `status` int(1) NOT NULL DEFAULT '0' COMMENT '用户状态',
-  `create_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `create_ip` varchar(80) DEFAULT '' COMMENT '创建的IP',
   `login_time` timestamp NULL DEFAULT NULL COMMENT '登录时间',
@@ -94,59 +87,28 @@ CREATE TABLE `tb_admin` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
--- ----------------------------
--- Records of tb_admin
--- ----------------------------
-INSERT INTO `tb_admin` VALUES ('1', 'zhangsan', '01d7f40760960e7bd9443513f22ab9af', '张三', '', '', '0', '1', '2018-08-22 01:25:04', '2018-08-22 01:25:04', '', '2018-08-01 00:39:00', '', '1', '1', '0');
-INSERT INTO `tb_admin` VALUES ('2', 'lisi', '	25d55ad283aa400af464c76d713c07ad', '李四', '18915542276', '', '张三丰', '1', '2018-08-22 01:22:05', '2018-08-22 01:22:05', '127.0.0.1', '2018-08-01 00:39:00', '127.0.0.1', '1', '0', '0');
-INSERT INTO `tb_admin` VALUES ('3', 'zhoawu', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '张三丰', '1', '2018-08-22 01:22:08', '2018-08-22 01:22:08', '127.0.0.1', '2018-08-01 00:39:00', '', '0', '0', '0');
-INSERT INTO `tb_admin` VALUES ('4', 'chenliu', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '张三丰', '1', '2018-08-22 01:22:10', '2018-08-22 01:22:10', '127.0.0.1', '2018-08-01 00:39:00', '', '0', '0', '0');
-INSERT INTO `tb_admin` VALUES ('5', 'zhangqi', 'c4ded2b85cc5be82fa1d2464eba9a7d3', '', '', '', '李四', '1', '2018-08-22 01:22:12', '2018-08-22 01:22:12', '127.0.0.1', '2018-08-01 00:39:00', '', '0', '0', '0');
-INSERT INTO `tb_admin` VALUES ('6', 'chensi', 'e10adc3949ba59abbe56e057f20f883e', '', '15900785383', '', '张三丰', '1', '2018-08-22 01:22:14', '2018-08-22 01:22:14', '127.0.0.1', '2018-08-01 00:39:00', '', '0', '0', '0');
-INSERT INTO `tb_admin` VALUES ('7', 'chensi', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '张三丰', '1', '2018-08-22 01:22:16', '2018-08-22 01:22:16', '127.0.0.1', '2018-08-01 00:39:00', '', '0', '0', '0');
-INSERT INTO `tb_admin` VALUES ('8', '', '5053f342b0dff7356813525495497267', '', '18915542274', '', '过', '1', '2018-08-22 01:22:18', '2018-08-22 01:22:18', '124.74.243.30', '2018-08-01 00:46:39', '', '0', '0', '0');
-INSERT INTO `tb_admin` VALUES ('9', '', '5053f342b0dff7356813525495497267', '', '18915542274', '', '过', '1', '2018-08-22 01:22:20', '2018-08-22 01:22:20', '124.74.243.30', '2018-08-01 00:39:00', '', '0', '0', '0');
-INSERT INTO `tb_admin` VALUES ('10', '', '69ef1f4520ae237e4eddc8da5a7fa9b8', '', '12475412585', '', '给', '1', '2018-08-22 01:22:22', '2018-08-22 01:22:22', '124.74.243.30', '2018-08-01 00:47:39', '', '0', '0', '0');
-INSERT INTO `tb_admin` VALUES ('16', '', '25d55ad283aa400af464c76d713c07ad', '', '13967741060', '', '王', '1', '2018-08-22 01:32:09', '2018-08-22 01:32:09', '124.74.243.30', '2018-08-01 00:47:39', '', '1', '0', '0');
-INSERT INTO `tb_admin` VALUES ('18', '', '25d55ad283aa400af464c76d713c07ad', '', '17826815702', '', '王成威', '1', '2018-08-22 01:11:30', '2018-08-22 01:11:30', '::1', null, '', '1', '1', '0');
+/*Data for the table `tb_admin` */
 
--- ----------------------------
--- Table structure for tb_admin_role
--- ----------------------------
+insert  into `tb_admin`(`id`,`username`,`password`,`nickname`,`mobile`,`email`,`real_name`,`status`,`create_time`,`update_time`,`create_ip`,`login_time`,`login_ip`,`authentication`,`operation_team_id`,`department_id`) values (1,'zhangsan','25d55ad283aa400af464c76d713c07ad','张三','17826815702','','0',1,'2018-09-07 16:46:02','2018-09-17 14:54:44','','2018-08-01 00:39:00','',1,1,2),(2,'lisi','25d55ad283aa400af464c76d713c07ad','李四','18915542276','','张三丰',1,'2018-09-07 16:03:54','2018-09-07 16:03:54','127.0.0.1','2018-08-01 00:39:00','127.0.0.1',1,0,0),(3,'zhoawu','e10adc3949ba59abbe56e057f20f883e','张三丰','','','张三丰',1,'2018-09-07 16:39:40','2018-09-07 16:39:40','127.0.0.1','2018-08-01 00:39:00','',0,0,0),(4,'chenliu','e10adc3949ba59abbe56e057f20f883e','张三丰','','','张三丰',1,'2018-09-07 16:39:32','2018-09-07 16:39:32','127.0.0.1','2018-08-01 00:39:00','',0,0,0),(5,'zhangqi','25d55ad283aa400af464c76d713c07ad','李四','15900785384','','李四',1,'2018-09-07 18:52:47','2018-09-07 18:52:47','127.0.0.1','2018-08-01 00:39:00','',1,0,1),(6,'chensi','25d55ad283aa400af464c76d713c07ad','张三丰','15900785383','','张三丰',1,'2018-09-07 16:39:25','2018-09-07 16:39:25','127.0.0.1','2018-08-01 00:39:00','',1,0,0),(7,'chensi','e10adc3949ba59abbe56e057f20f883e','张三丰','','','张三丰',1,'2018-09-07 16:39:24','2018-09-07 16:39:24','127.0.0.1','2018-08-01 00:39:00','',0,0,0),(8,'','5053f342b0dff7356813525495497267','过','18915542274','','过',1,'2018-09-07 16:39:21','2018-09-07 16:39:21','124.74.243.30','2018-08-01 00:46:39','',0,0,0),(9,'','5053f342b0dff7356813525495497267','过','18915542275','','过',1,'2018-09-07 18:52:41','2018-09-07 18:52:41','124.74.243.30','2018-08-01 00:39:00','',0,0,0),(10,'','69ef1f4520ae237e4eddc8da5a7fa9b8','给','12475412585','','给',1,'2018-09-07 16:39:18','2018-09-07 16:39:18','124.74.243.30','2018-08-01 00:47:39','',0,0,0),(16,'','25d55ad283aa400af464c76d713c07ad','王','13967741060','','王',1,'2018-09-12 13:57:27','2018-09-12 13:57:27','124.74.243.30','2018-08-01 00:47:39','',1,4,4),(18,'','25d55ad283aa400af464c76d713c07ad','王','17826815702','','王成威',1,'2018-09-17 11:32:49','2018-09-17 11:32:49','::1','2018-08-01 00:47:39','',1,1,1);
+
+/*Table structure for table `tb_admin_role` */
+
 DROP TABLE IF EXISTS `tb_admin_role`;
+
 CREATE TABLE `tb_admin_role` (
   `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
   `role_id` int(11) NOT NULL DEFAULT '0' COMMENT '角色id',
   PRIMARY KEY (`user_id`,`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色对应关系';
 
--- ----------------------------
--- Records of tb_admin_role
--- ----------------------------
-INSERT INTO `tb_admin_role` VALUES ('1', '1');
-INSERT INTO `tb_admin_role` VALUES ('1', '2');
-INSERT INTO `tb_admin_role` VALUES ('2', '1');
-INSERT INTO `tb_admin_role` VALUES ('2', '2');
-INSERT INTO `tb_admin_role` VALUES ('4', '2');
-INSERT INTO `tb_admin_role` VALUES ('5', '1');
-INSERT INTO `tb_admin_role` VALUES ('7', '1');
-INSERT INTO `tb_admin_role` VALUES ('7', '2');
-INSERT INTO `tb_admin_role` VALUES ('8', '1');
-INSERT INTO `tb_admin_role` VALUES ('8', '2');
-INSERT INTO `tb_admin_role` VALUES ('9', '1');
-INSERT INTO `tb_admin_role` VALUES ('9', '2');
-INSERT INTO `tb_admin_role` VALUES ('10', '1');
-INSERT INTO `tb_admin_role` VALUES ('10', '2');
-INSERT INTO `tb_admin_role` VALUES ('11', '1');
-INSERT INTO `tb_admin_role` VALUES ('11', '2');
-INSERT INTO `tb_admin_role` VALUES ('15', '1');
-INSERT INTO `tb_admin_role` VALUES ('16', '1');
-INSERT INTO `tb_admin_role` VALUES ('18', '1');
+/*Data for the table `tb_admin_role` */
 
--- ----------------------------
--- Table structure for tb_area
--- ----------------------------
+insert  into `tb_admin_role`(`user_id`,`role_id`) values (1,1),(1,2),(2,1),(2,2),(4,2),(5,1),(7,1),(7,2),(8,1),(8,2),(9,1),(9,2),(10,1),(10,2),(11,1),(11,2),(15,1),(16,1),(16,16),(18,1),(18,2),(18,16);
+
+/*Table structure for table `tb_area` */
+
 DROP TABLE IF EXISTS `tb_area`;
+
 CREATE TABLE `tb_area` (
   `id` int(6) NOT NULL,
   `name` varchar(100) DEFAULT NULL,
@@ -155,3522 +117,34 @@ CREATE TABLE `tb_area` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
--- ----------------------------
--- Records of tb_area
--- ----------------------------
-INSERT INTO `tb_area` VALUES ('330503', '南浔区', '330500', '3');
-INSERT INTO `tb_area` VALUES ('513223', '茂县', '513200', '3');
-INSERT INTO `tb_area` VALUES ('430523', '邵阳县', '430500', '3');
-INSERT INTO `tb_area` VALUES ('632222', '祁连县', '632200', '3');
-INSERT INTO `tb_area` VALUES ('231225', '明水县', '231200', '3');
-INSERT INTO `tb_area` VALUES ('140622', '应县', '140600', '3');
-INSERT INTO `tb_area` VALUES ('530625', '永善县', '530600', '3');
-INSERT INTO `tb_area` VALUES ('513332', '石渠县', '513300', '3');
-INSERT INTO `tb_area` VALUES ('431201', '市辖区', '431200', '3');
-INSERT INTO `tb_area` VALUES ('231202', '北林区', '231200', '3');
-INSERT INTO `tb_area` VALUES ('652323', '呼图壁县', '652300', '3');
-INSERT INTO `tb_area` VALUES ('610821', '神木县', '610800', '3');
-INSERT INTO `tb_area` VALUES ('150801', '市辖区', '150800', '3');
-INSERT INTO `tb_area` VALUES ('330300', '温州市', '330000', '2');
-INSERT INTO `tb_area` VALUES ('140421', '长治县', '140400', '3');
-INSERT INTO `tb_area` VALUES ('520323', '绥阳县', '520300', '3');
-INSERT INTO `tb_area` VALUES ('441322', '博罗县', '441300', '3');
-INSERT INTO `tb_area` VALUES ('320282', '宜兴市', '320200', '3');
-INSERT INTO `tb_area` VALUES ('510923', '大英县', '510900', '3');
-INSERT INTO `tb_area` VALUES ('350505', '泉港区', '350500', '3');
-INSERT INTO `tb_area` VALUES ('371101', '市辖区', '371100', '3');
-INSERT INTO `tb_area` VALUES ('530630', '水富县', '530600', '3');
-INSERT INTO `tb_area` VALUES ('433127', '永顺县', '433100', '3');
-INSERT INTO `tb_area` VALUES ('451102', '八步区', '451100', '3');
-INSERT INTO `tb_area` VALUES ('340506', '博望区', '340500', '3');
-INSERT INTO `tb_area` VALUES ('520627', '沿河土家族自治县', '520600', '3');
-INSERT INTO `tb_area` VALUES ('640122', '贺兰县', '640100', '3');
-INSERT INTO `tb_area` VALUES ('360728', '定南县', '360700', '3');
-INSERT INTO `tb_area` VALUES ('360501', '市辖区', '360500', '3');
-INSERT INTO `tb_area` VALUES ('441701', '市辖区', '441700', '3');
-INSERT INTO `tb_area` VALUES ('431223', '辰溪县', '431200', '3');
-INSERT INTO `tb_area` VALUES ('632521', '共和县', '632500', '3');
-INSERT INTO `tb_area` VALUES ('371302', '兰山区', '371300', '3');
-INSERT INTO `tb_area` VALUES ('623025', '玛曲县', '623000', '3');
-INSERT INTO `tb_area` VALUES ('420804', '掇刀区', '420800', '3');
-INSERT INTO `tb_area` VALUES ('230604', '让胡路区', '230600', '3');
-INSERT INTO `tb_area` VALUES ('130110', '鹿泉区', '130100', '3');
-INSERT INTO `tb_area` VALUES ('469006', '万宁市', '469000', '3');
-INSERT INTO `tb_area` VALUES ('510132', '新津县', '510100', '3');
-INSERT INTO `tb_area` VALUES ('620301', '市辖区', '620300', '3');
-INSERT INTO `tb_area` VALUES ('620400', '白银市', '620000', '2');
-INSERT INTO `tb_area` VALUES ('422825', '宣恩县', '422800', '3');
-INSERT INTO `tb_area` VALUES ('131122', '武邑县', '131100', '3');
-INSERT INTO `tb_area` VALUES ('210503', '溪湖区', '210500', '3');
-INSERT INTO `tb_area` VALUES ('321081', '仪征市', '321000', '3');
-INSERT INTO `tb_area` VALUES ('441800', '清远市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('330305', '洞头区', '330300', '3');
-INSERT INTO `tb_area` VALUES ('451200', '河池市', '450000', '2');
-INSERT INTO `tb_area` VALUES ('510800', '广元市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('410600', '鹤壁市', '410000', '2');
-INSERT INTO `tb_area` VALUES ('350427', '沙县', '350400', '3');
-INSERT INTO `tb_area` VALUES ('540237', '岗巴县', '540200', '3');
-INSERT INTO `tb_area` VALUES ('130609', '徐水区', '130600', '3');
-INSERT INTO `tb_area` VALUES ('513323', '丹巴县', '513300', '3');
-INSERT INTO `tb_area` VALUES ('530700', '丽江市', '530000', '2');
-INSERT INTO `tb_area` VALUES ('450502', '海城区', '450500', '3');
-INSERT INTO `tb_area` VALUES ('650102', '天山区', '650100', '3');
-INSERT INTO `tb_area` VALUES ('130623', '涞水县', '130600', '3');
-INSERT INTO `tb_area` VALUES ('450621', '上思县', '450600', '3');
-INSERT INTO `tb_area` VALUES ('469023', '澄迈县', '469000', '3');
-INSERT INTO `tb_area` VALUES ('341181', '天长市', '341100', '3');
-INSERT INTO `tb_area` VALUES ('710000', '台湾省', '0', '1');
-INSERT INTO `tb_area` VALUES ('370124', '平阴县', '370100', '3');
-INSERT INTO `tb_area` VALUES ('340225', '无为县', '340200', '3');
-INSERT INTO `tb_area` VALUES ('610430', '淳化县', '610400', '3');
-INSERT INTO `tb_area` VALUES ('620201', '市辖区', '620200', '3');
-INSERT INTO `tb_area` VALUES ('511381', '阆中市', '511300', '3');
-INSERT INTO `tb_area` VALUES ('430423', '衡山县', '430400', '3');
-INSERT INTO `tb_area` VALUES ('371321', '沂南县', '371300', '3');
-INSERT INTO `tb_area` VALUES ('371700', '菏泽市', '370000', '2');
-INSERT INTO `tb_area` VALUES ('220523', '辉南县', '220500', '3');
-INSERT INTO `tb_area` VALUES ('530922', '云县', '530900', '3');
-INSERT INTO `tb_area` VALUES ('410883', '孟州市', '410800', '3');
-INSERT INTO `tb_area` VALUES ('430703', '鼎城区', '430700', '3');
-INSERT INTO `tb_area` VALUES ('330921', '岱山县', '330900', '3');
-INSERT INTO `tb_area` VALUES ('542430', '尼玛县', '542400', '3');
-INSERT INTO `tb_area` VALUES ('330103', '下城区', '330100', '3');
-INSERT INTO `tb_area` VALUES ('141027', '浮山县', '141000', '3');
-INSERT INTO `tb_area` VALUES ('445102', '湘桥区', '445100', '3');
-INSERT INTO `tb_area` VALUES ('150501', '市辖区', '150500', '3');
-INSERT INTO `tb_area` VALUES ('350925', '周宁县', '350900', '3');
-INSERT INTO `tb_area` VALUES ('451300', '来宾市', '450000', '2');
-INSERT INTO `tb_area` VALUES ('511101', '市辖区', '511100', '3');
-INSERT INTO `tb_area` VALUES ('150430', '敖汉旗', '150400', '3');
-INSERT INTO `tb_area` VALUES ('650421', '鄯善县', '650400', '3');
-INSERT INTO `tb_area` VALUES ('610103', '碑林区', '610100', '3');
-INSERT INTO `tb_area` VALUES ('510801', '市辖区', '510800', '3');
-INSERT INTO `tb_area` VALUES ('440282', '南雄市', '440200', '3');
-INSERT INTO `tb_area` VALUES ('320923', '阜宁县', '320900', '3');
-INSERT INTO `tb_area` VALUES ('150601', '市辖区', '150600', '3');
-INSERT INTO `tb_area` VALUES ('450900', '玉林市', '450000', '2');
-INSERT INTO `tb_area` VALUES ('411121', '舞阳县', '411100', '3');
-INSERT INTO `tb_area` VALUES ('150781', '满洲里市', '150700', '3');
-INSERT INTO `tb_area` VALUES ('150701', '市辖区', '150700', '3');
-INSERT INTO `tb_area` VALUES ('440882', '雷州市', '440800', '3');
-INSERT INTO `tb_area` VALUES ('110000', '北京市', '0', '1');
-INSERT INTO `tb_area` VALUES ('430902', '资阳区', '430900', '3');
-INSERT INTO `tb_area` VALUES ('320803', '淮安区', '320800', '3');
-INSERT INTO `tb_area` VALUES ('141034', '汾西县', '141000', '3');
-INSERT INTO `tb_area` VALUES ('140601', '市辖区', '140600', '3');
-INSERT INTO `tb_area` VALUES ('510121', '金堂县', '510100', '3');
-INSERT INTO `tb_area` VALUES ('341122', '来安县', '341100', '3');
-INSERT INTO `tb_area` VALUES ('441500', '汕尾市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('620921', '金塔县', '620900', '3');
-INSERT INTO `tb_area` VALUES ('340825', '太湖县', '340800', '3');
-INSERT INTO `tb_area` VALUES ('320303', '云龙区', '320300', '3');
-INSERT INTO `tb_area` VALUES ('450332', '恭城瑶族自治县', '450300', '3');
-INSERT INTO `tb_area` VALUES ('653221', '和田县', '653200', '3');
-INSERT INTO `tb_area` VALUES ('430923', '安化县', '430900', '3');
-INSERT INTO `tb_area` VALUES ('540529', '隆子县', '540500', '3');
-INSERT INTO `tb_area` VALUES ('510131', '蒲江县', '510100', '3');
-INSERT INTO `tb_area` VALUES ('620724', '高台县', '620700', '3');
-INSERT INTO `tb_area` VALUES ('540230', '康马县', '540200', '3');
-INSERT INTO `tb_area` VALUES ('532523', '屏边苗族自治县', '532500', '3');
-INSERT INTO `tb_area` VALUES ('451103', '平桂区', '451100', '3');
-INSERT INTO `tb_area` VALUES ('230781', '铁力市', '230700', '3');
-INSERT INTO `tb_area` VALUES ('211005', '弓长岭区', '211000', '3');
-INSERT INTO `tb_area` VALUES ('210105', '皇姑区', '210100', '3');
-INSERT INTO `tb_area` VALUES ('130927', '南皮县', '130900', '3');
-INSERT INTO `tb_area` VALUES ('150525', '奈曼旗', '150500', '3');
-INSERT INTO `tb_area` VALUES ('610113', '雁塔区', '610100', '3');
-INSERT INTO `tb_area` VALUES ('510704', '游仙区', '510700', '3');
-INSERT INTO `tb_area` VALUES ('350502', '鲤城区', '350500', '3');
-INSERT INTO `tb_area` VALUES ('450804', '覃塘区', '450800', '3');
-INSERT INTO `tb_area` VALUES ('340801', '市辖区', '340800', '3');
-INSERT INTO `tb_area` VALUES ('120106', '红桥区', '120100', '3');
-INSERT INTO `tb_area` VALUES ('510821', '旺苍县', '510800', '3');
-INSERT INTO `tb_area` VALUES ('141000', '临汾市', '140000', '2');
-INSERT INTO `tb_area` VALUES ('310117', '松江区', '310100', '3');
-INSERT INTO `tb_area` VALUES ('450103', '青秀区', '450100', '3');
-INSERT INTO `tb_area` VALUES ('330127', '淳安县', '330100', '3');
-INSERT INTO `tb_area` VALUES ('360924', '宜丰县', '360900', '3');
-INSERT INTO `tb_area` VALUES ('510603', '旌阳区', '510600', '3');
-INSERT INTO `tb_area` VALUES ('331004', '路桥区', '331000', '3');
-INSERT INTO `tb_area` VALUES ('632801', '格尔木市', '632800', '3');
-INSERT INTO `tb_area` VALUES ('450127', '横县', '450100', '3');
-INSERT INTO `tb_area` VALUES ('411423', '宁陵县', '411400', '3');
-INSERT INTO `tb_area` VALUES ('130435', '曲周县', '130400', '3');
-INSERT INTO `tb_area` VALUES ('411328', '唐河县', '411300', '3');
-INSERT INTO `tb_area` VALUES ('360827', '遂川县', '360800', '3');
-INSERT INTO `tb_area` VALUES ('621002', '西峰区', '621000', '3');
-INSERT INTO `tb_area` VALUES ('150825', '乌拉特后旗', '150800', '3');
-INSERT INTO `tb_area` VALUES ('610501', '市辖区', '610500', '3');
-INSERT INTO `tb_area` VALUES ('469021', '定安县', '469000', '3');
-INSERT INTO `tb_area` VALUES ('370103', '市中区', '370100', '3');
-INSERT INTO `tb_area` VALUES ('350701', '市辖区', '350700', '3');
-INSERT INTO `tb_area` VALUES ('510725', '梓潼县', '510700', '3');
-INSERT INTO `tb_area` VALUES ('632725', '囊谦县', '632700', '3');
-INSERT INTO `tb_area` VALUES ('210603', '振兴区', '210600', '3');
-INSERT INTO `tb_area` VALUES ('110116', '怀柔区', '110100', '3');
-INSERT INTO `tb_area` VALUES ('450722', '浦北县', '450700', '3');
-INSERT INTO `tb_area` VALUES ('540526', '措美县', '540500', '3');
-INSERT INTO `tb_area` VALUES ('620525', '张家川回族自治县', '620500', '3');
-INSERT INTO `tb_area` VALUES ('361181', '德兴市', '361100', '3');
-INSERT INTO `tb_area` VALUES ('371482', '禹城市', '371400', '3');
-INSERT INTO `tb_area` VALUES ('140222', '天镇县', '140200', '3');
-INSERT INTO `tb_area` VALUES ('140000', '山西省', '0', '1');
-INSERT INTO `tb_area` VALUES ('150822', '磴口县', '150800', '3');
-INSERT INTO `tb_area` VALUES ('222400', '延边朝鲜族自治州', '220000', '2');
-INSERT INTO `tb_area` VALUES ('532922', '漾濞彝族自治县', '532900', '3');
-INSERT INTO `tb_area` VALUES ('411727', '汝南县', '411700', '3');
-INSERT INTO `tb_area` VALUES ('530622', '巧家县', '530600', '3');
-INSERT INTO `tb_area` VALUES ('620401', '市辖区', '620400', '3');
-INSERT INTO `tb_area` VALUES ('640105', '西夏区', '640100', '3');
-INSERT INTO `tb_area` VALUES ('350626', '东山县', '350600', '3');
-INSERT INTO `tb_area` VALUES ('411601', '市辖区', '411600', '3');
-INSERT INTO `tb_area` VALUES ('440704', '江海区', '440700', '3');
-INSERT INTO `tb_area` VALUES ('450521', '合浦县', '450500', '3');
-INSERT INTO `tb_area` VALUES ('540502', '乃东区', '540500', '3');
-INSERT INTO `tb_area` VALUES ('150428', '喀喇沁旗', '150400', '3');
-INSERT INTO `tb_area` VALUES ('230421', '萝北县', '230400', '3');
-INSERT INTO `tb_area` VALUES ('140400', '长治市', '140000', '2');
-INSERT INTO `tb_area` VALUES ('411081', '禹州市', '411000', '3');
-INSERT INTO `tb_area` VALUES ('220800', '白城市', '220000', '2');
-INSERT INTO `tb_area` VALUES ('130638', '雄县', '130600', '3');
-INSERT INTO `tb_area` VALUES ('530723', '华坪县', '530700', '3');
-INSERT INTO `tb_area` VALUES ('360100', '南昌市', '360000', '2');
-INSERT INTO `tb_area` VALUES ('420201', '市辖区', '420200', '3');
-INSERT INTO `tb_area` VALUES ('511700', '达州市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('210900', '阜新市', '210000', '2');
-INSERT INTO `tb_area` VALUES ('610822', '府谷县', '610800', '3');
-INSERT INTO `tb_area` VALUES ('610625', '志丹县', '610600', '3');
-INSERT INTO `tb_area` VALUES ('370101', '市辖区', '370100', '3');
-INSERT INTO `tb_area` VALUES ('532327', '永仁县', '532300', '3');
-INSERT INTO `tb_area` VALUES ('530823', '景东彝族自治县', '530800', '3');
-INSERT INTO `tb_area` VALUES ('140321', '平定县', '140300', '3');
-INSERT INTO `tb_area` VALUES ('632802', '德令哈市', '632800', '3');
-INSERT INTO `tb_area` VALUES ('360823', '峡江县', '360800', '3');
-INSERT INTO `tb_area` VALUES ('350623', '漳浦县', '350600', '3');
-INSERT INTO `tb_area` VALUES ('440222', '始兴县', '440200', '3');
-INSERT INTO `tb_area` VALUES ('130824', '滦平县', '130800', '3');
-INSERT INTO `tb_area` VALUES ('341881', '宁国市', '341800', '3');
-INSERT INTO `tb_area` VALUES ('530303', '沾益区', '530300', '3');
-INSERT INTO `tb_area` VALUES ('440501', '市辖区', '440500', '3');
-INSERT INTO `tb_area` VALUES ('220302', '铁西区', '220300', '3');
-INSERT INTO `tb_area` VALUES ('360104', '青云谱区', '360100', '3');
-INSERT INTO `tb_area` VALUES ('340303', '蚌山区', '340300', '3');
-INSERT INTO `tb_area` VALUES ('340101', '市辖区', '340100', '3');
-INSERT INTO `tb_area` VALUES ('150925', '凉城县', '150900', '3');
-INSERT INTO `tb_area` VALUES ('210700', '锦州市', '210000', '2');
-INSERT INTO `tb_area` VALUES ('210302', '铁东区', '210300', '3');
-INSERT INTO `tb_area` VALUES ('230183', '尚志市', '230100', '3');
-INSERT INTO `tb_area` VALUES ('230223', '依安县', '230200', '3');
-INSERT INTO `tb_area` VALUES ('640221', '平罗县', '640200', '3');
-INSERT INTO `tb_area` VALUES ('320505', '虎丘区', '320500', '3');
-INSERT INTO `tb_area` VALUES ('130984', '河间市', '130900', '3');
-INSERT INTO `tb_area` VALUES ('130425', '大名县', '130400', '3');
-INSERT INTO `tb_area` VALUES ('371201', '市辖区', '371200', '3');
-INSERT INTO `tb_area` VALUES ('441704', '阳东区', '441700', '3');
-INSERT INTO `tb_area` VALUES ('441302', '惠城区', '441300', '3');
-INSERT INTO `tb_area` VALUES ('522601', '凯里市', '522600', '3');
-INSERT INTO `tb_area` VALUES ('140221', '阳高县', '140200', '3');
-INSERT INTO `tb_area` VALUES ('220000', '吉林省', '0', '1');
-INSERT INTO `tb_area` VALUES ('210903', '新邱区', '210900', '3');
-INSERT INTO `tb_area` VALUES ('542500', '阿里地区', '540000', '2');
-INSERT INTO `tb_area` VALUES ('620901', '市辖区', '620900', '3');
-INSERT INTO `tb_area` VALUES ('141130', '交口县', '141100', '3');
-INSERT INTO `tb_area` VALUES ('321201', '市辖区', '321200', '3');
-INSERT INTO `tb_area` VALUES ('520401', '市辖区', '520400', '3');
-INSERT INTO `tb_area` VALUES ('350923', '屏南县', '350900', '3');
-INSERT INTO `tb_area` VALUES ('450702', '钦南区', '450700', '3');
-INSERT INTO `tb_area` VALUES ('542400', '那曲地区', '540000', '2');
-INSERT INTO `tb_area` VALUES ('411523', '新县', '411500', '3');
-INSERT INTO `tb_area` VALUES ('620102', '城关区', '620100', '3');
-INSERT INTO `tb_area` VALUES ('331001', '市辖区', '331000', '3');
-INSERT INTO `tb_area` VALUES ('640323', '盐池县', '640300', '3');
-INSERT INTO `tb_area` VALUES ('130730', '怀来县', '130700', '3');
-INSERT INTO `tb_area` VALUES ('220382', '双辽市', '220300', '3');
-INSERT INTO `tb_area` VALUES ('140901', '市辖区', '140900', '3');
-INSERT INTO `tb_area` VALUES ('431123', '双牌县', '431100', '3');
-INSERT INTO `tb_area` VALUES ('330324', '永嘉县', '330300', '3');
-INSERT INTO `tb_area` VALUES ('420304', '郧阳区', '420300', '3');
-INSERT INTO `tb_area` VALUES ('410203', '顺河回族区', '410200', '3');
-INSERT INTO `tb_area` VALUES ('653225', '策勒县', '653200', '3');
-INSERT INTO `tb_area` VALUES ('120112', '津南区', '120100', '3');
-INSERT INTO `tb_area` VALUES ('650109', '米东区', '650100', '3');
-INSERT INTO `tb_area` VALUES ('445103', '潮安区', '445100', '3');
-INSERT INTO `tb_area` VALUES ('621226', '礼县', '621200', '3');
-INSERT INTO `tb_area` VALUES ('500154', '开州区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('232700', '大兴安岭地区', '230000', '2');
-INSERT INTO `tb_area` VALUES ('522623', '施秉县', '522600', '3');
-INSERT INTO `tb_area` VALUES ('451227', '巴马瑶族自治县', '451200', '3');
-INSERT INTO `tb_area` VALUES ('532624', '麻栗坡县', '532600', '3');
-INSERT INTO `tb_area` VALUES ('520328', '湄潭县', '520300', '3');
-INSERT INTO `tb_area` VALUES ('532900', '大理白族自治州', '530000', '2');
-INSERT INTO `tb_area` VALUES ('360323', '芦溪县', '360300', '3');
-INSERT INTO `tb_area` VALUES ('533401', '香格里拉市', '533400', '3');
-INSERT INTO `tb_area` VALUES ('410327', '宜阳县', '410300', '3');
-INSERT INTO `tb_area` VALUES ('445101', '市辖区', '445100', '3');
-INSERT INTO `tb_area` VALUES ('513436', '美姑县', '513400', '3');
-INSERT INTO `tb_area` VALUES ('371311', '罗庄区', '371300', '3');
-INSERT INTO `tb_area` VALUES ('410603', '山城区', '410600', '3');
-INSERT INTO `tb_area` VALUES ('231100', '黑河市', '230000', '2');
-INSERT INTO `tb_area` VALUES ('530628', '彝良县', '530600', '3');
-INSERT INTO `tb_area` VALUES ('610302', '渭滨区', '610300', '3');
-INSERT INTO `tb_area` VALUES ('130724', '沽源县', '130700', '3');
-INSERT INTO `tb_area` VALUES ('510400', '攀枝花市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('630100', '西宁市', '630000', '2');
-INSERT INTO `tb_area` VALUES ('230302', '鸡冠区', '230300', '3');
-INSERT INTO `tb_area` VALUES ('152530', '正蓝旗', '152500', '3');
-INSERT INTO `tb_area` VALUES ('659002', '阿拉尔市', '659000', '3');
-INSERT INTO `tb_area` VALUES ('230104', '道外区', '230100', '3');
-INSERT INTO `tb_area` VALUES ('520423', '镇宁布依族苗族自治县', '520400', '3');
-INSERT INTO `tb_area` VALUES ('421223', '崇阳县', '421200', '3');
-INSERT INTO `tb_area` VALUES ('341523', '舒城县', '341500', '3');
-INSERT INTO `tb_area` VALUES ('331123', '遂昌县', '331100', '3');
-INSERT INTO `tb_area` VALUES ('620502', '秦州区', '620500', '3');
-INSERT INTO `tb_area` VALUES ('320509', '吴江区', '320500', '3');
-INSERT INTO `tb_area` VALUES ('231223', '青冈县', '231200', '3');
-INSERT INTO `tb_area` VALUES ('430521', '邵东县', '430500', '3');
-INSERT INTO `tb_area` VALUES ('411729', '新蔡县', '411700', '3');
-INSERT INTO `tb_area` VALUES ('530827', '孟连傣族拉祜族佤族自治县', '530800', '3');
-INSERT INTO `tb_area` VALUES ('340200', '芜湖市', '340000', '2');
-INSERT INTO `tb_area` VALUES ('222402', '图们市', '222400', '3');
-INSERT INTO `tb_area` VALUES ('610115', '临潼区', '610100', '3');
-INSERT INTO `tb_area` VALUES ('511304', '嘉陵区', '511300', '3');
-INSERT INTO `tb_area` VALUES ('445122', '饶平县', '445100', '3');
-INSERT INTO `tb_area` VALUES ('150702', '海拉尔区', '150700', '3');
-INSERT INTO `tb_area` VALUES ('140426', '黎城县', '140400', '3');
-INSERT INTO `tb_area` VALUES ('150423', '巴林右旗', '150400', '3');
-INSERT INTO `tb_area` VALUES ('441202', '端州区', '441200', '3');
-INSERT INTO `tb_area` VALUES ('610727', '略阳县', '610700', '3');
-INSERT INTO `tb_area` VALUES ('610828', '佳县', '610800', '3');
-INSERT INTO `tb_area` VALUES ('510822', '青川县', '510800', '3');
-INSERT INTO `tb_area` VALUES ('431101', '市辖区', '431100', '3');
-INSERT INTO `tb_area` VALUES ('510811', '昭化区', '510800', '3');
-INSERT INTO `tb_area` VALUES ('330825', '龙游县', '330800', '3');
-INSERT INTO `tb_area` VALUES ('433123', '凤凰县', '433100', '3');
-INSERT INTO `tb_area` VALUES ('500152', '潼南区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('360121', '南昌县', '360100', '3');
-INSERT INTO `tb_area` VALUES ('350181', '福清市', '350100', '3');
-INSERT INTO `tb_area` VALUES ('230706', '翠峦区', '230700', '3');
-INSERT INTO `tb_area` VALUES ('440515', '澄海区', '440500', '3');
-INSERT INTO `tb_area` VALUES ('610622', '延川县', '610600', '3');
-INSERT INTO `tb_area` VALUES ('510500', '泸州市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('654301', '阿勒泰市', '654300', '3');
-INSERT INTO `tb_area` VALUES ('441882', '连州市', '441800', '3');
-INSERT INTO `tb_area` VALUES ('421121', '团风县', '421100', '3');
-INSERT INTO `tb_area` VALUES ('513335', '巴塘县', '513300', '3');
-INSERT INTO `tb_area` VALUES ('533323', '福贡县', '533300', '3');
-INSERT INTO `tb_area` VALUES ('371521', '阳谷县', '371500', '3');
-INSERT INTO `tb_area` VALUES ('131125', '安平县', '131100', '3');
-INSERT INTO `tb_area` VALUES ('540300', '昌都市', '540000', '2');
-INSERT INTO `tb_area` VALUES ('370500', '东营市', '370000', '2');
-INSERT INTO `tb_area` VALUES ('610923', '宁陕县', '610900', '3');
-INSERT INTO `tb_area` VALUES ('530426', '峨山彝族自治县', '530400', '3');
-INSERT INTO `tb_area` VALUES ('230523', '宝清县', '230500', '3');
-INSERT INTO `tb_area` VALUES ('632624', '达日县', '632600', '3');
-INSERT INTO `tb_area` VALUES ('530902', '临翔区', '530900', '3');
-INSERT INTO `tb_area` VALUES ('341203', '颍东区', '341200', '3');
-INSERT INTO `tb_area` VALUES ('650200', '克拉玛依市', '650000', '2');
-INSERT INTO `tb_area` VALUES ('220581', '梅河口市', '220500', '3');
-INSERT INTO `tb_area` VALUES ('360103', '西湖区', '360100', '3');
-INSERT INTO `tb_area` VALUES ('360735', '石城县', '360700', '3');
-INSERT INTO `tb_area` VALUES ('422827', '来凤县', '422800', '3');
-INSERT INTO `tb_area` VALUES ('130633', '易县', '130600', '3');
-INSERT INTO `tb_area` VALUES ('130635', '蠡县', '130600', '3');
-INSERT INTO `tb_area` VALUES ('513328', '甘孜县', '513300', '3');
-INSERT INTO `tb_area` VALUES ('140201', '市辖区', '140200', '3');
-INSERT INTO `tb_area` VALUES ('445202', '榕城区', '445200', '3');
-INSERT INTO `tb_area` VALUES ('640202', '大武口区', '640200', '3');
-INSERT INTO `tb_area` VALUES ('510322', '富顺县', '510300', '3');
-INSERT INTO `tb_area` VALUES ('411421', '民权县', '411400', '3');
-INSERT INTO `tb_area` VALUES ('511421', '仁寿县', '511400', '3');
-INSERT INTO `tb_area` VALUES ('150422', '巴林左旗', '150400', '3');
-INSERT INTO `tb_area` VALUES ('532928', '永平县', '532900', '3');
-INSERT INTO `tb_area` VALUES ('230000', '黑龙江省', '0', '1');
-INSERT INTO `tb_area` VALUES ('532525', '石屏县', '532500', '3');
-INSERT INTO `tb_area` VALUES ('650201', '市辖区', '650200', '3');
-INSERT INTO `tb_area` VALUES ('431000', '郴州市', '430000', '2');
-INSERT INTO `tb_area` VALUES ('210702', '古塔区', '210700', '3');
-INSERT INTO `tb_area` VALUES ('621022', '环县', '621000', '3');
-INSERT INTO `tb_area` VALUES ('410882', '沁阳市', '410800', '3');
-INSERT INTO `tb_area` VALUES ('451027', '凌云县', '451000', '3');
-INSERT INTO `tb_area` VALUES ('230622', '肇源县', '230600', '3');
-INSERT INTO `tb_area` VALUES ('330205', '江北区', '330200', '3');
-INSERT INTO `tb_area` VALUES ('653127', '麦盖提县', '653100', '3');
-INSERT INTO `tb_area` VALUES ('130406', '峰峰矿区', '130400', '3');
-INSERT INTO `tb_area` VALUES ('220284', '磐石市', '220200', '3');
-INSERT INTO `tb_area` VALUES ('530581', '腾冲市', '530500', '3');
-INSERT INTO `tb_area` VALUES ('421201', '市辖区', '421200', '3');
-INSERT INTO `tb_area` VALUES ('430800', '张家界市', '430000', '2');
-INSERT INTO `tb_area` VALUES ('220300', '四平市', '220000', '2');
-INSERT INTO `tb_area` VALUES ('350901', '市辖区', '350900', '3');
-INSERT INTO `tb_area` VALUES ('440115', '南沙区', '440100', '3');
-INSERT INTO `tb_area` VALUES ('441702', '江城区', '441700', '3');
-INSERT INTO `tb_area` VALUES ('140924', '繁峙县', '140900', '3');
-INSERT INTO `tb_area` VALUES ('320301', '市辖区', '320300', '3');
-INSERT INTO `tb_area` VALUES ('211101', '市辖区', '211100', '3');
-INSERT INTO `tb_area` VALUES ('231025', '林口县', '231000', '3');
-INSERT INTO `tb_area` VALUES ('420581', '宜都市', '420500', '3');
-INSERT INTO `tb_area` VALUES ('610629', '洛川县', '610600', '3');
-INSERT INTO `tb_area` VALUES ('341721', '东至县', '341700', '3');
-INSERT INTO `tb_area` VALUES ('621222', '文县', '621200', '3');
-INSERT INTO `tb_area` VALUES ('460300', '三沙市', '460000', '2');
-INSERT INTO `tb_area` VALUES ('130626', '定兴县', '130600', '3');
-INSERT INTO `tb_area` VALUES ('130129', '赞皇县', '130100', '3');
-INSERT INTO `tb_area` VALUES ('430581', '武冈市', '430500', '3');
-INSERT INTO `tb_area` VALUES ('350582', '晋江市', '350500', '3');
-INSERT INTO `tb_area` VALUES ('540200', '日喀则市', '540000', '2');
-INSERT INTO `tb_area` VALUES ('371524', '东阿县', '371500', '3');
-INSERT INTO `tb_area` VALUES ('320830', '盱眙县', '320800', '3');
-INSERT INTO `tb_area` VALUES ('210404', '望花区', '210400', '3');
-INSERT INTO `tb_area` VALUES ('445203', '揭东区', '445200', '3');
-INSERT INTO `tb_area` VALUES ('320106', '鼓楼区', '320100', '3');
-INSERT INTO `tb_area` VALUES ('360921', '奉新县', '360900', '3');
-INSERT INTO `tb_area` VALUES ('522727', '平塘县', '522700', '3');
-INSERT INTO `tb_area` VALUES ('530828', '澜沧拉祜族自治县', '530800', '3');
-INSERT INTO `tb_area` VALUES ('220203', '龙潭区', '220200', '3');
-INSERT INTO `tb_area` VALUES ('220681', '临江市', '220600', '3');
-INSERT INTO `tb_area` VALUES ('440105', '海珠区', '440100', '3');
-INSERT INTO `tb_area` VALUES ('231000', '牡丹江市', '230000', '2');
-INSERT INTO `tb_area` VALUES ('130530', '新河县', '130500', '3');
-INSERT INTO `tb_area` VALUES ('610401', '市辖区', '610400', '3');
-INSERT INTO `tb_area` VALUES ('422828', '鹤峰县', '422800', '3');
-INSERT INTO `tb_area` VALUES ('450226', '三江侗族自治县', '450200', '3');
-INSERT INTO `tb_area` VALUES ('610324', '扶风县', '610300', '3');
-INSERT INTO `tb_area` VALUES ('430211', '天元区', '430200', '3');
-INSERT INTO `tb_area` VALUES ('610201', '市辖区', '610200', '3');
-INSERT INTO `tb_area` VALUES ('140181', '古交市', '140100', '3');
-INSERT INTO `tb_area` VALUES ('130634', '曲阳县', '130600', '3');
-INSERT INTO `tb_area` VALUES ('230206', '富拉尔基区', '230200', '3');
-INSERT INTO `tb_area` VALUES ('350401', '市辖区', '350400', '3');
-INSERT INTO `tb_area` VALUES ('371427', '夏津县', '371400', '3');
-INSERT INTO `tb_area` VALUES ('420106', '武昌区', '420100', '3');
-INSERT INTO `tb_area` VALUES ('150303', '海南区', '150300', '3');
-INSERT INTO `tb_area` VALUES ('451401', '市辖区', '451400', '3');
-INSERT INTO `tb_area` VALUES ('410183', '新密市', '410100', '3');
-INSERT INTO `tb_area` VALUES ('513432', '喜德县', '513400', '3');
-INSERT INTO `tb_area` VALUES ('150204', '青山区', '150200', '3');
-INSERT INTO `tb_area` VALUES ('411521', '罗山县', '411500', '3');
-INSERT INTO `tb_area` VALUES ('140702', '榆次区', '140700', '3');
-INSERT INTO `tb_area` VALUES ('140721', '榆社县', '140700', '3');
-INSERT INTO `tb_area` VALUES ('211282', '开原市', '211200', '3');
-INSERT INTO `tb_area` VALUES ('340000', '安徽省', '0', '1');
-INSERT INTO `tb_area` VALUES ('653000', '克孜勒苏柯尔克孜自治州', '650000', '2');
-INSERT INTO `tb_area` VALUES ('130302', '海港区', '130300', '3');
-INSERT INTO `tb_area` VALUES ('131022', '固安县', '131000', '3');
-INSERT INTO `tb_area` VALUES ('620422', '会宁县', '620400', '3');
-INSERT INTO `tb_area` VALUES ('152502', '锡林浩特市', '152500', '3');
-INSERT INTO `tb_area` VALUES ('530900', '临沧市', '530000', '2');
-INSERT INTO `tb_area` VALUES ('532622', '砚山县', '532600', '3');
-INSERT INTO `tb_area` VALUES ('410782', '辉县市', '410700', '3');
-INSERT INTO `tb_area` VALUES ('430281', '醴陵市', '430200', '3');
-INSERT INTO `tb_area` VALUES ('130925', '盐山县', '130900', '3');
-INSERT INTO `tb_area` VALUES ('210811', '老边区', '210800', '3');
-INSERT INTO `tb_area` VALUES ('530126', '石林彝族自治县', '530100', '3');
-INSERT INTO `tb_area` VALUES ('542429', '巴青县', '542400', '3');
-INSERT INTO `tb_area` VALUES ('131103', '冀州区', '131100', '3');
-INSERT INTO `tb_area` VALUES ('310110', '杨浦区', '310100', '3');
-INSERT INTO `tb_area` VALUES ('230709', '金山屯区', '230700', '3');
-INSERT INTO `tb_area` VALUES ('430901', '市辖区', '430900', '3');
-INSERT INTO `tb_area` VALUES ('140881', '永济市', '140800', '3');
-INSERT INTO `tb_area` VALUES ('139002', '辛集市', '139000', '3');
-INSERT INTO `tb_area` VALUES ('654000', '伊犁哈萨克自治州', '650000', '2');
-INSERT INTO `tb_area` VALUES ('340304', '禹会区', '340300', '3');
-INSERT INTO `tb_area` VALUES ('654004', '霍尔果斯市', '654000', '3');
-INSERT INTO `tb_area` VALUES ('230605', '红岗区', '230600', '3');
-INSERT INTO `tb_area` VALUES ('152202', '阿尔山市', '152200', '3');
-INSERT INTO `tb_area` VALUES ('152525', '东乌珠穆沁旗', '152500', '3');
-INSERT INTO `tb_area` VALUES ('450325', '兴安县', '450300', '3');
-INSERT INTO `tb_area` VALUES ('410802', '解放区', '410800', '3');
-INSERT INTO `tb_area` VALUES ('231001', '市辖区', '231000', '3');
-INSERT INTO `tb_area` VALUES ('410205', '禹王台区', '410200', '3');
-INSERT INTO `tb_area` VALUES ('511528', '兴文县', '511500', '3');
-INSERT INTO `tb_area` VALUES ('652827', '和静县', '652800', '3');
-INSERT INTO `tb_area` VALUES ('321204', '姜堰区', '321200', '3');
-INSERT INTO `tb_area` VALUES ('431126', '宁远县', '431100', '3');
-INSERT INTO `tb_area` VALUES ('500242', '酉阳土家族苗族自治县', '500200', '3');
-INSERT INTO `tb_area` VALUES ('440500', '汕头市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('361002', '临川区', '361000', '3');
-INSERT INTO `tb_area` VALUES ('510901', '市辖区', '510900', '3');
-INSERT INTO `tb_area` VALUES ('632800', '海西蒙古族藏族自治州', '630000', '2');
-INSERT INTO `tb_area` VALUES ('420822', '沙洋县', '420800', '3');
-INSERT INTO `tb_area` VALUES ('620922', '瓜州县', '620900', '3');
-INSERT INTO `tb_area` VALUES ('450125', '上林县', '450100', '3');
-INSERT INTO `tb_area` VALUES ('150581', '霍林郭勒市', '150500', '3');
-INSERT INTO `tb_area` VALUES ('140823', '闻喜县', '140800', '3');
-INSERT INTO `tb_area` VALUES ('652324', '玛纳斯县', '652300', '3');
-INSERT INTO `tb_area` VALUES ('360426', '德安县', '360400', '3');
-INSERT INTO `tb_area` VALUES ('330382', '乐清市', '330300', '3');
-INSERT INTO `tb_area` VALUES ('530403', '江川区', '530400', '3');
-INSERT INTO `tb_area` VALUES ('411103', '郾城区', '411100', '3');
-INSERT INTO `tb_area` VALUES ('321000', '扬州市', '320000', '2');
-INSERT INTO `tb_area` VALUES ('210905', '清河门区', '210900', '3');
-INSERT INTO `tb_area` VALUES ('440112', '黄埔区', '440100', '3');
-INSERT INTO `tb_area` VALUES ('230102', '道里区', '230100', '3');
-INSERT INTO `tb_area` VALUES ('445200', '揭阳市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('451023', '平果县', '451000', '3');
-INSERT INTO `tb_area` VALUES ('420204', '下陆区', '420200', '3');
-INSERT INTO `tb_area` VALUES ('522625', '镇远县', '522600', '3');
-INSERT INTO `tb_area` VALUES ('421224', '通山县', '421200', '3');
-INSERT INTO `tb_area` VALUES ('431003', '苏仙区', '431000', '3');
-INSERT INTO `tb_area` VALUES ('430525', '洞口县', '430500', '3');
-INSERT INTO `tb_area` VALUES ('652327', '吉木萨尔县', '652300', '3');
-INSERT INTO `tb_area` VALUES ('410302', '老城区', '410300', '3');
-INSERT INTO `tb_area` VALUES ('510700', '绵阳市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('540222', '江孜县', '540200', '3');
-INSERT INTO `tb_area` VALUES ('350627', '南靖县', '350600', '3');
-INSERT INTO `tb_area` VALUES ('512002', '雁江区', '512000', '3');
-INSERT INTO `tb_area` VALUES ('410505', '殷都区', '410500', '3');
-INSERT INTO `tb_area` VALUES ('441403', '梅县区', '441400', '3');
-INSERT INTO `tb_area` VALUES ('130183', '晋州市', '130100', '3');
-INSERT INTO `tb_area` VALUES ('340403', '田家庵区', '340400', '3');
-INSERT INTO `tb_area` VALUES ('530401', '市辖区', '530400', '3');
-INSERT INTO `tb_area` VALUES ('230524', '饶河县', '230500', '3');
-INSERT INTO `tb_area` VALUES ('360105', '湾里区', '360100', '3');
-INSERT INTO `tb_area` VALUES ('130700', '张家口市', '130000', '2');
-INSERT INTO `tb_area` VALUES ('230207', '碾子山区', '230200', '3');
-INSERT INTO `tb_area` VALUES ('140624', '怀仁县', '140600', '3');
-INSERT INTO `tb_area` VALUES ('341802', '宣州区', '341800', '3');
-INSERT INTO `tb_area` VALUES ('610925', '岚皋县', '610900', '3');
-INSERT INTO `tb_area` VALUES ('430406', '雁峰区', '430400', '3');
-INSERT INTO `tb_area` VALUES ('440604', '禅城区', '440600', '3');
-INSERT INTO `tb_area` VALUES ('430101', '市辖区', '430100', '3');
-INSERT INTO `tb_area` VALUES ('341101', '市辖区', '341100', '3');
-INSERT INTO `tb_area` VALUES ('511600', '广安市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('370982', '新泰市', '370900', '3');
-INSERT INTO `tb_area` VALUES ('532930', '洱源县', '532900', '3');
-INSERT INTO `tb_area` VALUES ('150426', '翁牛特旗', '150400', '3');
-INSERT INTO `tb_area` VALUES ('610524', '合阳县', '610500', '3');
-INSERT INTO `tb_area` VALUES ('321002', '广陵区', '321000', '3');
-INSERT INTO `tb_area` VALUES ('130207', '丰南区', '130200', '3');
-INSERT INTO `tb_area` VALUES ('140301', '市辖区', '140300', '3');
-INSERT INTO `tb_area` VALUES ('320621', '海安县', '320600', '3');
-INSERT INTO `tb_area` VALUES ('610824', '靖边县', '610800', '3');
-INSERT INTO `tb_area` VALUES ('222426', '安图县', '222400', '3');
-INSERT INTO `tb_area` VALUES ('420506', '夷陵区', '420500', '3');
-INSERT INTO `tb_area` VALUES ('340422', '寿县', '340400', '3');
-INSERT INTO `tb_area` VALUES ('440100', '广州市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('340301', '市辖区', '340300', '3');
-INSERT INTO `tb_area` VALUES ('530113', '东川区', '530100', '3');
-INSERT INTO `tb_area` VALUES ('130128', '深泽县', '130100', '3');
-INSERT INTO `tb_area` VALUES ('650400', '吐鲁番市', '650000', '2');
-INSERT INTO `tb_area` VALUES ('231083', '海林市', '231000', '3');
-INSERT INTO `tb_area` VALUES ('130502', '桥东区', '130500', '3');
-INSERT INTO `tb_area` VALUES ('350823', '上杭县', '350800', '3');
-INSERT INTO `tb_area` VALUES ('411728', '遂平县', '411700', '3');
-INSERT INTO `tb_area` VALUES ('140100', '太原市', '140000', '2');
-INSERT INTO `tb_area` VALUES ('210115', '辽中区', '210100', '3');
-INSERT INTO `tb_area` VALUES ('350182', '长乐市', '350100', '3');
-INSERT INTO `tb_area` VALUES ('220702', '宁江区', '220700', '3');
-INSERT INTO `tb_area` VALUES ('610326', '眉县', '610300', '3');
-INSERT INTO `tb_area` VALUES ('210522', '桓仁满族自治县', '210500', '3');
-INSERT INTO `tb_area` VALUES ('410303', '西工区', '410300', '3');
-INSERT INTO `tb_area` VALUES ('530322', '陆良县', '530300', '3');
-INSERT INTO `tb_area` VALUES ('141033', '蒲县', '141000', '3');
-INSERT INTO `tb_area` VALUES ('450801', '市辖区', '450800', '3');
-INSERT INTO `tb_area` VALUES ('421125', '浠水县', '421100', '3');
-INSERT INTO `tb_area` VALUES ('411621', '扶沟县', '411600', '3');
-INSERT INTO `tb_area` VALUES ('630104', '城西区', '630100', '3');
-INSERT INTO `tb_area` VALUES ('653123', '英吉沙县', '653100', '3');
-INSERT INTO `tb_area` VALUES ('220721', '前郭尔罗斯蒙古族自治县', '220700', '3');
-INSERT INTO `tb_area` VALUES ('511922', '南江县', '511900', '3');
-INSERT INTO `tb_area` VALUES ('350601', '市辖区', '350600', '3');
-INSERT INTO `tb_area` VALUES ('130723', '康保县', '130700', '3');
-INSERT INTO `tb_area` VALUES ('370921', '宁阳县', '370900', '3');
-INSERT INTO `tb_area` VALUES ('150000', '内蒙古自治区', '0', '1');
-INSERT INTO `tb_area` VALUES ('230305', '梨树区', '230300', '3');
-INSERT INTO `tb_area` VALUES ('450206', '柳江区', '450200', '3');
-INSERT INTO `tb_area` VALUES ('620822', '灵台县', '620800', '3');
-INSERT INTO `tb_area` VALUES ('440804', '坡头区', '440800', '3');
-INSERT INTO `tb_area` VALUES ('350824', '武平县', '350800', '3');
-INSERT INTO `tb_area` VALUES ('500229', '城口县', '500200', '3');
-INSERT INTO `tb_area` VALUES ('130629', '容城县', '130600', '3');
-INSERT INTO `tb_area` VALUES ('530721', '玉龙纳西族自治县', '530700', '3');
-INSERT INTO `tb_area` VALUES ('330381', '瑞安市', '330300', '3');
-INSERT INTO `tb_area` VALUES ('350602', '芗城区', '350600', '3');
-INSERT INTO `tb_area` VALUES ('360923', '上高县', '360900', '3');
-INSERT INTO `tb_area` VALUES ('220524', '柳河县', '220500', '3');
-INSERT INTO `tb_area` VALUES ('440703', '蓬江区', '440700', '3');
-INSERT INTO `tb_area` VALUES ('532932', '鹤庆县', '532900', '3');
-INSERT INTO `tb_area` VALUES ('431081', '资兴市', '431000', '3');
-INSERT INTO `tb_area` VALUES ('230704', '友好区', '230700', '3');
-INSERT INTO `tb_area` VALUES ('430382', '韶山市', '430300', '3');
-INSERT INTO `tb_area` VALUES ('350400', '三明市', '350000', '2');
-INSERT INTO `tb_area` VALUES ('150401', '市辖区', '150400', '3');
-INSERT INTO `tb_area` VALUES ('360123', '安义县', '360100', '3');
-INSERT INTO `tb_area` VALUES ('120119', '蓟州区', '120100', '3');
-INSERT INTO `tb_area` VALUES ('451321', '忻城县', '451300', '3');
-INSERT INTO `tb_area` VALUES ('640501', '市辖区', '640500', '3');
-INSERT INTO `tb_area` VALUES ('500113', '巴南区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('530112', '西山区', '530100', '3');
-INSERT INTO `tb_area` VALUES ('370783', '寿光市', '370700', '3');
-INSERT INTO `tb_area` VALUES ('320100', '南京市', '320000', '2');
-INSERT INTO `tb_area` VALUES ('330801', '市辖区', '330800', '3');
-INSERT INTO `tb_area` VALUES ('513422', '木里藏族自治县', '513400', '3');
-INSERT INTO `tb_area` VALUES ('371082', '荣成市', '371000', '3');
-INSERT INTO `tb_area` VALUES ('370282', '即墨市', '370200', '3');
-INSERT INTO `tb_area` VALUES ('520101', '市辖区', '520100', '3');
-INSERT INTO `tb_area` VALUES ('451101', '市辖区', '451100', '3');
-INSERT INTO `tb_area` VALUES ('371726', '鄄城县', '371700', '3');
-INSERT INTO `tb_area` VALUES ('652302', '阜康市', '652300', '3');
-INSERT INTO `tb_area` VALUES ('150301', '市辖区', '150300', '3');
-INSERT INTO `tb_area` VALUES ('140827', '垣曲县', '140800', '3');
-INSERT INTO `tb_area` VALUES ('430202', '荷塘区', '430200', '3');
-INSERT INTO `tb_area` VALUES ('513221', '汶川县', '513200', '3');
-INSERT INTO `tb_area` VALUES ('341202', '颍州区', '341200', '3');
-INSERT INTO `tb_area` VALUES ('370113', '长清区', '370100', '3');
-INSERT INTO `tb_area` VALUES ('371121', '五莲县', '371100', '3');
-INSERT INTO `tb_area` VALUES ('370505', '垦利区', '370500', '3');
-INSERT INTO `tb_area` VALUES ('620522', '秦安县', '620500', '3');
-INSERT INTO `tb_area` VALUES ('210201', '市辖区', '210200', '3');
-INSERT INTO `tb_area` VALUES ('520201', '钟山区', '520200', '3');
-INSERT INTO `tb_area` VALUES ('230903', '桃山区', '230900', '3');
-INSERT INTO `tb_area` VALUES ('371200', '莱芜市', '370000', '2');
-INSERT INTO `tb_area` VALUES ('445201', '市辖区', '445200', '3');
-INSERT INTO `tb_area` VALUES ('542526', '改则县', '542500', '3');
-INSERT INTO `tb_area` VALUES ('370682', '莱阳市', '370600', '3');
-INSERT INTO `tb_area` VALUES ('500101', '万州区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('431122', '东安县', '431100', '3');
-INSERT INTO `tb_area` VALUES ('130130', '无极县', '130100', '3');
-INSERT INTO `tb_area` VALUES ('341200', '阜阳市', '340000', '2');
-INSERT INTO `tb_area` VALUES ('360322', '上栗县', '360300', '3');
-INSERT INTO `tb_area` VALUES ('420921', '孝昌县', '420900', '3');
-INSERT INTO `tb_area` VALUES ('511401', '市辖区', '511400', '3');
-INSERT INTO `tb_area` VALUES ('411325', '内乡县', '411300', '3');
-INSERT INTO `tb_area` VALUES ('511901', '市辖区', '511900', '3');
-INSERT INTO `tb_area` VALUES ('522700', '黔南布依族苗族自治州', '520000', '2');
-INSERT INTO `tb_area` VALUES ('530324', '罗平县', '530300', '3');
-INSERT INTO `tb_area` VALUES ('350102', '鼓楼区', '350100', '3');
-INSERT INTO `tb_area` VALUES ('232722', '塔河县', '232700', '3');
-INSERT INTO `tb_area` VALUES ('431022', '宜章县', '431000', '3');
-INSERT INTO `tb_area` VALUES ('210727', '义县', '210700', '3');
-INSERT INTO `tb_area` VALUES ('130133', '赵县', '130100', '3');
-INSERT INTO `tb_area` VALUES ('440402', '香洲区', '440400', '3');
-INSERT INTO `tb_area` VALUES ('611021', '洛南县', '611000', '3');
-INSERT INTO `tb_area` VALUES ('620423', '景泰县', '620400', '3');
-INSERT INTO `tb_area` VALUES ('130303', '山海关区', '130300', '3');
-INSERT INTO `tb_area` VALUES ('370481', '滕州市', '370400', '3');
-INSERT INTO `tb_area` VALUES ('420505', '猇亭区', '420500', '3');
-INSERT INTO `tb_area` VALUES ('512021', '安岳县', '512000', '3');
-INSERT INTO `tb_area` VALUES ('410927', '台前县', '410900', '3');
-INSERT INTO `tb_area` VALUES ('120110', '东丽区', '120100', '3');
-INSERT INTO `tb_area` VALUES ('510781', '江油市', '510700', '3');
-INSERT INTO `tb_area` VALUES ('130223', '滦县', '130200', '3');
-INSERT INTO `tb_area` VALUES ('211324', '喀喇沁左翼蒙古族自治县', '211300', '3');
-INSERT INTO `tb_area` VALUES ('320305', '贾汪区', '320300', '3');
-INSERT INTO `tb_area` VALUES ('610116', '长安区', '610100', '3');
-INSERT INTO `tb_area` VALUES ('211200', '铁岭市', '210000', '2');
-INSERT INTO `tb_area` VALUES ('510115', '温江区', '510100', '3');
-INSERT INTO `tb_area` VALUES ('411425', '虞城县', '411400', '3');
-INSERT INTO `tb_area` VALUES ('360301', '市辖区', '360300', '3');
-INSERT INTO `tb_area` VALUES ('140729', '灵石县', '140700', '3');
-INSERT INTO `tb_area` VALUES ('610628', '富县', '610600', '3');
-INSERT INTO `tb_area` VALUES ('610403', '杨陵区', '610400', '3');
-INSERT INTO `tb_area` VALUES ('350429', '泰宁县', '350400', '3');
-INSERT INTO `tb_area` VALUES ('331125', '云和县', '331100', '3');
-INSERT INTO `tb_area` VALUES ('140826', '绛县', '140800', '3');
-INSERT INTO `tb_area` VALUES ('411122', '临颍县', '411100', '3');
-INSERT INTO `tb_area` VALUES ('532527', '泸西县', '532500', '3');
-INSERT INTO `tb_area` VALUES ('610724', '西乡县', '610700', '3');
-INSERT INTO `tb_area` VALUES ('440801', '市辖区', '440800', '3');
-INSERT INTO `tb_area` VALUES ('152526', '西乌珠穆沁旗', '152500', '3');
-INSERT INTO `tb_area` VALUES ('131081', '霸州市', '131000', '3');
-INSERT INTO `tb_area` VALUES ('320200', '无锡市', '320000', '2');
-INSERT INTO `tb_area` VALUES ('341301', '市辖区', '341300', '3');
-INSERT INTO `tb_area` VALUES ('220182', '榆树市', '220100', '3');
-INSERT INTO `tb_area` VALUES ('411100', '漯河市', '410000', '2');
-INSERT INTO `tb_area` VALUES ('341503', '裕安区', '341500', '3');
-INSERT INTO `tb_area` VALUES ('520628', '松桃苗族自治县', '520600', '3');
-INSERT INTO `tb_area` VALUES ('220301', '市辖区', '220300', '3');
-INSERT INTO `tb_area` VALUES ('230203', '建华区', '230200', '3');
-INSERT INTO `tb_area` VALUES ('331126', '庆元县', '331100', '3');
-INSERT INTO `tb_area` VALUES ('510922', '射洪县', '510900', '3');
-INSERT INTO `tb_area` VALUES ('441323', '惠东县', '441300', '3');
-INSERT INTO `tb_area` VALUES ('230124', '方正县', '230100', '3');
-INSERT INTO `tb_area` VALUES ('220802', '洮北区', '220800', '3');
-INSERT INTO `tb_area` VALUES ('370102', '历下区', '370100', '3');
-INSERT INTO `tb_area` VALUES ('520500', '毕节市', '520000', '2');
-INSERT INTO `tb_area` VALUES ('410304', '瀍河回族区', '410300', '3');
-INSERT INTO `tb_area` VALUES ('150823', '乌拉特前旗', '150800', '3');
-INSERT INTO `tb_area` VALUES ('211011', '太子河区', '211000', '3');
-INSERT INTO `tb_area` VALUES ('150727', '新巴尔虎右旗', '150700', '3');
-INSERT INTO `tb_area` VALUES ('131128', '阜城县', '131100', '3');
-INSERT INTO `tb_area` VALUES ('232721', '呼玛县', '232700', '3');
-INSERT INTO `tb_area` VALUES ('220201', '市辖区', '220200', '3');
-INSERT INTO `tb_area` VALUES ('513437', '雷波县', '513400', '3');
-INSERT INTO `tb_area` VALUES ('654200', '塔城地区', '650000', '2');
-INSERT INTO `tb_area` VALUES ('360925', '靖安县', '360900', '3');
-INSERT INTO `tb_area` VALUES ('522622', '黄平县', '522600', '3');
-INSERT INTO `tb_area` VALUES ('441423', '丰顺县', '441400', '3');
-INSERT INTO `tb_area` VALUES ('522628', '锦屏县', '522600', '3');
-INSERT INTO `tb_area` VALUES ('630103', '城中区', '630100', '3');
-INSERT INTO `tb_area` VALUES ('653122', '疏勒县', '653100', '3');
-INSERT INTO `tb_area` VALUES ('220500', '通化市', '220000', '2');
-INSERT INTO `tb_area` VALUES ('370283', '平度市', '370200', '3');
-INSERT INTO `tb_area` VALUES ('130108', '裕华区', '130100', '3');
-INSERT INTO `tb_area` VALUES ('654023', '霍城县', '654000', '3');
-INSERT INTO `tb_area` VALUES ('120114', '武清区', '120100', '3');
-INSERT INTO `tb_area` VALUES ('331000', '台州市', '330000', '2');
-INSERT INTO `tb_area` VALUES ('513427', '宁南县', '513400', '3');
-INSERT INTO `tb_area` VALUES ('130200', '唐山市', '130000', '2');
-INSERT INTO `tb_area` VALUES ('654226', '和布克赛尔蒙古自治县', '654200', '3');
-INSERT INTO `tb_area` VALUES ('620300', '金昌市', '620000', '2');
-INSERT INTO `tb_area` VALUES ('341323', '灵璧县', '341300', '3');
-INSERT INTO `tb_area` VALUES ('340181', '巢湖市', '340100', '3');
-INSERT INTO `tb_area` VALUES ('430524', '隆回县', '430500', '3');
-INSERT INTO `tb_area` VALUES ('320205', '锡山区', '320200', '3');
-INSERT INTO `tb_area` VALUES ('410201', '市辖区', '410200', '3');
-INSERT INTO `tb_area` VALUES ('460204', '天涯区', '460200', '3');
-INSERT INTO `tb_area` VALUES ('520115', '观山湖区', '520100', '3');
-INSERT INTO `tb_area` VALUES ('230406', '东山区', '230400', '3');
-INSERT INTO `tb_area` VALUES ('522728', '罗甸县', '522700', '3');
-INSERT INTO `tb_area` VALUES ('371523', '茌平县', '371500', '3');
-INSERT INTO `tb_area` VALUES ('511702', '通川区', '511700', '3');
-INSERT INTO `tb_area` VALUES ('410902', '华龙区', '410900', '3');
-INSERT INTO `tb_area` VALUES ('659003', '图木舒克市', '659000', '3');
-INSERT INTO `tb_area` VALUES ('420107', '青山区', '420100', '3');
-INSERT INTO `tb_area` VALUES ('222403', '敦化市', '222400', '3');
-INSERT INTO `tb_area` VALUES ('320681', '启东市', '320600', '3');
-INSERT INTO `tb_area` VALUES ('371203', '钢城区', '371200', '3');
-INSERT INTO `tb_area` VALUES ('511402', '东坡区', '511400', '3');
-INSERT INTO `tb_area` VALUES ('230125', '宾县', '230100', '3');
-INSERT INTO `tb_area` VALUES ('141032', '永和县', '141000', '3');
-INSERT INTO `tb_area` VALUES ('610222', '宜君县', '610200', '3');
-INSERT INTO `tb_area` VALUES ('331100', '丽水市', '330000', '2');
-INSERT INTO `tb_area` VALUES ('540326', '八宿县', '540300', '3');
-INSERT INTO `tb_area` VALUES ('410704', '凤泉区', '410700', '3');
-INSERT INTO `tb_area` VALUES ('211400', '葫芦岛市', '210000', '2');
-INSERT INTO `tb_area` VALUES ('540531', '浪卡子县', '540500', '3');
-INSERT INTO `tb_area` VALUES ('440607', '三水区', '440600', '3');
-INSERT INTO `tb_area` VALUES ('220723', '乾安县', '220700', '3');
-INSERT INTO `tb_area` VALUES ('150723', '鄂伦春自治旗', '150700', '3');
-INSERT INTO `tb_area` VALUES ('654202', '乌苏市', '654200', '3');
-INSERT INTO `tb_area` VALUES ('420200', '黄石市', '420000', '2');
-INSERT INTO `tb_area` VALUES ('510403', '西区', '510400', '3');
-INSERT INTO `tb_area` VALUES ('652826', '焉耆回族自治县', '652800', '3');
-INSERT INTO `tb_area` VALUES ('610331', '太白县', '610300', '3');
-INSERT INTO `tb_area` VALUES ('330424', '海盐县', '330400', '3');
-INSERT INTO `tb_area` VALUES ('451222', '天峨县', '451200', '3');
-INSERT INTO `tb_area` VALUES ('350128', '平潭县', '350100', '3');
-INSERT INTO `tb_area` VALUES ('420683', '枣阳市', '420600', '3');
-INSERT INTO `tb_area` VALUES ('430224', '茶陵县', '430200', '3');
-INSERT INTO `tb_area` VALUES ('340201', '市辖区', '340200', '3');
-INSERT INTO `tb_area` VALUES ('530925', '双江拉祜族佤族布朗族傣族自治县', '530900', '3');
-INSERT INTO `tb_area` VALUES ('141102', '离石区', '141100', '3');
-INSERT INTO `tb_area` VALUES ('360800', '吉安市', '360000', '2');
-INSERT INTO `tb_area` VALUES ('532529', '红河县', '532500', '3');
-INSERT INTO `tb_area` VALUES ('659006', '铁门关市', '659000', '3');
-INSERT INTO `tb_area` VALUES ('450501', '市辖区', '450500', '3');
-INSERT INTO `tb_area` VALUES ('450331', '荔浦县', '450300', '3');
-INSERT INTO `tb_area` VALUES ('540328', '芒康县', '540300', '3');
-INSERT INTO `tb_area` VALUES ('511100', '乐山市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('330702', '婺城区', '330700', '3');
-INSERT INTO `tb_area` VALUES ('140110', '晋源区', '140100', '3');
-INSERT INTO `tb_area` VALUES ('450302', '秀峰区', '450300', '3');
-INSERT INTO `tb_area` VALUES ('653022', '阿克陶县', '653000', '3');
-INSERT INTO `tb_area` VALUES ('520502', '七星关区', '520500', '3');
-INSERT INTO `tb_area` VALUES ('610125', '户县', '610100', '3');
-INSERT INTO `tb_area` VALUES ('140226', '左云县', '140200', '3');
-INSERT INTO `tb_area` VALUES ('320507', '相城区', '320500', '3');
-INSERT INTO `tb_area` VALUES ('652328', '木垒哈萨克自治县', '652300', '3');
-INSERT INTO `tb_area` VALUES ('520602', '碧江区', '520600', '3');
-INSERT INTO `tb_area` VALUES ('430111', '雨花区', '430100', '3');
-INSERT INTO `tb_area` VALUES ('421127', '黄梅县', '421100', '3');
-INSERT INTO `tb_area` VALUES ('410602', '鹤山区', '410600', '3');
-INSERT INTO `tb_area` VALUES ('410700', '新乡市', '410000', '2');
-INSERT INTO `tb_area` VALUES ('231086', '东宁市', '231000', '3');
-INSERT INTO `tb_area` VALUES ('230225', '甘南县', '230200', '3');
-INSERT INTO `tb_area` VALUES ('231101', '市辖区', '231100', '3');
-INSERT INTO `tb_area` VALUES ('220623', '长白朝鲜族自治县', '220600', '3');
-INSERT INTO `tb_area` VALUES ('510900', '遂宁市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('540329', '洛隆县', '540300', '3');
-INSERT INTO `tb_area` VALUES ('540402', '巴宜区', '540400', '3');
-INSERT INTO `tb_area` VALUES ('331102', '莲都区', '331100', '3');
-INSERT INTO `tb_area` VALUES ('231200', '绥化市', '230000', '2');
-INSERT INTO `tb_area` VALUES ('652701', '博乐市', '652700', '3');
-INSERT INTO `tb_area` VALUES ('130300', '秦皇岛市', '130000', '2');
-INSERT INTO `tb_area` VALUES ('411324', '镇平县', '411300', '3');
-INSERT INTO `tb_area` VALUES ('510301', '市辖区', '510300', '3');
-INSERT INTO `tb_area` VALUES ('350203', '思明区', '350200', '3');
-INSERT INTO `tb_area` VALUES ('622921', '临夏县', '622900', '3');
-INSERT INTO `tb_area` VALUES ('450100', '南宁市', '450000', '2');
-INSERT INTO `tb_area` VALUES ('419001', '济源市', '419000', '3');
-INSERT INTO `tb_area` VALUES ('230710', '五营区', '230700', '3');
-INSERT INTO `tb_area` VALUES ('210781', '凌海市', '210700', '3');
-INSERT INTO `tb_area` VALUES ('510107', '武侯区', '510100', '3');
-INSERT INTO `tb_area` VALUES ('350981', '福安市', '350900', '3');
-INSERT INTO `tb_area` VALUES ('131127', '景县', '131100', '3');
-INSERT INTO `tb_area` VALUES ('230805', '东风区', '230800', '3');
-INSERT INTO `tb_area` VALUES ('130523', '内丘县', '130500', '3');
-INSERT INTO `tb_area` VALUES ('420626', '保康县', '420600', '3');
-INSERT INTO `tb_area` VALUES ('350301', '市辖区', '350300', '3');
-INSERT INTO `tb_area` VALUES ('360703', '南康区', '360700', '3');
-INSERT INTO `tb_area` VALUES ('542523', '噶尔县', '542500', '3');
-INSERT INTO `tb_area` VALUES ('500109', '北碚区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('140701', '市辖区', '140700', '3');
-INSERT INTO `tb_area` VALUES ('510904', '安居区', '510900', '3');
-INSERT INTO `tb_area` VALUES ('321084', '高邮市', '321000', '3');
-INSERT INTO `tb_area` VALUES ('410306', '吉利区', '410300', '3');
-INSERT INTO `tb_area` VALUES ('330902', '定海区', '330900', '3');
-INSERT INTO `tb_area` VALUES ('653121', '疏附县', '653100', '3');
-INSERT INTO `tb_area` VALUES ('510112', '龙泉驿区', '510100', '3');
-INSERT INTO `tb_area` VALUES ('620923', '肃北蒙古族自治县', '620900', '3');
-INSERT INTO `tb_area` VALUES ('520622', '玉屏侗族自治县', '520600', '3');
-INSERT INTO `tb_area` VALUES ('230624', '杜尔伯特蒙古族自治县', '230600', '3');
-INSERT INTO `tb_area` VALUES ('640200', '石嘴山市', '640000', '2');
-INSERT INTO `tb_area` VALUES ('150302', '海勃湾区', '150300', '3');
-INSERT INTO `tb_area` VALUES ('230229', '克山县', '230200', '3');
-INSERT INTO `tb_area` VALUES ('610701', '市辖区', '610700', '3');
-INSERT INTO `tb_area` VALUES ('330421', '嘉善县', '330400', '3');
-INSERT INTO `tb_area` VALUES ('420606', '樊城区', '420600', '3');
-INSERT INTO `tb_area` VALUES ('632822', '都兰县', '632800', '3');
-INSERT INTO `tb_area` VALUES ('140802', '盐湖区', '140800', '3');
-INSERT INTO `tb_area` VALUES ('230109', '松北区', '230100', '3');
-INSERT INTO `tb_area` VALUES ('530125', '宜良县', '530100', '3');
-INSERT INTO `tb_area` VALUES ('231182', '五大连池市', '231100', '3');
-INSERT INTO `tb_area` VALUES ('450803', '港南区', '450800', '3');
-INSERT INTO `tb_area` VALUES ('360881', '井冈山市', '360800', '3');
-INSERT INTO `tb_area` VALUES ('320623', '如东县', '320600', '3');
-INSERT INTO `tb_area` VALUES ('341621', '涡阳县', '341600', '3');
-INSERT INTO `tb_area` VALUES ('540126', '达孜县', '540100', '3');
-INSERT INTO `tb_area` VALUES ('341282', '界首市', '341200', '3');
-INSERT INTO `tb_area` VALUES ('360700', '赣州市', '360000', '2');
-INSERT INTO `tb_area` VALUES ('511824', '石棉县', '511800', '3');
-INSERT INTO `tb_area` VALUES ('130521', '邢台县', '130500', '3');
-INSERT INTO `tb_area` VALUES ('370900', '泰安市', '370000', '2');
-INSERT INTO `tb_area` VALUES ('350201', '市辖区', '350200', '3');
-INSERT INTO `tb_area` VALUES ('140200', '大同市', '140000', '2');
-INSERT INTO `tb_area` VALUES ('320924', '射阳县', '320900', '3');
-INSERT INTO `tb_area` VALUES ('610632', '黄陵县', '610600', '3');
-INSERT INTO `tb_area` VALUES ('513224', '松潘县', '513200', '3');
-INSERT INTO `tb_area` VALUES ('653201', '和田市', '653200', '3');
-INSERT INTO `tb_area` VALUES ('445381', '罗定市', '445300', '3');
-INSERT INTO `tb_area` VALUES ('220700', '松原市', '220000', '2');
-INSERT INTO `tb_area` VALUES ('640502', '沙坡头区', '640500', '3');
-INSERT INTO `tb_area` VALUES ('430725', '桃源县', '430700', '3');
-INSERT INTO `tb_area` VALUES ('360502', '渝水区', '360500', '3');
-INSERT INTO `tb_area` VALUES ('532532', '河口瑶族自治县', '532500', '3');
-INSERT INTO `tb_area` VALUES ('340602', '杜集区', '340600', '3');
-INSERT INTO `tb_area` VALUES ('420114', '蔡甸区', '420100', '3');
-INSERT INTO `tb_area` VALUES ('511123', '犍为县', '511100', '3');
-INSERT INTO `tb_area` VALUES ('621122', '陇西县', '621100', '3');
-INSERT INTO `tb_area` VALUES ('511302', '顺庆区', '511300', '3');
-INSERT INTO `tb_area` VALUES ('370212', '崂山区', '370200', '3');
-INSERT INTO `tb_area` VALUES ('150623', '鄂托克前旗', '150600', '3');
-INSERT INTO `tb_area` VALUES ('431302', '娄星区', '431300', '3');
-INSERT INTO `tb_area` VALUES ('450700', '钦州市', '450000', '2');
-INSERT INTO `tb_area` VALUES ('330700', '金华市', '330000', '2');
-INSERT INTO `tb_area` VALUES ('511111', '沙湾区', '511100', '3');
-INSERT INTO `tb_area` VALUES ('430601', '市辖区', '430600', '3');
-INSERT INTO `tb_area` VALUES ('410100', '郑州市', '410000', '2');
-INSERT INTO `tb_area` VALUES ('210703', '凌河区', '210700', '3');
-INSERT INTO `tb_area` VALUES ('320500', '苏州市', '320000', '2');
-INSERT INTO `tb_area` VALUES ('340800', '安庆市', '340000', '2');
-INSERT INTO `tb_area` VALUES ('150203', '昆都仑区', '150200', '3');
-INSERT INTO `tb_area` VALUES ('611000', '商洛市', '610000', '2');
-INSERT INTO `tb_area` VALUES ('421002', '沙市区', '421000', '3');
-INSERT INTO `tb_area` VALUES ('130209', '曹妃甸区', '130200', '3');
-INSERT INTO `tb_area` VALUES ('360481', '瑞昌市', '360400', '3');
-INSERT INTO `tb_area` VALUES ('231005', '西安区', '231000', '3');
-INSERT INTO `tb_area` VALUES ('420113', '汉南区', '420100', '3');
-INSERT INTO `tb_area` VALUES ('420821', '京山县', '420800', '3');
-INSERT INTO `tb_area` VALUES ('330206', '北仑区', '330200', '3');
-INSERT INTO `tb_area` VALUES ('520325', '道真仡佬族苗族自治县', '520300', '3');
-INSERT INTO `tb_area` VALUES ('350628', '平和县', '350600', '3');
-INSERT INTO `tb_area` VALUES ('340523', '和县', '340500', '3');
-INSERT INTO `tb_area` VALUES ('410721', '新乡县', '410700', '3');
-INSERT INTO `tb_area` VALUES ('360424', '修水县', '360400', '3');
-INSERT INTO `tb_area` VALUES ('410501', '市辖区', '410500', '3');
-INSERT INTO `tb_area` VALUES ('445303', '云安区', '445300', '3');
-INSERT INTO `tb_area` VALUES ('441226', '德庆县', '441200', '3');
-INSERT INTO `tb_area` VALUES ('522635', '麻江县', '522600', '3');
-INSERT INTO `tb_area` VALUES ('370613', '莱山区', '370600', '3');
-INSERT INTO `tb_area` VALUES ('350625', '长泰县', '350600', '3');
-INSERT INTO `tb_area` VALUES ('510183', '邛崃市', '510100', '3');
-INSERT INTO `tb_area` VALUES ('420600', '襄阳市', '420000', '2');
-INSERT INTO `tb_area` VALUES ('131182', '深州市', '131100', '3');
-INSERT INTO `tb_area` VALUES ('530901', '市辖区', '530900', '3');
-INSERT INTO `tb_area` VALUES ('441303', '惠阳区', '441300', '3');
-INSERT INTO `tb_area` VALUES ('330781', '兰溪市', '330700', '3');
-INSERT INTO `tb_area` VALUES ('420982', '安陆市', '420900', '3');
-INSERT INTO `tb_area` VALUES ('410523', '汤阴县', '410500', '3');
-INSERT INTO `tb_area` VALUES ('420700', '鄂州市', '420000', '2');
-INSERT INTO `tb_area` VALUES ('441203', '鼎湖区', '441200', '3');
-INSERT INTO `tb_area` VALUES ('431200', '怀化市', '430000', '2');
-INSERT INTO `tb_area` VALUES ('533301', '泸水市', '533300', '3');
-INSERT INTO `tb_area` VALUES ('520425', '紫云苗族布依族自治县', '520400', '3');
-INSERT INTO `tb_area` VALUES ('441803', '清新区', '441800', '3');
-INSERT INTO `tb_area` VALUES ('511603', '前锋区', '511600', '3');
-INSERT INTO `tb_area` VALUES ('341126', '凤阳县', '341100', '3');
-INSERT INTO `tb_area` VALUES ('430922', '桃江县', '430900', '3');
-INSERT INTO `tb_area` VALUES ('610427', '彬县', '610400', '3');
-INSERT INTO `tb_area` VALUES ('341124', '全椒县', '341100', '3');
-INSERT INTO `tb_area` VALUES ('621027', '镇原县', '621000', '3');
-INSERT INTO `tb_area` VALUES ('150725', '陈巴尔虎旗', '150700', '3');
-INSERT INTO `tb_area` VALUES ('330111', '富阳区', '330100', '3');
-INSERT INTO `tb_area` VALUES ('450124', '马山县', '450100', '3');
-INSERT INTO `tb_area` VALUES ('430822', '桑植县', '430800', '3');
-INSERT INTO `tb_area` VALUES ('411201', '市辖区', '411200', '3');
-INSERT INTO `tb_area` VALUES ('350322', '仙游县', '350300', '3');
-INSERT INTO `tb_area` VALUES ('410726', '延津县', '410700', '3');
-INSERT INTO `tb_area` VALUES ('310000', '上海市', '0', '1');
-INSERT INTO `tb_area` VALUES ('530927', '沧源佤族自治县', '530900', '3');
-INSERT INTO `tb_area` VALUES ('140727', '祁县', '140700', '3');
-INSERT INTO `tb_area` VALUES ('410204', '鼓楼区', '410200', '3');
-INSERT INTO `tb_area` VALUES ('231224', '庆安县', '231200', '3');
-INSERT INTO `tb_area` VALUES ('130432', '广平县', '130400', '3');
-INSERT INTO `tb_area` VALUES ('210214', '普兰店区', '210200', '3');
-INSERT INTO `tb_area` VALUES ('540236', '萨嘎县', '540200', '3');
-INSERT INTO `tb_area` VALUES ('141029', '乡宁县', '141000', '3');
-INSERT INTO `tb_area` VALUES ('130503', '桥西区', '130500', '3');
-INSERT INTO `tb_area` VALUES ('653224', '洛浦县', '653200', '3');
-INSERT INTO `tb_area` VALUES ('370301', '市辖区', '370300', '3');
-INSERT INTO `tb_area` VALUES ('622922', '康乐县', '622900', '3');
-INSERT INTO `tb_area` VALUES ('522326', '望谟县', '522300', '3');
-INSERT INTO `tb_area` VALUES ('511503', '南溪区', '511500', '3');
-INSERT INTO `tb_area` VALUES ('513429', '布拖县', '513400', '3');
-INSERT INTO `tb_area` VALUES ('540232', '仲巴县', '540200', '3');
-INSERT INTO `tb_area` VALUES ('130902', '新华区', '130900', '3');
-INSERT INTO `tb_area` VALUES ('360622', '余江县', '360600', '3');
-INSERT INTO `tb_area` VALUES ('371401', '市辖区', '371400', '3');
-INSERT INTO `tb_area` VALUES ('370686', '栖霞市', '370600', '3');
-INSERT INTO `tb_area` VALUES ('522630', '台江县', '522600', '3');
-INSERT INTO `tb_area` VALUES ('542423', '比如县', '542400', '3');
-INSERT INTO `tb_area` VALUES ('350782', '武夷山市', '350700', '3');
-INSERT INTO `tb_area` VALUES ('511303', '高坪区', '511300', '3');
-INSERT INTO `tb_area` VALUES ('150802', '临河区', '150800', '3');
-INSERT INTO `tb_area` VALUES ('610627', '甘泉县', '610600', '3');
-INSERT INTO `tb_area` VALUES ('520121', '开阳县', '520100', '3');
-INSERT INTO `tb_area` VALUES ('451201', '市辖区', '451200', '3');
-INSERT INTO `tb_area` VALUES ('522324', '晴隆县', '522300', '3');
-INSERT INTO `tb_area` VALUES ('361101', '市辖区', '361100', '3');
-INSERT INTO `tb_area` VALUES ('431021', '桂阳县', '431000', '3');
-INSERT INTO `tb_area` VALUES ('140700', '晋中市', '140000', '2');
-INSERT INTO `tb_area` VALUES ('130801', '市辖区', '130800', '3');
-INSERT INTO `tb_area` VALUES ('350123', '罗源县', '350100', '3');
-INSERT INTO `tb_area` VALUES ('371428', '武城县', '371400', '3');
-INSERT INTO `tb_area` VALUES ('410727', '封丘县', '410700', '3');
-INSERT INTO `tb_area` VALUES ('310115', '浦东新区', '310100', '3');
-INSERT INTO `tb_area` VALUES ('130725', '尚义县', '130700', '3');
-INSERT INTO `tb_area` VALUES ('441204', '高要区', '441200', '3');
-INSERT INTO `tb_area` VALUES ('511822', '荥经县', '511800', '3');
-INSERT INTO `tb_area` VALUES ('320382', '邳州市', '320300', '3');
-INSERT INTO `tb_area` VALUES ('530824', '景谷傣族彝族自治县', '530800', '3');
-INSERT INTO `tb_area` VALUES ('411300', '南阳市', '410000', '2');
-INSERT INTO `tb_area` VALUES ('230407', '兴山区', '230400', '3');
-INSERT INTO `tb_area` VALUES ('522629', '剑河县', '522600', '3');
-INSERT INTO `tb_area` VALUES ('210701', '市辖区', '210700', '3');
-INSERT INTO `tb_area` VALUES ('530325', '富源县', '530300', '3');
-INSERT INTO `tb_area` VALUES ('370112', '历城区', '370100', '3');
-INSERT INTO `tb_area` VALUES ('360403', '浔阳区', '360400', '3');
-INSERT INTO `tb_area` VALUES ('360482', '共青城市', '360400', '3');
-INSERT INTO `tb_area` VALUES ('150526', '扎鲁特旗', '150500', '3');
-INSERT INTO `tb_area` VALUES ('211421', '绥中县', '211400', '3');
-INSERT INTO `tb_area` VALUES ('222401', '延吉市', '222400', '3');
-INSERT INTO `tb_area` VALUES ('341500', '六安市', '340000', '2');
-INSERT INTO `tb_area` VALUES ('140212', '新荣区', '140200', '3');
-INSERT INTO `tb_area` VALUES ('370302', '淄川区', '370300', '3');
-INSERT INTO `tb_area` VALUES ('360724', '上犹县', '360700', '3');
-INSERT INTO `tb_area` VALUES ('220602', '浑江区', '220600', '3');
-INSERT INTO `tb_area` VALUES ('330101', '市辖区', '330100', '3');
-INSERT INTO `tb_area` VALUES ('511521', '宜宾县', '511500', '3');
-INSERT INTO `tb_area` VALUES ('360830', '永新县', '360800', '3');
-INSERT INTO `tb_area` VALUES ('350700', '南平市', '350000', '2');
-INSERT INTO `tb_area` VALUES ('411282', '灵宝市', '411200', '3');
-INSERT INTO `tb_area` VALUES ('210212', '旅顺口区', '210200', '3');
-INSERT INTO `tb_area` VALUES ('231085', '穆棱市', '231000', '3');
-INSERT INTO `tb_area` VALUES ('511126', '夹江县', '511100', '3');
-INSERT INTO `tb_area` VALUES ('440304', '福田区', '440300', '3');
-INSERT INTO `tb_area` VALUES ('610300', '宝鸡市', '610000', '2');
-INSERT INTO `tb_area` VALUES ('653001', '阿图什市', '653000', '3');
-INSERT INTO `tb_area` VALUES ('450481', '岑溪市', '450400', '3');
-INSERT INTO `tb_area` VALUES ('650104', '新市区', '650100', '3');
-INSERT INTO `tb_area` VALUES ('610329', '麟游县', '610300', '3');
-INSERT INTO `tb_area` VALUES ('654224', '托里县', '654200', '3');
-INSERT INTO `tb_area` VALUES ('420115', '江夏区', '420100', '3');
-INSERT INTO `tb_area` VALUES ('230703', '南岔区', '230700', '3');
-INSERT INTO `tb_area` VALUES ('450321', '阳朔县', '450300', '3');
-INSERT INTO `tb_area` VALUES ('330481', '海宁市', '330400', '3');
-INSERT INTO `tb_area` VALUES ('131101', '市辖区', '131100', '3');
-INSERT INTO `tb_area` VALUES ('350526', '德化县', '350500', '3');
-INSERT INTO `tb_area` VALUES ('451021', '田阳县', '451000', '3');
-INSERT INTO `tb_area` VALUES ('430203', '芦淞区', '430200', '3');
-INSERT INTO `tb_area` VALUES ('341226', '颍上县', '341200', '3');
-INSERT INTO `tb_area` VALUES ('140801', '市辖区', '140800', '3');
-INSERT INTO `tb_area` VALUES ('610528', '富平县', '610500', '3');
-INSERT INTO `tb_area` VALUES ('450110', '武鸣区', '450100', '3');
-INSERT INTO `tb_area` VALUES ('230301', '市辖区', '230300', '3');
-INSERT INTO `tb_area` VALUES ('130111', '栾城区', '130100', '3');
-INSERT INTO `tb_area` VALUES ('320601', '市辖区', '320600', '3');
-INSERT INTO `tb_area` VALUES ('350725', '政和县', '350700', '3');
-INSERT INTO `tb_area` VALUES ('511723', '开江县', '511700', '3');
-INSERT INTO `tb_area` VALUES ('620402', '白银区', '620400', '3');
-INSERT INTO `tb_area` VALUES ('150205', '石拐区', '150200', '3');
-INSERT INTO `tb_area` VALUES ('150105', '赛罕区', '150100', '3');
-INSERT INTO `tb_area` VALUES ('632622', '班玛县', '632600', '3');
-INSERT INTO `tb_area` VALUES ('610111', '灞桥区', '610100', '3');
-INSERT INTO `tb_area` VALUES ('510726', '北川羌族自治县', '510700', '3');
-INSERT INTO `tb_area` VALUES ('231081', '绥芬河市', '231000', '3');
-INSERT INTO `tb_area` VALUES ('469000', '省直辖县级行政区划', '460000', '2');
-INSERT INTO `tb_area` VALUES ('520327', '凤冈县', '520300', '3');
-INSERT INTO `tb_area` VALUES ('360300', '萍乡市', '360000', '2');
-INSERT INTO `tb_area` VALUES ('341182', '明光市', '341100', '3');
-INSERT INTO `tb_area` VALUES ('652928', '阿瓦提县', '652900', '3');
-INSERT INTO `tb_area` VALUES ('610500', '渭南市', '610000', '2');
-INSERT INTO `tb_area` VALUES ('511725', '渠县', '511700', '3');
-INSERT INTO `tb_area` VALUES ('610924', '紫阳县', '610900', '3');
-INSERT INTO `tb_area` VALUES ('211201', '市辖区', '211200', '3');
-INSERT INTO `tb_area` VALUES ('320800', '淮安市', '320000', '2');
-INSERT INTO `tb_area` VALUES ('370685', '招远市', '370600', '3');
-INSERT INTO `tb_area` VALUES ('140101', '市辖区', '140100', '3');
-INSERT INTO `tb_area` VALUES ('530300', '曲靖市', '530000', '2');
-INSERT INTO `tb_area` VALUES ('411224', '卢氏县', '411200', '3');
-INSERT INTO `tb_area` VALUES ('640425', '彭阳县', '640400', '3');
-INSERT INTO `tb_area` VALUES ('513435', '甘洛县', '513400', '3');
-INSERT INTO `tb_area` VALUES ('360802', '吉州区', '360800', '3');
-INSERT INTO `tb_area` VALUES ('130321', '青龙满族自治县', '130300', '3');
-INSERT INTO `tb_area` VALUES ('230522', '友谊县', '230500', '3');
-INSERT INTO `tb_area` VALUES ('371723', '成武县', '371700', '3');
-INSERT INTO `tb_area` VALUES ('350402', '梅列区', '350400', '3');
-INSERT INTO `tb_area` VALUES ('410821', '修武县', '410800', '3');
-INSERT INTO `tb_area` VALUES ('371525', '冠县', '371500', '3');
-INSERT INTO `tb_area` VALUES ('230901', '市辖区', '230900', '3');
-INSERT INTO `tb_area` VALUES ('532501', '个旧市', '532500', '3');
-INSERT INTO `tb_area` VALUES ('429021', '神农架林区', '429000', '3');
-INSERT INTO `tb_area` VALUES ('420607', '襄州区', '420600', '3');
-INSERT INTO `tb_area` VALUES ('652900', '阿克苏地区', '650000', '2');
-INSERT INTO `tb_area` VALUES ('640303', '红寺堡区', '640300', '3');
-INSERT INTO `tb_area` VALUES ('360731', '于都县', '360700', '3');
-INSERT INTO `tb_area` VALUES ('140800', '运城市', '140000', '2');
-INSERT INTO `tb_area` VALUES ('130601', '市辖区', '130600', '3');
-INSERT INTO `tb_area` VALUES ('350702', '延平区', '350700', '3');
-INSERT INTO `tb_area` VALUES ('610502', '临渭区', '610500', '3');
-INSERT INTO `tb_area` VALUES ('211021', '辽阳县', '211000', '3');
-INSERT INTO `tb_area` VALUES ('469025', '白沙黎族自治县', '469000', '3');
-INSERT INTO `tb_area` VALUES ('141121', '文水县', '141100', '3');
-INSERT INTO `tb_area` VALUES ('330624', '新昌县', '330600', '3');
-INSERT INTO `tb_area` VALUES ('350205', '海沧区', '350200', '3');
-INSERT INTO `tb_area` VALUES ('320723', '灌云县', '320700', '3');
-INSERT INTO `tb_area` VALUES ('411002', '魏都区', '411000', '3');
-INSERT INTO `tb_area` VALUES ('340111', '包河区', '340100', '3');
-INSERT INTO `tb_area` VALUES ('522633', '从江县', '522600', '3');
-INSERT INTO `tb_area` VALUES ('810000', '香港特别行政区', '0', '1');
-INSERT INTO `tb_area` VALUES ('431382', '涟源市', '431300', '3');
-INSERT INTO `tb_area` VALUES ('500107', '九龙坡区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('440507', '龙湖区', '440500', '3');
-INSERT INTO `tb_area` VALUES ('530128', '禄劝彝族苗族自治县', '530100', '3');
-INSERT INTO `tb_area` VALUES ('532626', '丘北县', '532600', '3');
-INSERT INTO `tb_area` VALUES ('540229', '仁布县', '540200', '3');
-INSERT INTO `tb_area` VALUES ('430223', '攸县', '430200', '3');
-INSERT INTO `tb_area` VALUES ('640424', '泾源县', '640400', '3');
-INSERT INTO `tb_area` VALUES ('130125', '行唐县', '130100', '3');
-INSERT INTO `tb_area` VALUES ('632525', '贵南县', '632500', '3');
-INSERT INTO `tb_area` VALUES ('320201', '市辖区', '320200', '3');
-INSERT INTO `tb_area` VALUES ('411330', '桐柏县', '411300', '3');
-INSERT INTO `tb_area` VALUES ('430821', '慈利县', '430800', '3');
-INSERT INTO `tb_area` VALUES ('320281', '江阴市', '320200', '3');
-INSERT INTO `tb_area` VALUES ('513336', '乡城县', '513300', '3');
-INSERT INTO `tb_area` VALUES ('140524', '陵川县', '140500', '3');
-INSERT INTO `tb_area` VALUES ('610728', '镇巴县', '610700', '3');
-INSERT INTO `tb_area` VALUES ('654325', '青河县', '654300', '3');
-INSERT INTO `tb_area` VALUES ('410105', '金水区', '410100', '3');
-INSERT INTO `tb_area` VALUES ('350521', '惠安县', '350500', '3');
-INSERT INTO `tb_area` VALUES ('410103', '二七区', '410100', '3');
-INSERT INTO `tb_area` VALUES ('341524', '金寨县', '341500', '3');
-INSERT INTO `tb_area` VALUES ('360726', '安远县', '360700', '3');
-INSERT INTO `tb_area` VALUES ('130804', '鹰手营子矿区', '130800', '3');
-INSERT INTO `tb_area` VALUES ('540225', '拉孜县', '540200', '3');
-INSERT INTO `tb_area` VALUES ('370211', '黄岛区', '370200', '3');
-INSERT INTO `tb_area` VALUES ('341723', '青阳县', '341700', '3');
-INSERT INTO `tb_area` VALUES ('360681', '贵溪市', '360600', '3');
-INSERT INTO `tb_area` VALUES ('451122', '钟山县', '451100', '3');
-INSERT INTO `tb_area` VALUES ('513225', '九寨沟县', '513200', '3');
-INSERT INTO `tb_area` VALUES ('150625', '杭锦旗', '150600', '3');
-INSERT INTO `tb_area` VALUES ('340600', '淮北市', '340000', '2');
-INSERT INTO `tb_area` VALUES ('310114', '嘉定区', '310100', '3');
-INSERT INTO `tb_area` VALUES ('330824', '开化县', '330800', '3');
-INSERT INTO `tb_area` VALUES ('522725', '瓮安县', '522700', '3');
-INSERT INTO `tb_area` VALUES ('430981', '沅江市', '430900', '3');
-INSERT INTO `tb_area` VALUES ('522722', '荔波县', '522700', '3');
-INSERT INTO `tb_area` VALUES ('430802', '永定区', '430800', '3');
-INSERT INTO `tb_area` VALUES ('410482', '汝州市', '410400', '3');
-INSERT INTO `tb_area` VALUES ('230227', '富裕县', '230200', '3');
-INSERT INTO `tb_area` VALUES ('110100', '北京市', '110000', '2');
-INSERT INTO `tb_area` VALUES ('371100', '日照市', '370000', '2');
-INSERT INTO `tb_area` VALUES ('411426', '夏邑县', '411400', '3');
-INSERT INTO `tb_area` VALUES ('370702', '潍城区', '370700', '3');
-INSERT INTO `tb_area` VALUES ('440783', '开平市', '440700', '3');
-INSERT INTO `tb_area` VALUES ('540530', '错那县', '540500', '3');
-INSERT INTO `tb_area` VALUES ('420922', '大悟县', '420900', '3');
-INSERT INTO `tb_area` VALUES ('230803', '向阳区', '230800', '3');
-INSERT INTO `tb_area` VALUES ('511112', '五通桥区', '511100', '3');
-INSERT INTO `tb_area` VALUES ('371423', '庆云县', '371400', '3');
-INSERT INTO `tb_area` VALUES ('220323', '伊通满族自治县', '220300', '3');
-INSERT INTO `tb_area` VALUES ('532328', '元谋县', '532300', '3');
-INSERT INTO `tb_area` VALUES ('469027', '乐东黎族自治县', '469000', '3');
-INSERT INTO `tb_area` VALUES ('150927', '察哈尔右翼中旗', '150900', '3');
-INSERT INTO `tb_area` VALUES ('140224', '灵丘县', '140200', '3');
-INSERT INTO `tb_area` VALUES ('210922', '彰武县', '210900', '3');
-INSERT INTO `tb_area` VALUES ('621123', '渭源县', '621100', '3');
-INSERT INTO `tb_area` VALUES ('445302', '云城区', '445300', '3');
-INSERT INTO `tb_area` VALUES ('451402', '江州区', '451400', '3');
-INSERT INTO `tb_area` VALUES ('451228', '都安瑶族自治县', '451200', '3');
-INSERT INTO `tb_area` VALUES ('421100', '黄冈市', '420000', '2');
-INSERT INTO `tb_area` VALUES ('520326', '务川仡佬族苗族自治县', '520300', '3');
-INSERT INTO `tb_area` VALUES ('130529', '巨鹿县', '130500', '3');
-INSERT INTO `tb_area` VALUES ('341225', '阜南县', '341200', '3');
-INSERT INTO `tb_area` VALUES ('370104', '槐荫区', '370100', '3');
-INSERT INTO `tb_area` VALUES ('431121', '祁阳县', '431100', '3');
-INSERT INTO `tb_area` VALUES ('510903', '船山区', '510900', '3');
-INSERT INTO `tb_area` VALUES ('360302', '安源区', '360300', '3');
-INSERT INTO `tb_area` VALUES ('210204', '沙河口区', '210200', '3');
-INSERT INTO `tb_area` VALUES ('330502', '吴兴区', '330500', '3');
-INSERT INTO `tb_area` VALUES ('653024', '乌恰县', '653000', '3');
-INSERT INTO `tb_area` VALUES ('620111', '红古区', '620100', '3');
-INSERT INTO `tb_area` VALUES ('441225', '封开县', '441200', '3');
-INSERT INTO `tb_area` VALUES ('220112', '双阳区', '220100', '3');
-INSERT INTO `tb_area` VALUES ('513425', '会理县', '513400', '3');
-INSERT INTO `tb_area` VALUES ('652723', '温泉县', '652700', '3');
-INSERT INTO `tb_area` VALUES ('431300', '娄底市', '430000', '2');
-INSERT INTO `tb_area` VALUES ('130681', '涿州市', '130600', '3');
-INSERT INTO `tb_area` VALUES ('330681', '诸暨市', '330600', '3');
-INSERT INTO `tb_area` VALUES ('320585', '太仓市', '320500', '3');
-INSERT INTO `tb_area` VALUES ('130402', '邯山区', '130400', '3');
-INSERT INTO `tb_area` VALUES ('640101', '市辖区', '640100', '3');
-INSERT INTO `tb_area` VALUES ('350103', '台江区', '350100', '3');
-INSERT INTO `tb_area` VALUES ('330000', '浙江省', '0', '1');
-INSERT INTO `tb_area` VALUES ('621200', '陇南市', '620000', '2');
-INSERT INTO `tb_area` VALUES ('421381', '广水市', '421300', '3');
-INSERT INTO `tb_area` VALUES ('350825', '连城县', '350800', '3');
-INSERT INTO `tb_area` VALUES ('130722', '张北县', '130700', '3');
-INSERT INTO `tb_area` VALUES ('460108', '美兰区', '460100', '3');
-INSERT INTO `tb_area` VALUES ('370826', '微山县', '370800', '3');
-INSERT INTO `tb_area` VALUES ('500232', '武隆县', '500200', '3');
-INSERT INTO `tb_area` VALUES ('350803', '永定区', '350800', '3');
-INSERT INTO `tb_area` VALUES ('510402', '东区', '510400', '3');
-INSERT INTO `tb_area` VALUES ('360500', '新余市', '360000', '2');
-INSERT INTO `tb_area` VALUES ('370126', '商河县', '370100', '3');
-INSERT INTO `tb_area` VALUES ('510101', '市辖区', '510100', '3');
-INSERT INTO `tb_area` VALUES ('511902', '巴州区', '511900', '3');
-INSERT INTO `tb_area` VALUES ('654003', '奎屯市', '654000', '3');
-INSERT INTO `tb_area` VALUES ('430421', '衡阳县', '430400', '3');
-INSERT INTO `tb_area` VALUES ('431281', '洪江市', '431200', '3');
-INSERT INTO `tb_area` VALUES ('130924', '海兴县', '130900', '3');
-INSERT INTO `tb_area` VALUES ('450326', '永福县', '450300', '3');
-INSERT INTO `tb_area` VALUES ('430422', '衡南县', '430400', '3');
-INSERT INTO `tb_area` VALUES ('410601', '市辖区', '410600', '3');
-INSERT INTO `tb_area` VALUES ('540527', '洛扎县', '540500', '3');
-INSERT INTO `tb_area` VALUES ('321102', '京口区', '321100', '3');
-INSERT INTO `tb_area` VALUES ('130803', '双滦区', '130800', '3');
-INSERT INTO `tb_area` VALUES ('610726', '宁强县', '610700', '3');
-INSERT INTO `tb_area` VALUES ('150782', '牙克石市', '150700', '3');
-INSERT INTO `tb_area` VALUES ('430412', '南岳区', '430400', '3');
-INSERT INTO `tb_area` VALUES ('211103', '兴隆台区', '211100', '3');
-INSERT INTO `tb_area` VALUES ('441201', '市辖区', '441200', '3');
-INSERT INTO `tb_area` VALUES ('420583', '枝江市', '420500', '3');
-INSERT INTO `tb_area` VALUES ('341525', '霍山县', '341500', '3');
-INSERT INTO `tb_area` VALUES ('350500', '泉州市', '350000', '2');
-INSERT INTO `tb_area` VALUES ('540500', '山南市', '540000', '2');
-INSERT INTO `tb_area` VALUES ('130928', '吴桥县', '130900', '3');
-INSERT INTO `tb_area` VALUES ('510124', '郫县', '510100', '3');
-INSERT INTO `tb_area` VALUES ('460101', '市辖区', '460100', '3');
-INSERT INTO `tb_area` VALUES ('542522', '札达县', '542500', '3');
-INSERT INTO `tb_area` VALUES ('370612', '牟平区', '370600', '3');
-INSERT INTO `tb_area` VALUES ('420923', '云梦县', '420900', '3');
-INSERT INTO `tb_area` VALUES ('411500', '信阳市', '410000', '2');
-INSERT INTO `tb_area` VALUES ('320105', '建邺区', '320100', '3');
-INSERT INTO `tb_area` VALUES ('430301', '市辖区', '430300', '3');
-INSERT INTO `tb_area` VALUES ('131000', '廊坊市', '130000', '2');
-INSERT INTO `tb_area` VALUES ('141024', '洪洞县', '141000', '3');
-INSERT INTO `tb_area` VALUES ('110111', '房山区', '110100', '3');
-INSERT INTO `tb_area` VALUES ('610526', '蒲城县', '610500', '3');
-INSERT INTO `tb_area` VALUES ('532924', '宾川县', '532900', '3');
-INSERT INTO `tb_area` VALUES ('632821', '乌兰县', '632800', '3');
-INSERT INTO `tb_area` VALUES ('623026', '碌曲县', '623000', '3');
-INSERT INTO `tb_area` VALUES ('341004', '徽州区', '341000', '3');
-INSERT INTO `tb_area` VALUES ('440981', '高州市', '440900', '3');
-INSERT INTO `tb_area` VALUES ('620924', '阿克塞哈萨克族自治县', '620900', '3');
-INSERT INTO `tb_area` VALUES ('511102', '市中区', '511100', '3');
-INSERT INTO `tb_area` VALUES ('654322', '富蕴县', '654300', '3');
-INSERT INTO `tb_area` VALUES ('210203', '西岗区', '210200', '3');
-INSERT INTO `tb_area` VALUES ('330102', '上城区', '330100', '3');
-INSERT INTO `tb_area` VALUES ('230401', '市辖区', '230400', '3');
-INSERT INTO `tb_area` VALUES ('370600', '烟台市', '370000', '2');
-INSERT INTO `tb_area` VALUES ('321311', '宿豫区', '321300', '3');
-INSERT INTO `tb_area` VALUES ('361123', '玉山县', '361100', '3');
-INSERT INTO `tb_area` VALUES ('430528', '新宁县', '430500', '3');
-INSERT INTO `tb_area` VALUES ('469005', '文昌市', '469000', '3');
-INSERT INTO `tb_area` VALUES ('321023', '宝应县', '321000', '3');
-INSERT INTO `tb_area` VALUES ('450601', '市辖区', '450600', '3');
-INSERT INTO `tb_area` VALUES ('520601', '市辖区', '520600', '3');
-INSERT INTO `tb_area` VALUES ('130922', '青县', '130900', '3');
-INSERT INTO `tb_area` VALUES ('410901', '市辖区', '410900', '3');
-INSERT INTO `tb_area` VALUES ('421024', '江陵县', '421000', '3');
-INSERT INTO `tb_area` VALUES ('511800', '雅安市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('610803', '横山区', '610800', '3');
-INSERT INTO `tb_area` VALUES ('370827', '鱼台县', '370800', '3');
-INSERT INTO `tb_area` VALUES ('310100', '上海市', '310000', '2');
-INSERT INTO `tb_area` VALUES ('513326', '道孚县', '513300', '3');
-INSERT INTO `tb_area` VALUES ('140107', '杏花岭区', '140100', '3');
-INSERT INTO `tb_area` VALUES ('500110', '綦江区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('460100', '海口市', '460000', '2');
-INSERT INTO `tb_area` VALUES ('450303', '叠彩区', '450300', '3');
-INSERT INTO `tb_area` VALUES ('610801', '市辖区', '610800', '3');
-INSERT INTO `tb_area` VALUES ('360902', '袁州区', '360900', '3');
-INSERT INTO `tb_area` VALUES ('520221', '水城县', '520200', '3');
-INSERT INTO `tb_area` VALUES ('340321', '怀远县', '340300', '3');
-INSERT INTO `tb_area` VALUES ('510421', '米易县', '510400', '3');
-INSERT INTO `tb_area` VALUES ('130726', '蔚县', '130700', '3');
-INSERT INTO `tb_area` VALUES ('440800', '湛江市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('140825', '新绛县', '140800', '3');
-INSERT INTO `tb_area` VALUES ('321300', '宿迁市', '320000', '2');
-INSERT INTO `tb_area` VALUES ('420203', '西塞山区', '420200', '3');
-INSERT INTO `tb_area` VALUES ('510401', '市辖区', '510400', '3');
-INSERT INTO `tb_area` VALUES ('230600', '大庆市', '230000', '2');
-INSERT INTO `tb_area` VALUES ('623024', '迭部县', '623000', '3');
-INSERT INTO `tb_area` VALUES ('450329', '资源县', '450300', '3');
-INSERT INTO `tb_area` VALUES ('420117', '新洲区', '420100', '3');
-INSERT INTO `tb_area` VALUES ('441502', '城区', '441500', '3');
-INSERT INTO `tb_area` VALUES ('220113', '九台区', '220100', '3');
-INSERT INTO `tb_area` VALUES ('632626', '玛多县', '632600', '3');
-INSERT INTO `tb_area` VALUES ('410811', '山阳区', '410800', '3');
-INSERT INTO `tb_area` VALUES ('652722', '精河县', '652700', '3');
-INSERT INTO `tb_area` VALUES ('520625', '印江土家族苗族自治县', '520600', '3');
-INSERT INTO `tb_area` VALUES ('440301', '市辖区', '440300', '3');
-INSERT INTO `tb_area` VALUES ('640302', '利通区', '640300', '3');
-INSERT INTO `tb_area` VALUES ('632726', '曲麻莱县', '632700', '3');
-INSERT INTO `tb_area` VALUES ('220881', '洮南市', '220800', '3');
-INSERT INTO `tb_area` VALUES ('370687', '海阳市', '370600', '3');
-INSERT INTO `tb_area` VALUES ('500241', '秀山土家族苗族自治县', '500200', '3');
-INSERT INTO `tb_area` VALUES ('440802', '赤坎区', '440800', '3');
-INSERT INTO `tb_area` VALUES ('310107', '普陀区', '310100', '3');
-INSERT INTO `tb_area` VALUES ('211401', '市辖区', '211400', '3');
-INSERT INTO `tb_area` VALUES ('140223', '广灵县', '140200', '3');
-INSERT INTO `tb_area` VALUES ('441622', '龙川县', '441600', '3');
-INSERT INTO `tb_area` VALUES ('520300', '遵义市', '520000', '2');
-INSERT INTO `tb_area` VALUES ('371202', '莱城区', '371200', '3');
-INSERT INTO `tb_area` VALUES ('450300', '桂林市', '450000', '2');
-INSERT INTO `tb_area` VALUES ('522729', '长顺县', '522700', '3');
-INSERT INTO `tb_area` VALUES ('540501', '市辖区', '540500', '3');
-INSERT INTO `tb_area` VALUES ('421124', '英山县', '421100', '3');
-INSERT INTO `tb_area` VALUES ('511825', '天全县', '511800', '3');
-INSERT INTO `tb_area` VALUES ('371702', '牡丹区', '371700', '3');
-INSERT INTO `tb_area` VALUES ('231282', '肇东市', '231200', '3');
-INSERT INTO `tb_area` VALUES ('650103', '沙依巴克区', '650100', '3');
-INSERT INTO `tb_area` VALUES ('231004', '爱民区', '231000', '3');
-INSERT INTO `tb_area` VALUES ('540231', '定结县', '540200', '3');
-INSERT INTO `tb_area` VALUES ('533422', '德钦县', '533400', '3');
-INSERT INTO `tb_area` VALUES ('411302', '宛城区', '411300', '3');
-INSERT INTO `tb_area` VALUES ('431225', '会同县', '431200', '3');
-INSERT INTO `tb_area` VALUES ('340222', '繁昌县', '340200', '3');
-INSERT INTO `tb_area` VALUES ('500104', '大渡口区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('610328', '千阳县', '610300', '3');
-INSERT INTO `tb_area` VALUES ('220601', '市辖区', '220600', '3');
-INSERT INTO `tb_area` VALUES ('410724', '获嘉县', '410700', '3');
-INSERT INTO `tb_area` VALUES ('410502', '文峰区', '410500', '3');
-INSERT INTO `tb_area` VALUES ('370830', '汶上县', '370800', '3');
-INSERT INTO `tb_area` VALUES ('341321', '砀山县', '341300', '3');
-INSERT INTO `tb_area` VALUES ('530400', '玉溪市', '530000', '2');
-INSERT INTO `tb_area` VALUES ('370400', '枣庄市', '370000', '2');
-INSERT INTO `tb_area` VALUES ('420601', '市辖区', '420600', '3');
-INSERT INTO `tb_area` VALUES ('640402', '原州区', '640400', '3');
-INSERT INTO `tb_area` VALUES ('411625', '郸城县', '411600', '3');
-INSERT INTO `tb_area` VALUES ('152501', '二连浩特市', '152500', '3');
-INSERT INTO `tb_area` VALUES ('510129', '大邑县', '510100', '3');
-INSERT INTO `tb_area` VALUES ('370181', '章丘市', '370100', '3');
-INSERT INTO `tb_area` VALUES ('430121', '长沙县', '430100', '3');
-INSERT INTO `tb_area` VALUES ('450903', '福绵区', '450900', '3');
-INSERT INTO `tb_area` VALUES ('441600', '河源市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('210901', '市辖区', '210900', '3');
-INSERT INTO `tb_area` VALUES ('220221', '永吉县', '220200', '3');
-INSERT INTO `tb_area` VALUES ('530114', '呈贡区', '530100', '3');
-INSERT INTO `tb_area` VALUES ('511724', '大竹县', '511700', '3');
-INSERT INTO `tb_area` VALUES ('440103', '荔湾区', '440100', '3');
-INSERT INTO `tb_area` VALUES ('330302', '鹿城区', '330300', '3');
-INSERT INTO `tb_area` VALUES ('210902', '海州区', '210900', '3');
-INSERT INTO `tb_area` VALUES ('371426', '平原县', '371400', '3');
-INSERT INTO `tb_area` VALUES ('230902', '新兴区', '230900', '3');
-INSERT INTO `tb_area` VALUES ('130522', '临城县', '130500', '3');
-INSERT INTO `tb_area` VALUES ('370214', '城阳区', '370200', '3');
-INSERT INTO `tb_area` VALUES ('361100', '上饶市', '360000', '2');
-INSERT INTO `tb_area` VALUES ('522627', '天柱县', '522600', '3');
-INSERT INTO `tb_area` VALUES ('130101', '市辖区', '130100', '3');
-INSERT INTO `tb_area` VALUES ('140581', '高平市', '140500', '3');
-INSERT INTO `tb_area` VALUES ('140202', '城区', '140200', '3');
-INSERT INTO `tb_area` VALUES ('411623', '商水县', '411600', '3');
-INSERT INTO `tb_area` VALUES ('445281', '普宁市', '445200', '3');
-INSERT INTO `tb_area` VALUES ('652923', '库车县', '652900', '3');
-INSERT INTO `tb_area` VALUES ('330301', '市辖区', '330300', '3');
-INSERT INTO `tb_area` VALUES ('429000', '省直辖县级行政区划', '420000', '2');
-INSERT INTO `tb_area` VALUES ('410522', '安阳县', '410500', '3');
-INSERT INTO `tb_area` VALUES ('511681', '华蓥市', '511600', '3');
-INSERT INTO `tb_area` VALUES ('513401', '西昌市', '513400', '3');
-INSERT INTO `tb_area` VALUES ('430602', '岳阳楼区', '430600', '3');
-INSERT INTO `tb_area` VALUES ('220521', '通化县', '220500', '3');
-INSERT INTO `tb_area` VALUES ('451481', '凭祥市', '451400', '3');
-INSERT INTO `tb_area` VALUES ('130637', '博野县', '130600', '3');
-INSERT INTO `tb_area` VALUES ('350723', '光泽县', '350700', '3');
-INSERT INTO `tb_area` VALUES ('659004', '五家渠市', '659000', '3');
-INSERT INTO `tb_area` VALUES ('621001', '市辖区', '621000', '3');
-INSERT INTO `tb_area` VALUES ('130433', '馆陶县', '130400', '3');
-INSERT INTO `tb_area` VALUES ('450503', '银海区', '450500', '3');
-INSERT INTO `tb_area` VALUES ('422800', '恩施土家族苗族自治州', '420000', '2');
-INSERT INTO `tb_area` VALUES ('430781', '津市市', '430700', '3');
-INSERT INTO `tb_area` VALUES ('320981', '东台市', '320900', '3');
-INSERT INTO `tb_area` VALUES ('511622', '武胜县', '511600', '3');
-INSERT INTO `tb_area` VALUES ('450126', '宾阳县', '450100', '3');
-INSERT INTO `tb_area` VALUES ('370784', '安丘市', '370700', '3');
-INSERT INTO `tb_area` VALUES ('370704', '坊子区', '370700', '3');
-INSERT INTO `tb_area` VALUES ('510727', '平武县', '510700', '3');
-INSERT INTO `tb_area` VALUES ('430903', '赫山区', '430900', '3');
-INSERT INTO `tb_area` VALUES ('130123', '正定县', '130100', '3');
-INSERT INTO `tb_area` VALUES ('520402', '西秀区', '520400', '3');
-INSERT INTO `tb_area` VALUES ('340203', '弋江区', '340200', '3');
-INSERT INTO `tb_area` VALUES ('630202', '乐都区', '630200', '3');
-INSERT INTO `tb_area` VALUES ('522322', '兴仁县', '522300', '3');
-INSERT INTO `tb_area` VALUES ('441700', '阳江市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('653124', '泽普县', '653100', '3');
-INSERT INTO `tb_area` VALUES ('211000', '辽阳市', '210000', '2');
-INSERT INTO `tb_area` VALUES ('513430', '金阳县', '513400', '3');
-INSERT INTO `tb_area` VALUES ('120100', '天津市', '120000', '2');
-INSERT INTO `tb_area` VALUES ('411702', '驿城区', '411700', '3');
-INSERT INTO `tb_area` VALUES ('130184', '新乐市', '130100', '3');
-INSERT INTO `tb_area` VALUES ('150603', '康巴什区', '150600', '3');
-INSERT INTO `tb_area` VALUES ('513433', '冕宁县', '513400', '3');
-INSERT INTO `tb_area` VALUES ('610114', '阎良区', '610100', '3');
-INSERT INTO `tb_area` VALUES ('420111', '洪山区', '420100', '3');
-INSERT INTO `tb_area` VALUES ('653226', '于田县', '653200', '3');
-INSERT INTO `tb_area` VALUES ('140425', '平顺县', '140400', '3');
-INSERT INTO `tb_area` VALUES ('371622', '阳信县', '371600', '3');
-INSERT INTO `tb_area` VALUES ('331101', '市辖区', '331100', '3');
-INSERT INTO `tb_area` VALUES ('500108', '南岸区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('520623', '石阡县', '520600', '3');
-INSERT INTO `tb_area` VALUES ('370401', '市辖区', '370400', '3');
-INSERT INTO `tb_area` VALUES ('231281', '安达市', '231200', '3');
-INSERT INTO `tb_area` VALUES ('429004', '仙桃市', '429000', '3');
-INSERT INTO `tb_area` VALUES ('440600', '佛山市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('130607', '满城区', '130600', '3');
-INSERT INTO `tb_area` VALUES ('320722', '东海县', '320700', '3');
-INSERT INTO `tb_area` VALUES ('210112', '浑南区', '210100', '3');
-INSERT INTO `tb_area` VALUES ('430723', '澧县', '430700', '3');
-INSERT INTO `tb_area` VALUES ('653101', '喀什市', '653100', '3');
-INSERT INTO `tb_area` VALUES ('321112', '丹徒区', '321100', '3');
-INSERT INTO `tb_area` VALUES ('411481', '永城市', '411400', '3');
-INSERT INTO `tb_area` VALUES ('652927', '乌什县', '652900', '3');
-INSERT INTO `tb_area` VALUES ('532503', '蒙自市', '532500', '3');
-INSERT INTO `tb_area` VALUES ('450923', '博白县', '450900', '3');
-INSERT INTO `tb_area` VALUES ('140900', '忻州市', '140000', '2');
-INSERT INTO `tb_area` VALUES ('150521', '科尔沁左翼中旗', '150500', '3');
-INSERT INTO `tb_area` VALUES ('320206', '惠山区', '320200', '3');
-INSERT INTO `tb_area` VALUES ('361026', '宜黄县', '361000', '3');
-INSERT INTO `tb_area` VALUES ('330212', '鄞州区', '330200', '3');
-INSERT INTO `tb_area` VALUES ('540400', '林芝市', '540000', '2');
-INSERT INTO `tb_area` VALUES ('321301', '市辖区', '321300', '3');
-INSERT INTO `tb_area` VALUES ('220400', '辽源市', '220000', '2');
-INSERT INTO `tb_area` VALUES ('511502', '翠屏区', '511500', '3');
-INSERT INTO `tb_area` VALUES ('320826', '涟水县', '320800', '3');
-INSERT INTO `tb_area` VALUES ('210323', '岫岩满族自治县', '210300', '3');
-INSERT INTO `tb_area` VALUES ('621101', '市辖区', '621100', '3');
-INSERT INTO `tb_area` VALUES ('430482', '常宁市', '430400', '3');
-INSERT INTO `tb_area` VALUES ('330203', '海曙区', '330200', '3');
-INSERT INTO `tb_area` VALUES ('632321', '同仁县', '632300', '3');
-INSERT INTO `tb_area` VALUES ('420504', '点军区', '420500', '3');
-INSERT INTO `tb_area` VALUES ('211202', '银州区', '211200', '3');
-INSERT INTO `tb_area` VALUES ('420602', '襄城区', '420600', '3');
-INSERT INTO `tb_area` VALUES ('622923', '永靖县', '622900', '3');
-INSERT INTO `tb_area` VALUES ('152224', '突泉县', '152200', '3');
-INSERT INTO `tb_area` VALUES ('430100', '长沙市', '430000', '2');
-INSERT INTO `tb_area` VALUES ('321100', '镇江市', '320000', '2');
-INSERT INTO `tb_area` VALUES ('230303', '恒山区', '230300', '3');
-INSERT INTO `tb_area` VALUES ('513426', '会东县', '513400', '3');
-INSERT INTO `tb_area` VALUES ('420500', '宜昌市', '420000', '2');
-INSERT INTO `tb_area` VALUES ('632523', '贵德县', '632500', '3');
-INSERT INTO `tb_area` VALUES ('371725', '郓城县', '371700', '3');
-INSERT INTO `tb_area` VALUES ('623000', '甘南藏族自治州', '620000', '2');
-INSERT INTO `tb_area` VALUES ('440811', '麻章区', '440800', '3');
-INSERT INTO `tb_area` VALUES ('230103', '南岗区', '230100', '3');
-INSERT INTO `tb_area` VALUES ('513423', '盐源县', '513400', '3');
-INSERT INTO `tb_area` VALUES ('621126', '岷县', '621100', '3');
-INSERT INTO `tb_area` VALUES ('620524', '武山县', '620500', '3');
-INSERT INTO `tb_area` VALUES ('220202', '昌邑区', '220200', '3');
-INSERT INTO `tb_area` VALUES ('511301', '市辖区', '511300', '3');
-INSERT INTO `tb_area` VALUES ('361001', '市辖区', '361000', '3');
-INSERT INTO `tb_area` VALUES ('533423', '维西傈僳族自治县', '533400', '3');
-INSERT INTO `tb_area` VALUES ('340824', '潜山县', '340800', '3');
-INSERT INTO `tb_area` VALUES ('350900', '宁德市', '350000', '2');
-INSERT INTO `tb_area` VALUES ('361021', '南城县', '361000', '3');
-INSERT INTO `tb_area` VALUES ('533122', '梁河县', '533100', '3');
-INSERT INTO `tb_area` VALUES ('450602', '港口区', '450600', '3');
-INSERT INTO `tb_area` VALUES ('320902', '亭湖区', '320900', '3');
-INSERT INTO `tb_area` VALUES ('152531', '多伦县', '152500', '3');
-INSERT INTO `tb_area` VALUES ('341823', '泾县', '341800', '3');
-INSERT INTO `tb_area` VALUES ('130900', '沧州市', '130000', '2');
-INSERT INTO `tb_area` VALUES ('220183', '德惠市', '220100', '3');
-INSERT INTO `tb_area` VALUES ('522636', '丹寨县', '522600', '3');
-INSERT INTO `tb_area` VALUES ('513334', '理塘县', '513300', '3');
-INSERT INTO `tb_area` VALUES ('450512', '铁山港区', '450500', '3');
-INSERT INTO `tb_area` VALUES ('510705', '安州区', '510700', '3');
-INSERT INTO `tb_area` VALUES ('231283', '海伦市', '231200', '3');
-INSERT INTO `tb_area` VALUES ('540524', '琼结县', '540500', '3');
-INSERT INTO `tb_area` VALUES ('530427', '新平彝族傣族自治县', '530400', '3');
-INSERT INTO `tb_area` VALUES ('361023', '南丰县', '361000', '3');
-INSERT INTO `tb_area` VALUES ('120105', '河北区', '120100', '3');
-INSERT INTO `tb_area` VALUES ('532931', '剑川县', '532900', '3');
-INSERT INTO `tb_area` VALUES ('652929', '柯坪县', '652900', '3');
-INSERT INTO `tb_area` VALUES ('430522', '新邵县', '430500', '3');
-INSERT INTO `tb_area` VALUES ('410923', '南乐县', '410900', '3');
-INSERT INTO `tb_area` VALUES ('520403', '平坝区', '520400', '3');
-INSERT INTO `tb_area` VALUES ('230506', '宝山区', '230500', '3');
-INSERT INTO `tb_area` VALUES ('610428', '长武县', '610400', '3');
-INSERT INTO `tb_area` VALUES ('130102', '长安区', '130100', '3');
-INSERT INTO `tb_area` VALUES ('231003', '阳明区', '231000', '3');
-INSERT INTO `tb_area` VALUES ('431028', '安仁县', '431000', '3');
-INSERT INTO `tb_area` VALUES ('532500', '红河哈尼族彝族自治州', '530000', '2');
-INSERT INTO `tb_area` VALUES ('152201', '乌兰浩特市', '152200', '3');
-INSERT INTO `tb_area` VALUES ('530323', '师宗县', '530300', '3');
-INSERT INTO `tb_area` VALUES ('610425', '礼泉县', '610400', '3');
-INSERT INTO `tb_area` VALUES ('451202', '金城江区', '451200', '3');
-INSERT INTO `tb_area` VALUES ('210804', '鲅鱼圈区', '210800', '3');
-INSERT INTO `tb_area` VALUES ('130532', '平乡县', '130500', '3');
-INSERT INTO `tb_area` VALUES ('411422', '睢县', '411400', '3');
-INSERT INTO `tb_area` VALUES ('510116', '双流区', '510100', '3');
-INSERT INTO `tb_area` VALUES ('130527', '南和县', '130500', '3');
-INSERT INTO `tb_area` VALUES ('450101', '市辖区', '450100', '3');
-INSERT INTO `tb_area` VALUES ('310105', '长宁区', '310100', '3');
-INSERT INTO `tb_area` VALUES ('330226', '宁海县', '330200', '3');
-INSERT INTO `tb_area` VALUES ('411528', '息县', '411500', '3');
-INSERT INTO `tb_area` VALUES ('650107', '达坂城区', '650100', '3');
-INSERT INTO `tb_area` VALUES ('350212', '同安区', '350200', '3');
-INSERT INTO `tb_area` VALUES ('140227', '大同县', '140200', '3');
-INSERT INTO `tb_area` VALUES ('330900', '舟山市', '330000', '2');
-INSERT INTO `tb_area` VALUES ('610122', '蓝田县', '610100', '3');
-INSERT INTO `tb_area` VALUES ('430527', '绥宁县', '430500', '3');
-INSERT INTO `tb_area` VALUES ('140303', '矿区', '140300', '3');
-INSERT INTO `tb_area` VALUES ('431321', '双峰县', '431300', '3');
-INSERT INTO `tb_area` VALUES ('530103', '盘龙区', '530100', '3');
-INSERT INTO `tb_area` VALUES ('522301', '兴义市', '522300', '3');
-INSERT INTO `tb_area` VALUES ('431002', '北湖区', '431000', '3');
-INSERT INTO `tb_area` VALUES ('341324', '泗县', '341300', '3');
-INSERT INTO `tb_area` VALUES ('410404', '石龙区', '410400', '3');
-INSERT INTO `tb_area` VALUES ('370203', '市北区', '370200', '3');
-INSERT INTO `tb_area` VALUES ('610927', '镇坪县', '610900', '3');
-INSERT INTO `tb_area` VALUES ('230501', '市辖区', '230500', '3');
-INSERT INTO `tb_area` VALUES ('340124', '庐江县', '340100', '3');
-INSERT INTO `tb_area` VALUES ('410402', '新华区', '410400', '3');
-INSERT INTO `tb_area` VALUES ('469029', '保亭黎族苗族自治县', '469000', '3');
-INSERT INTO `tb_area` VALUES ('360821', '吉安县', '360800', '3');
-INSERT INTO `tb_area` VALUES ('411503', '平桥区', '411500', '3');
-INSERT INTO `tb_area` VALUES ('640422', '西吉县', '640400', '3');
-INSERT INTO `tb_area` VALUES ('230502', '尖山区', '230500', '3');
-INSERT INTO `tb_area` VALUES ('540233', '亚东县', '540200', '3');
-INSERT INTO `tb_area` VALUES ('440606', '顺德区', '440600', '3');
-INSERT INTO `tb_area` VALUES ('513434', '越西县', '513400', '3');
-INSERT INTO `tb_area` VALUES ('370202', '市南区', '370200', '3');
-INSERT INTO `tb_area` VALUES ('450922', '陆川县', '450900', '3');
-INSERT INTO `tb_area` VALUES ('630203', '平安区', '630200', '3');
-INSERT INTO `tb_area` VALUES ('652825', '且末县', '652800', '3');
-INSERT INTO `tb_area` VALUES ('350524', '安溪县', '350500', '3');
-INSERT INTO `tb_area` VALUES ('130403', '丛台区', '130400', '3');
-INSERT INTO `tb_area` VALUES ('341501', '市辖区', '341500', '3');
-INSERT INTO `tb_area` VALUES ('220622', '靖宇县', '220600', '3');
-INSERT INTO `tb_area` VALUES ('450305', '七星区', '450300', '3');
-INSERT INTO `tb_area` VALUES ('450102', '兴宁区', '450100', '3');
-INSERT INTO `tb_area` VALUES ('420625', '谷城县', '420600', '3');
-INSERT INTO `tb_area` VALUES ('420100', '武汉市', '420000', '2');
-INSERT INTO `tb_area` VALUES ('652823', '尉犁县', '652800', '3');
-INSERT INTO `tb_area` VALUES ('360601', '市辖区', '360600', '3');
-INSERT INTO `tb_area` VALUES ('150922', '化德县', '150900', '3');
-INSERT INTO `tb_area` VALUES ('469001', '五指山市', '469000', '3');
-INSERT INTO `tb_area` VALUES ('430529', '城步苗族自治县', '430500', '3');
-INSERT INTO `tb_area` VALUES ('320900', '盐城市', '320000', '2');
-INSERT INTO `tb_area` VALUES ('210682', '凤城市', '210600', '3');
-INSERT INTO `tb_area` VALUES ('220106', '绿园区', '220100', '3');
-INSERT INTO `tb_area` VALUES ('654324', '哈巴河县', '654300', '3');
-INSERT INTO `tb_area` VALUES ('230904', '茄子河区', '230900', '3');
-INSERT INTO `tb_area` VALUES ('211322', '建平县', '211300', '3');
-INSERT INTO `tb_area` VALUES ('520123', '修文县', '520100', '3');
-INSERT INTO `tb_area` VALUES ('510303', '贡井区', '510300', '3');
-INSERT INTO `tb_area` VALUES ('621224', '康县', '621200', '3');
-INSERT INTO `tb_area` VALUES ('630101', '市辖区', '630100', '3');
-INSERT INTO `tb_area` VALUES ('130421', '邯郸县', '130400', '3');
-INSERT INTO `tb_area` VALUES ('410381', '偃师市', '410300', '3');
-INSERT INTO `tb_area` VALUES ('350303', '涵江区', '350300', '3');
-INSERT INTO `tb_area` VALUES ('540525', '曲松县', '540500', '3');
-INSERT INTO `tb_area` VALUES ('340822', '怀宁县', '340800', '3');
-INSERT INTO `tb_area` VALUES ('420881', '钟祥市', '420800', '3');
-INSERT INTO `tb_area` VALUES ('451081', '靖西市', '451000', '3');
-INSERT INTO `tb_area` VALUES ('540121', '林周县', '540100', '3');
-INSERT INTO `tb_area` VALUES ('310113', '宝山区', '310100', '3');
-INSERT INTO `tb_area` VALUES ('511025', '资中县', '511000', '3');
-INSERT INTO `tb_area` VALUES ('533400', '迪庆藏族自治州', '530000', '2');
-INSERT INTO `tb_area` VALUES ('130628', '高阳县', '130600', '3');
-INSERT INTO `tb_area` VALUES ('110107', '石景山区', '110100', '3');
-INSERT INTO `tb_area` VALUES ('621102', '安定区', '621100', '3');
-INSERT INTO `tb_area` VALUES ('410222', '通许县', '410200', '3');
-INSERT INTO `tb_area` VALUES ('140725', '寿阳县', '140700', '3');
-INSERT INTO `tb_area` VALUES ('500238', '巫溪县', '500200', '3');
-INSERT INTO `tb_area` VALUES ('140929', '岢岚县', '140900', '3');
-INSERT INTO `tb_area` VALUES ('441481', '兴宁市', '441400', '3');
-INSERT INTO `tb_area` VALUES ('511002', '市中区', '511000', '3');
-INSERT INTO `tb_area` VALUES ('230404', '南山区', '230400', '3');
-INSERT INTO `tb_area` VALUES ('411602', '川汇区', '411600', '3');
-INSERT INTO `tb_area` VALUES ('632524', '兴海县', '632500', '3');
-INSERT INTO `tb_area` VALUES ('350902', '蕉城区', '350900', '3');
-INSERT INTO `tb_area` VALUES ('441224', '怀集县', '441200', '3');
-INSERT INTO `tb_area` VALUES ('320506', '吴中区', '320500', '3');
-INSERT INTO `tb_area` VALUES ('410928', '濮阳县', '410900', '3');
-INSERT INTO `tb_area` VALUES ('140302', '城区', '140300', '3');
-INSERT INTO `tb_area` VALUES ('370781', '青州市', '370700', '3');
-INSERT INTO `tb_area` VALUES ('330600', '绍兴市', '330000', '2');
-INSERT INTO `tb_area` VALUES ('530521', '施甸县', '530500', '3');
-INSERT INTO `tb_area` VALUES ('120113', '北辰区', '120100', '3');
-INSERT INTO `tb_area` VALUES ('610581', '韩城市', '610500', '3');
-INSERT INTO `tb_area` VALUES ('360822', '吉水县', '360800', '3');
-INSERT INTO `tb_area` VALUES ('331082', '临海市', '331000', '3');
-INSERT INTO `tb_area` VALUES ('410527', '内黄县', '410500', '3');
-INSERT INTO `tb_area` VALUES ('451425', '天等县', '451400', '3');
-INSERT INTO `tb_area` VALUES ('532823', '勐腊县', '532800', '3');
-INSERT INTO `tb_area` VALUES ('540302', '卡若区', '540300', '3');
-INSERT INTO `tb_area` VALUES ('110114', '昌平区', '110100', '3');
-INSERT INTO `tb_area` VALUES ('330200', '宁波市', '330000', '2');
-INSERT INTO `tb_area` VALUES ('140105', '小店区', '140100', '3');
-INSERT INTO `tb_area` VALUES ('420202', '黄石港区', '420200', '3');
-INSERT INTO `tb_area` VALUES ('654025', '新源县', '654000', '3');
-INSERT INTO `tb_area` VALUES ('513338', '得荣县', '513300', '3');
-INSERT INTO `tb_area` VALUES ('411403', '睢阳区', '411400', '3');
-INSERT INTO `tb_area` VALUES ('620825', '庄浪县', '620800', '3');
-INSERT INTO `tb_area` VALUES ('530100', '昆明市', '530000', '2');
-INSERT INTO `tb_area` VALUES ('341221', '临泉县', '341200', '3');
-INSERT INTO `tb_area` VALUES ('513327', '炉霍县', '513300', '3');
-INSERT INTO `tb_area` VALUES ('429005', '潜江市', '429000', '3');
-INSERT INTO `tb_area` VALUES ('350922', '古田县', '350900', '3');
-INSERT INTO `tb_area` VALUES ('610100', '西安市', '610000', '2');
-INSERT INTO `tb_area` VALUES ('220104', '朝阳区', '220100', '3');
-INSERT INTO `tb_area` VALUES ('451024', '德保县', '451000', '3');
-INSERT INTO `tb_area` VALUES ('360281', '乐平市', '360200', '3');
-INSERT INTO `tb_area` VALUES ('620725', '山丹县', '620700', '3');
-INSERT INTO `tb_area` VALUES ('450802', '港北区', '450800', '3');
-INSERT INTO `tb_area` VALUES ('542525', '革吉县', '542500', '3');
-INSERT INTO `tb_area` VALUES ('321324', '泗洪县', '321300', '3');
-INSERT INTO `tb_area` VALUES ('330603', '柯桥区', '330600', '3');
-INSERT INTO `tb_area` VALUES ('510824', '苍溪县', '510800', '3');
-INSERT INTO `tb_area` VALUES ('330211', '镇海区', '330200', '3');
-INSERT INTO `tb_area` VALUES ('370200', '青岛市', '370000', '2');
-INSERT INTO `tb_area` VALUES ('441426', '平远县', '441400', '3');
-INSERT INTO `tb_area` VALUES ('520111', '花溪区', '520100', '3');
-INSERT INTO `tb_area` VALUES ('330604', '上虞区', '330600', '3');
-INSERT INTO `tb_area` VALUES ('510601', '市辖区', '510600', '3');
-INSERT INTO `tb_area` VALUES ('330683', '嵊州市', '330600', '3');
-INSERT INTO `tb_area` VALUES ('430722', '汉寿县', '430700', '3');
-INSERT INTO `tb_area` VALUES ('610631', '黄龙县', '610600', '3');
-INSERT INTO `tb_area` VALUES ('150627', '伊金霍洛旗', '150600', '3');
-INSERT INTO `tb_area` VALUES ('623021', '临潭县', '623000', '3');
-INSERT INTO `tb_area` VALUES ('230321', '鸡东县', '230300', '3');
-INSERT INTO `tb_area` VALUES ('430424', '衡东县', '430400', '3');
-INSERT INTO `tb_area` VALUES ('371122', '莒县', '371100', '3');
-INSERT INTO `tb_area` VALUES ('520203', '六枝特区', '520200', '3');
-INSERT INTO `tb_area` VALUES ('451424', '大新县', '451400', '3');
-INSERT INTO `tb_area` VALUES ('210681', '东港市', '210600', '3');
-INSERT INTO `tb_area` VALUES ('152523', '苏尼特左旗', '152500', '3');
-INSERT INTO `tb_area` VALUES ('371323', '沂水县', '371300', '3');
-INSERT INTO `tb_area` VALUES ('340705', '铜官区', '340700', '3');
-INSERT INTO `tb_area` VALUES ('150206', '白云鄂博矿区', '150200', '3');
-INSERT INTO `tb_area` VALUES ('420105', '汉阳区', '420100', '3');
-INSERT INTO `tb_area` VALUES ('411627', '太康县', '411600', '3');
-INSERT INTO `tb_area` VALUES ('500117', '合川区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('522723', '贵定县', '522700', '3');
-INSERT INTO `tb_area` VALUES ('370125', '济阳县', '370100', '3');
-INSERT INTO `tb_area` VALUES ('440205', '曲江区', '440200', '3');
-INSERT INTO `tb_area` VALUES ('350583', '南安市', '350500', '3');
-INSERT INTO `tb_area` VALUES ('330225', '象山县', '330200', '3');
-INSERT INTO `tb_area` VALUES ('510504', '龙马潭区', '510500', '3');
-INSERT INTO `tb_area` VALUES ('140931', '保德县', '140900', '3');
-INSERT INTO `tb_area` VALUES ('152500', '锡林郭勒盟', '150000', '2');
-INSERT INTO `tb_area` VALUES ('611025', '镇安县', '611000', '3');
-INSERT INTO `tb_area` VALUES ('520624', '思南县', '520600', '3');
-INSERT INTO `tb_area` VALUES ('411402', '梁园区', '411400', '3');
-INSERT INTO `tb_area` VALUES ('540103', '堆龙德庆区', '540100', '3');
-INSERT INTO `tb_area` VALUES ('350525', '永春县', '350500', '3');
-INSERT INTO `tb_area` VALUES ('130709', '崇礼区', '130700', '3');
-INSERT INTO `tb_area` VALUES ('654225', '裕民县', '654200', '3');
-INSERT INTO `tb_area` VALUES ('411424', '柘城县', '411400', '3');
-INSERT INTO `tb_area` VALUES ('330328', '文成县', '330300', '3');
-INSERT INTO `tb_area` VALUES ('640400', '固原市', '640000', '2');
-INSERT INTO `tb_area` VALUES ('361025', '乐安县', '361000', '3');
-INSERT INTO `tb_area` VALUES ('610702', '汉台区', '610700', '3');
-INSERT INTO `tb_area` VALUES ('610323', '岐山县', '610300', '3');
-INSERT INTO `tb_area` VALUES ('411401', '市辖区', '411400', '3');
-INSERT INTO `tb_area` VALUES ('370883', '邹城市', '370800', '3');
-INSERT INTO `tb_area` VALUES ('350629', '华安县', '350600', '3');
-INSERT INTO `tb_area` VALUES ('632522', '同德县', '632500', '3');
-INSERT INTO `tb_area` VALUES ('540522', '贡嘎县', '540500', '3');
-INSERT INTO `tb_area` VALUES ('450224', '融安县', '450200', '3');
-INSERT INTO `tb_area` VALUES ('510600', '德阳市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('350101', '市辖区', '350100', '3');
-INSERT INTO `tb_area` VALUES ('410621', '浚县', '410600', '3');
-INSERT INTO `tb_area` VALUES ('440117', '从化区', '440100', '3');
-INSERT INTO `tb_area` VALUES ('410803', '中站区', '410800', '3');
-INSERT INTO `tb_area` VALUES ('510681', '广汉市', '510600', '3');
-INSERT INTO `tb_area` VALUES ('150421', '阿鲁科尔沁旗', '150400', '3');
-INSERT INTO `tb_area` VALUES ('320214', '新吴区', '320200', '3');
-INSERT INTO `tb_area` VALUES ('620982', '敦煌市', '620900', '3');
-INSERT INTO `tb_area` VALUES ('411326', '淅川县', '411300', '3');
-INSERT INTO `tb_area` VALUES ('230382', '密山市', '230300', '3');
-INSERT INTO `tb_area` VALUES ('220722', '长岭县', '220700', '3');
-INSERT INTO `tb_area` VALUES ('430600', '岳阳市', '430000', '2');
-INSERT INTO `tb_area` VALUES ('421003', '荆州区', '421000', '3');
-INSERT INTO `tb_area` VALUES ('441300', '惠州市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('139001', '定州市', '139000', '3');
-INSERT INTO `tb_area` VALUES ('230230', '克东县', '230200', '3');
-INSERT INTO `tb_area` VALUES ('330903', '普陀区', '330900', '3');
-INSERT INTO `tb_area` VALUES ('141126', '石楼县', '141100', '3');
-INSERT INTO `tb_area` VALUES ('370201', '市辖区', '370200', '3');
-INSERT INTO `tb_area` VALUES ('211281', '调兵山市', '211200', '3');
-INSERT INTO `tb_area` VALUES ('420701', '市辖区', '420700', '3');
-INSERT INTO `tb_area` VALUES ('321283', '泰兴市', '321200', '3');
-INSERT INTO `tb_area` VALUES ('530428', '元江哈尼族彝族傣族自治县', '530400', '3');
-INSERT INTO `tb_area` VALUES ('371481', '乐陵市', '371400', '3');
-INSERT INTO `tb_area` VALUES ('520382', '仁怀市', '520300', '3');
-INSERT INTO `tb_area` VALUES ('139000', '省直辖县级行政区划', '130000', '2');
-INSERT INTO `tb_area` VALUES ('421182', '武穴市', '421100', '3');
-INSERT INTO `tb_area` VALUES ('340503', '花山区', '340500', '3');
-INSERT INTO `tb_area` VALUES ('150523', '开鲁县', '150500', '3');
-INSERT INTO `tb_area` VALUES ('410185', '登封市', '410100', '3');
-INSERT INTO `tb_area` VALUES ('410400', '平顶山市', '410000', '2');
-INSERT INTO `tb_area` VALUES ('654300', '阿勒泰地区', '650000', '2');
-INSERT INTO `tb_area` VALUES ('530500', '保山市', '530000', '2');
-INSERT INTO `tb_area` VALUES ('150522', '科尔沁左翼后旗', '150500', '3');
-INSERT INTO `tb_area` VALUES ('120103', '河西区', '120100', '3');
-INSERT INTO `tb_area` VALUES ('321001', '市辖区', '321000', '3');
-INSERT INTO `tb_area` VALUES ('530101', '市辖区', '530100', '3');
-INSERT INTO `tb_area` VALUES ('530722', '永胜县', '530700', '3');
-INSERT INTO `tb_area` VALUES ('411501', '市辖区', '411500', '3');
-INSERT INTO `tb_area` VALUES ('230381', '虎林市', '230300', '3');
-INSERT INTO `tb_area` VALUES ('441623', '连平县', '441600', '3');
-INSERT INTO `tb_area` VALUES ('371312', '河东区', '371300', '3');
-INSERT INTO `tb_area` VALUES ('510300', '自贡市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('230707', '新青区', '230700', '3');
-INSERT INTO `tb_area` VALUES ('430204', '石峰区', '430200', '3');
-INSERT INTO `tb_area` VALUES ('430407', '石鼓区', '430400', '3');
-INSERT INTO `tb_area` VALUES ('620702', '甘州区', '620700', '3');
-INSERT INTO `tb_area` VALUES ('542527', '措勤县', '542500', '3');
-INSERT INTO `tb_area` VALUES ('150200', '包头市', '150000', '2');
-INSERT INTO `tb_area` VALUES ('430426', '祁东县', '430400', '3');
-INSERT INTO `tb_area` VALUES ('371721', '曹县', '371700', '3');
-INSERT INTO `tb_area` VALUES ('210400', '抚顺市', '210000', '2');
-INSERT INTO `tb_area` VALUES ('210111', '苏家屯区', '210100', '3');
-INSERT INTO `tb_area` VALUES ('360727', '龙南县', '360700', '3');
-INSERT INTO `tb_area` VALUES ('421081', '石首市', '421000', '3');
-INSERT INTO `tb_area` VALUES ('532625', '马关县', '532600', '3');
-INSERT INTO `tb_area` VALUES ('610124', '周至县', '610100', '3');
-INSERT INTO `tb_area` VALUES ('130528', '宁晋县', '130500', '3');
-INSERT INTO `tb_area` VALUES ('360729', '全南县', '360700', '3');
-INSERT INTO `tb_area` VALUES ('370100', '济南市', '370000', '2');
-INSERT INTO `tb_area` VALUES ('371724', '巨野县', '371700', '3');
-INSERT INTO `tb_area` VALUES ('530821', '宁洱哈尼族彝族自治县', '530800', '3');
-INSERT INTO `tb_area` VALUES ('511001', '市辖区', '511000', '3');
-INSERT INTO `tb_area` VALUES ('522300', '黔西南布依族苗族自治州', '520000', '2');
-INSERT INTO `tb_area` VALUES ('130501', '市辖区', '130500', '3');
-INSERT INTO `tb_area` VALUES ('441401', '市辖区', '441400', '3');
-INSERT INTO `tb_area` VALUES ('420901', '市辖区', '420900', '3');
-INSERT INTO `tb_area` VALUES ('429006', '天门市', '429000', '3');
-INSERT INTO `tb_area` VALUES ('430623', '华容县', '430600', '3');
-INSERT INTO `tb_area` VALUES ('371103', '岚山区', '371100', '3');
-INSERT INTO `tb_area` VALUES ('410702', '红旗区', '410700', '3');
-INSERT INTO `tb_area` VALUES ('360429', '湖口县', '360400', '3');
-INSERT INTO `tb_area` VALUES ('320113', '栖霞区', '320100', '3');
-INSERT INTO `tb_area` VALUES ('530822', '墨江哈尼族自治县', '530800', '3');
-INSERT INTO `tb_area` VALUES ('522732', '三都水族自治县', '522700', '3');
-INSERT INTO `tb_area` VALUES ('330483', '桐乡市', '330400', '3');
-INSERT INTO `tb_area` VALUES ('511024', '威远县', '511000', '3');
-INSERT INTO `tb_area` VALUES ('361125', '横峰县', '361100', '3');
-INSERT INTO `tb_area` VALUES ('130429', '永年县', '130400', '3');
-INSERT INTO `tb_area` VALUES ('620824', '华亭县', '620800', '3');
-INSERT INTO `tb_area` VALUES ('350403', '三元区', '350400', '3');
-INSERT INTO `tb_area` VALUES ('640300', '吴忠市', '640000', '2');
-INSERT INTO `tb_area` VALUES ('331124', '松阳县', '331100', '3');
-INSERT INTO `tb_area` VALUES ('610301', '市辖区', '610300', '3');
-INSERT INTO `tb_area` VALUES ('445222', '揭西县', '445200', '3');
-INSERT INTO `tb_area` VALUES ('230202', '龙沙区', '230200', '3');
-INSERT INTO `tb_area` VALUES ('511011', '东兴区', '511000', '3');
-INSERT INTO `tb_area` VALUES ('220605', '江源区', '220600', '3');
-INSERT INTO `tb_area` VALUES ('610423', '泾阳县', '610400', '3');
-INSERT INTO `tb_area` VALUES ('330482', '平湖市', '330400', '3');
-INSERT INTO `tb_area` VALUES ('130903', '运河区', '130900', '3');
-INSERT INTO `tb_area` VALUES ('371722', '单县', '371700', '3');
-INSERT INTO `tb_area` VALUES ('540528', '加查县', '540500', '3');
-INSERT INTO `tb_area` VALUES ('510823', '剑阁县', '510800', '3');
-INSERT INTO `tb_area` VALUES ('500116', '江津区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('530627', '镇雄县', '530600', '3');
-INSERT INTO `tb_area` VALUES ('420684', '宜城市', '420600', '3');
-INSERT INTO `tb_area` VALUES ('321101', '市辖区', '321100', '3');
-INSERT INTO `tb_area` VALUES ('632300', '黄南藏族自治州', '630000', '2');
-INSERT INTO `tb_area` VALUES ('211204', '清河区', '211200', '3');
-INSERT INTO `tb_area` VALUES ('533124', '陇川县', '533100', '3');
-INSERT INTO `tb_area` VALUES ('130526', '任县', '130500', '3');
-INSERT INTO `tb_area` VALUES ('620103', '七里河区', '620100', '3');
-INSERT INTO `tb_area` VALUES ('532801', '景洪市', '532800', '3');
-INSERT INTO `tb_area` VALUES ('410804', '马村区', '410800', '3');
-INSERT INTO `tb_area` VALUES ('610429', '旬邑县', '610400', '3');
-INSERT INTO `tb_area` VALUES ('445322', '郁南县', '445300', '3');
-INSERT INTO `tb_area` VALUES ('421101', '市辖区', '421100', '3');
-INSERT INTO `tb_area` VALUES ('640121', '永宁县', '640100', '3');
-INSERT INTO `tb_area` VALUES ('513431', '昭觉县', '513400', '3');
-INSERT INTO `tb_area` VALUES ('350503', '丰泽区', '350500', '3');
-INSERT INTO `tb_area` VALUES ('120115', '宝坻区', '120100', '3');
-INSERT INTO `tb_area` VALUES ('130431', '鸡泽县', '130400', '3');
-INSERT INTO `tb_area` VALUES ('150800', '巴彦淖尔市', '150000', '2');
-INSERT INTO `tb_area` VALUES ('511921', '通江县', '511900', '3');
-INSERT INTO `tb_area` VALUES ('370281', '胶州市', '370200', '3');
-INSERT INTO `tb_area` VALUES ('451028', '乐业县', '451000', '3');
-INSERT INTO `tb_area` VALUES ('623001', '合作市', '623000', '3');
-INSERT INTO `tb_area` VALUES ('411000', '许昌市', '410000', '2');
-INSERT INTO `tb_area` VALUES ('632723', '称多县', '632700', '3');
-INSERT INTO `tb_area` VALUES ('210281', '瓦房店市', '210200', '3');
-INSERT INTO `tb_area` VALUES ('653227', '民丰县', '653200', '3');
-INSERT INTO `tb_area` VALUES ('540425', '察隅县', '540400', '3');
-INSERT INTO `tb_area` VALUES ('341022', '休宁县', '341000', '3');
-INSERT INTO `tb_area` VALUES ('433125', '保靖县', '433100', '3');
-INSERT INTO `tb_area` VALUES ('360900', '宜春市', '360000', '2');
-INSERT INTO `tb_area` VALUES ('621023', '华池县', '621000', '3');
-INSERT INTO `tb_area` VALUES ('340604', '烈山区', '340600', '3');
-INSERT INTO `tb_area` VALUES ('211321', '朝阳县', '211300', '3');
-INSERT INTO `tb_area` VALUES ('131100', '衡水市', '130000', '2');
-INSERT INTO `tb_area` VALUES ('620722', '民乐县', '620700', '3');
-INSERT INTO `tb_area` VALUES ('320401', '市辖区', '320400', '3');
-INSERT INTO `tb_area` VALUES ('420800', '荆门市', '420000', '2');
-INSERT INTO `tb_area` VALUES ('530600', '昭通市', '530000', '2');
-INSERT INTO `tb_area` VALUES ('451322', '象州县', '451300', '3');
-INSERT INTO `tb_area` VALUES ('469024', '临高县', '469000', '3');
-INSERT INTO `tb_area` VALUES ('360824', '新干县', '360800', '3');
-INSERT INTO `tb_area` VALUES ('500111', '大足区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('410800', '焦作市', '410000', '2');
-INSERT INTO `tb_area` VALUES ('441801', '市辖区', '441800', '3');
-INSERT INTO `tb_area` VALUES ('513226', '金川县', '513200', '3');
-INSERT INTO `tb_area` VALUES ('532502', '开远市', '532500', '3');
-INSERT INTO `tb_area` VALUES ('451223', '凤山县', '451200', '3');
-INSERT INTO `tb_area` VALUES ('513222', '理县', '513200', '3');
-INSERT INTO `tb_area` VALUES ('320213', '梁溪区', '320200', '3');
-INSERT INTO `tb_area` VALUES ('610523', '大荔县', '610500', '3');
-INSERT INTO `tb_area` VALUES ('522327', '册亨县', '522300', '3');
-INSERT INTO `tb_area` VALUES ('140726', '太谷县', '140700', '3');
-INSERT INTO `tb_area` VALUES ('130203', '路北区', '130200', '3');
-INSERT INTO `tb_area` VALUES ('411624', '沈丘县', '411600', '3');
-INSERT INTO `tb_area` VALUES ('341100', '滁州市', '340000', '2');
-INSERT INTO `tb_area` VALUES ('231181', '北安市', '231100', '3');
-INSERT INTO `tb_area` VALUES ('520329', '余庆县', '520300', '3');
-INSERT INTO `tb_area` VALUES ('620100', '兰州市', '620000', '2');
-INSERT INTO `tb_area` VALUES ('360926', '铜鼓县', '360900', '3');
-INSERT INTO `tb_area` VALUES ('431103', '冷水滩区', '431100', '3');
-INSERT INTO `tb_area` VALUES ('654223', '沙湾县', '654200', '3');
-INSERT INTO `tb_area` VALUES ('532329', '武定县', '532300', '3');
-INSERT INTO `tb_area` VALUES ('140829', '平陆县', '140800', '3');
-INSERT INTO `tb_area` VALUES ('530425', '易门县', '530400', '3');
-INSERT INTO `tb_area` VALUES ('210301', '市辖区', '210300', '3');
-INSERT INTO `tb_area` VALUES ('350122', '连江县', '350100', '3');
-INSERT INTO `tb_area` VALUES ('150100', '呼和浩特市', '150000', '2');
-INSERT INTO `tb_area` VALUES ('610831', '子洲县', '610800', '3');
-INSERT INTO `tb_area` VALUES ('330104', '江干区', '330100', '3');
-INSERT INTO `tb_area` VALUES ('371425', '齐河县', '371400', '3');
-INSERT INTO `tb_area` VALUES ('130923', '东光县', '130900', '3');
-INSERT INTO `tb_area` VALUES ('150223', '达尔罕茂明安联合旗', '150200', '3');
-INSERT INTO `tb_area` VALUES ('411701', '市辖区', '411700', '3');
-INSERT INTO `tb_area` VALUES ('440201', '市辖区', '440200', '3');
-INSERT INTO `tb_area` VALUES ('120104', '南开区', '120100', '3');
-INSERT INTO `tb_area` VALUES ('622926', '东乡族自治县', '622900', '3');
-INSERT INTO `tb_area` VALUES ('610404', '渭城区', '610400', '3');
-INSERT INTO `tb_area` VALUES ('320583', '昆山市', '320500', '3');
-INSERT INTO `tb_area` VALUES ('130823', '平泉县', '130800', '3');
-INSERT INTO `tb_area` VALUES ('451400', '崇左市', '450000', '2');
-INSERT INTO `tb_area` VALUES ('460203', '吉阳区', '460200', '3');
-INSERT INTO `tb_area` VALUES ('371329', '临沭县', '371300', '3');
-INSERT INTO `tb_area` VALUES ('520424', '关岭布依族苗族自治县', '520400', '3');
-INSERT INTO `tb_area` VALUES ('500237', '巫山县', '500200', '3');
-INSERT INTO `tb_area` VALUES ('360428', '都昌县', '360400', '3');
-INSERT INTO `tb_area` VALUES ('410526', '滑县', '410500', '3');
-INSERT INTO `tb_area` VALUES ('640106', '金凤区', '640100', '3');
-INSERT INTO `tb_area` VALUES ('140923', '代县', '140900', '3');
-INSERT INTO `tb_area` VALUES ('520102', '南明区', '520100', '3');
-INSERT INTO `tb_area` VALUES ('431025', '临武县', '431000', '3');
-INSERT INTO `tb_area` VALUES ('360101', '市辖区', '360100', '3');
-INSERT INTO `tb_area` VALUES ('410401', '市辖区', '410400', '3');
-INSERT INTO `tb_area` VALUES ('211402', '连山区', '211400', '3');
-INSERT INTO `tb_area` VALUES ('110117', '平谷区', '110100', '3');
-INSERT INTO `tb_area` VALUES ('421221', '嘉鱼县', '421200', '3');
-INSERT INTO `tb_area` VALUES ('220401', '市辖区', '220400', '3');
-INSERT INTO `tb_area` VALUES ('430801', '市辖区', '430800', '3');
-INSERT INTO `tb_area` VALUES ('421301', '市辖区', '421300', '3');
-INSERT INTO `tb_area` VALUES ('520525', '纳雍县', '520500', '3');
-INSERT INTO `tb_area` VALUES ('150929', '四子王旗', '150900', '3');
-INSERT INTO `tb_area` VALUES ('621124', '临洮县', '621100', '3');
-INSERT INTO `tb_area` VALUES ('411527', '淮滨县', '411500', '3');
-INSERT INTO `tb_area` VALUES ('130631', '望都县', '130600', '3');
-INSERT INTO `tb_area` VALUES ('510182', '彭州市', '510100', '3');
-INSERT INTO `tb_area` VALUES ('360401', '市辖区', '360400', '3');
-INSERT INTO `tb_area` VALUES ('440983', '信宜市', '440900', '3');
-INSERT INTO `tb_area` VALUES ('230602', '萨尔图区', '230600', '3');
-INSERT INTO `tb_area` VALUES ('370832', '梁山县', '370800', '3');
-INSERT INTO `tb_area` VALUES ('410221', '杞县', '410200', '3');
-INSERT INTO `tb_area` VALUES ('130828', '围场满族蒙古族自治县', '130800', '3');
-INSERT INTO `tb_area` VALUES ('520522', '黔西县', '520500', '3');
-INSERT INTO `tb_area` VALUES ('450800', '贵港市', '450000', '2');
-INSERT INTO `tb_area` VALUES ('610829', '吴堡县', '610800', '3');
-INSERT INTO `tb_area` VALUES ('310104', '徐汇区', '310100', '3');
-INSERT INTO `tb_area` VALUES ('130131', '平山县', '130100', '3');
-INSERT INTO `tb_area` VALUES ('141123', '兴县', '141100', '3');
-INSERT INTO `tb_area` VALUES ('620802', '崆峒区', '620800', '3');
-INSERT INTO `tb_area` VALUES ('520000', '贵州省', '0', '1');
-INSERT INTO `tb_area` VALUES ('320481', '溧阳市', '320400', '3');
-INSERT INTO `tb_area` VALUES ('370881', '曲阜市', '370800', '3');
-INSERT INTO `tb_area` VALUES ('511425', '青神县', '511400', '3');
-INSERT INTO `tb_area` VALUES ('410711', '牧野区', '410700', '3');
-INSERT INTO `tb_area` VALUES ('532301', '楚雄市', '532300', '3');
-INSERT INTO `tb_area` VALUES ('621201', '市辖区', '621200', '3');
-INSERT INTO `tb_area` VALUES ('220822', '通榆县', '220800', '3');
-INSERT INTO `tb_area` VALUES ('371602', '滨城区', '371600', '3');
-INSERT INTO `tb_area` VALUES ('231226', '绥棱县', '231200', '3');
-INSERT INTO `tb_area` VALUES ('451029', '田林县', '451000', '3');
-INSERT INTO `tb_area` VALUES ('340701', '市辖区', '340700', '3');
-INSERT INTO `tb_area` VALUES ('371502', '东昌府区', '371500', '3');
-INSERT INTO `tb_area` VALUES ('440106', '天河区', '440100', '3');
-INSERT INTO `tb_area` VALUES ('130428', '肥乡县', '130400', '3');
-INSERT INTO `tb_area` VALUES ('310101', '黄浦区', '310100', '3');
-INSERT INTO `tb_area` VALUES ('420527', '秭归县', '420500', '3');
-INSERT INTO `tb_area` VALUES ('532331', '禄丰县', '532300', '3');
-INSERT INTO `tb_area` VALUES ('610730', '佛坪县', '610700', '3');
-INSERT INTO `tb_area` VALUES ('120117', '宁河区', '120100', '3');
-INSERT INTO `tb_area` VALUES ('422822', '建始县', '422800', '3');
-INSERT INTO `tb_area` VALUES ('620523', '甘谷县', '620500', '3');
-INSERT INTO `tb_area` VALUES ('500233', '忠县', '500200', '3');
-INSERT INTO `tb_area` VALUES ('440104', '越秀区', '440100', '3');
-INSERT INTO `tb_area` VALUES ('150201', '市辖区', '150200', '3');
-INSERT INTO `tb_area` VALUES ('410223', '尉氏县', '410200', '3');
-INSERT INTO `tb_area` VALUES ('520626', '德江县', '520600', '3');
-INSERT INTO `tb_area` VALUES ('341103', '南谯区', '341100', '3');
-INSERT INTO `tb_area` VALUES ('450200', '柳州市', '450000', '2');
-INSERT INTO `tb_area` VALUES ('450204', '柳南区', '450200', '3');
-INSERT INTO `tb_area` VALUES ('450105', '江南区', '450100', '3');
-INSERT INTO `tb_area` VALUES ('230822', '桦南县', '230800', '3');
-INSERT INTO `tb_area` VALUES ('140722', '左权县', '140700', '3');
-INSERT INTO `tb_area` VALUES ('610203', '印台区', '610200', '3');
-INSERT INTO `tb_area` VALUES ('623022', '卓尼县', '623000', '3');
-INSERT INTO `tb_area` VALUES ('231102', '爱辉区', '231100', '3');
-INSERT INTO `tb_area` VALUES ('440825', '徐闻县', '440800', '3');
-INSERT INTO `tb_area` VALUES ('140926', '静乐县', '140900', '3');
-INSERT INTO `tb_area` VALUES ('540327', '左贡县', '540300', '3');
-INSERT INTO `tb_area` VALUES ('511623', '邻水县', '511600', '3');
-INSERT INTO `tb_area` VALUES ('370705', '奎文区', '370700', '3');
-INSERT INTO `tb_area` VALUES ('530422', '澄江县', '530400', '3');
-INSERT INTO `tb_area` VALUES ('210303', '铁西区', '210300', '3');
-INSERT INTO `tb_area` VALUES ('341600', '亳州市', '340000', '2');
-INSERT INTO `tb_area` VALUES ('530702', '古城区', '530700', '3');
-INSERT INTO `tb_area` VALUES ('370323', '沂源县', '370300', '3');
-INSERT INTO `tb_area` VALUES ('130534', '清河县', '130500', '3');
-INSERT INTO `tb_area` VALUES ('321181', '丹阳市', '321100', '3');
-INSERT INTO `tb_area` VALUES ('411082', '长葛市', '411000', '3');
-INSERT INTO `tb_area` VALUES ('441402', '梅江区', '441400', '3');
-INSERT INTO `tb_area` VALUES ('350802', '新罗区', '350800', '3');
-INSERT INTO `tb_area` VALUES ('211422', '建昌县', '211400', '3');
-INSERT INTO `tb_area` VALUES ('350603', '龙文区', '350600', '3');
-INSERT INTO `tb_area` VALUES ('370684', '蓬莱市', '370600', '3');
-INSERT INTO `tb_area` VALUES ('350206', '湖里区', '350200', '3');
-INSERT INTO `tb_area` VALUES ('150402', '红山区', '150400', '3');
-INSERT INTO `tb_area` VALUES ('330500', '湖州市', '330000', '2');
-INSERT INTO `tb_area` VALUES ('340121', '长丰县', '340100', '3');
-INSERT INTO `tb_area` VALUES ('511802', '雨城区', '511800', '3');
-INSERT INTO `tb_area` VALUES ('513227', '小金县', '513200', '3');
-INSERT INTO `tb_area` VALUES ('511132', '峨边彝族自治县', '511100', '3');
-INSERT INTO `tb_area` VALUES ('150703', '扎赉诺尔区', '150700', '3');
-INSERT INTO `tb_area` VALUES ('652801', '库尔勒市', '652800', '3');
-INSERT INTO `tb_area` VALUES ('230184', '五常市', '230100', '3');
-INSERT INTO `tb_area` VALUES ('210403', '东洲区', '210400', '3');
-INSERT INTO `tb_area` VALUES ('640205', '惠农区', '640200', '3');
-INSERT INTO `tb_area` VALUES ('321200', '泰州市', '320000', '2');
-INSERT INTO `tb_area` VALUES ('510525', '古蔺县', '510500', '3');
-INSERT INTO `tb_area` VALUES ('371402', '德城区', '371400', '3');
-INSERT INTO `tb_area` VALUES ('360721', '赣县', '360700', '3');
-INSERT INTO `tb_area` VALUES ('533103', '芒市', '533100', '3');
-INSERT INTO `tb_area` VALUES ('411400', '商丘市', '410000', '2');
-INSERT INTO `tb_area` VALUES ('150502', '科尔沁区', '150500', '3');
-INSERT INTO `tb_area` VALUES ('370306', '周村区', '370300', '3');
-INSERT INTO `tb_area` VALUES ('650106', '头屯河区', '650100', '3');
-INSERT INTO `tb_area` VALUES ('341602', '谯城区', '341600', '3');
-INSERT INTO `tb_area` VALUES ('230601', '市辖区', '230600', '3');
-INSERT INTO `tb_area` VALUES ('230716', '上甘岭区', '230700', '3');
-INSERT INTO `tb_area` VALUES ('130525', '隆尧县', '130500', '3');
-INSERT INTO `tb_area` VALUES ('341701', '市辖区', '341700', '3');
-INSERT INTO `tb_area` VALUES ('141122', '交城县', '141100', '3');
-INSERT INTO `tb_area` VALUES ('210602', '元宝区', '210600', '3');
-INSERT INTO `tb_area` VALUES ('630122', '湟中县', '630100', '3');
-INSERT INTO `tb_area` VALUES ('510502', '江阳区', '510500', '3');
-INSERT INTO `tb_area` VALUES ('440400', '珠海市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('140600', '朔州市', '140000', '2');
-INSERT INTO `tb_area` VALUES ('140921', '定襄县', '140900', '3');
-INSERT INTO `tb_area` VALUES ('610431', '武功县', '610400', '3');
-INSERT INTO `tb_area` VALUES ('450324', '全州县', '450300', '3');
-INSERT INTO `tb_area` VALUES ('522731', '惠水县', '522700', '3');
-INSERT INTO `tb_area` VALUES ('152921', '阿拉善左旗', '152900', '3');
-INSERT INTO `tb_area` VALUES ('321282', '靖江市', '321200', '3');
-INSERT INTO `tb_area` VALUES ('430201', '市辖区', '430200', '3');
-INSERT INTO `tb_area` VALUES ('230702', '伊春区', '230700', '3');
-INSERT INTO `tb_area` VALUES ('420302', '茅箭区', '420300', '3');
-INSERT INTO `tb_area` VALUES ('220283', '舒兰市', '220200', '3');
-INSERT INTO `tb_area` VALUES ('500103', '渝中区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('210124', '法库县', '210100', '3');
-INSERT INTO `tb_area` VALUES ('460107', '琼山区', '460100', '3');
-INSERT INTO `tb_area` VALUES ('350800', '龙岩市', '350000', '2');
-INSERT INTO `tb_area` VALUES ('130606', '莲池区', '130600', '3');
-INSERT INTO `tb_area` VALUES ('511324', '仪陇县', '511300', '3');
-INSERT INTO `tb_area` VALUES ('350121', '闽侯县', '350100', '3');
-INSERT INTO `tb_area` VALUES ('340828', '岳西县', '340800', '3');
-INSERT INTO `tb_area` VALUES ('340700', '铜陵市', '340000', '2');
-INSERT INTO `tb_area` VALUES ('654022', '察布查尔锡伯自治县', '654000', '3');
-INSERT INTO `tb_area` VALUES ('500000', '重庆市', '0', '1');
-INSERT INTO `tb_area` VALUES ('220204', '船营区', '220200', '3');
-INSERT INTO `tb_area` VALUES ('130105', '新华区', '130100', '3');
-INSERT INTO `tb_area` VALUES ('532925', '弥渡县', '532900', '3');
-INSERT INTO `tb_area` VALUES ('230722', '嘉荫县', '230700', '3');
-INSERT INTO `tb_area` VALUES ('450107', '西乡塘区', '450100', '3');
-INSERT INTO `tb_area` VALUES ('441284', '四会市', '441200', '3');
-INSERT INTO `tb_area` VALUES ('511129', '沐川县', '511100', '3');
-INSERT INTO `tb_area` VALUES ('611002', '商州区', '611000', '3');
-INSERT INTO `tb_area` VALUES ('210101', '市辖区', '210100', '3');
-INSERT INTO `tb_area` VALUES ('320211', '滨湖区', '320200', '3');
-INSERT INTO `tb_area` VALUES ('340221', '芜湖县', '340200', '3');
-INSERT INTO `tb_area` VALUES ('140821', '临猗县', '140800', '3');
-INSERT INTO `tb_area` VALUES ('450109', '邕宁区', '450100', '3');
-INSERT INTO `tb_area` VALUES ('370983', '肥城市', '370900', '3');
-INSERT INTO `tb_area` VALUES ('210283', '庄河市', '210200', '3');
-INSERT INTO `tb_area` VALUES ('360982', '樟树市', '360900', '3');
-INSERT INTO `tb_area` VALUES ('610700', '汉中市', '610000', '2');
-INSERT INTO `tb_area` VALUES ('513233', '红原县', '513200', '3');
-INSERT INTO `tb_area` VALUES ('150104', '玉泉区', '150100', '3');
-INSERT INTO `tb_area` VALUES ('610304', '陈仓区', '610300', '3');
-INSERT INTO `tb_area` VALUES ('360430', '彭泽县', '360400', '3');
-INSERT INTO `tb_area` VALUES ('350721', '顺昌县', '350700', '3');
-INSERT INTO `tb_area` VALUES ('371701', '市辖区', '371700', '3');
-INSERT INTO `tb_area` VALUES ('340123', '肥西县', '340100', '3');
-INSERT INTO `tb_area` VALUES ('330108', '滨江区', '330100', '3');
-INSERT INTO `tb_area` VALUES ('511803', '名山区', '511800', '3');
-INSERT INTO `tb_area` VALUES ('441826', '连南瑶族自治县', '441800', '3');
-INSERT INTO `tb_area` VALUES ('220103', '宽城区', '220100', '3');
-INSERT INTO `tb_area` VALUES ('411322', '方城县', '411300', '3');
-INSERT INTO `tb_area` VALUES ('430501', '市辖区', '430500', '3');
-INSERT INTO `tb_area` VALUES ('341003', '黄山区', '341000', '3');
-INSERT INTO `tb_area` VALUES ('411323', '西峡县', '411300', '3');
-INSERT INTO `tb_area` VALUES ('370503', '河口区', '370500', '3');
-INSERT INTO `tb_area` VALUES ('210300', '鞍山市', '210000', '2');
-INSERT INTO `tb_area` VALUES ('540227', '谢通门县', '540200', '3');
-INSERT INTO `tb_area` VALUES ('460201', '市辖区', '460200', '3');
-INSERT INTO `tb_area` VALUES ('610827', '米脂县', '610800', '3');
-INSERT INTO `tb_area` VALUES ('530924', '镇康县', '530900', '3');
-INSERT INTO `tb_area` VALUES ('360521', '分宜县', '360500', '3');
-INSERT INTO `tb_area` VALUES ('371083', '乳山市', '371000', '3');
-INSERT INTO `tb_area` VALUES ('150123', '和林格尔县', '150100', '3');
-INSERT INTO `tb_area` VALUES ('210502', '平山区', '210500', '3');
-INSERT INTO `tb_area` VALUES ('500118', '永川区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('130825', '隆化县', '130800', '3');
-INSERT INTO `tb_area` VALUES ('210102', '和平区', '210100', '3');
-INSERT INTO `tb_area` VALUES ('330922', '嵊泗县', '330900', '3');
-INSERT INTO `tb_area` VALUES ('510311', '沿滩区', '510300', '3');
-INSERT INTO `tb_area` VALUES ('460400', '儋州市', '460000', '2');
-INSERT INTO `tb_area` VALUES ('150981', '丰镇市', '150900', '3');
-INSERT INTO `tb_area` VALUES ('411023', '许昌县', '411000', '3');
-INSERT INTO `tb_area` VALUES ('220303', '铁东区', '220300', '3');
-INSERT INTO `tb_area` VALUES ('320707', '赣榆区', '320700', '3');
-INSERT INTO `tb_area` VALUES ('530601', '市辖区', '530600', '3');
-INSERT INTO `tb_area` VALUES ('130127', '高邑县', '130100', '3');
-INSERT INTO `tb_area` VALUES ('370911', '岱岳区', '370900', '3');
-INSERT INTO `tb_area` VALUES ('150403', '元宝山区', '150400', '3');
-INSERT INTO `tb_area` VALUES ('441301', '市辖区', '441300', '3');
-INSERT INTO `tb_area` VALUES ('130104', '桥西区', '130100', '3');
-INSERT INTO `tb_area` VALUES ('140927', '神池县', '140900', '3');
-INSERT INTO `tb_area` VALUES ('320400', '常州市', '320000', '2');
-INSERT INTO `tb_area` VALUES ('622901', '临夏市', '622900', '3');
-INSERT INTO `tb_area` VALUES ('330304', '瓯海区', '330300', '3');
-INSERT INTO `tb_area` VALUES ('530624', '大关县', '530600', '3');
-INSERT INTO `tb_area` VALUES ('330822', '常山县', '330800', '3');
-INSERT INTO `tb_area` VALUES ('130324', '卢龙县', '130300', '3');
-INSERT INTO `tb_area` VALUES ('511923', '平昌县', '511900', '3');
-INSERT INTO `tb_area` VALUES ('210213', '金州区', '210200', '3');
-INSERT INTO `tb_area` VALUES ('230304', '滴道区', '230300', '3');
-INSERT INTO `tb_area` VALUES ('469007', '东方市', '469000', '3');
-INSERT INTO `tb_area` VALUES ('520527', '赫章县', '520500', '3');
-INSERT INTO `tb_area` VALUES ('110102', '西城区', '110100', '3');
-INSERT INTO `tb_area` VALUES ('330106', '西湖区', '330100', '3');
-INSERT INTO `tb_area` VALUES ('440232', '乳源瑶族自治县', '440200', '3');
-INSERT INTO `tb_area` VALUES ('520621', '江口县', '520600', '3');
-INSERT INTO `tb_area` VALUES ('371601', '市辖区', '371600', '3');
-INSERT INTO `tb_area` VALUES ('620123', '榆中县', '620100', '3');
-INSERT INTO `tb_area` VALUES ('370700', '潍坊市', '370000', '2');
-INSERT INTO `tb_area` VALUES ('652901', '阿克苏市', '652900', '3');
-INSERT INTO `tb_area` VALUES ('410184', '新郑市', '410100', '3');
-INSERT INTO `tb_area` VALUES ('440224', '仁化县', '440200', '3');
-INSERT INTO `tb_area` VALUES ('320813', '洪泽区', '320800', '3');
-INSERT INTO `tb_area` VALUES ('210106', '铁西区', '210100', '3');
-INSERT INTO `tb_area` VALUES ('110106', '丰台区', '110100', '3');
-INSERT INTO `tb_area` VALUES ('620621', '民勤县', '620600', '3');
-INSERT INTO `tb_area` VALUES ('130301', '市辖区', '130300', '3');
-INSERT INTO `tb_area` VALUES ('420281', '大冶市', '420200', '3');
-INSERT INTO `tb_area` VALUES ('440303', '罗湖区', '440300', '3');
-INSERT INTO `tb_area` VALUES ('421102', '黄州区', '421100', '3');
-INSERT INTO `tb_area` VALUES ('530800', '普洱市', '530000', '2');
-INSERT INTO `tb_area` VALUES ('513400', '凉山彝族自治州', '510000', '2');
-INSERT INTO `tb_area` VALUES ('421303', '曾都区', '421300', '3');
-INSERT INTO `tb_area` VALUES ('130322', '昌黎县', '130300', '3');
-INSERT INTO `tb_area` VALUES ('210423', '清原满族自治县', '210400', '3');
-INSERT INTO `tb_area` VALUES ('350921', '霞浦县', '350900', '3');
-INSERT INTO `tb_area` VALUES ('410328', '洛宁县', '410300', '3');
-INSERT INTO `tb_area` VALUES ('610402', '秦都区', '610400', '3');
-INSERT INTO `tb_area` VALUES ('370681', '龙口市', '370600', '3');
-INSERT INTO `tb_area` VALUES ('513301', '康定市', '513300', '3');
-INSERT INTO `tb_area` VALUES ('542427', '索县', '542400', '3');
-INSERT INTO `tb_area` VALUES ('371522', '莘县', '371500', '3');
-INSERT INTO `tb_area` VALUES ('640104', '兴庆区', '640100', '3');
-INSERT INTO `tb_area` VALUES ('411526', '潢川县', '411500', '3');
-INSERT INTO `tb_area` VALUES ('540122', '当雄县', '540100', '3');
-INSERT INTO `tb_area` VALUES ('610503', '华州区', '610500', '3');
-INSERT INTO `tb_area` VALUES ('330411', '秀洲区', '330400', '3');
-INSERT INTO `tb_area` VALUES ('420702', '梁子湖区', '420700', '3');
-INSERT INTO `tb_area` VALUES ('610900', '安康市', '610000', '2');
-INSERT INTO `tb_area` VALUES ('512001', '市辖区', '512000', '3');
-INSERT INTO `tb_area` VALUES ('120102', '河东区', '120100', '3');
-INSERT INTO `tb_area` VALUES ('610525', '澄城县', '610500', '3');
-INSERT INTO `tb_area` VALUES ('320703', '连云区', '320700', '3');
-INSERT INTO `tb_area` VALUES ('340323', '固镇县', '340300', '3');
-INSERT INTO `tb_area` VALUES ('340405', '八公山区', '340400', '3');
-INSERT INTO `tb_area` VALUES ('152923', '额济纳旗', '152900', '3');
-INSERT INTO `tb_area` VALUES ('220102', '南关区', '220100', '3');
-INSERT INTO `tb_area` VALUES ('430381', '湘乡市', '430300', '3');
-INSERT INTO `tb_area` VALUES ('450225', '融水苗族自治县', '450200', '3');
-INSERT INTO `tb_area` VALUES ('610481', '兴平市', '610400', '3');
-INSERT INTO `tb_area` VALUES ('130624', '阜平县', '130600', '3');
-INSERT INTO `tb_area` VALUES ('450123', '隆安县', '450100', '3');
-INSERT INTO `tb_area` VALUES ('330523', '安吉县', '330500', '3');
-INSERT INTO `tb_area` VALUES ('620602', '凉州区', '620600', '3');
-INSERT INTO `tb_area` VALUES ('350305', '秀屿区', '350300', '3');
-INSERT INTO `tb_area` VALUES ('440902', '茂南区', '440900', '3');
-INSERT INTO `tb_area` VALUES ('130500', '邢台市', '130000', '2');
-INSERT INTO `tb_area` VALUES ('131028', '大厂回族自治县', '131000', '3');
-INSERT INTO `tb_area` VALUES ('130427', '磁县', '130400', '3');
-INSERT INTO `tb_area` VALUES ('530102', '五华区', '530100', '3');
-INSERT INTO `tb_area` VALUES ('210881', '盖州市', '210800', '3');
-INSERT INTO `tb_area` VALUES ('330703', '金东区', '330700', '3');
-INSERT INTO `tb_area` VALUES ('230126', '巴彦县', '230100', '3');
-INSERT INTO `tb_area` VALUES ('340202', '镜湖区', '340200', '3');
-INSERT INTO `tb_area` VALUES ('431301', '市辖区', '431300', '3');
-INSERT INTO `tb_area` VALUES ('450327', '灌阳县', '450300', '3');
-INSERT INTO `tb_area` VALUES ('411522', '光山县', '411500', '3');
-INSERT INTO `tb_area` VALUES ('130627', '唐县', '130600', '3');
-INSERT INTO `tb_area` VALUES ('411102', '源汇区', '411100', '3');
-INSERT INTO `tb_area` VALUES ('361130', '婺源县', '361100', '3');
-INSERT INTO `tb_area` VALUES ('610623', '子长县', '610600', '3');
-INSERT INTO `tb_area` VALUES ('350481', '永安市', '350400', '3');
-INSERT INTO `tb_area` VALUES ('460106', '龙华区', '460100', '3');
-INSERT INTO `tb_area` VALUES ('150122', '托克托县', '150100', '3');
-INSERT INTO `tb_area` VALUES ('220211', '丰满区', '220200', '3');
-INSERT INTO `tb_area` VALUES ('440233', '新丰县', '440200', '3');
-INSERT INTO `tb_area` VALUES ('520523', '金沙县', '520500', '3');
-INSERT INTO `tb_area` VALUES ('211001', '市辖区', '211000', '3');
-INSERT INTO `tb_area` VALUES ('220621', '抚松县', '220600', '3');
-INSERT INTO `tb_area` VALUES ('341623', '利辛县', '341600', '3');
-INSERT INTO `tb_area` VALUES ('632722', '杂多县', '632700', '3');
-INSERT INTO `tb_area` VALUES ('152200', '兴安盟', '150000', '2');
-INSERT INTO `tb_area` VALUES ('500200', '县', '500000', '2');
-INSERT INTO `tb_area` VALUES ('340603', '相山区', '340600', '3');
-INSERT INTO `tb_area` VALUES ('630224', '化隆回族自治县', '630200', '3');
-INSERT INTO `tb_area` VALUES ('130404', '复兴区', '130400', '3');
-INSERT INTO `tb_area` VALUES ('130224', '滦南县', '130200', '3');
-INSERT INTO `tb_area` VALUES ('220801', '市辖区', '220800', '3');
-INSERT INTO `tb_area` VALUES ('620121', '永登县', '620100', '3');
-INSERT INTO `tb_area` VALUES ('532300', '楚雄彝族自治州', '530000', '2');
-INSERT INTO `tb_area` VALUES ('654201', '塔城市', '654200', '3');
-INSERT INTO `tb_area` VALUES ('450681', '东兴市', '450600', '3');
-INSERT INTO `tb_area` VALUES ('410311', '洛龙区', '410300', '3');
-INSERT INTO `tb_area` VALUES ('130630', '涞源县', '130600', '3');
-INSERT INTO `tb_area` VALUES ('410181', '巩义市', '410100', '3');
-INSERT INTO `tb_area` VALUES ('511529', '屏山县', '511500', '3');
-INSERT INTO `tb_area` VALUES ('632701', '玉树市', '632700', '3');
-INSERT INTO `tb_area` VALUES ('230400', '鹤岗市', '230000', '2');
-INSERT INTO `tb_area` VALUES ('230712', '汤旺河区', '230700', '3');
-INSERT INTO `tb_area` VALUES ('140122', '阳曲县', '140100', '3');
-INSERT INTO `tb_area` VALUES ('421126', '蕲春县', '421100', '3');
-INSERT INTO `tb_area` VALUES ('152529', '正镶白旗', '152500', '3');
-INSERT INTO `tb_area` VALUES ('640000', '宁夏回族自治区', '0', '1');
-INSERT INTO `tb_area` VALUES ('150624', '鄂托克旗', '150600', '3');
-INSERT INTO `tb_area` VALUES ('230221', '龙江县', '230200', '3');
-INSERT INTO `tb_area` VALUES ('610725', '勉县', '610700', '3');
-INSERT INTO `tb_area` VALUES ('341722', '石台县', '341700', '3');
-INSERT INTO `tb_area` VALUES ('433122', '泸溪县', '433100', '3');
-INSERT INTO `tb_area` VALUES ('410611', '淇滨区', '410600', '3');
-INSERT INTO `tb_area` VALUES ('421222', '通城县', '421200', '3');
-INSERT INTO `tb_area` VALUES ('520304', '播州区', '520300', '3');
-INSERT INTO `tb_area` VALUES ('440308', '盐田区', '440300', '3');
-INSERT INTO `tb_area` VALUES ('510521', '泸县', '510500', '3');
-INSERT INTO `tb_area` VALUES ('130600', '保定市', '130000', '2');
-INSERT INTO `tb_area` VALUES ('542521', '普兰县', '542500', '3');
-INSERT INTO `tb_area` VALUES ('650502', '伊州区', '650500', '3');
-INSERT INTO `tb_area` VALUES ('440881', '廉江市', '440800', '3');
-INSERT INTO `tb_area` VALUES ('321003', '邗江区', '321000', '3');
-INSERT INTO `tb_area` VALUES ('610422', '三原县', '610400', '3');
-INSERT INTO `tb_area` VALUES ('430900', '益阳市', '430000', '2');
-INSERT INTO `tb_area` VALUES ('431127', '蓝山县', '431100', '3');
-INSERT INTO `tb_area` VALUES ('532929', '云龙县', '532900', '3');
-INSERT INTO `tb_area` VALUES ('361121', '上饶县', '361100', '3');
-INSERT INTO `tb_area` VALUES ('130708', '万全区', '130700', '3');
-INSERT INTO `tb_area` VALUES ('220502', '东昌区', '220500', '3');
-INSERT INTO `tb_area` VALUES ('310112', '闵行区', '310100', '3');
-INSERT INTO `tb_area` VALUES ('433126', '古丈县', '433100', '3');
-INSERT INTO `tb_area` VALUES ('371327', '莒南县', '371300', '3');
-INSERT INTO `tb_area` VALUES ('441625', '东源县', '441600', '3');
-INSERT INTO `tb_area` VALUES ('150425', '克什克腾旗', '150400', '3');
-INSERT INTO `tb_area` VALUES ('360983', '高安市', '360900', '3');
-INSERT INTO `tb_area` VALUES ('451221', '南丹县', '451200', '3');
-INSERT INTO `tb_area` VALUES ('621000', '庆阳市', '620000', '2');
-INSERT INTO `tb_area` VALUES ('210311', '千山区', '210300', '3');
-INSERT INTO `tb_area` VALUES ('430702', '武陵区', '430700', '3');
-INSERT INTO `tb_area` VALUES ('231123', '逊克县', '231100', '3');
-INSERT INTO `tb_area` VALUES ('411281', '义马市', '411200', '3');
-INSERT INTO `tb_area` VALUES ('530802', '思茅区', '530800', '3');
-INSERT INTO `tb_area` VALUES ('511113', '金口河区', '511100', '3');
-INSERT INTO `tb_area` VALUES ('540124', '曲水县', '540100', '3');
-INSERT INTO `tb_area` VALUES ('430603', '云溪区', '430600', '3');
-INSERT INTO `tb_area` VALUES ('440523', '南澳县', '440500', '3');
-INSERT INTO `tb_area` VALUES ('469030', '琼中黎族苗族自治县', '469000', '3');
-INSERT INTO `tb_area` VALUES ('430721', '安乡县', '430700', '3');
-INSERT INTO `tb_area` VALUES ('230108', '平房区', '230100', '3');
-INSERT INTO `tb_area` VALUES ('320831', '金湖县', '320800', '3');
-INSERT INTO `tb_area` VALUES ('522600', '黔东南苗族侗族自治州', '520000', '2');
-INSERT INTO `tb_area` VALUES ('522624', '三穗县', '522600', '3');
-INSERT INTO `tb_area` VALUES ('411723', '平舆县', '411700', '3');
-INSERT INTO `tb_area` VALUES ('451421', '扶绥县', '451400', '3');
-INSERT INTO `tb_area` VALUES ('150207', '九原区', '150200', '3');
-INSERT INTO `tb_area` VALUES ('320322', '沛县', '320300', '3');
-INSERT INTO `tb_area` VALUES ('131024', '香河县', '131000', '3');
-INSERT INTO `tb_area` VALUES ('220701', '市辖区', '220700', '3');
-INSERT INTO `tb_area` VALUES ('411001', '市辖区', '411000', '3');
-INSERT INTO `tb_area` VALUES ('653222', '墨玉县', '653200', '3');
-INSERT INTO `tb_area` VALUES ('211122', '盘山县', '211100', '3');
-INSERT INTO `tb_area` VALUES ('430700', '常德市', '430000', '2');
-INSERT INTO `tb_area` VALUES ('210000', '辽宁省', '0', '1');
-INSERT INTO `tb_area` VALUES ('341023', '黟县', '341000', '3');
-INSERT INTO `tb_area` VALUES ('210726', '黑山县', '210700', '3');
-INSERT INTO `tb_area` VALUES ('231121', '嫩江县', '231100', '3');
-INSERT INTO `tb_area` VALUES ('610800', '榆林市', '610000', '2');
-INSERT INTO `tb_area` VALUES ('430112', '望城区', '430100', '3');
-INSERT INTO `tb_area` VALUES ('654028', '尼勒克县', '654000', '3');
-INSERT INTO `tb_area` VALUES ('411221', '渑池县', '411200', '3');
-INSERT INTO `tb_area` VALUES ('511526', '珙县', '511500', '3');
-INSERT INTO `tb_area` VALUES ('510683', '绵竹市', '510600', '3');
-INSERT INTO `tb_area` VALUES ('140724', '昔阳县', '140700', '3');
-INSERT INTO `tb_area` VALUES ('630123', '湟源县', '630100', '3');
-INSERT INTO `tb_area` VALUES ('371621', '惠民县', '371600', '3');
-INSERT INTO `tb_area` VALUES ('331127', '景宁畲族自治县', '331100', '3');
-INSERT INTO `tb_area` VALUES ('370611', '福山区', '370600', '3');
-INSERT INTO `tb_area` VALUES ('520524', '织金县', '520500', '3');
-INSERT INTO `tb_area` VALUES ('411600', '周口市', '410000', '2');
-INSERT INTO `tb_area` VALUES ('210200', '大连市', '210000', '2');
-INSERT INTO `tb_area` VALUES ('632221', '门源回族自治县', '632200', '3');
-INSERT INTO `tb_area` VALUES ('632600', '果洛藏族自治州', '630000', '2');
-INSERT INTO `tb_area` VALUES ('331003', '黄岩区', '331000', '3');
-INSERT INTO `tb_area` VALUES ('532530', '金平苗族瑶族傣族自治县', '532500', '3');
-INSERT INTO `tb_area` VALUES ('520330', '习水县', '520300', '3');
-INSERT INTO `tb_area` VALUES ('320321', '丰县', '320300', '3');
-INSERT INTO `tb_area` VALUES ('532623', '西畴县', '532600', '3');
-INSERT INTO `tb_area` VALUES ('532326', '大姚县', '532300', '3');
-INSERT INTO `tb_area` VALUES ('520100', '贵阳市', '520000', '2');
-INSERT INTO `tb_area` VALUES ('230705', '西林区', '230700', '3');
-INSERT INTO `tb_area` VALUES ('441721', '阳西县', '441700', '3');
-INSERT INTO `tb_area` VALUES ('430181', '浏阳市', '430100', '3');
-INSERT INTO `tb_area` VALUES ('150926', '察哈尔右翼前旗', '150900', '3');
-INSERT INTO `tb_area` VALUES ('441521', '海丰县', '441500', '3');
-INSERT INTO `tb_area` VALUES ('230811', '郊区', '230800', '3');
-INSERT INTO `tb_area` VALUES ('410102', '中原区', '410100', '3');
-INSERT INTO `tb_area` VALUES ('530921', '凤庆县', '530900', '3');
-INSERT INTO `tb_area` VALUES ('361000', '抚州市', '360000', '2');
-INSERT INTO `tb_area` VALUES ('210113', '沈北新区', '210100', '3');
-INSERT INTO `tb_area` VALUES ('440901', '市辖区', '440900', '3');
-INSERT INTO `tb_area` VALUES ('230708', '美溪区', '230700', '3');
-INSERT INTO `tb_area` VALUES ('141125', '柳林县', '141100', '3');
-INSERT INTO `tb_area` VALUES ('430300', '湘潭市', '430000', '2');
-INSERT INTO `tb_area` VALUES ('431024', '嘉禾县', '431000', '3');
-INSERT INTO `tb_area` VALUES ('430103', '天心区', '430100', '3');
-INSERT INTO `tb_area` VALUES ('540323', '类乌齐县', '540300', '3');
-INSERT INTO `tb_area` VALUES ('511903', '恩阳区', '511900', '3');
-INSERT INTO `tb_area` VALUES ('130533', '威县', '130500', '3');
-INSERT INTO `tb_area` VALUES ('469026', '昌江黎族自治县', '469000', '3');
-INSERT INTO `tb_area` VALUES ('210211', '甘井子区', '210200', '3');
-INSERT INTO `tb_area` VALUES ('411524', '商城县', '411500', '3');
-INSERT INTO `tb_area` VALUES ('141022', '翼城县', '141000', '3');
-INSERT INTO `tb_area` VALUES ('410725', '原阳县', '410700', '3');
-INSERT INTO `tb_area` VALUES ('370800', '济宁市', '370000', '2');
-INSERT INTO `tb_area` VALUES ('632621', '玛沁县', '632600', '3');
-INSERT INTO `tb_area` VALUES ('513300', '甘孜藏族自治州', '510000', '2');
-INSERT INTO `tb_area` VALUES ('331122', '缙云县', '331100', '3');
-INSERT INTO `tb_area` VALUES ('620800', '平凉市', '620000', '2');
-INSERT INTO `tb_area` VALUES ('513324', '九龙县', '513300', '3');
-INSERT INTO `tb_area` VALUES ('350213', '翔安区', '350200', '3');
-INSERT INTO `tb_area` VALUES ('542431', '双湖县', '542400', '3');
-INSERT INTO `tb_area` VALUES ('511400', '眉山市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('532822', '勐海县', '532800', '3');
-INSERT INTO `tb_area` VALUES ('210501', '市辖区', '210500', '3');
-INSERT INTO `tb_area` VALUES ('511500', '宜宾市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('330602', '越城区', '330600', '3');
-INSERT INTO `tb_area` VALUES ('420116', '黄陂区', '420100', '3');
-INSERT INTO `tb_area` VALUES ('411726', '泌阳县', '411700', '3');
-INSERT INTO `tb_area` VALUES ('360402', '濂溪区', '360400', '3');
-INSERT INTO `tb_area` VALUES ('330283', '奉化市', '330200', '3');
-INSERT INTO `tb_area` VALUES ('654021', '伊宁县', '654000', '3');
-INSERT INTO `tb_area` VALUES ('430921', '南县', '430900', '3');
-INSERT INTO `tb_area` VALUES ('611026', '柞水县', '611000', '3');
-INSERT INTO `tb_area` VALUES ('610825', '定边县', '610800', '3');
-INSERT INTO `tb_area` VALUES ('422802', '利川市', '422800', '3');
-INSERT INTO `tb_area` VALUES ('210500', '本溪市', '210000', '2');
-INSERT INTO `tb_area` VALUES ('140621', '山阴县', '140600', '3');
-INSERT INTO `tb_area` VALUES ('130701', '市辖区', '130700', '3');
-INSERT INTO `tb_area` VALUES ('460205', '崖州区', '460200', '3');
-INSERT INTO `tb_area` VALUES ('511826', '芦山县', '511800', '3');
-INSERT INTO `tb_area` VALUES ('540101', '市辖区', '540100', '3');
-INSERT INTO `tb_area` VALUES ('510802', '利州区', '510800', '3');
-INSERT INTO `tb_area` VALUES ('445300', '云浮市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('360203', '珠山区', '360200', '3');
-INSERT INTO `tb_area` VALUES ('420501', '市辖区', '420500', '3');
-INSERT INTO `tb_area` VALUES ('340311', '淮上区', '340300', '3');
-INSERT INTO `tb_area` VALUES ('410212', '祥符区', '410200', '3');
-INSERT INTO `tb_area` VALUES ('231222', '兰西县', '231200', '3');
-INSERT INTO `tb_area` VALUES ('330122', '桐庐县', '330100', '3');
-INSERT INTO `tb_area` VALUES ('420528', '长阳土家族自治县', '420500', '3');
-INSERT INTO `tb_area` VALUES ('621026', '宁县', '621000', '3');
-INSERT INTO `tb_area` VALUES ('360825', '永丰县', '360800', '3');
-INSERT INTO `tb_area` VALUES ('140121', '清徐县', '140100', '3');
-INSERT INTO `tb_area` VALUES ('652824', '若羌县', '652800', '3');
-INSERT INTO `tb_area` VALUES ('330110', '余杭区', '330100', '3');
-INSERT INTO `tb_area` VALUES ('653126', '叶城县', '653100', '3');
-INSERT INTO `tb_area` VALUES ('110113', '顺义区', '110100', '3');
-INSERT INTO `tb_area` VALUES ('330282', '慈溪市', '330200', '3');
-INSERT INTO `tb_area` VALUES ('621025', '正宁县', '621000', '3');
-INSERT INTO `tb_area` VALUES ('140431', '沁源县', '140400', '3');
-INSERT INTO `tb_area` VALUES ('350681', '龙海市', '350600', '3');
-INSERT INTO `tb_area` VALUES ('610929', '白河县', '610900', '3');
-INSERT INTO `tb_area` VALUES ('650121', '乌鲁木齐县', '650100', '3');
-INSERT INTO `tb_area` VALUES ('623023', '舟曲县', '623000', '3');
-INSERT INTO `tb_area` VALUES ('610527', '白水县', '610500', '3');
-INSERT INTO `tb_area` VALUES ('371000', '威海市', '370000', '2');
-INSERT INTO `tb_area` VALUES ('520400', '安顺市', '520000', '2');
-INSERT INTO `tb_area` VALUES ('532926', '南涧彝族自治县', '532900', '3');
-INSERT INTO `tb_area` VALUES ('131025', '大城县', '131000', '3');
-INSERT INTO `tb_area` VALUES ('410182', '荥阳市', '410100', '3');
-INSERT INTO `tb_area` VALUES ('130705', '宣化区', '130700', '3');
-INSERT INTO `tb_area` VALUES ('420503', '伍家岗区', '420500', '3');
-INSERT INTO `tb_area` VALUES ('410324', '栾川县', '410300', '3');
-INSERT INTO `tb_area` VALUES ('510302', '自流井区', '510300', '3');
-INSERT INTO `tb_area` VALUES ('640201', '市辖区', '640200', '3');
-INSERT INTO `tb_area` VALUES ('451001', '市辖区', '451000', '3');
-INSERT INTO `tb_area` VALUES ('360124', '进贤县', '360100', '3');
-INSERT INTO `tb_area` VALUES ('152528', '镶黄旗', '152500', '3');
-INSERT INTO `tb_area` VALUES ('630000', '青海省', '0', '1');
-INSERT INTO `tb_area` VALUES ('621227', '徽县', '621200', '3');
-INSERT INTO `tb_area` VALUES ('150700', '呼伦贝尔市', '150000', '2');
-INSERT INTO `tb_area` VALUES ('510682', '什邡市', '510600', '3');
-INSERT INTO `tb_area` VALUES ('430408', '蒸湘区', '430400', '3');
-INSERT INTO `tb_area` VALUES ('321203', '高港区', '321200', '3');
-INSERT INTO `tb_area` VALUES ('371328', '蒙阴县', '371300', '3');
-INSERT INTO `tb_area` VALUES ('360723', '大余县', '360700', '3');
-INSERT INTO `tb_area` VALUES ('230826', '桦川县', '230800', '3');
-INSERT INTO `tb_area` VALUES ('370300', '淄博市', '370000', '2');
-INSERT INTO `tb_area` VALUES ('411681', '项城市', '411600', '3');
-INSERT INTO `tb_area` VALUES ('230882', '富锦市', '230800', '3');
-INSERT INTO `tb_area` VALUES ('130121', '井陉县', '130100', '3');
-INSERT INTO `tb_area` VALUES ('620623', '天祝藏族自治县', '620600', '3');
-INSERT INTO `tb_area` VALUES ('420525', '远安县', '420500', '3');
-INSERT INTO `tb_area` VALUES ('410728', '长垣县', '410700', '3');
-INSERT INTO `tb_area` VALUES ('530602', '昭阳区', '530600', '3');
-INSERT INTO `tb_area` VALUES ('610921', '汉阴县', '610900', '3');
-INSERT INTO `tb_area` VALUES ('320411', '新北区', '320400', '3');
-INSERT INTO `tb_area` VALUES ('630223', '互助土族自治县', '630200', '3');
-INSERT INTO `tb_area` VALUES ('542421', '那曲县', '542400', '3');
-INSERT INTO `tb_area` VALUES ('220402', '龙山区', '220400', '3');
-INSERT INTO `tb_area` VALUES ('410325', '嵩县', '410300', '3');
-INSERT INTO `tb_area` VALUES ('450203', '鱼峰区', '450200', '3');
-INSERT INTO `tb_area` VALUES ('230112', '阿城区', '230100', '3');
-INSERT INTO `tb_area` VALUES ('120116', '滨海新区', '120100', '3');
-INSERT INTO `tb_area` VALUES ('220122', '农安县', '220100', '3');
-INSERT INTO `tb_area` VALUES ('451000', '百色市', '450000', '2');
-INSERT INTO `tb_area` VALUES ('361030', '广昌县', '361000', '3');
-INSERT INTO `tb_area` VALUES ('411721', '西平县', '411700', '3');
-INSERT INTO `tb_area` VALUES ('340601', '市辖区', '340600', '3');
-INSERT INTO `tb_area` VALUES ('532627', '广南县', '532600', '3');
-INSERT INTO `tb_area` VALUES ('230804', '前进区', '230800', '3');
-INSERT INTO `tb_area` VALUES ('650500', '哈密市', '650000', '2');
-INSERT INTO `tb_area` VALUES ('500115', '长寿区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('330501', '市辖区', '330500', '3');
-INSERT INTO `tb_area` VALUES ('654002', '伊宁市', '654000', '3');
-INSERT INTO `tb_area` VALUES ('140424', '屯留县', '140400', '3');
-INSERT INTO `tb_area` VALUES ('330201', '市辖区', '330200', '3');
-INSERT INTO `tb_area` VALUES ('532528', '元阳县', '532500', '3');
-INSERT INTO `tb_area` VALUES ('532901', '大理市', '532900', '3');
-INSERT INTO `tb_area` VALUES ('331081', '温岭市', '331000', '3');
-INSERT INTO `tb_area` VALUES ('451324', '金秀瑶族自治县', '451300', '3');
-INSERT INTO `tb_area` VALUES ('431229', '靖州苗族侗族自治县', '431200', '3');
-INSERT INTO `tb_area` VALUES ('513331', '白玉县', '513300', '3');
-INSERT INTO `tb_area` VALUES ('610926', '平利县', '610900', '3');
-INSERT INTO `tb_area` VALUES ('421281', '赤壁市', '421200', '3');
-INSERT INTO `tb_area` VALUES ('350504', '洛江区', '350500', '3');
-INSERT INTO `tb_area` VALUES ('350924', '寿宁县', '350900', '3');
-INSERT INTO `tb_area` VALUES ('652922', '温宿县', '652900', '3');
-INSERT INTO `tb_area` VALUES ('360722', '信丰县', '360700', '3');
-INSERT INTO `tb_area` VALUES ('620503', '麦积区', '620500', '3');
-INSERT INTO `tb_area` VALUES ('141082', '霍州市', '141000', '3');
-INSERT INTO `tb_area` VALUES ('361128', '鄱阳县', '361100', '3');
-INSERT INTO `tb_area` VALUES ('451226', '环江毛南族自治县', '451200', '3');
-INSERT INTO `tb_area` VALUES ('451381', '合山市', '451300', '3');
-INSERT INTO `tb_area` VALUES ('370829', '嘉祥县', '370800', '3');
-INSERT INTO `tb_area` VALUES ('410622', '淇县', '410600', '3');
-INSERT INTO `tb_area` VALUES ('320117', '溧水区', '320100', '3');
-INSERT INTO `tb_area` VALUES ('513231', '阿坝县', '513200', '3');
-INSERT INTO `tb_area` VALUES ('530825', '镇沅彝族哈尼族拉祜族自治县', '530800', '3');
-INSERT INTO `tb_area` VALUES ('620302', '金川区', '620300', '3');
-INSERT INTO `tb_area` VALUES ('421300', '随州市', '420000', '2');
-INSERT INTO `tb_area` VALUES ('431129', '江华瑶族自治县', '431100', '3');
-INSERT INTO `tb_area` VALUES ('371003', '文登区', '371000', '3');
-INSERT INTO `tb_area` VALUES ('411329', '新野县', '411300', '3');
-INSERT INTO `tb_area` VALUES ('310151', '崇明区', '310100', '3');
-INSERT INTO `tb_area` VALUES ('621100', '定西市', '620000', '2');
-INSERT INTO `tb_area` VALUES ('360826', '泰和县', '360800', '3');
-INSERT INTO `tb_area` VALUES ('440403', '斗门区', '440400', '3');
-INSERT INTO `tb_area` VALUES ('469022', '屯昌县', '469000', '3');
-INSERT INTO `tb_area` VALUES ('320903', '盐都区', '320900', '3');
-INSERT INTO `tb_area` VALUES ('230921', '勃利县', '230900', '3');
-INSERT INTO `tb_area` VALUES ('411104', '召陵区', '411100', '3');
-INSERT INTO `tb_area` VALUES ('610722', '城固县', '610700', '3');
-INSERT INTO `tb_area` VALUES ('610630', '宜川县', '610600', '3');
-INSERT INTO `tb_area` VALUES ('420529', '五峰土家族自治县', '420500', '3');
-INSERT INTO `tb_area` VALUES ('340302', '龙子湖区', '340300', '3');
-INSERT INTO `tb_area` VALUES ('620622', '古浪县', '620600', '3');
-INSERT INTO `tb_area` VALUES ('211301', '市辖区', '211300', '3');
-INSERT INTO `tb_area` VALUES ('610101', '市辖区', '610100', '3');
-INSERT INTO `tb_area` VALUES ('231002', '东安区', '231000', '3');
-INSERT INTO `tb_area` VALUES ('150783', '扎兰屯市', '150700', '3');
-INSERT INTO `tb_area` VALUES ('410411', '湛河区', '410400', '3');
-INSERT INTO `tb_area` VALUES ('350424', '宁化县', '350400', '3');
-INSERT INTO `tb_area` VALUES ('120000', '天津市', '0', '1');
-INSERT INTO `tb_area` VALUES ('420301', '市辖区', '420300', '3');
-INSERT INTO `tb_area` VALUES ('320381', '新沂市', '320300', '3');
-INSERT INTO `tb_area` VALUES ('150900', '乌兰察布市', '150000', '2');
-INSERT INTO `tb_area` VALUES ('540322', '贡觉县', '540300', '3');
-INSERT INTO `tb_area` VALUES ('653129', '伽师县', '653100', '3');
-INSERT INTO `tb_area` VALUES ('361126', '弋阳县', '361100', '3');
-INSERT INTO `tb_area` VALUES ('511602', '广安区', '511600', '3');
-INSERT INTO `tb_area` VALUES ('654027', '特克斯县', '654000', '3');
-INSERT INTO `tb_area` VALUES ('152527', '太仆寺旗', '152500', '3');
-INSERT INTO `tb_area` VALUES ('620701', '市辖区', '620700', '3');
-INSERT INTO `tb_area` VALUES ('350527', '金门县', '350500', '3');
-INSERT INTO `tb_area` VALUES ('431221', '中方县', '431200', '3');
-INSERT INTO `tb_area` VALUES ('431128', '新田县', '431100', '3');
-INSERT INTO `tb_area` VALUES ('210103', '沈河区', '210100', '3');
-INSERT INTO `tb_area` VALUES ('330783', '东阳市', '330700', '3');
-INSERT INTO `tb_area` VALUES ('152222', '科尔沁右翼中旗', '152200', '3');
-INSERT INTO `tb_area` VALUES ('510106', '金牛区', '510100', '3');
-INSERT INTO `tb_area` VALUES ('652800', '巴音郭楞蒙古自治州', '650000', '2');
-INSERT INTO `tb_area` VALUES ('152221', '科尔沁右翼前旗', '152200', '3');
-INSERT INTO `tb_area` VALUES ('340722', '枞阳县', '340700', '3');
-INSERT INTO `tb_area` VALUES ('431227', '新晃侗族自治县', '431200', '3');
-INSERT INTO `tb_area` VALUES ('371102', '东港区', '371100', '3');
-INSERT INTO `tb_area` VALUES ('371422', '宁津县', '371400', '3');
-INSERT INTO `tb_area` VALUES ('431027', '桂东县', '431000', '3');
-INSERT INTO `tb_area` VALUES ('450202', '城中区', '450200', '3');
-INSERT INTO `tb_area` VALUES ('230129', '延寿县', '230100', '3');
-INSERT INTO `tb_area` VALUES ('440784', '鹤山市', '440700', '3');
-INSERT INTO `tb_area` VALUES ('330105', '拱墅区', '330100', '3');
-INSERT INTO `tb_area` VALUES ('520302', '红花岗区', '520300', '3');
-INSERT INTO `tb_area` VALUES ('540330', '边坝县', '540300', '3');
-INSERT INTO `tb_area` VALUES ('522631', '黎平县', '522600', '3');
-INSERT INTO `tb_area` VALUES ('140981', '原平市', '140900', '3');
-INSERT INTO `tb_area` VALUES ('350302', '城厢区', '350300', '3');
-INSERT INTO `tb_area` VALUES ('320904', '大丰区', '320900', '3');
-INSERT INTO `tb_area` VALUES ('330303', '龙湾区', '330300', '3');
-INSERT INTO `tb_area` VALUES ('350200', '厦门市', '350000', '2');
-INSERT INTO `tb_area` VALUES ('330800', '衢州市', '330000', '2');
-INSERT INTO `tb_area` VALUES ('371703', '定陶区', '371700', '3');
-INSERT INTO `tb_area` VALUES ('210381', '海城市', '210300', '3');
-INSERT INTO `tb_area` VALUES ('230113', '双城区', '230100', '3');
-INSERT INTO `tb_area` VALUES ('441581', '陆丰市', '441500', '3');
-INSERT INTO `tb_area` VALUES ('310106', '静安区', '310100', '3');
-INSERT INTO `tb_area` VALUES ('320701', '市辖区', '320700', '3');
-INSERT INTO `tb_area` VALUES ('361024', '崇仁县', '361000', '3');
-INSERT INTO `tb_area` VALUES ('371424', '临邑县', '371400', '3');
-INSERT INTO `tb_area` VALUES ('610400', '咸阳市', '610000', '2');
-INSERT INTO `tb_area` VALUES ('640401', '市辖区', '640400', '3');
-INSERT INTO `tb_area` VALUES ('430400', '衡阳市', '430000', '2');
-INSERT INTO `tb_area` VALUES ('140203', '矿区', '140200', '3');
-INSERT INTO `tb_area` VALUES ('350783', '建瓯市', '350700', '3');
-INSERT INTO `tb_area` VALUES ('440229', '翁源县', '440200', '3');
-INSERT INTO `tb_area` VALUES ('150824', '乌拉特中旗', '150800', '3');
-INSERT INTO `tb_area` VALUES ('370725', '昌乐县', '370700', '3');
-INSERT INTO `tb_area` VALUES ('360102', '东湖区', '360100', '3');
-INSERT INTO `tb_area` VALUES ('130109', '藁城区', '130100', '3');
-INSERT INTO `tb_area` VALUES ('610200', '铜川市', '610000', '2');
-INSERT INTO `tb_area` VALUES ('440700', '江门市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('440306', '宝安区', '440300', '3');
-INSERT INTO `tb_area` VALUES ('211221', '铁岭县', '211200', '3');
-INSERT INTO `tb_area` VALUES ('360701', '市辖区', '360700', '3');
-INSERT INTO `tb_area` VALUES ('469028', '陵水黎族自治县', '469000', '3');
-INSERT INTO `tb_area` VALUES ('150724', '鄂温克族自治旗', '150700', '3');
-INSERT INTO `tb_area` VALUES ('530402', '红塔区', '530400', '3');
-INSERT INTO `tb_area` VALUES ('621024', '合水县', '621000', '3');
-INSERT INTO `tb_area` VALUES ('320684', '海门市', '320600', '3');
-INSERT INTO `tb_area` VALUES ('340322', '五河县', '340300', '3');
-INSERT INTO `tb_area` VALUES ('450423', '蒙山县', '450400', '3');
-INSERT INTO `tb_area` VALUES ('330601', '市辖区', '330600', '3');
-INSERT INTO `tb_area` VALUES ('540127', '墨竹工卡县', '540100', '3');
-INSERT INTO `tb_area` VALUES ('530181', '安宁市', '530100', '3');
-INSERT INTO `tb_area` VALUES ('211302', '双塔区', '211300', '3');
-INSERT INTO `tb_area` VALUES ('433124', '花垣县', '433100', '3');
-INSERT INTO `tb_area` VALUES ('140225', '浑源县', '140200', '3');
-INSERT INTO `tb_area` VALUES ('140123', '娄烦县', '140100', '3');
-INSERT INTO `tb_area` VALUES ('140429', '武乡县', '140400', '3');
-INSERT INTO `tb_area` VALUES ('340802', '迎江区', '340800', '3');
-INSERT INTO `tb_area` VALUES ('140930', '河曲县', '140900', '3');
-INSERT INTO `tb_area` VALUES ('140300', '阳泉市', '140000', '2');
-INSERT INTO `tb_area` VALUES ('610117', '高陵区', '610100', '3');
-INSERT INTO `tb_area` VALUES ('430304', '岳塘区', '430300', '3');
-INSERT INTO `tb_area` VALUES ('320501', '市辖区', '320500', '3');
-INSERT INTO `tb_area` VALUES ('411203', '陕州区', '411200', '3');
-INSERT INTO `tb_area` VALUES ('321322', '沭阳县', '321300', '3');
-INSERT INTO `tb_area` VALUES ('511300', '南充市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('340406', '潘集区', '340400', '3');
-INSERT INTO `tb_area` VALUES ('422823', '巴东县', '422800', '3');
-INSERT INTO `tb_area` VALUES ('340122', '肥东县', '340100', '3');
-INSERT INTO `tb_area` VALUES ('210411', '顺城区', '210400', '3');
-INSERT INTO `tb_area` VALUES ('370601', '市辖区', '370600', '3');
-INSERT INTO `tb_area` VALUES ('451423', '龙州县', '451400', '3');
-INSERT INTO `tb_area` VALUES ('430200', '株洲市', '430000', '2');
-INSERT INTO `tb_area` VALUES ('513424', '德昌县', '513400', '3');
-INSERT INTO `tb_area` VALUES ('430321', '湘潭县', '430300', '3');
-INSERT INTO `tb_area` VALUES ('130423', '临漳县', '130400', '3');
-INSERT INTO `tb_area` VALUES ('420323', '竹山县', '420300', '3');
-INSERT INTO `tb_area` VALUES ('421083', '洪湖市', '421000', '3');
-INSERT INTO `tb_area` VALUES ('653130', '巴楚县', '653100', '3');
-INSERT INTO `tb_area` VALUES ('620981', '玉门市', '620900', '3');
-INSERT INTO `tb_area` VALUES ('330802', '柯城区', '330800', '3');
-INSERT INTO `tb_area` VALUES ('210601', '市辖区', '210600', '3');
-INSERT INTO `tb_area` VALUES ('530523', '龙陵县', '530500', '3');
-INSERT INTO `tb_area` VALUES ('440701', '市辖区', '440700', '3');
-INSERT INTO `tb_area` VALUES ('320804', '淮阴区', '320800', '3');
-INSERT INTO `tb_area` VALUES ('360781', '瑞金市', '360700', '3');
-INSERT INTO `tb_area` VALUES ('420303', '张湾区', '420300', '3');
-INSERT INTO `tb_area` VALUES ('500151', '铜梁区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('450328', '龙胜各族自治县', '450300', '3');
-INSERT INTO `tb_area` VALUES ('410305', '涧西区', '410300', '3');
-INSERT INTO `tb_area` VALUES ('331121', '青田县', '331100', '3');
-INSERT INTO `tb_area` VALUES ('540321', '江达县', '540300', '3');
-INSERT INTO `tb_area` VALUES ('360734', '寻乌县', '360700', '3');
-INSERT INTO `tb_area` VALUES ('513232', '若尔盖县', '513200', '3');
-INSERT INTO `tb_area` VALUES ('131026', '文安县', '131000', '3');
-INSERT INTO `tb_area` VALUES ('210181', '新民市', '210100', '3');
-INSERT INTO `tb_area` VALUES ('610322', '凤翔县', '610300', '3');
-INSERT INTO `tb_area` VALUES ('540000', '西藏自治区', '0', '1');
-INSERT INTO `tb_area` VALUES ('451030', '西林县', '451000', '3');
-INSERT INTO `tb_area` VALUES ('230701', '市辖区', '230700', '3');
-INSERT INTO `tb_area` VALUES ('441601', '市辖区', '441600', '3');
-INSERT INTO `tb_area` VALUES ('341300', '宿州市', '340000', '2');
-INSERT INTO `tb_area` VALUES ('150821', '五原县', '150800', '3');
-INSERT INTO `tb_area` VALUES ('230883', '抚远市', '230800', '3');
-INSERT INTO `tb_area` VALUES ('330782', '义乌市', '330700', '3');
-INSERT INTO `tb_area` VALUES ('511701', '市辖区', '511700', '3');
-INSERT INTO `tb_area` VALUES ('532628', '富宁县', '532600', '3');
-INSERT INTO `tb_area` VALUES ('440401', '市辖区', '440400', '3');
-INSERT INTO `tb_area` VALUES ('540421', '工布江达县', '540400', '3');
-INSERT INTO `tb_area` VALUES ('141021', '曲沃县', '141000', '3');
-INSERT INTO `tb_area` VALUES ('542424', '聂荣县', '542400', '3');
-INSERT INTO `tb_area` VALUES ('420104', '硚口区', '420100', '3');
-INSERT INTO `tb_area` VALUES ('640100', '银川市', '640000', '2');
-INSERT INTO `tb_area` VALUES ('511525', '高县', '511500', '3');
-INSERT INTO `tb_area` VALUES ('440803', '霞山区', '440800', '3');
-INSERT INTO `tb_area` VALUES ('320111', '浦口区', '320100', '3');
-INSERT INTO `tb_area` VALUES ('220200', '吉林市', '220000', '2');
-INSERT INTO `tb_area` VALUES ('512022', '乐至县', '512000', '3');
-INSERT INTO `tb_area` VALUES ('540100', '拉萨市', '540000', '2');
-INSERT INTO `tb_area` VALUES ('320600', '南通市', '320000', '2');
-INSERT INTO `tb_area` VALUES ('130683', '安国市', '130600', '3');
-INSERT INTO `tb_area` VALUES ('370321', '桓台县', '370300', '3');
-INSERT INTO `tb_area` VALUES ('130802', '双桥区', '130800', '3');
-INSERT INTO `tb_area` VALUES ('430225', '炎陵县', '430200', '3');
-INSERT INTO `tb_area` VALUES ('510411', '仁和区', '510400', '3');
-INSERT INTO `tb_area` VALUES ('141124', '临县', '141100', '3');
-INSERT INTO `tb_area` VALUES ('320612', '通州区', '320600', '3');
-INSERT INTO `tb_area` VALUES ('211102', '双台子区', '211100', '3');
-INSERT INTO `tb_area` VALUES ('520112', '乌当区', '520100', '3');
-INSERT INTO `tb_area` VALUES ('410326', '汝阳县', '410300', '3');
-INSERT INTO `tb_area` VALUES ('532325', '姚安县', '532300', '3');
-INSERT INTO `tb_area` VALUES ('511403', '彭山区', '511400', '3');
-INSERT INTO `tb_area` VALUES ('320682', '如皋市', '320600', '3');
-INSERT INTO `tb_area` VALUES ('530124', '富民县', '530100', '3');
-INSERT INTO `tb_area` VALUES ('341800', '宣城市', '340000', '2');
-INSERT INTO `tb_area` VALUES ('370634', '长岛县', '370600', '3');
-INSERT INTO `tb_area` VALUES ('540523', '桑日县', '540500', '3');
-INSERT INTO `tb_area` VALUES ('411200', '三门峡市', '410000', '2');
-INSERT INTO `tb_area` VALUES ('140922', '五台县', '140900', '3');
-INSERT INTO `tb_area` VALUES ('420381', '丹江口市', '420300', '3');
-INSERT INTO `tb_area` VALUES ('211100', '盘锦市', '210000', '2');
-INSERT INTO `tb_area` VALUES ('120111', '西青区', '120100', '3');
-INSERT INTO `tb_area` VALUES ('620500', '天水市', '620000', '2');
-INSERT INTO `tb_area` VALUES ('410421', '宝丰县', '410400', '3');
-INSERT INTO `tb_area` VALUES ('520603', '万山区', '520600', '3');
-INSERT INTO `tb_area` VALUES ('220403', '西安区', '220400', '3');
-INSERT INTO `tb_area` VALUES ('620104', '西固区', '620100', '3');
-INSERT INTO `tb_area` VALUES ('450222', '柳城县', '450200', '3');
-INSERT INTO `tb_area` VALUES ('650402', '高昌区', '650400', '3');
-INSERT INTO `tb_area` VALUES ('610330', '凤县', '610300', '3');
-INSERT INTO `tb_area` VALUES ('511325', '西充县', '511300', '3');
-INSERT INTO `tb_area` VALUES ('141129', '中阳县', '141100', '3');
-INSERT INTO `tb_area` VALUES ('370501', '市辖区', '370500', '3');
-INSERT INTO `tb_area` VALUES ('130727', '阳原县', '130700', '3');
-INSERT INTO `tb_area` VALUES ('110115', '大兴区', '110100', '3');
-INSERT INTO `tb_area` VALUES ('231221', '望奎县', '231200', '3');
-INSERT INTO `tb_area` VALUES ('130926', '肃宁县', '130900', '3');
-INSERT INTO `tb_area` VALUES ('371603', '沾化区', '371600', '3');
-INSERT INTO `tb_area` VALUES ('130706', '下花园区', '130700', '3');
-INSERT INTO `tb_area` VALUES ('370304', '博山区', '370300', '3');
-INSERT INTO `tb_area` VALUES ('440513', '潮阳区', '440500', '3');
-INSERT INTO `tb_area` VALUES ('330402', '南湖区', '330400', '3');
-INSERT INTO `tb_area` VALUES ('130430', '邱县', '130400', '3');
-INSERT INTO `tb_area` VALUES ('640381', '青铜峡市', '640300', '3');
-INSERT INTO `tb_area` VALUES ('621221', '成县', '621200', '3');
-INSERT INTO `tb_area` VALUES ('530629', '威信县', '530600', '3');
-INSERT INTO `tb_area` VALUES ('220282', '桦甸市', '220200', '3');
-INSERT INTO `tb_area` VALUES ('533324', '贡山独龙族怒族自治县', '533300', '3');
-INSERT INTO `tb_area` VALUES ('140211', '南郊区', '140200', '3');
-INSERT INTO `tb_area` VALUES ('411202', '湖滨区', '411200', '3');
-INSERT INTO `tb_area` VALUES ('371581', '临清市', '371500', '3');
-INSERT INTO `tb_area` VALUES ('320312', '铜山区', '320300', '3');
-INSERT INTO `tb_area` VALUES ('371322', '郯城县', '371300', '3');
-INSERT INTO `tb_area` VALUES ('421122', '红安县', '421100', '3');
-INSERT INTO `tb_area` VALUES ('150124', '清水河县', '150100', '3');
-INSERT INTO `tb_area` VALUES ('130000', '河北省', '0', '1');
-INSERT INTO `tb_area` VALUES ('620600', '武威市', '620000', '2');
-INSERT INTO `tb_area` VALUES ('150404', '松山区', '150400', '3');
-INSERT INTO `tb_area` VALUES ('230800', '佳木斯市', '230000', '2');
-INSERT INTO `tb_area` VALUES ('430502', '双清区', '430500', '3');
-INSERT INTO `tb_area` VALUES ('451229', '大化瑶族自治县', '451200', '3');
-INSERT INTO `tb_area` VALUES ('620721', '肃南裕固族自治县', '620700', '3');
-INSERT INTO `tb_area` VALUES ('520113', '白云区', '520100', '3');
-INSERT INTO `tb_area` VALUES ('610723', '洋县', '610700', '3');
-INSERT INTO `tb_area` VALUES ('632823', '天峻县', '632800', '3');
-INSERT INTO `tb_area` VALUES ('441802', '清城区', '441800', '3');
-INSERT INTO `tb_area` VALUES ('610922', '石泉县', '610900', '3');
-INSERT INTO `tb_area` VALUES ('230711', '乌马河区', '230700', '3');
-INSERT INTO `tb_area` VALUES ('440608', '高明区', '440600', '3');
-INSERT INTO `tb_area` VALUES ('441602', '源城区', '441600', '3');
-INSERT INTO `tb_area` VALUES ('650100', '乌鲁木齐市', '650000', '2');
-INSERT INTO `tb_area` VALUES ('110108', '海淀区', '110100', '3');
-INSERT INTO `tb_area` VALUES ('431202', '鹤城区', '431200', '3');
-INSERT INTO `tb_area` VALUES ('522634', '雷山县', '522600', '3');
-INSERT INTO `tb_area` VALUES ('360313', '湘东区', '360300', '3');
-INSERT INTO `tb_area` VALUES ('140723', '和顺县', '140700', '3');
-INSERT INTO `tb_area` VALUES ('650205', '乌尔禾区', '650200', '3');
-INSERT INTO `tb_area` VALUES ('622927', '积石山保安族东乡族撒拉族自治县', '622900', '3');
-INSERT INTO `tb_area` VALUES ('130983', '黄骅市', '130900', '3');
-INSERT INTO `tb_area` VALUES ('130401', '市辖区', '130400', '3');
-INSERT INTO `tb_area` VALUES ('440883', '吴川市', '440800', '3');
-INSERT INTO `tb_area` VALUES ('231084', '宁安市', '231000', '3');
-INSERT INTO `tb_area` VALUES ('371325', '费县', '371300', '3');
-INSERT INTO `tb_area` VALUES ('520301', '市辖区', '520300', '3');
-INSERT INTO `tb_area` VALUES ('610928', '旬阳县', '610900', '3');
-INSERT INTO `tb_area` VALUES ('451301', '市辖区', '451300', '3');
-INSERT INTO `tb_area` VALUES ('653023', '阿合奇县', '653000', '3');
-INSERT INTO `tb_area` VALUES ('330881', '江山市', '330800', '3');
-INSERT INTO `tb_area` VALUES ('231124', '孙吴县', '231100', '3');
-INSERT INTO `tb_area` VALUES ('320706', '海州区', '320700', '3');
-INSERT INTO `tb_area` VALUES ('441823', '阳山县', '441800', '3');
-INSERT INTO `tb_area` VALUES ('532531', '绿春县', '532500', '3');
-INSERT INTO `tb_area` VALUES ('141023', '襄汾县', '141000', '3');
-INSERT INTO `tb_area` VALUES ('150826', '杭锦后旗', '150800', '3');
-INSERT INTO `tb_area` VALUES ('451323', '武宣县', '451300', '3');
-INSERT INTO `tb_area` VALUES ('410801', '市辖区', '410800', '3');
-INSERT INTO `tb_area` VALUES ('411628', '鹿邑县', '411600', '3');
-INSERT INTO `tb_area` VALUES ('222406', '和龙市', '222400', '3');
-INSERT INTO `tb_area` VALUES ('220781', '扶余市', '220700', '3');
-INSERT INTO `tb_area` VALUES ('420682', '老河口市', '420600', '3');
-INSERT INTO `tb_area` VALUES ('130126', '灵寿县', '130100', '3');
-INSERT INTO `tb_area` VALUES ('441821', '佛冈县', '441800', '3');
-INSERT INTO `tb_area` VALUES ('140401', '市辖区', '140400', '3');
-INSERT INTO `tb_area` VALUES ('652822', '轮台县', '652800', '3');
-INSERT INTO `tb_area` VALUES ('140603', '平鲁区', '140600', '3');
-INSERT INTO `tb_area` VALUES ('520521', '大方县', '520500', '3');
-INSERT INTO `tb_area` VALUES ('430621', '岳阳县', '430600', '3');
-INSERT INTO `tb_area` VALUES ('522730', '龙里县', '522700', '3');
-INSERT INTO `tb_area` VALUES ('411724', '正阳县', '411700', '3');
-INSERT INTO `tb_area` VALUES ('320101', '市辖区', '320100', '3');
-INSERT INTO `tb_area` VALUES ('320611', '港闸区', '320600', '3');
-INSERT INTO `tb_area` VALUES ('230100', '哈尔滨市', '230000', '2');
-INSERT INTO `tb_area` VALUES ('411301', '市辖区', '411300', '3');
-INSERT INTO `tb_area` VALUES ('510921', '蓬溪县', '510900', '3');
-INSERT INTO `tb_area` VALUES ('340500', '马鞍山市', '340000', '2');
-INSERT INTO `tb_area` VALUES ('140522', '阳城县', '140500', '3');
-INSERT INTO `tb_area` VALUES ('350624', '诏安县', '350600', '3');
-INSERT INTO `tb_area` VALUES ('140322', '盂县', '140300', '3');
-INSERT INTO `tb_area` VALUES ('361027', '金溪县', '361000', '3');
-INSERT INTO `tb_area` VALUES ('410825', '温县', '410800', '3');
-INSERT INTO `tb_area` VALUES ('370285', '莱西市', '370200', '3');
-INSERT INTO `tb_area` VALUES ('451225', '罗城仫佬族自治县', '451200', '3');
-INSERT INTO `tb_area` VALUES ('330803', '衢江区', '330800', '3');
-INSERT INTO `tb_area` VALUES ('140728', '平遥县', '140700', '3');
-INSERT INTO `tb_area` VALUES ('150424', '林西县', '150400', '3');
-INSERT INTO `tb_area` VALUES ('532927', '巍山彝族回族自治县', '532900', '3');
-INSERT INTO `tb_area` VALUES ('430405', '珠晖区', '430400', '3');
-INSERT INTO `tb_area` VALUES ('370901', '市辖区', '370900', '3');
-INSERT INTO `tb_area` VALUES ('210402', '新抚区', '210400', '3');
-INSERT INTO `tb_area` VALUES ('140411', '郊区', '140400', '3');
-INSERT INTO `tb_area` VALUES ('450108', '良庆区', '450100', '3');
-INSERT INTO `tb_area` VALUES ('632625', '久治县', '632600', '3');
-INSERT INTO `tb_area` VALUES ('530829', '西盟佤族自治县', '530800', '3');
-INSERT INTO `tb_area` VALUES ('150902', '集宁区', '150900', '3');
-INSERT INTO `tb_area` VALUES ('419000', '省直辖县级行政区划', '410000', '2');
-INSERT INTO `tb_area` VALUES ('330109', '萧山区', '330100', '3');
-INSERT INTO `tb_area` VALUES ('340711', '郊区', '340700', '3');
-INSERT INTO `tb_area` VALUES ('140828', '夏县', '140800', '3');
-INSERT INTO `tb_area` VALUES ('445100', '潮州市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('510524', '叙永县', '510500', '3');
-INSERT INTO `tb_area` VALUES ('451281', '宜州市', '451200', '3');
-INSERT INTO `tb_area` VALUES ('540223', '定日县', '540200', '3');
-INSERT INTO `tb_area` VALUES ('130827', '宽城满族自治县', '130800', '3');
-INSERT INTO `tb_area` VALUES ('370406', '山亭区', '370400', '3');
-INSERT INTO `tb_area` VALUES ('610204', '耀州区', '610200', '3');
-INSERT INTO `tb_area` VALUES ('510105', '青羊区', '510100', '3');
-INSERT INTO `tb_area` VALUES ('150722', '莫力达瓦达斡尔族自治旗', '150700', '3');
-INSERT INTO `tb_area` VALUES ('130930', '孟村回族自治县', '130900', '3');
-INSERT INTO `tb_area` VALUES ('610721', '南郑县', '610700', '3');
-INSERT INTO `tb_area` VALUES ('130132', '元氏县', '130100', '3');
-INSERT INTO `tb_area` VALUES ('330723', '武义县', '330700', '3');
-INSERT INTO `tb_area` VALUES ('441825', '连山壮族瑶族自治县', '441800', '3');
-INSERT INTO `tb_area` VALUES ('421023', '监利县', '421000', '3');
-INSERT INTO `tb_area` VALUES ('542426', '申扎县', '542400', '3');
-INSERT INTO `tb_area` VALUES ('321183', '句容市', '321100', '3');
-INSERT INTO `tb_area` VALUES ('341622', '蒙城县', '341600', '3');
-INSERT INTO `tb_area` VALUES ('441200', '肇庆市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('230500', '双鸭山市', '230000', '2');
-INSERT INTO `tb_area` VALUES ('420300', '十堰市', '420000', '2');
-INSERT INTO `tb_area` VALUES ('220503', '二道江区', '220500', '3');
-INSERT INTO `tb_area` VALUES ('410301', '市辖区', '410300', '3');
-INSERT INTO `tb_area` VALUES ('420703', '华容区', '420700', '3');
-INSERT INTO `tb_area` VALUES ('150121', '土默特左旗', '150100', '3');
-INSERT INTO `tb_area` VALUES ('500105', '江北区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('440404', '金湾区', '440400', '3');
-INSERT INTO `tb_area` VALUES ('430811', '武陵源区', '430800', '3');
-INSERT INTO `tb_area` VALUES ('141001', '市辖区', '141000', '3');
-INSERT INTO `tb_area` VALUES ('360981', '丰城市', '360900', '3');
-INSERT INTO `tb_area` VALUES ('350100', '福州市', '350000', '2');
-INSERT INTO `tb_area` VALUES ('370303', '张店区', '370300', '3');
-INSERT INTO `tb_area` VALUES ('450701', '市辖区', '450700', '3');
-INSERT INTO `tb_area` VALUES ('230505', '四方台区', '230500', '3');
-INSERT INTO `tb_area` VALUES ('220600', '白山市', '220000', '2');
-INSERT INTO `tb_area` VALUES ('361029', '东乡县', '361000', '3');
-INSERT INTO `tb_area` VALUES ('610000', '陕西省', '0', '1');
-INSERT INTO `tb_area` VALUES ('450924', '兴业县', '450900', '3');
-INSERT INTO `tb_area` VALUES ('440705', '新会区', '440700', '3');
-INSERT INTO `tb_area` VALUES ('152900', '阿拉善盟', '150000', '2');
-INSERT INTO `tb_area` VALUES ('140623', '右玉县', '140600', '3');
-INSERT INTO `tb_area` VALUES ('210421', '抚顺县', '210400', '3');
-INSERT INTO `tb_area` VALUES ('542428', '班戈县', '542400', '3');
-INSERT INTO `tb_area` VALUES ('510422', '盐边县', '510400', '3');
-INSERT INTO `tb_area` VALUES ('131003', '广阳区', '131000', '3');
-INSERT INTO `tb_area` VALUES ('211381', '北票市', '211300', '3');
-INSERT INTO `tb_area` VALUES ('210802', '站前区', '210800', '3');
-INSERT INTO `tb_area` VALUES ('530502', '隆阳区', '530500', '3');
-INSERT INTO `tb_area` VALUES ('511823', '汉源县', '511800', '3');
-INSERT INTO `tb_area` VALUES ('520103', '云岩区', '520100', '3');
-INSERT INTO `tb_area` VALUES ('230300', '鸡西市', '230000', '2');
-INSERT INTO `tb_area` VALUES ('650521', '巴里坤哈萨克自治县', '650500', '3');
-INSERT INTO `tb_area` VALUES ('530626', '绥江县', '530600', '3');
-INSERT INTO `tb_area` VALUES ('510304', '大安区', '510300', '3');
-INSERT INTO `tb_area` VALUES ('430626', '平江县', '430600', '3');
-INSERT INTO `tb_area` VALUES ('130306', '抚宁区', '130300', '3');
-INSERT INTO `tb_area` VALUES ('341821', '郎溪县', '341800', '3');
-INSERT INTO `tb_area` VALUES ('222424', '汪清县', '222400', '3');
-INSERT INTO `tb_area` VALUES ('654221', '额敏县', '654200', '3');
-INSERT INTO `tb_area` VALUES ('410106', '上街区', '410100', '3');
-INSERT INTO `tb_area` VALUES ('530926', '耿马傣族佤族自治县', '530900', '3');
-INSERT INTO `tb_area` VALUES ('230128', '通河县', '230100', '3');
-INSERT INTO `tb_area` VALUES ('440113', '番禺区', '440100', '3');
-INSERT INTO `tb_area` VALUES ('220422', '东辽县', '220400', '3');
-INSERT INTO `tb_area` VALUES ('320412', '武进区', '320400', '3');
-INSERT INTO `tb_area` VALUES ('410503', '北关区', '410500', '3');
-INSERT INTO `tb_area` VALUES ('370828', '金乡县', '370800', '3');
-INSERT INTO `tb_area` VALUES ('361102', '信州区', '361100', '3');
-INSERT INTO `tb_area` VALUES ('421001', '市辖区', '421000', '3');
-INSERT INTO `tb_area` VALUES ('411303', '卧龙区', '411300', '3');
-INSERT INTO `tb_area` VALUES ('230521', '集贤县', '230500', '3');
-INSERT INTO `tb_area` VALUES ('350104', '仓山区', '350100', '3');
-INSERT INTO `tb_area` VALUES ('510113', '青白江区', '510100', '3');
-INSERT INTO `tb_area` VALUES ('210921', '阜新蒙古族自治县', '210900', '3');
-INSERT INTO `tb_area` VALUES ('140108', '尖草坪区', '140100', '3');
-INSERT INTO `tb_area` VALUES ('522632', '榕江县', '522600', '3');
-INSERT INTO `tb_area` VALUES ('320413', '金坛区', '320400', '3');
-INSERT INTO `tb_area` VALUES ('431224', '溆浦县', '431200', '3');
-INSERT INTO `tb_area` VALUES ('131126', '故城县', '131100', '3');
-INSERT INTO `tb_area` VALUES ('640324', '同心县', '640300', '3');
-INSERT INTO `tb_area` VALUES ('410823', '武陟县', '410800', '3');
-INSERT INTO `tb_area` VALUES ('620200', '嘉峪关市', '620000', '2');
-INSERT INTO `tb_area` VALUES ('430682', '临湘市', '430600', '3');
-INSERT INTO `tb_area` VALUES ('340504', '雨山区', '340500', '3');
-INSERT INTO `tb_area` VALUES ('431322', '新化县', '431300', '3');
-INSERT INTO `tb_area` VALUES ('370000', '山东省', '0', '1');
-INSERT INTO `tb_area` VALUES ('420900', '孝感市', '420000', '2');
-INSERT INTO `tb_area` VALUES ('420526', '兴山县', '420500', '3');
-INSERT INTO `tb_area` VALUES ('130728', '怀安县', '130700', '3');
-INSERT INTO `tb_area` VALUES ('150901', '市辖区', '150900', '3');
-INSERT INTO `tb_area` VALUES ('130702', '桥东区', '130700', '3');
-INSERT INTO `tb_area` VALUES ('370782', '诸城市', '370700', '3');
-INSERT INTO `tb_area` VALUES ('542422', '嘉黎县', '542400', '3');
-INSERT INTO `tb_area` VALUES ('530321', '马龙县', '530300', '3');
-INSERT INTO `tb_area` VALUES ('210100', '沈阳市', '210000', '2');
-INSERT INTO `tb_area` VALUES ('430701', '市辖区', '430700', '3');
-INSERT INTO `tb_area` VALUES ('511028', '隆昌县', '511000', '3');
-INSERT INTO `tb_area` VALUES ('211382', '凌源市', '211300', '3');
-INSERT INTO `tb_area` VALUES ('310109', '虹口区', '310100', '3');
-INSERT INTO `tb_area` VALUES ('130531', '广宗县', '130500', '3');
-INSERT INTO `tb_area` VALUES ('540325', '察雅县', '540300', '3');
-INSERT INTO `tb_area` VALUES ('360222', '浮梁县', '360200', '3');
-INSERT INTO `tb_area` VALUES ('431226', '麻阳苗族自治县', '431200', '3');
-INSERT INTO `tb_area` VALUES ('451224', '东兰县', '451200', '3');
-INSERT INTO `tb_area` VALUES ('650101', '市辖区', '650100', '3');
-INSERT INTO `tb_area` VALUES ('530623', '盐津县', '530600', '3');
-INSERT INTO `tb_area` VALUES ('610621', '延长县', '610600', '3');
-INSERT INTO `tb_area` VALUES ('621125', '漳县', '621100', '3');
-INSERT INTO `tb_area` VALUES ('150304', '乌达区', '150300', '3');
-INSERT INTO `tb_area` VALUES ('632324', '河南蒙古族自治县', '632300', '3');
-INSERT INTO `tb_area` VALUES ('511321', '南部县', '511300', '3');
-INSERT INTO `tb_area` VALUES ('141030', '大宁县', '141000', '3');
-INSERT INTO `tb_area` VALUES ('654323', '福海县', '654300', '3');
-INSERT INTO `tb_area` VALUES ('411626', '淮阳县', '411600', '3');
-INSERT INTO `tb_area` VALUES ('210504', '明山区', '210500', '3');
-INSERT INTO `tb_area` VALUES ('420502', '西陵区', '420500', '3');
-INSERT INTO `tb_area` VALUES ('350781', '邵武市', '350700', '3');
-INSERT INTO `tb_area` VALUES ('610104', '莲湖区', '610100', '3');
-INSERT INTO `tb_area` VALUES ('361022', '黎川县', '361000', '3');
-INSERT INTO `tb_area` VALUES ('360828', '万安县', '360800', '3');
-INSERT INTO `tb_area` VALUES ('520322', '桐梓县', '520300', '3');
-INSERT INTO `tb_area` VALUES ('210422', '新宾满族自治县', '210400', '3');
-INSERT INTO `tb_area` VALUES ('341824', '绩溪县', '341800', '3');
-INSERT INTO `tb_area` VALUES ('131002', '安次区', '131000', '3');
-INSERT INTO `tb_area` VALUES ('130208', '丰润区', '130200', '3');
-INSERT INTO `tb_area` VALUES ('500112', '渝北区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('650204', '白碱滩区', '650200', '3');
-INSERT INTO `tb_area` VALUES ('450405', '长洲区', '450400', '3');
-INSERT INTO `tb_area` VALUES ('440982', '化州市', '440900', '3');
-INSERT INTO `tb_area` VALUES ('350430', '建宁县', '350400', '3');
-INSERT INTO `tb_area` VALUES ('150923', '商都县', '150900', '3');
-INSERT INTO `tb_area` VALUES ('640181', '灵武市', '640100', '3');
-INSERT INTO `tb_area` VALUES ('659000', '自治区直辖县级行政区划', '650000', '2');
-INSERT INTO `tb_area` VALUES ('632224', '刚察县', '632200', '3');
-INSERT INTO `tb_area` VALUES ('500100', '重庆市', '500000', '2');
-INSERT INTO `tb_area` VALUES ('370523', '广饶县', '370500', '3');
-INSERT INTO `tb_area` VALUES ('150626', '乌审旗', '150600', '3');
-INSERT INTO `tb_area` VALUES ('460000', '海南省', '0', '1');
-INSERT INTO `tb_area` VALUES ('321111', '润州区', '321100', '3');
-INSERT INTO `tb_area` VALUES ('421000', '荆州市', '420000', '2');
-INSERT INTO `tb_area` VALUES ('510623', '中江县', '510600', '3');
-INSERT INTO `tb_area` VALUES ('450330', '平乐县', '450300', '3');
-INSERT INTO `tb_area` VALUES ('450323', '灵川县', '450300', '3');
-INSERT INTO `tb_area` VALUES ('511181', '峨眉山市', '511100', '3');
-INSERT INTO `tb_area` VALUES ('513329', '新龙县', '513300', '3');
-INSERT INTO `tb_area` VALUES ('231201', '市辖区', '231200', '3');
-INSERT INTO `tb_area` VALUES ('433130', '龙山县', '433100', '3');
-INSERT INTO `tb_area` VALUES ('360600', '鹰潭市', '360000', '2');
-INSERT INTO `tb_area` VALUES ('350124', '闽清县', '350100', '3');
-INSERT INTO `tb_area` VALUES ('440900', '茂名市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('211003', '文圣区', '211000', '3');
-INSERT INTO `tb_area` VALUES ('130732', '赤城县', '130700', '3');
-INSERT INTO `tb_area` VALUES ('310118', '青浦区', '310100', '3');
-INSERT INTO `tb_area` VALUES ('540324', '丁青县', '540300', '3');
-INSERT INTO `tb_area` VALUES ('320602', '崇川区', '320600', '3');
-INSERT INTO `tb_area` VALUES ('411024', '鄢陵县', '411000', '3');
-INSERT INTO `tb_area` VALUES ('422826', '咸丰县', '422800', '3');
-INSERT INTO `tb_area` VALUES ('450881', '桂平市', '450800', '3');
-INSERT INTO `tb_area` VALUES ('141081', '侯马市', '141000', '3');
-INSERT INTO `tb_area` VALUES ('540224', '萨迦县', '540200', '3');
-INSERT INTO `tb_area` VALUES ('511523', '江安县', '511500', '3');
-INSERT INTO `tb_area` VALUES ('650202', '独山子区', '650200', '3');
-INSERT INTO `tb_area` VALUES ('410225', '兰考县', '410200', '3');
-INSERT INTO `tb_area` VALUES ('360829', '安福县', '360800', '3');
-INSERT INTO `tb_area` VALUES ('500230', '丰都县', '500200', '3');
-INSERT INTO `tb_area` VALUES ('620902', '肃州区', '620900', '3');
-INSERT INTO `tb_area` VALUES ('620801', '市辖区', '620800', '3');
-INSERT INTO `tb_area` VALUES ('341021', '歙县', '341000', '3');
-INSERT INTO `tb_area` VALUES ('640521', '中宁县', '640500', '3');
-INSERT INTO `tb_area` VALUES ('320324', '睢宁县', '320300', '3');
-INSERT INTO `tb_area` VALUES ('513428', '普格县', '513400', '3');
-INSERT INTO `tb_area` VALUES ('130227', '迁西县', '130200', '3');
-INSERT INTO `tb_area` VALUES ('440114', '花都区', '440100', '3');
-INSERT INTO `tb_area` VALUES ('230623', '林甸县', '230600', '3');
-INSERT INTO `tb_area` VALUES ('451302', '兴宾区', '451300', '3');
-INSERT INTO `tb_area` VALUES ('632200', '海北藏族自治州', '630000', '2');
-INSERT INTO `tb_area` VALUES ('520122', '息烽县', '520100', '3');
-INSERT INTO `tb_area` VALUES ('450311', '雁山区', '450300', '3');
-INSERT INTO `tb_area` VALUES ('630121', '大通回族土族自治县', '630100', '3');
-INSERT INTO `tb_area` VALUES ('230101', '市辖区', '230100', '3');
-INSERT INTO `tb_area` VALUES ('150102', '新城区', '150100', '3');
-INSERT INTO `tb_area` VALUES ('211404', '南票区', '211400', '3');
-INSERT INTO `tb_area` VALUES ('513322', '泸定县', '513300', '3');
-INSERT INTO `tb_area` VALUES ('532923', '祥云县', '532900', '3');
-INSERT INTO `tb_area` VALUES ('341822', '广德县', '341800', '3');
-INSERT INTO `tb_area` VALUES ('430000', '湖南省', '0', '1');
-INSERT INTO `tb_area` VALUES ('620521', '清水县', '620500', '3');
-INSERT INTO `tb_area` VALUES ('410506', '龙安区', '410500', '3');
-INSERT INTO `tb_area` VALUES ('110105', '朝阳区', '110100', '3');
-INSERT INTO `tb_area` VALUES ('320581', '常熟市', '320500', '3');
-INSERT INTO `tb_area` VALUES ('410581', '林州市', '410500', '3');
-INSERT INTO `tb_area` VALUES ('140430', '沁县', '140400', '3');
-INSERT INTO `tb_area` VALUES ('532504', '弥勒市', '532500', '3');
-INSERT INTO `tb_area` VALUES ('411327', '社旗县', '411300', '3');
-INSERT INTO `tb_area` VALUES ('520600', '铜仁市', '520000', '2');
-INSERT INTO `tb_area` VALUES ('433101', '吉首市', '433100', '3');
-INSERT INTO `tb_area` VALUES ('510321', '荣县', '510300', '3');
-INSERT INTO `tb_area` VALUES ('350304', '荔城区', '350300', '3');
-INSERT INTO `tb_area` VALUES ('321302', '宿城区', '321300', '3');
-INSERT INTO `tb_area` VALUES ('340103', '庐阳区', '340100', '3');
-INSERT INTO `tb_area` VALUES ('421022', '公安县', '421000', '3');
-INSERT INTO `tb_area` VALUES ('511527', '筠连县', '511500', '3');
-INSERT INTO `tb_area` VALUES ('230111', '呼兰区', '230100', '3');
-INSERT INTO `tb_area` VALUES ('451022', '田东县', '451000', '3');
-INSERT INTO `tb_area` VALUES ('441624', '和平县', '441600', '3');
-INSERT INTO `tb_area` VALUES ('371001', '市辖区', '371000', '3');
-INSERT INTO `tb_area` VALUES ('320801', '市辖区', '320800', '3');
-INSERT INTO `tb_area` VALUES ('210505', '南芬区', '210500', '3');
-INSERT INTO `tb_area` VALUES ('430624', '湘阴县', '430600', '3');
-INSERT INTO `tb_area` VALUES ('513200', '阿坝藏族羌族自治州', '510000', '2');
-INSERT INTO `tb_area` VALUES ('410425', '郏县', '410400', '3');
-INSERT INTO `tb_area` VALUES ('110109', '门头沟区', '110100', '3');
-INSERT INTO `tb_area` VALUES ('141025', '古县', '141000', '3');
-INSERT INTO `tb_area` VALUES ('370703', '寒亭区', '370700', '3');
-INSERT INTO `tb_area` VALUES ('532524', '建水县', '532500', '3');
-INSERT INTO `tb_area` VALUES ('130608', '清苑区', '130600', '3');
-INSERT INTO `tb_area` VALUES ('430481', '耒阳市', '430400', '3');
-INSERT INTO `tb_area` VALUES ('140824', '稷山县', '140800', '3');
-INSERT INTO `tb_area` VALUES ('441621', '紫金县', '441600', '3');
-INSERT INTO `tb_area` VALUES ('150222', '固阳县', '150200', '3');
-INSERT INTO `tb_area` VALUES ('513337', '稻城县', '513300', '3');
-INSERT INTO `tb_area` VALUES ('440203', '武江区', '440200', '3');
-INSERT INTO `tb_area` VALUES ('230123', '依兰县', '230100', '3');
-INSERT INTO `tb_area` VALUES ('441427', '蕉岭县', '441400', '3');
-INSERT INTO `tb_area` VALUES ('621228', '两当县', '621200', '3');
-INSERT INTO `tb_area` VALUES ('350501', '市辖区', '350500', '3');
-INSERT INTO `tb_area` VALUES ('320302', '鼓楼区', '320300', '3');
-INSERT INTO `tb_area` VALUES ('210803', '西市区', '210800', '3');
-INSERT INTO `tb_area` VALUES ('510184', '崇州市', '510100', '3');
-INSERT INTO `tb_area` VALUES ('360801', '市辖区', '360800', '3');
-INSERT INTO `tb_area` VALUES ('410322', '孟津县', '410300', '3');
-INSERT INTO `tb_area` VALUES ('141127', '岚县', '141100', '3');
-INSERT INTO `tb_area` VALUES ('654024', '巩留县', '654000', '3');
-INSERT INTO `tb_area` VALUES ('420205', '铁山区', '420200', '3');
-INSERT INTO `tb_area` VALUES ('410202', '龙亭区', '410200', '3');
-INSERT INTO `tb_area` VALUES ('511000', '内江市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('420624', '南漳县', '420600', '3');
-INSERT INTO `tb_area` VALUES ('150500', '通辽市', '150000', '2');
-INSERT INTO `tb_area` VALUES ('371728', '东明县', '371700', '3');
-INSERT INTO `tb_area` VALUES ('230715', '红星区', '230700', '3');
-INSERT INTO `tb_area` VALUES ('330726', '浦江县', '330700', '3');
-INSERT INTO `tb_area` VALUES ('440512', '濠江区', '440500', '3');
-INSERT INTO `tb_area` VALUES ('140882', '河津市', '140800', '3');
-INSERT INTO `tb_area` VALUES ('530381', '宣威市', '530300', '3');
-INSERT INTO `tb_area` VALUES ('341001', '市辖区', '341000', '3');
-INSERT INTO `tb_area` VALUES ('230881', '同江市', '230800', '3');
-INSERT INTO `tb_area` VALUES ('440904', '电白区', '440900', '3');
-INSERT INTO `tb_area` VALUES ('440101', '市辖区', '440100', '3');
-INSERT INTO `tb_area` VALUES ('420101', '市辖区', '420100', '3');
-INSERT INTO `tb_area` VALUES ('410422', '叶县', '410400', '3');
-INSERT INTO `tb_area` VALUES ('430104', '岳麓区', '430100', '3');
-INSERT INTO `tb_area` VALUES ('652702', '阿拉山口市', '652700', '3');
-INSERT INTO `tb_area` VALUES ('370923', '东平县', '370900', '3');
-INSERT INTO `tb_area` VALUES ('131082', '三河市', '131000', '3');
-INSERT INTO `tb_area` VALUES ('650105', '水磨沟区', '650100', '3');
-INSERT INTO `tb_area` VALUES ('140402', '城区', '140400', '3');
-INSERT INTO `tb_area` VALUES ('350425', '大田县', '350400', '3');
-INSERT INTO `tb_area` VALUES ('331024', '仙居县', '331000', '3');
-INSERT INTO `tb_area` VALUES ('532322', '双柏县', '532300', '3');
-INSERT INTO `tb_area` VALUES ('340300', '蚌埠市', '340000', '2');
-INSERT INTO `tb_area` VALUES ('640423', '隆德县', '640400', '3');
-INSERT INTO `tb_area` VALUES ('440111', '白云区', '440100', '3');
-INSERT INTO `tb_area` VALUES ('330522', '长兴县', '330500', '3');
-INSERT INTO `tb_area` VALUES ('220381', '公主岭市', '220300', '3');
-INSERT INTO `tb_area` VALUES ('511133', '马边彝族自治县', '511100', '3');
-INSERT INTO `tb_area` VALUES ('230205', '昂昂溪区', '230200', '3');
-INSERT INTO `tb_area` VALUES ('371501', '市辖区', '371500', '3');
-INSERT INTO `tb_area` VALUES ('130581', '南宫市', '130500', '3');
-INSERT INTO `tb_area` VALUES ('211481', '兴城市', '211400', '3');
-INSERT INTO `tb_area` VALUES ('131102', '桃城区', '131100', '3');
-INSERT INTO `tb_area` VALUES ('140106', '迎泽区', '140100', '3');
-INSERT INTO `tb_area` VALUES ('445301', '市辖区', '445300', '3');
-INSERT INTO `tb_area` VALUES ('533325', '兰坪白族普米族自治县', '533300', '3');
-INSERT INTO `tb_area` VALUES ('371623', '无棣县', '371600', '3');
-INSERT INTO `tb_area` VALUES ('141028', '吉县', '141000', '3');
-INSERT INTO `tb_area` VALUES ('210114', '于洪区', '210100', '3');
-INSERT INTO `tb_area` VALUES ('140830', '芮城县', '140800', '3');
-INSERT INTO `tb_area` VALUES ('210604', '振安区', '210600', '3');
-INSERT INTO `tb_area` VALUES ('445224', '惠来县', '445200', '3');
-INSERT INTO `tb_area` VALUES ('610426', '永寿县', '610400', '3');
-INSERT INTO `tb_area` VALUES ('371403', '陵城区', '371400', '3');
-INSERT INTO `tb_area` VALUES ('410000', '河南省', '0', '1');
-INSERT INTO `tb_area` VALUES ('450421', '苍梧县', '450400', '3');
-INSERT INTO `tb_area` VALUES ('350600', '漳州市', '350000', '2');
-INSERT INTO `tb_area` VALUES ('511781', '万源市', '511700', '3');
-INSERT INTO `tb_area` VALUES ('610729', '留坝县', '610700', '3');
-INSERT INTO `tb_area` VALUES ('450422', '藤县', '450400', '3');
-INSERT INTO `tb_area` VALUES ('340881', '桐城市', '340800', '3');
-INSERT INTO `tb_area` VALUES ('360112', '新建区', '360100', '3');
-INSERT INTO `tb_area` VALUES ('530122', '晋宁县', '530100', '3');
-INSERT INTO `tb_area` VALUES ('220582', '集安市', '220500', '3');
-INSERT INTO `tb_area` VALUES ('533300', '怒江傈僳族自治州', '530000', '2');
-INSERT INTO `tb_area` VALUES ('320508', '姑苏区', '320500', '3');
-INSERT INTO `tb_area` VALUES ('152524', '苏尼特右旗', '152500', '3');
-INSERT INTO `tb_area` VALUES ('411725', '确山县', '411700', '3');
-INSERT INTO `tb_area` VALUES ('360602', '月湖区', '360600', '3');
-INSERT INTO `tb_area` VALUES ('653128', '岳普湖县', '653100', '3');
-INSERT INTO `tb_area` VALUES ('140423', '襄垣县', '140400', '3');
-INSERT INTO `tb_area` VALUES ('130400', '邯郸市', '130000', '2');
-INSERT INTO `tb_area` VALUES ('370402', '市中区', '370400', '3');
-INSERT INTO `tb_area` VALUES ('360901', '市辖区', '360900', '3');
-INSERT INTO `tb_area` VALUES ('410329', '伊川县', '410300', '3');
-INSERT INTO `tb_area` VALUES ('610424', '乾县', '610400', '3');
-INSERT INTO `tb_area` VALUES ('451031', '隆林各族自治县', '451000', '3');
-INSERT INTO `tb_area` VALUES ('530424', '华宁县', '530400', '3');
-INSERT INTO `tb_area` VALUES ('361129', '万年县', '361100', '3');
-INSERT INTO `tb_area` VALUES ('320582', '张家港市', '320500', '3');
-INSERT INTO `tb_area` VALUES ('130201', '市辖区', '130200', '3');
-INSERT INTO `tb_area` VALUES ('441424', '五华县', '441400', '3');
-INSERT INTO `tb_area` VALUES ('450205', '柳北区', '450200', '3');
-INSERT INTO `tb_area` VALUES ('410781', '卫辉市', '410700', '3');
-INSERT INTO `tb_area` VALUES ('530621', '鲁甸县', '530600', '3');
-INSERT INTO `tb_area` VALUES ('130800', '承德市', '130000', '2');
-INSERT INTO `tb_area` VALUES ('611022', '丹凤县', '611000', '3');
-INSERT INTO `tb_area` VALUES ('360202', '昌江区', '360200', '3');
-INSERT INTO `tb_area` VALUES ('650203', '克拉玛依区', '650200', '3');
-INSERT INTO `tb_area` VALUES ('540202', '桑珠孜区', '540200', '3');
-INSERT INTO `tb_area` VALUES ('340100', '合肥市', '340000', '2');
-INSERT INTO `tb_area` VALUES ('451002', '右江区', '451000', '3');
-INSERT INTO `tb_area` VALUES ('530923', '永德县', '530900', '3');
-INSERT INTO `tb_area` VALUES ('350421', '明溪县', '350400', '3');
-INSERT INTO `tb_area` VALUES ('520200', '六盘水市', '520000', '2');
-INSERT INTO `tb_area` VALUES ('621121', '通渭县', '621100', '3');
-INSERT INTO `tb_area` VALUES ('150400', '赤峰市', '150000', '2');
-INSERT INTO `tb_area` VALUES ('511827', '宝兴县', '511800', '3');
-INSERT INTO `tb_area` VALUES ('652325', '奇台县', '652300', '3');
-INSERT INTO `tb_area` VALUES ('530302', '麒麟区', '530300', '3');
-INSERT INTO `tb_area` VALUES ('140902', '忻府区', '140900', '3');
-INSERT INTO `tb_area` VALUES ('210521', '本溪满族自治县', '210500', '3');
-INSERT INTO `tb_area` VALUES ('220882', '大安市', '220800', '3');
-INSERT INTO `tb_area` VALUES ('522726', '独山县', '522700', '3');
-INSERT INTO `tb_area` VALUES ('320115', '江宁区', '320100', '3');
-INSERT INTO `tb_area` VALUES ('220421', '东丰县', '220400', '3');
-INSERT INTO `tb_area` VALUES ('610522', '潼关县', '610500', '3');
-INSERT INTO `tb_area` VALUES ('350125', '永泰县', '350100', '3');
-INSERT INTO `tb_area` VALUES ('220105', '二道区', '220100', '3');
-INSERT INTO `tb_area` VALUES ('530826', '江城哈尼族彝族自治县', '530800', '3');
-INSERT INTO `tb_area` VALUES ('441781', '阳春市', '441700', '3');
-INSERT INTO `tb_area` VALUES ('610102', '新城区', '610100', '3');
-INSERT INTO `tb_area` VALUES ('610826', '绥德县', '610800', '3');
-INSERT INTO `tb_area` VALUES ('430511', '北塔区', '430500', '3');
-INSERT INTO `tb_area` VALUES ('520181', '清镇市', '520100', '3');
-INSERT INTO `tb_area` VALUES ('440605', '南海区', '440600', '3');
-INSERT INTO `tb_area` VALUES ('230127', '木兰县', '230100', '3');
-INSERT INTO `tb_area` VALUES ('330281', '余姚市', '330200', '3');
-INSERT INTO `tb_area` VALUES ('431102', '零陵区', '431100', '3');
-INSERT INTO `tb_area` VALUES ('654321', '布尔津县', '654300', '3');
-INSERT INTO `tb_area` VALUES ('510812', '朝天区', '510800', '3');
-INSERT INTO `tb_area` VALUES ('620821', '泾川县', '620800', '3');
-INSERT INTO `tb_area` VALUES ('340104', '蜀山区', '340100', '3');
-INSERT INTO `tb_area` VALUES ('230281', '讷河市', '230200', '3');
-INSERT INTO `tb_area` VALUES ('431100', '永州市', '430000', '2');
-INSERT INTO `tb_area` VALUES ('410423', '鲁山县', '410400', '3');
-INSERT INTO `tb_area` VALUES ('451026', '那坡县', '451000', '3');
-INSERT INTO `tb_area` VALUES ('513325', '雅江县', '513300', '3');
-INSERT INTO `tb_area` VALUES ('522702', '福泉市', '522700', '3');
-INSERT INTO `tb_area` VALUES ('611001', '市辖区', '611000', '3');
-INSERT INTO `tb_area` VALUES ('630102', '城东区', '630100', '3');
-INSERT INTO `tb_area` VALUES ('141101', '市辖区', '141100', '3');
-INSERT INTO `tb_area` VALUES ('211004', '宏伟区', '211000', '3');
-INSERT INTO `tb_area` VALUES ('370602', '芝罘区', '370600', '3');
-INSERT INTO `tb_area` VALUES ('360400', '九江市', '360000', '2');
-INSERT INTO `tb_area` VALUES ('330204', '江东区', '330200', '3');
-INSERT INTO `tb_area` VALUES ('522325', '贞丰县', '522300', '3');
-INSERT INTO `tb_area` VALUES ('411622', '西华县', '411600', '3');
-INSERT INTO `tb_area` VALUES ('640500', '中卫市', '640000', '2');
-INSERT INTO `tb_area` VALUES ('150524', '库伦旗', '150500', '3');
-INSERT INTO `tb_area` VALUES ('410200', '开封市', '410000', '2');
-INSERT INTO `tb_area` VALUES ('430124', '宁乡县', '430100', '3');
-INSERT INTO `tb_area` VALUES ('211224', '昌图县', '211200', '3');
-INSERT INTO `tb_area` VALUES ('371300', '临沂市', '370000', '2');
-INSERT INTO `tb_area` VALUES ('430611', '君山区', '430600', '3');
-INSERT INTO `tb_area` VALUES ('341801', '市辖区', '341800', '3');
-INSERT INTO `tb_area` VALUES ('370785', '高密市', '370700', '3');
-INSERT INTO `tb_area` VALUES ('441223', '广宁县', '441200', '3');
-INSERT INTO `tb_area` VALUES ('410108', '惠济区', '410100', '3');
-INSERT INTO `tb_area` VALUES ('350111', '晋安区', '350100', '3');
-INSERT INTO `tb_area` VALUES ('522323', '普安县', '522300', '3');
-INSERT INTO `tb_area` VALUES ('440823', '遂溪县', '440800', '3');
-INSERT INTO `tb_area` VALUES ('350881', '漳平市', '350800', '3');
-INSERT INTO `tb_area` VALUES ('210782', '北镇市', '210700', '3');
-INSERT INTO `tb_area` VALUES ('659001', '石河子市', '659000', '3');
-INSERT INTO `tb_area` VALUES ('130434', '魏县', '130400', '3');
-INSERT INTO `tb_area` VALUES ('540234', '吉隆县', '540200', '3');
-INSERT INTO `tb_area` VALUES ('500153', '荣昌区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('411700', '驻马店市', '410000', '2');
-INSERT INTO `tb_area` VALUES ('340400', '淮南市', '340000', '2');
-INSERT INTO `tb_area` VALUES ('130582', '沙河市', '130500', '3');
-INSERT INTO `tb_area` VALUES ('610602', '宝塔区', '610600', '3');
-INSERT INTO `tb_area` VALUES ('500236', '奉节县', '500200', '3');
-INSERT INTO `tb_area` VALUES ('469002', '琼海市', '469000', '3');
-INSERT INTO `tb_area` VALUES ('320104', '秦淮区', '320100', '3');
-INSERT INTO `tb_area` VALUES ('220101', '市辖区', '220100', '3');
-INSERT INTO `tb_area` VALUES ('141181', '孝义市', '141100', '3');
-INSERT INTO `tb_area` VALUES ('450400', '梧州市', '450000', '2');
-INSERT INTO `tb_area` VALUES ('451123', '富川瑶族自治县', '451100', '3');
-INSERT INTO `tb_area` VALUES ('430302', '雨湖区', '430300', '3');
-INSERT INTO `tb_area` VALUES ('441523', '陆河县', '441500', '3');
-INSERT INTO `tb_area` VALUES ('540422', '米林县', '540400', '3');
-INSERT INTO `tb_area` VALUES ('460202', '海棠区', '460200', '3');
-INSERT INTO `tb_area` VALUES ('140427', '壶关县', '140400', '3');
-INSERT INTO `tb_area` VALUES ('450981', '北流市', '450900', '3');
-INSERT INTO `tb_area` VALUES ('350722', '浦城县', '350700', '3');
-INSERT INTO `tb_area` VALUES ('211104', '大洼区', '211100', '3');
-INSERT INTO `tb_area` VALUES ('130901', '市辖区', '130900', '3');
-INSERT INTO `tb_area` VALUES ('210600', '丹东市', '210000', '2');
-INSERT INTO `tb_area` VALUES ('652301', '昌吉市', '652300', '3');
-INSERT INTO `tb_area` VALUES ('430102', '芙蓉区', '430100', '3');
-INSERT INTO `tb_area` VALUES ('130602', '竞秀区', '130600', '3');
-INSERT INTO `tb_area` VALUES ('360803', '青原区', '360800', '3');
-INSERT INTO `tb_area` VALUES ('440601', '市辖区', '440600', '3');
-INSERT INTO `tb_area` VALUES ('130283', '迁安市', '130200', '3');
-INSERT INTO `tb_area` VALUES ('530501', '市辖区', '530500', '3');
-INSERT INTO `tb_area` VALUES ('522701', '都匀市', '522700', '3');
-INSERT INTO `tb_area` VALUES ('440781', '台山市', '440700', '3');
-INSERT INTO `tb_area` VALUES ('141182', '汾阳市', '141100', '3');
-INSERT INTO `tb_area` VALUES ('420704', '鄂城区', '420700', '3');
-INSERT INTO `tb_area` VALUES ('341222', '太和县', '341200', '3');
-INSERT INTO `tb_area` VALUES ('410101', '市辖区', '410100', '3');
-INSERT INTO `tb_area` VALUES ('430105', '开福区', '430100', '3');
-INSERT INTO `tb_area` VALUES ('340404', '谢家集区', '340400', '3');
-INSERT INTO `tb_area` VALUES ('230603', '龙凤区', '230600', '3');
-INSERT INTO `tb_area` VALUES ('152522', '阿巴嘎旗', '152500', '3');
-INSERT INTO `tb_area` VALUES ('410922', '清丰县', '410900', '3');
-INSERT INTO `tb_area` VALUES ('450921', '容县', '450900', '3');
-INSERT INTO `tb_area` VALUES ('511323', '蓬安县', '511300', '3');
-INSERT INTO `tb_area` VALUES ('511124', '井研县', '511100', '3');
-INSERT INTO `tb_area` VALUES ('440305', '南山区', '440300', '3');
-INSERT INTO `tb_area` VALUES ('230422', '绥滨县', '230400', '3');
-INSERT INTO `tb_area` VALUES ('431230', '通道侗族自治县', '431200', '3');
-INSERT INTO `tb_area` VALUES ('450000', '广西壮族自治区', '0', '1');
-INSERT INTO `tb_area` VALUES ('341322', '萧县', '341300', '3');
-INSERT INTO `tb_area` VALUES ('340521', '当涂县', '340500', '3');
-INSERT INTO `tb_area` VALUES ('140109', '万柏林区', '140100', '3');
-INSERT INTO `tb_area` VALUES ('450406', '龙圩区', '450400', '3');
-INSERT INTO `tb_area` VALUES ('331023', '天台县', '331000', '3');
-INSERT INTO `tb_area` VALUES ('500114', '黔江区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('131023', '永清县', '131000', '3');
-INSERT INTO `tb_area` VALUES ('510185', '简阳市', '510100', '3');
-INSERT INTO `tb_area` VALUES ('350703', '建阳区', '350700', '3');
-INSERT INTO `tb_area` VALUES ('610303', '金台区', '610300', '3');
-INSERT INTO `tb_area` VALUES ('361103', '广丰区', '361100', '3');
-INSERT INTO `tb_area` VALUES ('110101', '东城区', '110100', '3');
-INSERT INTO `tb_area` VALUES ('530524', '昌宁县', '530500', '3');
-INSERT INTO `tb_area` VALUES ('140928', '五寨县', '140900', '3');
-INSERT INTO `tb_area` VALUES ('440300', '深圳市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('340402', '大通区', '340400', '3');
-INSERT INTO `tb_area` VALUES ('511424', '丹棱县', '511400', '3');
-INSERT INTO `tb_area` VALUES ('420112', '东西湖区', '420100', '3');
-INSERT INTO `tb_area` VALUES ('360733', '会昌县', '360700', '3');
-INSERT INTO `tb_area` VALUES ('431228', '芷江侗族自治县', '431200', '3');
-INSERT INTO `tb_area` VALUES ('341504', '叶集区', '341500', '3');
-INSERT INTO `tb_area` VALUES ('500231', '垫江县', '500200', '3');
-INSERT INTO `tb_area` VALUES ('330521', '德清县', '330500', '3');
-INSERT INTO `tb_area` VALUES ('370105', '天桥区', '370100', '3');
-INSERT INTO `tb_area` VALUES ('430500', '邵阳市', '430000', '2');
-INSERT INTO `tb_area` VALUES ('430221', '株洲县', '430200', '3');
-INSERT INTO `tb_area` VALUES ('430724', '临澧县', '430700', '3');
-INSERT INTO `tb_area` VALUES ('420802', '东宝区', '420800', '3');
-INSERT INTO `tb_area` VALUES ('230801', '市辖区', '230800', '3');
-INSERT INTO `tb_area` VALUES ('371625', '博兴县', '371600', '3');
-INSERT INTO `tb_area` VALUES ('140481', '潞城市', '140400', '3');
-INSERT INTO `tb_area` VALUES ('130426', '涉县', '130400', '3');
-INSERT INTO `tb_area` VALUES ('150429', '宁城县', '150400', '3');
-INSERT INTO `tb_area` VALUES ('411502', '浉河区', '411500', '3');
-INSERT INTO `tb_area` VALUES ('370812', '兖州区', '370800', '3');
-INSERT INTO `tb_area` VALUES ('450401', '市辖区', '450400', '3');
-INSERT INTO `tb_area` VALUES ('371301', '市辖区', '371300', '3');
-INSERT INTO `tb_area` VALUES ('350581', '石狮市', '350500', '3');
-INSERT INTO `tb_area` VALUES ('370801', '市辖区', '370800', '3');
-INSERT INTO `tb_area` VALUES ('232723', '漠河县', '232700', '3');
-INSERT INTO `tb_area` VALUES ('152922', '阿拉善右旗', '152900', '3');
-INSERT INTO `tb_area` VALUES ('440281', '乐昌市', '440200', '3');
-INSERT INTO `tb_area` VALUES ('654326', '吉木乃县', '654300', '3');
-INSERT INTO `tb_area` VALUES ('131121', '枣强县', '131100', '3');
-INSERT INTO `tb_area` VALUES ('520526', '威宁彝族回族苗族自治县', '520500', '3');
-INSERT INTO `tb_area` VALUES ('341002', '屯溪区', '341000', '3');
-INSERT INTO `tb_area` VALUES ('620421', '靖远县', '620400', '3');
-INSERT INTO `tb_area` VALUES ('150622', '准格尔旗', '150600', '3');
-INSERT INTO `tb_area` VALUES ('530129', '寻甸回族彝族自治县', '530100', '3');
-INSERT INTO `tb_area` VALUES ('350105', '马尾区', '350100', '3');
-INSERT INTO `tb_area` VALUES ('511322', '营山县', '511300', '3');
-INSERT INTO `tb_area` VALUES ('230405', '兴安区', '230400', '3');
-INSERT INTO `tb_area` VALUES ('410104', '管城回族区', '410100', '3');
-INSERT INTO `tb_area` VALUES ('330327', '苍南县', '330300', '3');
-INSERT INTO `tb_area` VALUES ('410822', '博爱县', '410800', '3');
-INSERT INTO `tb_area` VALUES ('331181', '龙泉市', '331100', '3');
-INSERT INTO `tb_area` VALUES ('130304', '北戴河区', '130300', '3');
-INSERT INTO `tb_area` VALUES ('370404', '峄城区', '370400', '3');
-INSERT INTO `tb_area` VALUES ('540228', '白朗县', '540200', '3');
-INSERT INTO `tb_area` VALUES ('320901', '市辖区', '320900', '3');
-INSERT INTO `tb_area` VALUES ('510703', '涪城区', '510700', '3');
-INSERT INTO `tb_area` VALUES ('450603', '防城区', '450600', '3');
-INSERT INTO `tb_area` VALUES ('450703', '钦北区', '450700', '3');
-INSERT INTO `tb_area` VALUES ('530111', '官渡区', '530100', '3');
-INSERT INTO `tb_area` VALUES ('350426', '尤溪县', '350400', '3');
-INSERT INTO `tb_area` VALUES ('320724', '灌南县', '320700', '3');
-INSERT INTO `tb_area` VALUES ('511524', '长宁县', '511500', '3');
-INSERT INTO `tb_area` VALUES ('130929', '献县', '130900', '3');
-INSERT INTO `tb_area` VALUES ('500120', '璧山区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('451121', '昭平县', '451100', '3');
-INSERT INTO `tb_area` VALUES ('330329', '泰顺县', '330300', '3');
-INSERT INTO `tb_area` VALUES ('360483', '庐山市', '360400', '3');
-INSERT INTO `tb_area` VALUES ('210321', '台安县', '210300', '3');
-INSERT INTO `tb_area` VALUES ('110118', '密云区', '110100', '3');
-INSERT INTO `tb_area` VALUES ('140525', '泽州县', '140500', '3');
-INSERT INTO `tb_area` VALUES ('350423', '清流县', '350400', '3');
-INSERT INTO `tb_area` VALUES ('431222', '沅陵县', '431200', '3');
-INSERT INTO `tb_area` VALUES ('230700', '伊春市', '230000', '2');
-INSERT INTO `tb_area` VALUES ('623027', '夏河县', '623000', '3');
-INSERT INTO `tb_area` VALUES ('370786', '昌邑市', '370700', '3');
-INSERT INTO `tb_area` VALUES ('230201', '市辖区', '230200', '3');
-INSERT INTO `tb_area` VALUES ('820000', '澳门特别行政区', '0', '1');
-INSERT INTO `tb_area` VALUES ('130524', '柏乡县', '130500', '3');
-INSERT INTO `tb_area` VALUES ('440511', '金平区', '440500', '3');
-INSERT INTO `tb_area` VALUES ('610626', '吴起县', '610600', '3');
-INSERT INTO `tb_area` VALUES ('130731', '涿鹿县', '130700', '3');
-INSERT INTO `tb_area` VALUES ('211303', '龙城区', '211300', '3');
-INSERT INTO `tb_area` VALUES ('420000', '湖北省', '0', '1');
-INSERT INTO `tb_area` VALUES ('410900', '濮阳市', '410000', '2');
-INSERT INTO `tb_area` VALUES ('210401', '市辖区', '210400', '3');
-INSERT INTO `tb_area` VALUES ('341302', '埇桥区', '341300', '3');
-INSERT INTO `tb_area` VALUES ('520422', '普定县', '520400', '3');
-INSERT INTO `tb_area` VALUES ('131123', '武强县', '131100', '3');
-INSERT INTO `tb_area` VALUES ('230828', '汤原县', '230800', '3');
-INSERT INTO `tb_area` VALUES ('360725', '崇义县', '360700', '3');
-INSERT INTO `tb_area` VALUES ('130826', '丰宁满族自治县', '130800', '3');
-INSERT INTO `tb_area` VALUES ('330401', '市辖区', '330400', '3');
-INSERT INTO `tb_area` VALUES ('130982', '任丘市', '130900', '3');
-INSERT INTO `tb_area` VALUES ('411101', '市辖区', '411100', '3');
-INSERT INTO `tb_area` VALUES ('530724', '宁蒗彝族自治县', '530700', '3');
-INSERT INTO `tb_area` VALUES ('130107', '井陉矿区', '130100', '3');
-INSERT INTO `tb_area` VALUES ('230402', '向阳区', '230400', '3');
-INSERT INTO `tb_area` VALUES ('460105', '秀英区', '460100', '3');
-INSERT INTO `tb_area` VALUES ('130821', '承德县', '130800', '3');
-INSERT INTO `tb_area` VALUES ('630105', '城北区', '630100', '3');
-INSERT INTO `tb_area` VALUES ('130481', '武安市', '130400', '3');
-INSERT INTO `tb_area` VALUES ('460200', '三亚市', '460000', '2');
-INSERT INTO `tb_area` VALUES ('410926', '范县', '410900', '3');
-INSERT INTO `tb_area` VALUES ('130703', '桥西区', '130700', '3');
-INSERT INTO `tb_area` VALUES ('511801', '市辖区', '511800', '3');
-INSERT INTO `tb_area` VALUES ('340102', '瑶海区', '340100', '3');
-INSERT INTO `tb_area` VALUES ('520501', '市辖区', '520500', '3');
-INSERT INTO `tb_area` VALUES ('510522', '合江县', '510500', '3');
-INSERT INTO `tb_area` VALUES ('321182', '扬中市', '321100', '3');
-INSERT INTO `tb_area` VALUES ('610603', '安塞区', '610600', '3');
-INSERT INTO `tb_area` VALUES ('510501', '市辖区', '510500', '3');
-INSERT INTO `tb_area` VALUES ('450500', '北海市', '450000', '2');
-INSERT INTO `tb_area` VALUES ('340207', '鸠江区', '340200', '3');
-INSERT INTO `tb_area` VALUES ('410300', '洛阳市', '410000', '2');
-INSERT INTO `tb_area` VALUES ('340223', '南陵县', '340200', '3');
-INSERT INTO `tb_area` VALUES ('540235', '聂拉木县', '540200', '3');
-INSERT INTO `tb_area` VALUES ('653200', '和田地区', '650000', '2');
-INSERT INTO `tb_area` VALUES ('370305', '临淄区', '370300', '3');
-INSERT INTO `tb_area` VALUES ('630200', '海东市', '630000', '2');
-INSERT INTO `tb_area` VALUES ('341700', '池州市', '340000', '2');
-INSERT INTO `tb_area` VALUES ('630225', '循化撒拉族自治县', '630200', '3');
-INSERT INTO `tb_area` VALUES ('371500', '聊城市', '370000', '2');
-INSERT INTO `tb_area` VALUES ('530701', '市辖区', '530700', '3');
-INSERT INTO `tb_area` VALUES ('532601', '文山市', '532600', '3');
-INSERT INTO `tb_area` VALUES ('450312', '临桂区', '450300', '3');
-INSERT INTO `tb_area` VALUES ('542425', '安多县', '542400', '3');
-INSERT INTO `tb_area` VALUES ('421321', '随县', '421300', '3');
-INSERT INTO `tb_area` VALUES ('653131', '塔什库尔干塔吉克自治县', '653100', '3');
-INSERT INTO `tb_area` VALUES ('445321', '新兴县', '445300', '3');
-INSERT INTO `tb_area` VALUES ('131001', '市辖区', '131000', '3');
-INSERT INTO `tb_area` VALUES ('513333', '色达县', '513300', '3');
-INSERT INTO `tb_area` VALUES ('350724', '松溪县', '350700', '3');
-INSERT INTO `tb_area` VALUES ('440118', '增城区', '440100', '3');
-INSERT INTO `tb_area` VALUES ('420324', '竹溪县', '420300', '3');
-INSERT INTO `tb_area` VALUES ('150602', '东胜区', '150600', '3');
-INSERT INTO `tb_area` VALUES ('371526', '高唐县', '371500', '3');
-INSERT INTO `tb_area` VALUES ('420582', '当阳市', '420500', '3');
-INSERT INTO `tb_area` VALUES ('320922', '滨海县', '320900', '3');
-INSERT INTO `tb_area` VALUES ('150726', '新巴尔虎左旗', '150700', '3');
-INSERT INTO `tb_area` VALUES ('340522', '含山县', '340500', '3');
-INSERT INTO `tb_area` VALUES ('421181', '麻城市', '421100', '3');
-INSERT INTO `tb_area` VALUES ('350300', '莆田市', '350000', '2');
-INSERT INTO `tb_area` VALUES ('350622', '云霄县', '350600', '3');
-INSERT INTO `tb_area` VALUES ('522626', '岑巩县', '522600', '3');
-INSERT INTO `tb_area` VALUES ('610327', '陇县', '610300', '3');
-INSERT INTO `tb_area` VALUES ('360200', '景德镇市', '360000', '2');
-INSERT INTO `tb_area` VALUES ('321323', '泗阳县', '321300', '3');
-INSERT INTO `tb_area` VALUES ('533102', '瑞丽市', '533100', '3');
-INSERT INTO `tb_area` VALUES ('130204', '古冶区', '130200', '3');
-INSERT INTO `tb_area` VALUES ('650422', '托克逊县', '650400', '3');
-INSERT INTO `tb_area` VALUES ('513230', '壤塘县', '513200', '3');
-INSERT INTO `tb_area` VALUES ('340501', '市辖区', '340500', '3');
-INSERT INTO `tb_area` VALUES ('350982', '福鼎市', '350900', '3');
-INSERT INTO `tb_area` VALUES ('310120', '奉贤区', '310100', '3');
-INSERT INTO `tb_area` VALUES ('210801', '市辖区', '210800', '3');
-INSERT INTO `tb_area` VALUES ('330784', '永康市', '330700', '3');
-INSERT INTO `tb_area` VALUES ('510104', '锦江区', '510100', '3');
-INSERT INTO `tb_area` VALUES ('511722', '宣汉县', '511700', '3');
-INSERT INTO `tb_area` VALUES ('530423', '通海县', '530400', '3');
-INSERT INTO `tb_area` VALUES ('360421', '九江县', '360400', '3');
-INSERT INTO `tb_area` VALUES ('532323', '牟定县', '532300', '3');
-INSERT INTO `tb_area` VALUES ('540123', '尼木县', '540100', '3');
-INSERT INTO `tb_area` VALUES ('130229', '玉田县', '130200', '3');
-INSERT INTO `tb_area` VALUES ('442000', '中山市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('500235', '云阳县', '500200', '3');
-INSERT INTO `tb_area` VALUES ('130981', '泊头市', '130900', '3');
-INSERT INTO `tb_area` VALUES ('540102', '城关区', '540100', '3');
-INSERT INTO `tb_area` VALUES ('361028', '资溪县', '361000', '3');
-INSERT INTO `tb_area` VALUES ('620403', '平川区', '620400', '3');
-INSERT INTO `tb_area` VALUES ('210224', '长海县', '210200', '3');
-INSERT INTO `tb_area` VALUES ('130202', '路南区', '130200', '3');
-INSERT INTO `tb_area` VALUES ('360201', '市辖区', '360200', '3');
-INSERT INTO `tb_area` VALUES ('511601', '市辖区', '511600', '3');
-INSERT INTO `tb_area` VALUES ('130632', '安新县', '130600', '3');
-INSERT INTO `tb_area` VALUES ('450223', '鹿寨县', '450200', '3');
-INSERT INTO `tb_area` VALUES ('500102', '涪陵区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('510100', '成都市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('420102', '江岸区', '420100', '3');
-INSERT INTO `tb_area` VALUES ('421200', '咸宁市', '420000', '2');
-INSERT INTO `tb_area` VALUES ('320118', '高淳区', '320100', '3');
-INSERT INTO `tb_area` VALUES ('210800', '营口市', '210000', '2');
-INSERT INTO `tb_area` VALUES ('210882', '大石桥市', '210800', '3');
-INSERT INTO `tb_area` VALUES ('360000', '江西省', '0', '1');
-INSERT INTO `tb_area` VALUES ('540226', '昂仁县', '540200', '3');
-INSERT INTO `tb_area` VALUES ('230306', '城子河区', '230300', '3');
-INSERT INTO `tb_area` VALUES ('451100', '贺州市', '450000', '2');
-INSERT INTO `tb_area` VALUES ('341601', '市辖区', '341600', '3');
-INSERT INTO `tb_area` VALUES ('210904', '太平区', '210900', '3');
-INSERT INTO `tb_area` VALUES ('150221', '土默特右旗', '150200', '3');
-INSERT INTO `tb_area` VALUES ('500243', '彭水苗族土家族自治县', '500200', '3');
-INSERT INTO `tb_area` VALUES ('540426', '朗县', '540400', '3');
-INSERT INTO `tb_area` VALUES ('440514', '潮南区', '440500', '3');
-INSERT INTO `tb_area` VALUES ('210304', '立山区', '210300', '3');
-INSERT INTO `tb_area` VALUES ('431124', '道县', '431100', '3');
-INSERT INTO `tb_area` VALUES ('632724', '治多县', '632700', '3');
-INSERT INTO `tb_area` VALUES ('220322', '梨树县', '220300', '3');
-INSERT INTO `tb_area` VALUES ('411722', '上蔡县', '411700', '3');
-INSERT INTO `tb_area` VALUES ('350211', '集美区', '350200', '3');
-INSERT INTO `tb_area` VALUES ('421202', '咸安区', '421200', '3');
-INSERT INTO `tb_area` VALUES ('210123', '康平县', '210100', '3');
-INSERT INTO `tb_area` VALUES ('320404', '钟楼区', '320400', '3');
-INSERT INTO `tb_area` VALUES ('620321', '永昌县', '620300', '3');
-INSERT INTO `tb_area` VALUES ('360111', '青山湖区', '360100', '3');
-INSERT INTO `tb_area` VALUES ('371600', '滨州市', '370000', '2');
-INSERT INTO `tb_area` VALUES ('433100', '湘西土家族苗族自治州', '430000', '2');
-INSERT INTO `tb_area` VALUES ('130636', '顺平县', '130600', '3');
-INSERT INTO `tb_area` VALUES ('361124', '铅山县', '361100', '3');
-INSERT INTO `tb_area` VALUES ('620900', '酒泉市', '620000', '2');
-INSERT INTO `tb_area` VALUES ('410481', '舞钢市', '410400', '3');
-INSERT INTO `tb_area` VALUES ('230307', '麻山区', '230300', '3');
-INSERT INTO `tb_area` VALUES ('450821', '平南县', '450800', '3');
-INSERT INTO `tb_area` VALUES ('210202', '中山区', '210200', '3');
-INSERT INTO `tb_area` VALUES ('441324', '龙门县', '441300', '3');
-INSERT INTO `tb_area` VALUES ('431001', '市辖区', '431000', '3');
-INSERT INTO `tb_area` VALUES ('150600', '鄂尔多斯市', '150000', '2');
-INSERT INTO `tb_area` VALUES ('610901', '市辖区', '610900', '3');
-INSERT INTO `tb_area` VALUES ('140925', '宁武县', '140900', '3');
-INSERT INTO `tb_area` VALUES ('340826', '宿松县', '340800', '3');
-INSERT INTO `tb_area` VALUES ('320921', '响水县', '320900', '3');
-INSERT INTO `tb_area` VALUES ('150300', '乌海市', '150000', '2');
-INSERT INTO `tb_area` VALUES ('130535', '临西县', '130500', '3');
-INSERT INTO `tb_area` VALUES ('630222', '民和回族土族自治县', '630200', '3');
-INSERT INTO `tb_area` VALUES ('500106', '沙坪坝区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('621202', '武都区', '621200', '3');
-INSERT INTO `tb_area` VALUES ('340803', '大观区', '340800', '3');
-INSERT INTO `tb_area` VALUES ('532600', '文山壮族苗族自治州', '530000', '2');
-INSERT INTO `tb_area` VALUES ('511703', '达川区', '511700', '3');
-INSERT INTO `tb_area` VALUES ('441422', '大埔县', '441400', '3');
-INSERT INTO `tb_area` VALUES ('411381', '邓州市', '411300', '3');
-INSERT INTO `tb_area` VALUES ('320311', '泉山区', '320300', '3');
-INSERT INTO `tb_area` VALUES ('230403', '工农区', '230400', '3');
-INSERT INTO `tb_area` VALUES ('370831', '泗水县', '370800', '3');
-INSERT INTO `tb_area` VALUES ('110119', '延庆区', '110100', '3');
-INSERT INTO `tb_area` VALUES ('410403', '卫东区', '410400', '3');
-INSERT INTO `tb_area` VALUES ('130921', '沧县', '130900', '3');
-INSERT INTO `tb_area` VALUES ('652700', '博尔塔拉蒙古自治州', '650000', '2');
-INSERT INTO `tb_area` VALUES ('140311', '郊区', '140300', '3');
-INSERT INTO `tb_area` VALUES ('540424', '波密县', '540400', '3');
-INSERT INTO `tb_area` VALUES ('321202', '海陵区', '321200', '3');
-INSERT INTO `tb_area` VALUES ('140428', '长子县', '140400', '3');
-INSERT INTO `tb_area` VALUES ('370405', '台儿庄区', '370400', '3');
-INSERT INTO `tb_area` VALUES ('440000', '广东省', '0', '1');
-INSERT INTO `tb_area` VALUES ('520324', '正安县', '520300', '3');
-INSERT INTO `tb_area` VALUES ('140781', '介休市', '140700', '3');
-INSERT INTO `tb_area` VALUES ('450201', '市辖区', '450200', '3');
-INSERT INTO `tb_area` VALUES ('230606', '大同区', '230600', '3');
-INSERT INTO `tb_area` VALUES ('371326', '平邑县', '371300', '3');
-INSERT INTO `tb_area` VALUES ('431026', '汝城县', '431000', '3');
-INSERT INTO `tb_area` VALUES ('620723', '临泽县', '620700', '3');
-INSERT INTO `tb_area` VALUES ('211081', '灯塔市', '211000', '3');
-INSERT INTO `tb_area` VALUES ('431023', '永兴县', '431000', '3');
-INSERT INTO `tb_area` VALUES ('420981', '应城市', '420900', '3');
-INSERT INTO `tb_area` VALUES ('540521', '扎囊县', '540500', '3');
-INSERT INTO `tb_area` VALUES ('370322', '高青县', '370300', '3');
-INSERT INTO `tb_area` VALUES ('510723', '盐亭县', '510700', '3');
-INSERT INTO `tb_area` VALUES ('511900', '巴中市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('340401', '市辖区', '340400', '3');
-INSERT INTO `tb_area` VALUES ('411525', '固始县', '411500', '3');
-INSERT INTO `tb_area` VALUES ('341201', '市辖区', '341200', '3');
-INSERT INTO `tb_area` VALUES ('371324', '兰陵县', '371300', '3');
-INSERT INTO `tb_area` VALUES ('530127', '嵩明县', '530100', '3');
-INSERT INTO `tb_area` VALUES ('410323', '新安县', '410300', '3');
-INSERT INTO `tb_area` VALUES ('370902', '泰山区', '370900', '3');
-INSERT INTO `tb_area` VALUES ('341522', '霍邱县', '341500', '3');
-INSERT INTO `tb_area` VALUES ('621021', '庆城县', '621000', '3');
-INSERT INTO `tb_area` VALUES ('440307', '龙岗区', '440300', '3');
-INSERT INTO `tb_area` VALUES ('371002', '环翠区', '371000', '3');
-INSERT INTO `tb_area` VALUES ('360922', '万载县', '360900', '3');
-INSERT INTO `tb_area` VALUES ('450721', '灵山县', '450700', '3');
-INSERT INTO `tb_area` VALUES ('640301', '市辖区', '640300', '3');
-INSERT INTO `tb_area` VALUES ('330182', '建德市', '330100', '3');
-INSERT INTO `tb_area` VALUES ('530301', '市辖区', '530300', '3');
-INSERT INTO `tb_area` VALUES ('230621', '肇州县', '230600', '3');
-INSERT INTO `tb_area` VALUES ('533100', '德宏傣族景颇族自治州', '530000', '2');
-INSERT INTO `tb_area` VALUES ('140602', '朔城区', '140600', '3');
-INSERT INTO `tb_area` VALUES ('220501', '市辖区', '220500', '3');
-INSERT INTO `tb_area` VALUES ('530000', '云南省', '0', '1');
-INSERT INTO `tb_area` VALUES ('360702', '章贡区', '360700', '3');
-INSERT INTO `tb_area` VALUES ('650522', '伊吾县', '650500', '3');
-INSERT INTO `tb_area` VALUES ('150921', '卓资县', '150900', '3');
-INSERT INTO `tb_area` VALUES ('440204', '浈江区', '440200', '3');
-INSERT INTO `tb_area` VALUES ('653223', '皮山县', '653200', '3');
-INSERT INTO `tb_area` VALUES ('150125', '武川县', '150100', '3');
-INSERT INTO `tb_area` VALUES ('330185', '临安市', '330100', '3');
-INSERT INTO `tb_area` VALUES ('513228', '黑水县', '513200', '3');
-INSERT INTO `tb_area` VALUES ('230714', '乌伊岭区', '230700', '3');
-INSERT INTO `tb_area` VALUES ('150621', '达拉特旗', '150600', '3');
-INSERT INTO `tb_area` VALUES ('632623', '甘德县', '632600', '3');
-INSERT INTO `tb_area` VALUES ('320114', '雨花台区', '320100', '3');
-INSERT INTO `tb_area` VALUES ('370522', '利津县', '370500', '3');
-INSERT INTO `tb_area` VALUES ('331021', '玉环县', '331000', '3');
-INSERT INTO `tb_area` VALUES ('520303', '汇川区', '520300', '3');
-INSERT INTO `tb_area` VALUES ('431125', '江永县', '431100', '3');
-INSERT INTO `tb_area` VALUES ('620122', '皋兰县', '620100', '3');
-INSERT INTO `tb_area` VALUES ('622924', '广河县', '622900', '3');
-INSERT INTO `tb_area` VALUES ('430401', '市辖区', '430400', '3');
-INSERT INTO `tb_area` VALUES ('632223', '海晏县', '632200', '3');
-INSERT INTO `tb_area` VALUES ('510108', '成华区', '510100', '3');
-INSERT INTO `tb_area` VALUES ('230713', '带岭区', '230700', '3');
-INSERT INTO `tb_area` VALUES ('430681', '汨罗市', '430600', '3');
-INSERT INTO `tb_area` VALUES ('511621', '岳池县', '511600', '3');
-INSERT INTO `tb_area` VALUES ('211300', '朝阳市', '210000', '2');
-INSERT INTO `tb_area` VALUES ('652829', '博湖县', '652800', '3');
-INSERT INTO `tb_area` VALUES ('620823', '崇信县', '620800', '3');
-INSERT INTO `tb_area` VALUES ('230208', '梅里斯达斡尔族区', '230200', '3');
-INSERT INTO `tb_area` VALUES ('513201', '马尔康市', '513200', '3');
-INSERT INTO `tb_area` VALUES ('131124', '饶阳县', '131100', '3');
-INSERT INTO `tb_area` VALUES ('450304', '象山区', '450300', '3');
-INSERT INTO `tb_area` VALUES ('330400', '嘉兴市', '330000', '2');
-INSERT INTO `tb_area` VALUES ('510722', '三台县', '510700', '3');
-INSERT INTO `tb_area` VALUES ('230231', '拜泉县', '230200', '3');
-INSERT INTO `tb_area` VALUES ('620700', '张掖市', '620000', '2');
-INSERT INTO `tb_area` VALUES ('640522', '海原县', '640500', '3');
-INSERT INTO `tb_area` VALUES ('410122', '中牟县', '410100', '3');
-INSERT INTO `tb_area` VALUES ('520222', '盘县', '520200', '3');
-INSERT INTO `tb_area` VALUES ('331002', '椒江区', '331000', '3');
-INSERT INTO `tb_area` VALUES ('371400', '德州市', '370000', '2');
-INSERT INTO `tb_area` VALUES ('421123', '罗田县', '421100', '3');
-INSERT INTO `tb_area` VALUES ('652924', '沙雅县', '652900', '3');
-INSERT INTO `tb_area` VALUES ('411321', '南召县', '411300', '3');
-INSERT INTO `tb_area` VALUES ('230503', '岭东区', '230500', '3');
-INSERT INTO `tb_area` VALUES ('130684', '高碑店市', '130600', '3');
-INSERT INTO `tb_area` VALUES ('130822', '兴隆县', '130800', '3');
-INSERT INTO `tb_area` VALUES ('340421', '凤台县', '340400', '3');
-INSERT INTO `tb_area` VALUES ('230224', '泰来县', '230200', '3');
-INSERT INTO `tb_area` VALUES ('360732', '兴国县', '360700', '3');
-INSERT INTO `tb_area` VALUES ('230200', '齐齐哈尔市', '230000', '2');
-INSERT INTO `tb_area` VALUES ('441501', '市辖区', '441500', '3');
-INSERT INTO `tb_area` VALUES ('652828', '和硕县', '652800', '3');
-INSERT INTO `tb_area` VALUES ('441881', '英德市', '441800', '3');
-INSERT INTO `tb_area` VALUES ('110112', '通州区', '110100', '3');
-INSERT INTO `tb_area` VALUES ('211002', '白塔区', '211000', '3');
-INSERT INTO `tb_area` VALUES ('542524', '日土县', '542500', '3');
-INSERT INTO `tb_area` VALUES ('150721', '阿荣旗', '150700', '3');
-INSERT INTO `tb_area` VALUES ('632323', '泽库县', '632300', '3');
-INSERT INTO `tb_area` VALUES ('141031', '隰县', '141000', '3');
-INSERT INTO `tb_area` VALUES ('341024', '祁门县', '341000', '3');
-INSERT INTO `tb_area` VALUES ('350428', '将乐县', '350400', '3');
-INSERT INTO `tb_area` VALUES ('141100', '吕梁市', '140000', '2');
-INSERT INTO `tb_area` VALUES ('320102', '玄武区', '320100', '3');
-INSERT INTO `tb_area` VALUES ('450600', '防城港市', '450000', '2');
-INSERT INTO `tb_area` VALUES ('370724', '临朐县', '370700', '3');
-INSERT INTO `tb_area` VALUES ('370213', '李沧区', '370200', '3');
-INSERT INTO `tb_area` VALUES ('532800', '西双版纳傣族自治州', '530000', '2');
-INSERT INTO `tb_area` VALUES ('120118', '静海区', '120100', '3');
-INSERT INTO `tb_area` VALUES ('611023', '商南县', '611000', '3');
-INSERT INTO `tb_area` VALUES ('422801', '恩施市', '422800', '3');
-INSERT INTO `tb_area` VALUES ('210104', '大东区', '210100', '3');
-INSERT INTO `tb_area` VALUES ('210911', '细河区', '210900', '3');
-INSERT INTO `tb_area` VALUES ('511423', '洪雅县', '511400', '3');
-INSERT INTO `tb_area` VALUES ('510114', '新都区', '510100', '3');
-INSERT INTO `tb_area` VALUES ('420902', '孝南区', '420900', '3');
-INSERT INTO `tb_area` VALUES ('140502', '城区', '140500', '3');
-INSERT INTO `tb_area` VALUES ('654026', '昭苏县', '654000', '3');
-INSERT INTO `tb_area` VALUES ('320925', '建湖县', '320900', '3');
-INSERT INTO `tb_area` VALUES ('620601', '市辖区', '620600', '3');
-INSERT INTO `tb_area` VALUES ('410500', '安阳市', '410000', '2');
-INSERT INTO `tb_area` VALUES ('320116', '六合区', '320100', '3');
-INSERT INTO `tb_area` VALUES ('130205', '开平区', '130200', '3');
-INSERT INTO `tb_area` VALUES ('532324', '南华县', '532300', '3');
-INSERT INTO `tb_area` VALUES ('441400', '梅州市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('500240', '石柱土家族自治县', '500200', '3');
-INSERT INTO `tb_area` VALUES ('211403', '龙港区', '211400', '3');
-INSERT INTO `tb_area` VALUES ('130424', '成安县', '130400', '3');
-INSERT INTO `tb_area` VALUES ('330901', '市辖区', '330900', '3');
-INSERT INTO `tb_area` VALUES ('622925', '和政县', '622900', '3');
-INSERT INTO `tb_area` VALUES ('150924', '兴和县', '150900', '3');
-INSERT INTO `tb_area` VALUES ('653100', '喀什地区', '650000', '2');
-INSERT INTO `tb_area` VALUES ('510503', '纳溪区', '510500', '3');
-INSERT INTO `tb_area` VALUES ('610802', '榆阳区', '610800', '3');
-INSERT INTO `tb_area` VALUES ('340811', '宜秀区', '340800', '3');
-INSERT INTO `tb_area` VALUES ('220281', '蛟河市', '220200', '3');
-INSERT INTO `tb_area` VALUES ('620101', '市辖区', '620100', '3');
-INSERT INTO `tb_area` VALUES ('230204', '铁锋区', '230200', '3');
-INSERT INTO `tb_area` VALUES ('350821', '长汀县', '350800', '3');
-INSERT INTO `tb_area` VALUES ('341825', '旌德县', '341800', '3');
-INSERT INTO `tb_area` VALUES ('652300', '昌吉回族自治州', '650000', '2');
-INSERT INTO `tb_area` VALUES ('440200', '韶关市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('450901', '市辖区', '450900', '3');
-INSERT INTO `tb_area` VALUES ('610112', '未央区', '610100', '3');
-INSERT INTO `tb_area` VALUES ('370502', '东营区', '370500', '3');
-INSERT INTO `tb_area` VALUES ('230110', '香坊区', '230100', '3');
-INSERT INTO `tb_area` VALUES ('450403', '万秀区', '450400', '3');
-INSERT INTO `tb_area` VALUES ('350926', '柘荣县', '350900', '3');
-INSERT INTO `tb_area` VALUES ('653125', '莎车县', '653100', '3');
-INSERT INTO `tb_area` VALUES ('360423', '武宁县', '360400', '3');
-INSERT INTO `tb_area` VALUES ('610830', '清涧县', '610800', '3');
-INSERT INTO `tb_area` VALUES ('140822', '万荣县', '140800', '3');
-INSERT INTO `tb_area` VALUES ('510626', '罗江县', '510600', '3');
-INSERT INTO `tb_area` VALUES ('530801', '市辖区', '530800', '3');
-INSERT INTO `tb_area` VALUES ('141002', '尧都区', '141000', '3');
-INSERT INTO `tb_area` VALUES ('320700', '连云港市', '320000', '2');
-INSERT INTO `tb_area` VALUES ('150103', '回民区', '150100', '3');
-INSERT INTO `tb_area` VALUES ('330701', '市辖区', '330700', '3');
-INSERT INTO `tb_area` VALUES ('610600', '延安市', '610000', '2');
-INSERT INTO `tb_area` VALUES ('370811', '任城区', '370800', '3');
-INSERT INTO `tb_area` VALUES ('340706', '义安区', '340700', '3');
-INSERT INTO `tb_area` VALUES ('430726', '石门县', '430700', '3');
-INSERT INTO `tb_area` VALUES ('450301', '市辖区', '450300', '3');
-INSERT INTO `tb_area` VALUES ('341125', '定远县', '341100', '3');
-INSERT INTO `tb_area` VALUES ('620105', '安宁区', '620100', '3');
-INSERT INTO `tb_area` VALUES ('341204', '颍泉区', '341200', '3');
-INSERT INTO `tb_area` VALUES ('152223', '扎赉特旗', '152200', '3');
-INSERT INTO `tb_area` VALUES ('360321', '莲花县', '360300', '3');
-INSERT INTO `tb_area` VALUES ('150202', '东河区', '150200', '3');
-INSERT INTO `tb_area` VALUES ('341102', '琅琊区', '341100', '3');
-INSERT INTO `tb_area` VALUES ('150928', '察哈尔右翼后旗', '150900', '3');
-INSERT INTO `tb_area` VALUES ('620501', '市辖区', '620500', '3');
-INSERT INTO `tb_area` VALUES ('632700', '玉树藏族自治州', '630000', '2');
-INSERT INTO `tb_area` VALUES ('211223', '西丰县', '211200', '3');
-INSERT INTO `tb_area` VALUES ('622900', '临夏回族自治州', '620000', '2');
-INSERT INTO `tb_area` VALUES ('120101', '和平区', '120100', '3');
-INSERT INTO `tb_area` VALUES ('341502', '金安区', '341500', '3');
-INSERT INTO `tb_area` VALUES ('321012', '江都区', '321000', '3');
-INSERT INTO `tb_area` VALUES ('140501', '市辖区', '140500', '3');
-INSERT INTO `tb_area` VALUES ('500228', '梁平县', '500200', '3');
-INSERT INTO `tb_area` VALUES ('652925', '新和县', '652900', '3');
-INSERT INTO `tb_area` VALUES ('320000', '江苏省', '0', '1');
-INSERT INTO `tb_area` VALUES ('450902', '玉州区', '450900', '3');
-INSERT INTO `tb_area` VALUES ('330326', '平阳县', '330300', '3');
-INSERT INTO `tb_area` VALUES ('370701', '市辖区', '370700', '3');
-INSERT INTO `tb_area` VALUES ('650000', '新疆维吾尔自治区', '0', '1');
-INSERT INTO `tb_area` VALUES ('410211', '金明区', '410200', '3');
-INSERT INTO `tb_area` VALUES ('632322', '尖扎县', '632300', '3');
-INSERT INTO `tb_area` VALUES ('611024', '山阳县', '611000', '3');
-INSERT INTO `tb_area` VALUES ('320300', '徐州市', '320000', '2');
-INSERT INTO `tb_area` VALUES ('451422', '宁明县', '451400', '3');
-INSERT INTO `tb_area` VALUES ('150785', '根河市', '150700', '3');
-INSERT INTO `tb_area` VALUES ('130100', '石家庄市', '130000', '2');
-INSERT INTO `tb_area` VALUES ('610601', '市辖区', '610600', '3');
-INSERT INTO `tb_area` VALUES ('220100', '长春市', '220000', '2');
-INSERT INTO `tb_area` VALUES ('321281', '兴化市', '321200', '3');
-INSERT INTO `tb_area` VALUES ('370683', '莱州市', '370600', '3');
-INSERT INTO `tb_area` VALUES ('421087', '松滋市', '421000', '3');
-INSERT INTO `tb_area` VALUES ('610582', '华阴市', '610500', '3');
-INSERT INTO `tb_area` VALUES ('130225', '乐亭县', '130200', '3');
-INSERT INTO `tb_area` VALUES ('141128', '方山县', '141100', '3');
-INSERT INTO `tb_area` VALUES ('340621', '濉溪县', '340600', '3');
-INSERT INTO `tb_area` VALUES ('520381', '赤水市', '520300', '3');
-INSERT INTO `tb_area` VALUES ('370403', '薛城区', '370400', '3');
-INSERT INTO `tb_area` VALUES ('320812', '清江浦区', '320800', '3');
-INSERT INTO `tb_area` VALUES ('440785', '恩平市', '440700', '3');
-INSERT INTO `tb_area` VALUES ('431381', '冷水江市', '431300', '3');
-INSERT INTO `tb_area` VALUES ('652926', '拜城县', '652900', '3');
-INSERT INTO `tb_area` VALUES ('140521', '沁水县', '140500', '3');
-INSERT INTO `tb_area` VALUES ('150101', '市辖区', '150100', '3');
-INSERT INTO `tb_area` VALUES ('540221', '南木林县', '540200', '3');
-INSERT INTO `tb_area` VALUES ('330727', '磐安县', '330700', '3');
-INSERT INTO `tb_area` VALUES ('510701', '市辖区', '510700', '3');
-INSERT INTO `tb_area` VALUES ('230900', '七台河市', '230000', '2');
-INSERT INTO `tb_area` VALUES ('330100', '杭州市', '330000', '2');
-INSERT INTO `tb_area` VALUES ('420801', '市辖区', '420800', '3');
-INSERT INTO `tb_area` VALUES ('150784', '额尔古纳市', '150700', '3');
-INSERT INTO `tb_area` VALUES ('530326', '会泽县', '530300', '3');
-INSERT INTO `tb_area` VALUES ('540423', '墨脱县', '540400', '3');
-INSERT INTO `tb_area` VALUES ('420222', '阳新县', '420200', '3');
-INSERT INTO `tb_area` VALUES ('420322', '郧西县', '420300', '3');
-INSERT INTO `tb_area` VALUES ('350000', '福建省', '0', '1');
-INSERT INTO `tb_area` VALUES ('610202', '王益区', '610200', '3');
-INSERT INTO `tb_area` VALUES ('360730', '宁都县', '360700', '3');
-INSERT INTO `tb_area` VALUES ('411025', '襄城县', '411000', '3');
-INSERT INTO `tb_area` VALUES ('341702', '贵池区', '341700', '3');
-INSERT INTO `tb_area` VALUES ('361127', '余干县', '361100', '3');
-INSERT INTO `tb_area` VALUES ('610902', '汉滨区', '610900', '3');
-INSERT INTO `tb_area` VALUES ('533123', '盈江县', '533100', '3');
-INSERT INTO `tb_area` VALUES ('210624', '宽甸满族自治县', '210600', '3');
-INSERT INTO `tb_area` VALUES ('350801', '市辖区', '350800', '3');
-INSERT INTO `tb_area` VALUES ('513330', '德格县', '513300', '3');
-INSERT INTO `tb_area` VALUES ('441900', '东莞市', '440000', '2');
-INSERT INTO `tb_area` VALUES ('360425', '永修县', '360400', '3');
-INSERT INTO `tb_area` VALUES ('340827', '望江县', '340800', '3');
-INSERT INTO `tb_area` VALUES ('341000', '黄山市', '340000', '2');
-INSERT INTO `tb_area` VALUES ('222405', '龙井市', '222400', '3');
-INSERT INTO `tb_area` VALUES ('420103', '江汉区', '420100', '3');
-INSERT INTO `tb_area` VALUES ('512000', '资阳市', '510000', '2');
-INSERT INTO `tb_area` VALUES ('210711', '太和区', '210700', '3');
-INSERT INTO `tb_area` VALUES ('510000', '四川省', '0', '1');
-INSERT INTO `tb_area` VALUES ('632500', '海南藏族自治州', '630000', '2');
-INSERT INTO `tb_area` VALUES ('130281', '遵化市', '130200', '3');
-INSERT INTO `tb_area` VALUES ('140932', '偏关县', '140900', '3');
-INSERT INTO `tb_area` VALUES ('410703', '卫滨区', '410700', '3');
-INSERT INTO `tb_area` VALUES ('511501', '市辖区', '511500', '3');
-INSERT INTO `tb_area` VALUES ('331022', '三门县', '331000', '3');
-INSERT INTO `tb_area` VALUES ('420984', '汉川市', '420900', '3');
-INSERT INTO `tb_area` VALUES ('620000', '甘肃省', '0', '1');
-INSERT INTO `tb_area` VALUES ('522328', '安龙县', '522300', '3');
-INSERT INTO `tb_area` VALUES ('310116', '金山区', '310100', '3');
-INSERT INTO `tb_area` VALUES ('420325', '房县', '420300', '3');
-INSERT INTO `tb_area` VALUES ('220821', '镇赉县', '220800', '3');
-INSERT INTO `tb_area` VALUES ('140500', '晋城市', '140000', '2');
-INSERT INTO `tb_area` VALUES ('430503', '大祥区', '430500', '3');
-INSERT INTO `tb_area` VALUES ('141026', '安泽县', '141000', '3');
-INSERT INTO `tb_area` VALUES ('500119', '南川区', '500100', '3');
-INSERT INTO `tb_area` VALUES ('620826', '静宁县', '620800', '3');
-INSERT INTO `tb_area` VALUES ('340208', '三山区', '340200', '3');
-INSERT INTO `tb_area` VALUES ('621223', '宕昌县', '621200', '3');
-INSERT INTO `tb_area` VALUES ('510181', '都江堰市', '510100', '3');
-INSERT INTO `tb_area` VALUES ('621225', '西和县', '621200', '3');
-INSERT INTO `tb_area` VALUES ('222404', '珲春市', '222400', '3');
-INSERT INTO `tb_area` VALUES ('371626', '邹平县', '371600', '3');
-INSERT INTO `tb_area` VALUES ('320402', '天宁区', '320400', '3');
-INSERT INTO `tb_area` VALUES ('410701', '市辖区', '410700', '3');
+/*Data for the table `tb_area` */
 
--- ----------------------------
--- Table structure for tb_contract
--- ----------------------------
+insert  into `tb_area`(`id`,`name`,`top_id`,`level`) values (330503,'南浔区',330500,3),(513223,'茂县',513200,3),(430523,'邵阳县',430500,3),(632222,'祁连县',632200,3),(231225,'明水县',231200,3),(140622,'应县',140600,3),(530625,'永善县',530600,3),(513332,'石渠县',513300,3),(431201,'市辖区',431200,3),(231202,'北林区',231200,3),(652323,'呼图壁县',652300,3),(610821,'神木县',610800,3),(150801,'市辖区',150800,3),(330300,'温州市',330000,2),(140421,'长治县',140400,3),(520323,'绥阳县',520300,3),(441322,'博罗县',441300,3),(320282,'宜兴市',320200,3),(510923,'大英县',510900,3),(350505,'泉港区',350500,3),(371101,'市辖区',371100,3),(530630,'水富县',530600,3),(433127,'永顺县',433100,3),(451102,'八步区',451100,3),(340506,'博望区',340500,3),(520627,'沿河土家族自治县',520600,3),(640122,'贺兰县',640100,3),(360728,'定南县',360700,3),(360501,'市辖区',360500,3),(441701,'市辖区',441700,3),(431223,'辰溪县',431200,3),(632521,'共和县',632500,3),(371302,'兰山区',371300,3),(623025,'玛曲县',623000,3),(420804,'掇刀区',420800,3),(230604,'让胡路区',230600,3),(130110,'鹿泉区',130100,3),(469006,'万宁市',469000,3),(510132,'新津县',510100,3),(620301,'市辖区',620300,3),(620400,'白银市',620000,2),(422825,'宣恩县',422800,3),(131122,'武邑县',131100,3),(210503,'溪湖区',210500,3),(321081,'仪征市',321000,3),(441800,'清远市',440000,2),(330305,'洞头区',330300,3),(451200,'河池市',450000,2),(510800,'广元市',510000,2),(410600,'鹤壁市',410000,2),(350427,'沙县',350400,3),(540237,'岗巴县',540200,3),(130609,'徐水区',130600,3),(513323,'丹巴县',513300,3),(530700,'丽江市',530000,2),(450502,'海城区',450500,3),(650102,'天山区',650100,3),(130623,'涞水县',130600,3),(450621,'上思县',450600,3),(469023,'澄迈县',469000,3),(341181,'天长市',341100,3),(710000,'台湾省',0,1),(370124,'平阴县',370100,3),(340225,'无为县',340200,3),(610430,'淳化县',610400,3),(620201,'市辖区',620200,3),(511381,'阆中市',511300,3),(430423,'衡山县',430400,3),(371321,'沂南县',371300,3),(371700,'菏泽市',370000,2),(220523,'辉南县',220500,3),(530922,'云县',530900,3),(410883,'孟州市',410800,3),(430703,'鼎城区',430700,3),(330921,'岱山县',330900,3),(542430,'尼玛县',542400,3),(330103,'下城区',330100,3),(141027,'浮山县',141000,3),(445102,'湘桥区',445100,3),(150501,'市辖区',150500,3),(350925,'周宁县',350900,3),(451300,'来宾市',450000,2),(511101,'市辖区',511100,3),(150430,'敖汉旗',150400,3),(650421,'鄯善县',650400,3),(610103,'碑林区',610100,3),(510801,'市辖区',510800,3),(440282,'南雄市',440200,3),(320923,'阜宁县',320900,3),(150601,'市辖区',150600,3),(450900,'玉林市',450000,2),(411121,'舞阳县',411100,3),(150781,'满洲里市',150700,3),(150701,'市辖区',150700,3),(440882,'雷州市',440800,3),(110000,'北京市',0,1),(430902,'资阳区',430900,3),(320803,'淮安区',320800,3),(141034,'汾西县',141000,3),(140601,'市辖区',140600,3),(510121,'金堂县',510100,3),(341122,'来安县',341100,3),(441500,'汕尾市',440000,2),(620921,'金塔县',620900,3),(340825,'太湖县',340800,3),(320303,'云龙区',320300,3),(450332,'恭城瑶族自治县',450300,3),(653221,'和田县',653200,3),(430923,'安化县',430900,3),(540529,'隆子县',540500,3),(510131,'蒲江县',510100,3),(620724,'高台县',620700,3),(540230,'康马县',540200,3),(532523,'屏边苗族自治县',532500,3),(451103,'平桂区',451100,3),(230781,'铁力市',230700,3),(211005,'弓长岭区',211000,3),(210105,'皇姑区',210100,3),(130927,'南皮县',130900,3),(150525,'奈曼旗',150500,3),(610113,'雁塔区',610100,3),(510704,'游仙区',510700,3),(350502,'鲤城区',350500,3),(450804,'覃塘区',450800,3),(340801,'市辖区',340800,3),(120106,'红桥区',120100,3),(510821,'旺苍县',510800,3),(141000,'临汾市',140000,2),(310117,'松江区',310100,3),(450103,'青秀区',450100,3),(330127,'淳安县',330100,3),(360924,'宜丰县',360900,3),(510603,'旌阳区',510600,3),(331004,'路桥区',331000,3),(632801,'格尔木市',632800,3),(450127,'横县',450100,3),(411423,'宁陵县',411400,3),(130435,'曲周县',130400,3),(411328,'唐河县',411300,3),(360827,'遂川县',360800,3),(621002,'西峰区',621000,3),(150825,'乌拉特后旗',150800,3),(610501,'市辖区',610500,3),(469021,'定安县',469000,3),(370103,'市中区',370100,3),(350701,'市辖区',350700,3),(510725,'梓潼县',510700,3),(632725,'囊谦县',632700,3),(210603,'振兴区',210600,3),(110116,'怀柔区',110100,3),(450722,'浦北县',450700,3),(540526,'措美县',540500,3),(620525,'张家川回族自治县',620500,3),(361181,'德兴市',361100,3),(371482,'禹城市',371400,3),(140222,'天镇县',140200,3),(140000,'山西省',0,1),(150822,'磴口县',150800,3),(222400,'延边朝鲜族自治州',220000,2),(532922,'漾濞彝族自治县',532900,3),(411727,'汝南县',411700,3),(530622,'巧家县',530600,3),(620401,'市辖区',620400,3),(640105,'西夏区',640100,3),(350626,'东山县',350600,3),(411601,'市辖区',411600,3),(440704,'江海区',440700,3),(450521,'合浦县',450500,3),(540502,'乃东区',540500,3),(150428,'喀喇沁旗',150400,3),(230421,'萝北县',230400,3),(140400,'长治市',140000,2),(411081,'禹州市',411000,3),(220800,'白城市',220000,2),(130638,'雄县',130600,3),(530723,'华坪县',530700,3),(360100,'南昌市',360000,2),(420201,'市辖区',420200,3),(511700,'达州市',510000,2),(210900,'阜新市',210000,2),(610822,'府谷县',610800,3),(610625,'志丹县',610600,3),(370101,'市辖区',370100,3),(532327,'永仁县',532300,3),(530823,'景东彝族自治县',530800,3),(140321,'平定县',140300,3),(632802,'德令哈市',632800,3),(360823,'峡江县',360800,3),(350623,'漳浦县',350600,3),(440222,'始兴县',440200,3),(130824,'滦平县',130800,3),(341881,'宁国市',341800,3),(530303,'沾益区',530300,3),(440501,'市辖区',440500,3),(220302,'铁西区',220300,3),(360104,'青云谱区',360100,3),(340303,'蚌山区',340300,3),(340101,'市辖区',340100,3),(150925,'凉城县',150900,3),(210700,'锦州市',210000,2),(210302,'铁东区',210300,3),(230183,'尚志市',230100,3),(230223,'依安县',230200,3),(640221,'平罗县',640200,3),(320505,'虎丘区',320500,3),(130984,'河间市',130900,3),(130425,'大名县',130400,3),(371201,'市辖区',371200,3),(441704,'阳东区',441700,3),(441302,'惠城区',441300,3),(522601,'凯里市',522600,3),(140221,'阳高县',140200,3),(220000,'吉林省',0,1),(210903,'新邱区',210900,3),(542500,'阿里地区',540000,2),(620901,'市辖区',620900,3),(141130,'交口县',141100,3),(321201,'市辖区',321200,3),(520401,'市辖区',520400,3),(350923,'屏南县',350900,3),(450702,'钦南区',450700,3),(542400,'那曲地区',540000,2),(411523,'新县',411500,3),(620102,'城关区',620100,3),(331001,'市辖区',331000,3),(640323,'盐池县',640300,3),(130730,'怀来县',130700,3),(220382,'双辽市',220300,3),(140901,'市辖区',140900,3),(431123,'双牌县',431100,3),(330324,'永嘉县',330300,3),(420304,'郧阳区',420300,3),(410203,'顺河回族区',410200,3),(653225,'策勒县',653200,3),(120112,'津南区',120100,3),(650109,'米东区',650100,3),(445103,'潮安区',445100,3),(621226,'礼县',621200,3),(500154,'开州区',500100,3),(232700,'大兴安岭地区',230000,2),(522623,'施秉县',522600,3),(451227,'巴马瑶族自治县',451200,3),(532624,'麻栗坡县',532600,3),(520328,'湄潭县',520300,3),(532900,'大理白族自治州',530000,2),(360323,'芦溪县',360300,3),(533401,'香格里拉市',533400,3),(410327,'宜阳县',410300,3),(445101,'市辖区',445100,3),(513436,'美姑县',513400,3),(371311,'罗庄区',371300,3),(410603,'山城区',410600,3),(231100,'黑河市',230000,2),(530628,'彝良县',530600,3),(610302,'渭滨区',610300,3),(130724,'沽源县',130700,3),(510400,'攀枝花市',510000,2),(630100,'西宁市',630000,2),(230302,'鸡冠区',230300,3),(152530,'正蓝旗',152500,3),(659002,'阿拉尔市',659000,3),(230104,'道外区',230100,3),(520423,'镇宁布依族苗族自治县',520400,3),(421223,'崇阳县',421200,3),(341523,'舒城县',341500,3),(331123,'遂昌县',331100,3),(620502,'秦州区',620500,3),(320509,'吴江区',320500,3),(231223,'青冈县',231200,3),(430521,'邵东县',430500,3),(411729,'新蔡县',411700,3),(530827,'孟连傣族拉祜族佤族自治县',530800,3),(340200,'芜湖市',340000,2),(222402,'图们市',222400,3),(610115,'临潼区',610100,3),(511304,'嘉陵区',511300,3),(445122,'饶平县',445100,3),(150702,'海拉尔区',150700,3),(140426,'黎城县',140400,3),(150423,'巴林右旗',150400,3),(441202,'端州区',441200,3),(610727,'略阳县',610700,3),(610828,'佳县',610800,3),(510822,'青川县',510800,3),(431101,'市辖区',431100,3),(510811,'昭化区',510800,3),(330825,'龙游县',330800,3),(433123,'凤凰县',433100,3),(500152,'潼南区',500100,3),(360121,'南昌县',360100,3),(350181,'福清市',350100,3),(230706,'翠峦区',230700,3),(440515,'澄海区',440500,3),(610622,'延川县',610600,3),(510500,'泸州市',510000,2),(654301,'阿勒泰市',654300,3),(441882,'连州市',441800,3),(421121,'团风县',421100,3),(513335,'巴塘县',513300,3),(533323,'福贡县',533300,3),(371521,'阳谷县',371500,3),(131125,'安平县',131100,3),(540300,'昌都市',540000,2),(370500,'东营市',370000,2),(610923,'宁陕县',610900,3),(530426,'峨山彝族自治县',530400,3),(230523,'宝清县',230500,3),(632624,'达日县',632600,3),(530902,'临翔区',530900,3),(341203,'颍东区',341200,3),(650200,'克拉玛依市',650000,2),(220581,'梅河口市',220500,3),(360103,'西湖区',360100,3),(360735,'石城县',360700,3),(422827,'来凤县',422800,3),(130633,'易县',130600,3),(130635,'蠡县',130600,3),(513328,'甘孜县',513300,3),(140201,'市辖区',140200,3),(445202,'榕城区',445200,3),(640202,'大武口区',640200,3),(510322,'富顺县',510300,3),(411421,'民权县',411400,3),(511421,'仁寿县',511400,3),(150422,'巴林左旗',150400,3),(532928,'永平县',532900,3),(230000,'黑龙江省',0,1),(532525,'石屏县',532500,3),(650201,'市辖区',650200,3),(431000,'郴州市',430000,2),(210702,'古塔区',210700,3),(621022,'环县',621000,3),(410882,'沁阳市',410800,3),(451027,'凌云县',451000,3),(230622,'肇源县',230600,3),(330205,'江北区',330200,3),(653127,'麦盖提县',653100,3),(130406,'峰峰矿区',130400,3),(220284,'磐石市',220200,3),(530581,'腾冲市',530500,3),(421201,'市辖区',421200,3),(430800,'张家界市',430000,2),(220300,'四平市',220000,2),(350901,'市辖区',350900,3),(440115,'南沙区',440100,3),(441702,'江城区',441700,3),(140924,'繁峙县',140900,3),(320301,'市辖区',320300,3),(211101,'市辖区',211100,3),(231025,'林口县',231000,3),(420581,'宜都市',420500,3),(610629,'洛川县',610600,3),(341721,'东至县',341700,3),(621222,'文县',621200,3),(460300,'三沙市',460000,2),(130626,'定兴县',130600,3),(130129,'赞皇县',130100,3),(430581,'武冈市',430500,3),(350582,'晋江市',350500,3),(540200,'日喀则市',540000,2),(371524,'东阿县',371500,3),(320830,'盱眙县',320800,3),(210404,'望花区',210400,3),(445203,'揭东区',445200,3),(320106,'鼓楼区',320100,3),(360921,'奉新县',360900,3),(522727,'平塘县',522700,3),(530828,'澜沧拉祜族自治县',530800,3),(220203,'龙潭区',220200,3),(220681,'临江市',220600,3),(440105,'海珠区',440100,3),(231000,'牡丹江市',230000,2),(130530,'新河县',130500,3),(610401,'市辖区',610400,3),(422828,'鹤峰县',422800,3),(450226,'三江侗族自治县',450200,3),(610324,'扶风县',610300,3),(430211,'天元区',430200,3),(610201,'市辖区',610200,3),(140181,'古交市',140100,3),(130634,'曲阳县',130600,3),(230206,'富拉尔基区',230200,3),(350401,'市辖区',350400,3),(371427,'夏津县',371400,3),(420106,'武昌区',420100,3),(150303,'海南区',150300,3),(451401,'市辖区',451400,3),(410183,'新密市',410100,3),(513432,'喜德县',513400,3),(150204,'青山区',150200,3),(411521,'罗山县',411500,3),(140702,'榆次区',140700,3),(140721,'榆社县',140700,3),(211282,'开原市',211200,3),(340000,'安徽省',0,1),(653000,'克孜勒苏柯尔克孜自治州',650000,2),(130302,'海港区',130300,3),(131022,'固安县',131000,3),(620422,'会宁县',620400,3),(152502,'锡林浩特市',152500,3),(530900,'临沧市',530000,2),(532622,'砚山县',532600,3),(410782,'辉县市',410700,3),(430281,'醴陵市',430200,3),(130925,'盐山县',130900,3),(210811,'老边区',210800,3),(530126,'石林彝族自治县',530100,3),(542429,'巴青县',542400,3),(131103,'冀州区',131100,3),(310110,'杨浦区',310100,3),(230709,'金山屯区',230700,3),(430901,'市辖区',430900,3),(140881,'永济市',140800,3),(139002,'辛集市',139000,3),(654000,'伊犁哈萨克自治州',650000,2),(340304,'禹会区',340300,3),(654004,'霍尔果斯市',654000,3),(230605,'红岗区',230600,3),(152202,'阿尔山市',152200,3),(152525,'东乌珠穆沁旗',152500,3),(450325,'兴安县',450300,3),(410802,'解放区',410800,3),(231001,'市辖区',231000,3),(410205,'禹王台区',410200,3),(511528,'兴文县',511500,3),(652827,'和静县',652800,3),(321204,'姜堰区',321200,3),(431126,'宁远县',431100,3),(500242,'酉阳土家族苗族自治县',500200,3),(440500,'汕头市',440000,2),(361002,'临川区',361000,3),(510901,'市辖区',510900,3),(632800,'海西蒙古族藏族自治州',630000,2),(420822,'沙洋县',420800,3),(620922,'瓜州县',620900,3),(450125,'上林县',450100,3),(150581,'霍林郭勒市',150500,3),(140823,'闻喜县',140800,3),(652324,'玛纳斯县',652300,3),(360426,'德安县',360400,3),(330382,'乐清市',330300,3),(530403,'江川区',530400,3),(411103,'郾城区',411100,3),(321000,'扬州市',320000,2),(210905,'清河门区',210900,3),(440112,'黄埔区',440100,3),(230102,'道里区',230100,3),(445200,'揭阳市',440000,2),(451023,'平果县',451000,3),(420204,'下陆区',420200,3),(522625,'镇远县',522600,3),(421224,'通山县',421200,3),(431003,'苏仙区',431000,3),(430525,'洞口县',430500,3),(652327,'吉木萨尔县',652300,3),(410302,'老城区',410300,3),(510700,'绵阳市',510000,2),(540222,'江孜县',540200,3),(350627,'南靖县',350600,3),(512002,'雁江区',512000,3),(410505,'殷都区',410500,3),(441403,'梅县区',441400,3),(130183,'晋州市',130100,3),(340403,'田家庵区',340400,3),(530401,'市辖区',530400,3),(230524,'饶河县',230500,3),(360105,'湾里区',360100,3),(130700,'张家口市',130000,2),(230207,'碾子山区',230200,3),(140624,'怀仁县',140600,3),(341802,'宣州区',341800,3),(610925,'岚皋县',610900,3),(430406,'雁峰区',430400,3),(440604,'禅城区',440600,3),(430101,'市辖区',430100,3),(341101,'市辖区',341100,3),(511600,'广安市',510000,2),(370982,'新泰市',370900,3),(532930,'洱源县',532900,3),(150426,'翁牛特旗',150400,3),(610524,'合阳县',610500,3),(321002,'广陵区',321000,3),(130207,'丰南区',130200,3),(140301,'市辖区',140300,3),(320621,'海安县',320600,3),(610824,'靖边县',610800,3),(222426,'安图县',222400,3),(420506,'夷陵区',420500,3),(340422,'寿县',340400,3),(440100,'广州市',440000,2),(340301,'市辖区',340300,3),(530113,'东川区',530100,3),(130128,'深泽县',130100,3),(650400,'吐鲁番市',650000,2),(231083,'海林市',231000,3),(130502,'桥东区',130500,3),(350823,'上杭县',350800,3),(411728,'遂平县',411700,3),(140100,'太原市',140000,2),(210115,'辽中区',210100,3),(350182,'长乐市',350100,3),(220702,'宁江区',220700,3),(610326,'眉县',610300,3),(210522,'桓仁满族自治县',210500,3),(410303,'西工区',410300,3),(530322,'陆良县',530300,3),(141033,'蒲县',141000,3),(450801,'市辖区',450800,3),(421125,'浠水县',421100,3),(411621,'扶沟县',411600,3),(630104,'城西区',630100,3),(653123,'英吉沙县',653100,3),(220721,'前郭尔罗斯蒙古族自治县',220700,3),(511922,'南江县',511900,3),(350601,'市辖区',350600,3),(130723,'康保县',130700,3),(370921,'宁阳县',370900,3),(150000,'内蒙古自治区',0,1),(230305,'梨树区',230300,3),(450206,'柳江区',450200,3),(620822,'灵台县',620800,3),(440804,'坡头区',440800,3),(350824,'武平县',350800,3),(500229,'城口县',500200,3),(130629,'容城县',130600,3),(530721,'玉龙纳西族自治县',530700,3),(330381,'瑞安市',330300,3),(350602,'芗城区',350600,3),(360923,'上高县',360900,3),(220524,'柳河县',220500,3),(440703,'蓬江区',440700,3),(532932,'鹤庆县',532900,3),(431081,'资兴市',431000,3),(230704,'友好区',230700,3),(430382,'韶山市',430300,3),(350400,'三明市',350000,2),(150401,'市辖区',150400,3),(360123,'安义县',360100,3),(120119,'蓟州区',120100,3),(451321,'忻城县',451300,3),(640501,'市辖区',640500,3),(500113,'巴南区',500100,3),(530112,'西山区',530100,3),(370783,'寿光市',370700,3),(320100,'南京市',320000,2),(330801,'市辖区',330800,3),(513422,'木里藏族自治县',513400,3),(371082,'荣成市',371000,3),(370282,'即墨市',370200,3),(520101,'市辖区',520100,3),(451101,'市辖区',451100,3),(371726,'鄄城县',371700,3),(652302,'阜康市',652300,3),(150301,'市辖区',150300,3),(140827,'垣曲县',140800,3),(430202,'荷塘区',430200,3),(513221,'汶川县',513200,3),(341202,'颍州区',341200,3),(370113,'长清区',370100,3),(371121,'五莲县',371100,3),(370505,'垦利区',370500,3),(620522,'秦安县',620500,3),(210201,'市辖区',210200,3),(520201,'钟山区',520200,3),(230903,'桃山区',230900,3),(371200,'莱芜市',370000,2),(445201,'市辖区',445200,3),(542526,'改则县',542500,3),(370682,'莱阳市',370600,3),(500101,'万州区',500100,3),(431122,'东安县',431100,3),(130130,'无极县',130100,3),(341200,'阜阳市',340000,2),(360322,'上栗县',360300,3),(420921,'孝昌县',420900,3),(511401,'市辖区',511400,3),(411325,'内乡县',411300,3),(511901,'市辖区',511900,3),(522700,'黔南布依族苗族自治州',520000,2),(530324,'罗平县',530300,3),(350102,'鼓楼区',350100,3),(232722,'塔河县',232700,3),(431022,'宜章县',431000,3),(210727,'义县',210700,3),(130133,'赵县',130100,3),(440402,'香洲区',440400,3),(611021,'洛南县',611000,3),(620423,'景泰县',620400,3),(130303,'山海关区',130300,3),(370481,'滕州市',370400,3),(420505,'猇亭区',420500,3),(512021,'安岳县',512000,3),(410927,'台前县',410900,3),(120110,'东丽区',120100,3),(510781,'江油市',510700,3),(130223,'滦县',130200,3),(211324,'喀喇沁左翼蒙古族自治县',211300,3),(320305,'贾汪区',320300,3),(610116,'长安区',610100,3),(211200,'铁岭市',210000,2),(510115,'温江区',510100,3),(411425,'虞城县',411400,3),(360301,'市辖区',360300,3),(140729,'灵石县',140700,3),(610628,'富县',610600,3),(610403,'杨陵区',610400,3),(350429,'泰宁县',350400,3),(331125,'云和县',331100,3),(140826,'绛县',140800,3),(411122,'临颍县',411100,3),(532527,'泸西县',532500,3),(610724,'西乡县',610700,3),(440801,'市辖区',440800,3),(152526,'西乌珠穆沁旗',152500,3),(131081,'霸州市',131000,3),(320200,'无锡市',320000,2),(341301,'市辖区',341300,3),(220182,'榆树市',220100,3),(411100,'漯河市',410000,2),(341503,'裕安区',341500,3),(520628,'松桃苗族自治县',520600,3),(220301,'市辖区',220300,3),(230203,'建华区',230200,3),(331126,'庆元县',331100,3),(510922,'射洪县',510900,3),(441323,'惠东县',441300,3),(230124,'方正县',230100,3),(220802,'洮北区',220800,3),(370102,'历下区',370100,3),(520500,'毕节市',520000,2),(410304,'瀍河回族区',410300,3),(150823,'乌拉特前旗',150800,3),(211011,'太子河区',211000,3),(150727,'新巴尔虎右旗',150700,3),(131128,'阜城县',131100,3),(232721,'呼玛县',232700,3),(220201,'市辖区',220200,3),(513437,'雷波县',513400,3),(654200,'塔城地区',650000,2),(360925,'靖安县',360900,3),(522622,'黄平县',522600,3),(441423,'丰顺县',441400,3),(522628,'锦屏县',522600,3),(630103,'城中区',630100,3),(653122,'疏勒县',653100,3),(220500,'通化市',220000,2),(370283,'平度市',370200,3),(130108,'裕华区',130100,3),(654023,'霍城县',654000,3),(120114,'武清区',120100,3),(331000,'台州市',330000,2),(513427,'宁南县',513400,3),(130200,'唐山市',130000,2),(654226,'和布克赛尔蒙古自治县',654200,3),(620300,'金昌市',620000,2),(341323,'灵璧县',341300,3),(340181,'巢湖市',340100,3),(430524,'隆回县',430500,3),(320205,'锡山区',320200,3),(410201,'市辖区',410200,3),(460204,'天涯区',460200,3),(520115,'观山湖区',520100,3),(230406,'东山区',230400,3),(522728,'罗甸县',522700,3),(371523,'茌平县',371500,3),(511702,'通川区',511700,3),(410902,'华龙区',410900,3),(659003,'图木舒克市',659000,3),(420107,'青山区',420100,3),(222403,'敦化市',222400,3),(320681,'启东市',320600,3),(371203,'钢城区',371200,3),(511402,'东坡区',511400,3),(230125,'宾县',230100,3),(141032,'永和县',141000,3),(610222,'宜君县',610200,3),(331100,'丽水市',330000,2),(540326,'八宿县',540300,3),(410704,'凤泉区',410700,3),(211400,'葫芦岛市',210000,2),(540531,'浪卡子县',540500,3),(440607,'三水区',440600,3),(220723,'乾安县',220700,3),(150723,'鄂伦春自治旗',150700,3),(654202,'乌苏市',654200,3),(420200,'黄石市',420000,2),(510403,'西区',510400,3),(652826,'焉耆回族自治县',652800,3),(610331,'太白县',610300,3),(330424,'海盐县',330400,3),(451222,'天峨县',451200,3),(350128,'平潭县',350100,3),(420683,'枣阳市',420600,3),(430224,'茶陵县',430200,3),(340201,'市辖区',340200,3),(530925,'双江拉祜族佤族布朗族傣族自治县',530900,3),(141102,'离石区',141100,3),(360800,'吉安市',360000,2),(532529,'红河县',532500,3),(659006,'铁门关市',659000,3),(450501,'市辖区',450500,3),(450331,'荔浦县',450300,3),(540328,'芒康县',540300,3),(511100,'乐山市',510000,2),(330702,'婺城区',330700,3),(140110,'晋源区',140100,3),(450302,'秀峰区',450300,3),(653022,'阿克陶县',653000,3),(520502,'七星关区',520500,3),(610125,'户县',610100,3),(140226,'左云县',140200,3),(320507,'相城区',320500,3),(652328,'木垒哈萨克自治县',652300,3),(520602,'碧江区',520600,3),(430111,'雨花区',430100,3),(421127,'黄梅县',421100,3),(410602,'鹤山区',410600,3),(410700,'新乡市',410000,2),(231086,'东宁市',231000,3),(230225,'甘南县',230200,3),(231101,'市辖区',231100,3),(220623,'长白朝鲜族自治县',220600,3),(510900,'遂宁市',510000,2),(540329,'洛隆县',540300,3),(540402,'巴宜区',540400,3),(331102,'莲都区',331100,3),(231200,'绥化市',230000,2),(652701,'博乐市',652700,3),(130300,'秦皇岛市',130000,2),(411324,'镇平县',411300,3),(510301,'市辖区',510300,3),(350203,'思明区',350200,3),(622921,'临夏县',622900,3),(450100,'南宁市',450000,2),(419001,'济源市',419000,3),(230710,'五营区',230700,3),(210781,'凌海市',210700,3),(510107,'武侯区',510100,3),(350981,'福安市',350900,3),(131127,'景县',131100,3),(230805,'东风区',230800,3),(130523,'内丘县',130500,3),(420626,'保康县',420600,3),(350301,'市辖区',350300,3),(360703,'南康区',360700,3),(542523,'噶尔县',542500,3),(500109,'北碚区',500100,3),(140701,'市辖区',140700,3),(510904,'安居区',510900,3),(321084,'高邮市',321000,3),(410306,'吉利区',410300,3),(330902,'定海区',330900,3),(653121,'疏附县',653100,3),(510112,'龙泉驿区',510100,3),(620923,'肃北蒙古族自治县',620900,3),(520622,'玉屏侗族自治县',520600,3),(230624,'杜尔伯特蒙古族自治县',230600,3),(640200,'石嘴山市',640000,2),(150302,'海勃湾区',150300,3),(230229,'克山县',230200,3),(610701,'市辖区',610700,3),(330421,'嘉善县',330400,3),(420606,'樊城区',420600,3),(632822,'都兰县',632800,3),(140802,'盐湖区',140800,3),(230109,'松北区',230100,3),(530125,'宜良县',530100,3),(231182,'五大连池市',231100,3),(450803,'港南区',450800,3),(360881,'井冈山市',360800,3),(320623,'如东县',320600,3),(341621,'涡阳县',341600,3),(540126,'达孜县',540100,3),(341282,'界首市',341200,3),(360700,'赣州市',360000,2),(511824,'石棉县',511800,3),(130521,'邢台县',130500,3),(370900,'泰安市',370000,2),(350201,'市辖区',350200,3),(140200,'大同市',140000,2),(320924,'射阳县',320900,3),(610632,'黄陵县',610600,3),(513224,'松潘县',513200,3),(653201,'和田市',653200,3),(445381,'罗定市',445300,3),(220700,'松原市',220000,2),(640502,'沙坡头区',640500,3),(430725,'桃源县',430700,3),(360502,'渝水区',360500,3),(532532,'河口瑶族自治县',532500,3),(340602,'杜集区',340600,3),(420114,'蔡甸区',420100,3),(511123,'犍为县',511100,3),(621122,'陇西县',621100,3),(511302,'顺庆区',511300,3),(370212,'崂山区',370200,3),(150623,'鄂托克前旗',150600,3),(431302,'娄星区',431300,3),(450700,'钦州市',450000,2),(330700,'金华市',330000,2),(511111,'沙湾区',511100,3),(430601,'市辖区',430600,3),(410100,'郑州市',410000,2),(210703,'凌河区',210700,3),(320500,'苏州市',320000,2),(340800,'安庆市',340000,2),(150203,'昆都仑区',150200,3),(611000,'商洛市',610000,2),(421002,'沙市区',421000,3),(130209,'曹妃甸区',130200,3),(360481,'瑞昌市',360400,3),(231005,'西安区',231000,3),(420113,'汉南区',420100,3),(420821,'京山县',420800,3),(330206,'北仑区',330200,3),(520325,'道真仡佬族苗族自治县',520300,3),(350628,'平和县',350600,3),(340523,'和县',340500,3),(410721,'新乡县',410700,3),(360424,'修水县',360400,3),(410501,'市辖区',410500,3),(445303,'云安区',445300,3),(441226,'德庆县',441200,3),(522635,'麻江县',522600,3),(370613,'莱山区',370600,3),(350625,'长泰县',350600,3),(510183,'邛崃市',510100,3),(420600,'襄阳市',420000,2),(131182,'深州市',131100,3),(530901,'市辖区',530900,3),(441303,'惠阳区',441300,3),(330781,'兰溪市',330700,3),(420982,'安陆市',420900,3),(410523,'汤阴县',410500,3),(420700,'鄂州市',420000,2),(441203,'鼎湖区',441200,3),(431200,'怀化市',430000,2),(533301,'泸水市',533300,3),(520425,'紫云苗族布依族自治县',520400,3),(441803,'清新区',441800,3),(511603,'前锋区',511600,3),(341126,'凤阳县',341100,3),(430922,'桃江县',430900,3),(610427,'彬县',610400,3),(341124,'全椒县',341100,3),(621027,'镇原县',621000,3),(150725,'陈巴尔虎旗',150700,3),(330111,'富阳区',330100,3),(450124,'马山县',450100,3),(430822,'桑植县',430800,3),(411201,'市辖区',411200,3),(350322,'仙游县',350300,3),(410726,'延津县',410700,3),(310000,'上海市',0,1),(530927,'沧源佤族自治县',530900,3),(140727,'祁县',140700,3),(410204,'鼓楼区',410200,3),(231224,'庆安县',231200,3),(130432,'广平县',130400,3),(210214,'普兰店区',210200,3),(540236,'萨嘎县',540200,3),(141029,'乡宁县',141000,3),(130503,'桥西区',130500,3),(653224,'洛浦县',653200,3),(370301,'市辖区',370300,3),(622922,'康乐县',622900,3),(522326,'望谟县',522300,3),(511503,'南溪区',511500,3),(513429,'布拖县',513400,3),(540232,'仲巴县',540200,3),(130902,'新华区',130900,3),(360622,'余江县',360600,3),(371401,'市辖区',371400,3),(370686,'栖霞市',370600,3),(522630,'台江县',522600,3),(542423,'比如县',542400,3),(350782,'武夷山市',350700,3),(511303,'高坪区',511300,3),(150802,'临河区',150800,3),(610627,'甘泉县',610600,3),(520121,'开阳县',520100,3),(451201,'市辖区',451200,3),(522324,'晴隆县',522300,3),(361101,'市辖区',361100,3),(431021,'桂阳县',431000,3),(140700,'晋中市',140000,2),(130801,'市辖区',130800,3),(350123,'罗源县',350100,3),(371428,'武城县',371400,3),(410727,'封丘县',410700,3),(310115,'浦东新区',310100,3),(130725,'尚义县',130700,3),(441204,'高要区',441200,3),(511822,'荥经县',511800,3),(320382,'邳州市',320300,3),(530824,'景谷傣族彝族自治县',530800,3),(411300,'南阳市',410000,2),(230407,'兴山区',230400,3),(522629,'剑河县',522600,3),(210701,'市辖区',210700,3),(530325,'富源县',530300,3),(370112,'历城区',370100,3),(360403,'浔阳区',360400,3),(360482,'共青城市',360400,3),(150526,'扎鲁特旗',150500,3),(211421,'绥中县',211400,3),(222401,'延吉市',222400,3),(341500,'六安市',340000,2),(140212,'新荣区',140200,3),(370302,'淄川区',370300,3),(360724,'上犹县',360700,3),(220602,'浑江区',220600,3),(330101,'市辖区',330100,3),(511521,'宜宾县',511500,3),(360830,'永新县',360800,3),(350700,'南平市',350000,2),(411282,'灵宝市',411200,3),(210212,'旅顺口区',210200,3),(231085,'穆棱市',231000,3),(511126,'夹江县',511100,3),(440304,'福田区',440300,3),(610300,'宝鸡市',610000,2),(653001,'阿图什市',653000,3),(450481,'岑溪市',450400,3),(650104,'新市区',650100,3),(610329,'麟游县',610300,3),(654224,'托里县',654200,3),(420115,'江夏区',420100,3),(230703,'南岔区',230700,3),(450321,'阳朔县',450300,3),(330481,'海宁市',330400,3),(131101,'市辖区',131100,3),(350526,'德化县',350500,3),(451021,'田阳县',451000,3),(430203,'芦淞区',430200,3),(341226,'颍上县',341200,3),(140801,'市辖区',140800,3),(610528,'富平县',610500,3),(450110,'武鸣区',450100,3),(230301,'市辖区',230300,3),(130111,'栾城区',130100,3),(320601,'市辖区',320600,3),(350725,'政和县',350700,3),(511723,'开江县',511700,3),(620402,'白银区',620400,3),(150205,'石拐区',150200,3),(150105,'赛罕区',150100,3),(632622,'班玛县',632600,3),(610111,'灞桥区',610100,3),(510726,'北川羌族自治县',510700,3),(231081,'绥芬河市',231000,3),(469000,'省直辖县级行政区划',460000,2),(520327,'凤冈县',520300,3),(360300,'萍乡市',360000,2),(341182,'明光市',341100,3),(652928,'阿瓦提县',652900,3),(610500,'渭南市',610000,2),(511725,'渠县',511700,3),(610924,'紫阳县',610900,3),(211201,'市辖区',211200,3),(320800,'淮安市',320000,2),(370685,'招远市',370600,3),(140101,'市辖区',140100,3),(530300,'曲靖市',530000,2),(411224,'卢氏县',411200,3),(640425,'彭阳县',640400,3),(513435,'甘洛县',513400,3),(360802,'吉州区',360800,3),(130321,'青龙满族自治县',130300,3),(230522,'友谊县',230500,3),(371723,'成武县',371700,3),(350402,'梅列区',350400,3),(410821,'修武县',410800,3),(371525,'冠县',371500,3),(230901,'市辖区',230900,3),(532501,'个旧市',532500,3),(429021,'神农架林区',429000,3),(420607,'襄州区',420600,3),(652900,'阿克苏地区',650000,2),(640303,'红寺堡区',640300,3),(360731,'于都县',360700,3),(140800,'运城市',140000,2),(130601,'市辖区',130600,3),(350702,'延平区',350700,3),(610502,'临渭区',610500,3),(211021,'辽阳县',211000,3),(469025,'白沙黎族自治县',469000,3),(141121,'文水县',141100,3),(330624,'新昌县',330600,3),(350205,'海沧区',350200,3),(320723,'灌云县',320700,3),(411002,'魏都区',411000,3),(340111,'包河区',340100,3),(522633,'从江县',522600,3),(810000,'香港特别行政区',0,1),(431382,'涟源市',431300,3),(500107,'九龙坡区',500100,3),(440507,'龙湖区',440500,3),(530128,'禄劝彝族苗族自治县',530100,3),(532626,'丘北县',532600,3),(540229,'仁布县',540200,3),(430223,'攸县',430200,3),(640424,'泾源县',640400,3),(130125,'行唐县',130100,3),(632525,'贵南县',632500,3),(320201,'市辖区',320200,3),(411330,'桐柏县',411300,3),(430821,'慈利县',430800,3),(320281,'江阴市',320200,3),(513336,'乡城县',513300,3),(140524,'陵川县',140500,3),(610728,'镇巴县',610700,3),(654325,'青河县',654300,3),(410105,'金水区',410100,3),(350521,'惠安县',350500,3),(410103,'二七区',410100,3),(341524,'金寨县',341500,3),(360726,'安远县',360700,3),(130804,'鹰手营子矿区',130800,3),(540225,'拉孜县',540200,3),(370211,'黄岛区',370200,3),(341723,'青阳县',341700,3),(360681,'贵溪市',360600,3),(451122,'钟山县',451100,3),(513225,'九寨沟县',513200,3),(150625,'杭锦旗',150600,3),(340600,'淮北市',340000,2),(310114,'嘉定区',310100,3),(330824,'开化县',330800,3),(522725,'瓮安县',522700,3),(430981,'沅江市',430900,3),(522722,'荔波县',522700,3),(430802,'永定区',430800,3),(410482,'汝州市',410400,3),(230227,'富裕县',230200,3),(110100,'北京市',110000,2),(371100,'日照市',370000,2),(411426,'夏邑县',411400,3),(370702,'潍城区',370700,3),(440783,'开平市',440700,3),(540530,'错那县',540500,3),(420922,'大悟县',420900,3),(230803,'向阳区',230800,3),(511112,'五通桥区',511100,3),(371423,'庆云县',371400,3),(220323,'伊通满族自治县',220300,3),(532328,'元谋县',532300,3),(469027,'乐东黎族自治县',469000,3),(150927,'察哈尔右翼中旗',150900,3),(140224,'灵丘县',140200,3),(210922,'彰武县',210900,3),(621123,'渭源县',621100,3),(445302,'云城区',445300,3),(451402,'江州区',451400,3),(451228,'都安瑶族自治县',451200,3),(421100,'黄冈市',420000,2),(520326,'务川仡佬族苗族自治县',520300,3),(130529,'巨鹿县',130500,3),(341225,'阜南县',341200,3),(370104,'槐荫区',370100,3),(431121,'祁阳县',431100,3),(510903,'船山区',510900,3),(360302,'安源区',360300,3),(210204,'沙河口区',210200,3),(330502,'吴兴区',330500,3),(653024,'乌恰县',653000,3),(620111,'红古区',620100,3),(441225,'封开县',441200,3),(220112,'双阳区',220100,3),(513425,'会理县',513400,3),(652723,'温泉县',652700,3),(431300,'娄底市',430000,2),(130681,'涿州市',130600,3),(330681,'诸暨市',330600,3),(320585,'太仓市',320500,3),(130402,'邯山区',130400,3),(640101,'市辖区',640100,3),(350103,'台江区',350100,3),(330000,'浙江省',0,1),(621200,'陇南市',620000,2),(421381,'广水市',421300,3),(350825,'连城县',350800,3),(130722,'张北县',130700,3),(460108,'美兰区',460100,3),(370826,'微山县',370800,3),(500232,'武隆县',500200,3),(350803,'永定区',350800,3),(510402,'东区',510400,3),(360500,'新余市',360000,2),(370126,'商河县',370100,3),(510101,'市辖区',510100,3),(511902,'巴州区',511900,3),(654003,'奎屯市',654000,3),(430421,'衡阳县',430400,3),(431281,'洪江市',431200,3),(130924,'海兴县',130900,3),(450326,'永福县',450300,3),(430422,'衡南县',430400,3),(410601,'市辖区',410600,3),(540527,'洛扎县',540500,3),(321102,'京口区',321100,3),(130803,'双滦区',130800,3),(610726,'宁强县',610700,3),(150782,'牙克石市',150700,3),(430412,'南岳区',430400,3),(211103,'兴隆台区',211100,3),(441201,'市辖区',441200,3),(420583,'枝江市',420500,3),(341525,'霍山县',341500,3),(350500,'泉州市',350000,2),(540500,'山南市',540000,2),(130928,'吴桥县',130900,3),(510124,'郫县',510100,3),(460101,'市辖区',460100,3),(542522,'札达县',542500,3),(370612,'牟平区',370600,3),(420923,'云梦县',420900,3),(411500,'信阳市',410000,2),(320105,'建邺区',320100,3),(430301,'市辖区',430300,3),(131000,'廊坊市',130000,2),(141024,'洪洞县',141000,3),(110111,'房山区',110100,3),(610526,'蒲城县',610500,3),(532924,'宾川县',532900,3),(632821,'乌兰县',632800,3),(623026,'碌曲县',623000,3),(341004,'徽州区',341000,3),(440981,'高州市',440900,3),(620924,'阿克塞哈萨克族自治县',620900,3),(511102,'市中区',511100,3),(654322,'富蕴县',654300,3),(210203,'西岗区',210200,3),(330102,'上城区',330100,3),(230401,'市辖区',230400,3),(370600,'烟台市',370000,2),(321311,'宿豫区',321300,3),(361123,'玉山县',361100,3),(430528,'新宁县',430500,3),(469005,'文昌市',469000,3),(321023,'宝应县',321000,3),(450601,'市辖区',450600,3),(520601,'市辖区',520600,3),(130922,'青县',130900,3),(410901,'市辖区',410900,3),(421024,'江陵县',421000,3),(511800,'雅安市',510000,2),(610803,'横山区',610800,3),(370827,'鱼台县',370800,3),(310100,'上海市',310000,2),(513326,'道孚县',513300,3),(140107,'杏花岭区',140100,3),(500110,'綦江区',500100,3),(460100,'海口市',460000,2),(450303,'叠彩区',450300,3),(610801,'市辖区',610800,3),(360902,'袁州区',360900,3),(520221,'水城县',520200,3),(340321,'怀远县',340300,3),(510421,'米易县',510400,3),(130726,'蔚县',130700,3),(440800,'湛江市',440000,2),(140825,'新绛县',140800,3),(321300,'宿迁市',320000,2),(420203,'西塞山区',420200,3),(510401,'市辖区',510400,3),(230600,'大庆市',230000,2),(623024,'迭部县',623000,3),(450329,'资源县',450300,3),(420117,'新洲区',420100,3),(441502,'城区',441500,3),(220113,'九台区',220100,3),(632626,'玛多县',632600,3),(410811,'山阳区',410800,3),(652722,'精河县',652700,3),(520625,'印江土家族苗族自治县',520600,3),(440301,'市辖区',440300,3),(640302,'利通区',640300,3),(632726,'曲麻莱县',632700,3),(220881,'洮南市',220800,3),(370687,'海阳市',370600,3),(500241,'秀山土家族苗族自治县',500200,3),(440802,'赤坎区',440800,3),(310107,'普陀区',310100,3),(211401,'市辖区',211400,3),(140223,'广灵县',140200,3),(441622,'龙川县',441600,3),(520300,'遵义市',520000,2),(371202,'莱城区',371200,3),(450300,'桂林市',450000,2),(522729,'长顺县',522700,3),(540501,'市辖区',540500,3),(421124,'英山县',421100,3),(511825,'天全县',511800,3),(371702,'牡丹区',371700,3),(231282,'肇东市',231200,3),(650103,'沙依巴克区',650100,3),(231004,'爱民区',231000,3),(540231,'定结县',540200,3),(533422,'德钦县',533400,3),(411302,'宛城区',411300,3),(431225,'会同县',431200,3),(340222,'繁昌县',340200,3),(500104,'大渡口区',500100,3),(610328,'千阳县',610300,3),(220601,'市辖区',220600,3),(410724,'获嘉县',410700,3),(410502,'文峰区',410500,3),(370830,'汶上县',370800,3),(341321,'砀山县',341300,3),(530400,'玉溪市',530000,2),(370400,'枣庄市',370000,2),(420601,'市辖区',420600,3),(640402,'原州区',640400,3),(411625,'郸城县',411600,3),(152501,'二连浩特市',152500,3),(510129,'大邑县',510100,3),(370181,'章丘市',370100,3),(430121,'长沙县',430100,3),(450903,'福绵区',450900,3),(441600,'河源市',440000,2),(210901,'市辖区',210900,3),(220221,'永吉县',220200,3),(530114,'呈贡区',530100,3),(511724,'大竹县',511700,3),(440103,'荔湾区',440100,3),(330302,'鹿城区',330300,3),(210902,'海州区',210900,3),(371426,'平原县',371400,3),(230902,'新兴区',230900,3),(130522,'临城县',130500,3),(370214,'城阳区',370200,3),(361100,'上饶市',360000,2),(522627,'天柱县',522600,3),(130101,'市辖区',130100,3),(140581,'高平市',140500,3),(140202,'城区',140200,3),(411623,'商水县',411600,3),(445281,'普宁市',445200,3),(652923,'库车县',652900,3),(330301,'市辖区',330300,3),(429000,'省直辖县级行政区划',420000,2),(410522,'安阳县',410500,3),(511681,'华蓥市',511600,3),(513401,'西昌市',513400,3),(430602,'岳阳楼区',430600,3),(220521,'通化县',220500,3),(451481,'凭祥市',451400,3),(130637,'博野县',130600,3),(350723,'光泽县',350700,3),(659004,'五家渠市',659000,3),(621001,'市辖区',621000,3),(130433,'馆陶县',130400,3),(450503,'银海区',450500,3),(422800,'恩施土家族苗族自治州',420000,2),(430781,'津市市',430700,3),(320981,'东台市',320900,3),(511622,'武胜县',511600,3),(450126,'宾阳县',450100,3),(370784,'安丘市',370700,3),(370704,'坊子区',370700,3),(510727,'平武县',510700,3),(430903,'赫山区',430900,3),(130123,'正定县',130100,3),(520402,'西秀区',520400,3),(340203,'弋江区',340200,3),(630202,'乐都区',630200,3),(522322,'兴仁县',522300,3),(441700,'阳江市',440000,2),(653124,'泽普县',653100,3),(211000,'辽阳市',210000,2),(513430,'金阳县',513400,3),(120100,'天津市',120000,2),(411702,'驿城区',411700,3),(130184,'新乐市',130100,3),(150603,'康巴什区',150600,3),(513433,'冕宁县',513400,3),(610114,'阎良区',610100,3),(420111,'洪山区',420100,3),(653226,'于田县',653200,3),(140425,'平顺县',140400,3),(371622,'阳信县',371600,3),(331101,'市辖区',331100,3),(500108,'南岸区',500100,3),(520623,'石阡县',520600,3),(370401,'市辖区',370400,3),(231281,'安达市',231200,3),(429004,'仙桃市',429000,3),(440600,'佛山市',440000,2),(130607,'满城区',130600,3),(320722,'东海县',320700,3),(210112,'浑南区',210100,3),(430723,'澧县',430700,3),(653101,'喀什市',653100,3),(321112,'丹徒区',321100,3),(411481,'永城市',411400,3),(652927,'乌什县',652900,3),(532503,'蒙自市',532500,3),(450923,'博白县',450900,3),(140900,'忻州市',140000,2),(150521,'科尔沁左翼中旗',150500,3),(320206,'惠山区',320200,3),(361026,'宜黄县',361000,3),(330212,'鄞州区',330200,3),(540400,'林芝市',540000,2),(321301,'市辖区',321300,3),(220400,'辽源市',220000,2),(511502,'翠屏区',511500,3),(320826,'涟水县',320800,3),(210323,'岫岩满族自治县',210300,3),(621101,'市辖区',621100,3),(430482,'常宁市',430400,3),(330203,'海曙区',330200,3),(632321,'同仁县',632300,3),(420504,'点军区',420500,3),(211202,'银州区',211200,3),(420602,'襄城区',420600,3),(622923,'永靖县',622900,3),(152224,'突泉县',152200,3),(430100,'长沙市',430000,2),(321100,'镇江市',320000,2),(230303,'恒山区',230300,3),(513426,'会东县',513400,3),(420500,'宜昌市',420000,2),(632523,'贵德县',632500,3),(371725,'郓城县',371700,3),(623000,'甘南藏族自治州',620000,2),(440811,'麻章区',440800,3),(230103,'南岗区',230100,3),(513423,'盐源县',513400,3),(621126,'岷县',621100,3),(620524,'武山县',620500,3),(220202,'昌邑区',220200,3),(511301,'市辖区',511300,3),(361001,'市辖区',361000,3),(533423,'维西傈僳族自治县',533400,3),(340824,'潜山县',340800,3),(350900,'宁德市',350000,2),(361021,'南城县',361000,3),(533122,'梁河县',533100,3),(450602,'港口区',450600,3),(320902,'亭湖区',320900,3),(152531,'多伦县',152500,3),(341823,'泾县',341800,3),(130900,'沧州市',130000,2),(220183,'德惠市',220100,3),(522636,'丹寨县',522600,3),(513334,'理塘县',513300,3),(450512,'铁山港区',450500,3),(510705,'安州区',510700,3),(231283,'海伦市',231200,3),(540524,'琼结县',540500,3),(530427,'新平彝族傣族自治县',530400,3),(361023,'南丰县',361000,3),(120105,'河北区',120100,3),(532931,'剑川县',532900,3),(652929,'柯坪县',652900,3),(430522,'新邵县',430500,3),(410923,'南乐县',410900,3),(520403,'平坝区',520400,3),(230506,'宝山区',230500,3),(610428,'长武县',610400,3),(130102,'长安区',130100,3),(231003,'阳明区',231000,3),(431028,'安仁县',431000,3),(532500,'红河哈尼族彝族自治州',530000,2),(152201,'乌兰浩特市',152200,3),(530323,'师宗县',530300,3),(610425,'礼泉县',610400,3),(451202,'金城江区',451200,3),(210804,'鲅鱼圈区',210800,3),(130532,'平乡县',130500,3),(411422,'睢县',411400,3),(510116,'双流区',510100,3),(130527,'南和县',130500,3),(450101,'市辖区',450100,3),(310105,'长宁区',310100,3),(330226,'宁海县',330200,3),(411528,'息县',411500,3),(650107,'达坂城区',650100,3),(350212,'同安区',350200,3),(140227,'大同县',140200,3),(330900,'舟山市',330000,2),(610122,'蓝田县',610100,3),(430527,'绥宁县',430500,3),(140303,'矿区',140300,3),(431321,'双峰县',431300,3),(530103,'盘龙区',530100,3),(522301,'兴义市',522300,3),(431002,'北湖区',431000,3),(341324,'泗县',341300,3),(410404,'石龙区',410400,3),(370203,'市北区',370200,3),(610927,'镇坪县',610900,3),(230501,'市辖区',230500,3),(340124,'庐江县',340100,3),(410402,'新华区',410400,3),(469029,'保亭黎族苗族自治县',469000,3),(360821,'吉安县',360800,3),(411503,'平桥区',411500,3),(640422,'西吉县',640400,3),(230502,'尖山区',230500,3),(540233,'亚东县',540200,3),(440606,'顺德区',440600,3),(513434,'越西县',513400,3),(370202,'市南区',370200,3),(450922,'陆川县',450900,3),(630203,'平安区',630200,3),(652825,'且末县',652800,3),(350524,'安溪县',350500,3),(130403,'丛台区',130400,3),(341501,'市辖区',341500,3),(220622,'靖宇县',220600,3),(450305,'七星区',450300,3),(450102,'兴宁区',450100,3),(420625,'谷城县',420600,3),(420100,'武汉市',420000,2),(652823,'尉犁县',652800,3),(360601,'市辖区',360600,3),(150922,'化德县',150900,3),(469001,'五指山市',469000,3),(430529,'城步苗族自治县',430500,3),(320900,'盐城市',320000,2),(210682,'凤城市',210600,3),(220106,'绿园区',220100,3),(654324,'哈巴河县',654300,3),(230904,'茄子河区',230900,3),(211322,'建平县',211300,3),(520123,'修文县',520100,3),(510303,'贡井区',510300,3),(621224,'康县',621200,3),(630101,'市辖区',630100,3),(130421,'邯郸县',130400,3),(410381,'偃师市',410300,3),(350303,'涵江区',350300,3),(540525,'曲松县',540500,3),(340822,'怀宁县',340800,3),(420881,'钟祥市',420800,3),(451081,'靖西市',451000,3),(540121,'林周县',540100,3),(310113,'宝山区',310100,3),(511025,'资中县',511000,3),(533400,'迪庆藏族自治州',530000,2),(130628,'高阳县',130600,3),(110107,'石景山区',110100,3),(621102,'安定区',621100,3),(410222,'通许县',410200,3),(140725,'寿阳县',140700,3),(500238,'巫溪县',500200,3),(140929,'岢岚县',140900,3),(441481,'兴宁市',441400,3),(511002,'市中区',511000,3),(230404,'南山区',230400,3),(411602,'川汇区',411600,3),(632524,'兴海县',632500,3),(350902,'蕉城区',350900,3),(441224,'怀集县',441200,3),(320506,'吴中区',320500,3),(410928,'濮阳县',410900,3),(140302,'城区',140300,3),(370781,'青州市',370700,3),(330600,'绍兴市',330000,2),(530521,'施甸县',530500,3),(120113,'北辰区',120100,3),(610581,'韩城市',610500,3),(360822,'吉水县',360800,3),(331082,'临海市',331000,3),(410527,'内黄县',410500,3),(451425,'天等县',451400,3),(532823,'勐腊县',532800,3),(540302,'卡若区',540300,3),(110114,'昌平区',110100,3),(330200,'宁波市',330000,2),(140105,'小店区',140100,3),(420202,'黄石港区',420200,3),(654025,'新源县',654000,3),(513338,'得荣县',513300,3),(411403,'睢阳区',411400,3),(620825,'庄浪县',620800,3),(530100,'昆明市',530000,2),(341221,'临泉县',341200,3),(513327,'炉霍县',513300,3),(429005,'潜江市',429000,3),(350922,'古田县',350900,3),(610100,'西安市',610000,2),(220104,'朝阳区',220100,3),(451024,'德保县',451000,3),(360281,'乐平市',360200,3),(620725,'山丹县',620700,3),(450802,'港北区',450800,3),(542525,'革吉县',542500,3),(321324,'泗洪县',321300,3),(330603,'柯桥区',330600,3),(510824,'苍溪县',510800,3),(330211,'镇海区',330200,3),(370200,'青岛市',370000,2),(441426,'平远县',441400,3),(520111,'花溪区',520100,3),(330604,'上虞区',330600,3),(510601,'市辖区',510600,3),(330683,'嵊州市',330600,3),(430722,'汉寿县',430700,3),(610631,'黄龙县',610600,3),(150627,'伊金霍洛旗',150600,3),(623021,'临潭县',623000,3),(230321,'鸡东县',230300,3),(430424,'衡东县',430400,3),(371122,'莒县',371100,3),(520203,'六枝特区',520200,3),(451424,'大新县',451400,3),(210681,'东港市',210600,3),(152523,'苏尼特左旗',152500,3),(371323,'沂水县',371300,3),(340705,'铜官区',340700,3),(150206,'白云鄂博矿区',150200,3),(420105,'汉阳区',420100,3),(411627,'太康县',411600,3),(500117,'合川区',500100,3),(522723,'贵定县',522700,3),(370125,'济阳县',370100,3),(440205,'曲江区',440200,3),(350583,'南安市',350500,3),(330225,'象山县',330200,3),(510504,'龙马潭区',510500,3),(140931,'保德县',140900,3),(152500,'锡林郭勒盟',150000,2),(611025,'镇安县',611000,3),(520624,'思南县',520600,3),(411402,'梁园区',411400,3),(540103,'堆龙德庆区',540100,3),(350525,'永春县',350500,3),(130709,'崇礼区',130700,3),(654225,'裕民县',654200,3),(411424,'柘城县',411400,3),(330328,'文成县',330300,3),(640400,'固原市',640000,2),(361025,'乐安县',361000,3),(610702,'汉台区',610700,3),(610323,'岐山县',610300,3),(411401,'市辖区',411400,3),(370883,'邹城市',370800,3),(350629,'华安县',350600,3),(632522,'同德县',632500,3),(540522,'贡嘎县',540500,3),(450224,'融安县',450200,3),(510600,'德阳市',510000,2),(350101,'市辖区',350100,3),(410621,'浚县',410600,3),(440117,'从化区',440100,3),(410803,'中站区',410800,3),(510681,'广汉市',510600,3),(150421,'阿鲁科尔沁旗',150400,3),(320214,'新吴区',320200,3),(620982,'敦煌市',620900,3),(411326,'淅川县',411300,3),(230382,'密山市',230300,3),(220722,'长岭县',220700,3),(430600,'岳阳市',430000,2),(421003,'荆州区',421000,3),(441300,'惠州市',440000,2),(139001,'定州市',139000,3),(230230,'克东县',230200,3),(330903,'普陀区',330900,3),(141126,'石楼县',141100,3),(370201,'市辖区',370200,3),(211281,'调兵山市',211200,3),(420701,'市辖区',420700,3),(321283,'泰兴市',321200,3),(530428,'元江哈尼族彝族傣族自治县',530400,3),(371481,'乐陵市',371400,3),(520382,'仁怀市',520300,3),(139000,'省直辖县级行政区划',130000,2),(421182,'武穴市',421100,3),(340503,'花山区',340500,3),(150523,'开鲁县',150500,3),(410185,'登封市',410100,3),(410400,'平顶山市',410000,2),(654300,'阿勒泰地区',650000,2),(530500,'保山市',530000,2),(150522,'科尔沁左翼后旗',150500,3),(120103,'河西区',120100,3),(321001,'市辖区',321000,3),(530101,'市辖区',530100,3),(530722,'永胜县',530700,3),(411501,'市辖区',411500,3),(230381,'虎林市',230300,3),(441623,'连平县',441600,3),(371312,'河东区',371300,3),(510300,'自贡市',510000,2),(230707,'新青区',230700,3),(430204,'石峰区',430200,3),(430407,'石鼓区',430400,3),(620702,'甘州区',620700,3),(542527,'措勤县',542500,3),(150200,'包头市',150000,2),(430426,'祁东县',430400,3),(371721,'曹县',371700,3),(210400,'抚顺市',210000,2),(210111,'苏家屯区',210100,3),(360727,'龙南县',360700,3),(421081,'石首市',421000,3),(532625,'马关县',532600,3),(610124,'周至县',610100,3),(130528,'宁晋县',130500,3),(360729,'全南县',360700,3),(370100,'济南市',370000,2),(371724,'巨野县',371700,3),(530821,'宁洱哈尼族彝族自治县',530800,3),(511001,'市辖区',511000,3),(522300,'黔西南布依族苗族自治州',520000,2),(130501,'市辖区',130500,3),(441401,'市辖区',441400,3),(420901,'市辖区',420900,3),(429006,'天门市',429000,3),(430623,'华容县',430600,3),(371103,'岚山区',371100,3),(410702,'红旗区',410700,3),(360429,'湖口县',360400,3),(320113,'栖霞区',320100,3),(530822,'墨江哈尼族自治县',530800,3),(522732,'三都水族自治县',522700,3),(330483,'桐乡市',330400,3),(511024,'威远县',511000,3),(361125,'横峰县',361100,3),(130429,'永年县',130400,3),(620824,'华亭县',620800,3),(350403,'三元区',350400,3),(640300,'吴忠市',640000,2),(331124,'松阳县',331100,3),(610301,'市辖区',610300,3),(445222,'揭西县',445200,3),(230202,'龙沙区',230200,3),(511011,'东兴区',511000,3),(220605,'江源区',220600,3),(610423,'泾阳县',610400,3),(330482,'平湖市',330400,3),(130903,'运河区',130900,3),(371722,'单县',371700,3),(540528,'加查县',540500,3),(510823,'剑阁县',510800,3),(500116,'江津区',500100,3),(530627,'镇雄县',530600,3),(420684,'宜城市',420600,3),(321101,'市辖区',321100,3),(632300,'黄南藏族自治州',630000,2),(211204,'清河区',211200,3),(533124,'陇川县',533100,3),(130526,'任县',130500,3),(620103,'七里河区',620100,3),(532801,'景洪市',532800,3),(410804,'马村区',410800,3),(610429,'旬邑县',610400,3),(445322,'郁南县',445300,3),(421101,'市辖区',421100,3),(640121,'永宁县',640100,3),(513431,'昭觉县',513400,3),(350503,'丰泽区',350500,3),(120115,'宝坻区',120100,3),(130431,'鸡泽县',130400,3),(150800,'巴彦淖尔市',150000,2),(511921,'通江县',511900,3),(370281,'胶州市',370200,3),(451028,'乐业县',451000,3),(623001,'合作市',623000,3),(411000,'许昌市',410000,2),(632723,'称多县',632700,3),(210281,'瓦房店市',210200,3),(653227,'民丰县',653200,3),(540425,'察隅县',540400,3),(341022,'休宁县',341000,3),(433125,'保靖县',433100,3),(360900,'宜春市',360000,2),(621023,'华池县',621000,3),(340604,'烈山区',340600,3),(211321,'朝阳县',211300,3),(131100,'衡水市',130000,2),(620722,'民乐县',620700,3),(320401,'市辖区',320400,3),(420800,'荆门市',420000,2),(530600,'昭通市',530000,2),(451322,'象州县',451300,3),(469024,'临高县',469000,3),(360824,'新干县',360800,3),(500111,'大足区',500100,3),(410800,'焦作市',410000,2),(441801,'市辖区',441800,3),(513226,'金川县',513200,3),(532502,'开远市',532500,3),(451223,'凤山县',451200,3),(513222,'理县',513200,3),(320213,'梁溪区',320200,3),(610523,'大荔县',610500,3),(522327,'册亨县',522300,3),(140726,'太谷县',140700,3),(130203,'路北区',130200,3),(411624,'沈丘县',411600,3),(341100,'滁州市',340000,2),(231181,'北安市',231100,3),(520329,'余庆县',520300,3),(620100,'兰州市',620000,2),(360926,'铜鼓县',360900,3),(431103,'冷水滩区',431100,3),(654223,'沙湾县',654200,3),(532329,'武定县',532300,3),(140829,'平陆县',140800,3),(530425,'易门县',530400,3),(210301,'市辖区',210300,3),(350122,'连江县',350100,3),(150100,'呼和浩特市',150000,2),(610831,'子洲县',610800,3),(330104,'江干区',330100,3),(371425,'齐河县',371400,3),(130923,'东光县',130900,3),(150223,'达尔罕茂明安联合旗',150200,3),(411701,'市辖区',411700,3),(440201,'市辖区',440200,3),(120104,'南开区',120100,3),(622926,'东乡族自治县',622900,3),(610404,'渭城区',610400,3),(320583,'昆山市',320500,3),(130823,'平泉县',130800,3),(451400,'崇左市',450000,2),(460203,'吉阳区',460200,3),(371329,'临沭县',371300,3),(520424,'关岭布依族苗族自治县',520400,3),(500237,'巫山县',500200,3),(360428,'都昌县',360400,3),(410526,'滑县',410500,3),(640106,'金凤区',640100,3),(140923,'代县',140900,3),(520102,'南明区',520100,3),(431025,'临武县',431000,3),(360101,'市辖区',360100,3),(410401,'市辖区',410400,3),(211402,'连山区',211400,3),(110117,'平谷区',110100,3),(421221,'嘉鱼县',421200,3),(220401,'市辖区',220400,3),(430801,'市辖区',430800,3),(421301,'市辖区',421300,3),(520525,'纳雍县',520500,3),(150929,'四子王旗',150900,3),(621124,'临洮县',621100,3),(411527,'淮滨县',411500,3),(130631,'望都县',130600,3),(510182,'彭州市',510100,3),(360401,'市辖区',360400,3),(440983,'信宜市',440900,3),(230602,'萨尔图区',230600,3),(370832,'梁山县',370800,3),(410221,'杞县',410200,3),(130828,'围场满族蒙古族自治县',130800,3),(520522,'黔西县',520500,3),(450800,'贵港市',450000,2),(610829,'吴堡县',610800,3),(310104,'徐汇区',310100,3),(130131,'平山县',130100,3),(141123,'兴县',141100,3),(620802,'崆峒区',620800,3),(520000,'贵州省',0,1),(320481,'溧阳市',320400,3),(370881,'曲阜市',370800,3),(511425,'青神县',511400,3),(410711,'牧野区',410700,3),(532301,'楚雄市',532300,3),(621201,'市辖区',621200,3),(220822,'通榆县',220800,3),(371602,'滨城区',371600,3),(231226,'绥棱县',231200,3),(451029,'田林县',451000,3),(340701,'市辖区',340700,3),(371502,'东昌府区',371500,3),(440106,'天河区',440100,3),(130428,'肥乡县',130400,3),(310101,'黄浦区',310100,3),(420527,'秭归县',420500,3),(532331,'禄丰县',532300,3),(610730,'佛坪县',610700,3),(120117,'宁河区',120100,3),(422822,'建始县',422800,3),(620523,'甘谷县',620500,3),(500233,'忠县',500200,3),(440104,'越秀区',440100,3),(150201,'市辖区',150200,3),(410223,'尉氏县',410200,3),(520626,'德江县',520600,3),(341103,'南谯区',341100,3),(450200,'柳州市',450000,2),(450204,'柳南区',450200,3),(450105,'江南区',450100,3),(230822,'桦南县',230800,3),(140722,'左权县',140700,3),(610203,'印台区',610200,3),(623022,'卓尼县',623000,3),(231102,'爱辉区',231100,3),(440825,'徐闻县',440800,3),(140926,'静乐县',140900,3),(540327,'左贡县',540300,3),(511623,'邻水县',511600,3),(370705,'奎文区',370700,3),(530422,'澄江县',530400,3),(210303,'铁西区',210300,3),(341600,'亳州市',340000,2),(530702,'古城区',530700,3),(370323,'沂源县',370300,3),(130534,'清河县',130500,3),(321181,'丹阳市',321100,3),(411082,'长葛市',411000,3),(441402,'梅江区',441400,3),(350802,'新罗区',350800,3),(211422,'建昌县',211400,3),(350603,'龙文区',350600,3),(370684,'蓬莱市',370600,3),(350206,'湖里区',350200,3),(150402,'红山区',150400,3),(330500,'湖州市',330000,2),(340121,'长丰县',340100,3),(511802,'雨城区',511800,3),(513227,'小金县',513200,3),(511132,'峨边彝族自治县',511100,3),(150703,'扎赉诺尔区',150700,3),(652801,'库尔勒市',652800,3),(230184,'五常市',230100,3),(210403,'东洲区',210400,3),(640205,'惠农区',640200,3),(321200,'泰州市',320000,2),(510525,'古蔺县',510500,3),(371402,'德城区',371400,3),(360721,'赣县',360700,3),(533103,'芒市',533100,3),(411400,'商丘市',410000,2),(150502,'科尔沁区',150500,3),(370306,'周村区',370300,3),(650106,'头屯河区',650100,3),(341602,'谯城区',341600,3),(230601,'市辖区',230600,3),(230716,'上甘岭区',230700,3),(130525,'隆尧县',130500,3),(341701,'市辖区',341700,3),(141122,'交城县',141100,3),(210602,'元宝区',210600,3),(630122,'湟中县',630100,3),(510502,'江阳区',510500,3),(440400,'珠海市',440000,2),(140600,'朔州市',140000,2),(140921,'定襄县',140900,3),(610431,'武功县',610400,3),(450324,'全州县',450300,3),(522731,'惠水县',522700,3),(152921,'阿拉善左旗',152900,3),(321282,'靖江市',321200,3),(430201,'市辖区',430200,3),(230702,'伊春区',230700,3),(420302,'茅箭区',420300,3),(220283,'舒兰市',220200,3),(500103,'渝中区',500100,3),(210124,'法库县',210100,3),(460107,'琼山区',460100,3),(350800,'龙岩市',350000,2),(130606,'莲池区',130600,3),(511324,'仪陇县',511300,3),(350121,'闽侯县',350100,3),(340828,'岳西县',340800,3),(340700,'铜陵市',340000,2),(654022,'察布查尔锡伯自治县',654000,3),(500000,'重庆市',0,1),(220204,'船营区',220200,3),(130105,'新华区',130100,3),(532925,'弥渡县',532900,3),(230722,'嘉荫县',230700,3),(450107,'西乡塘区',450100,3),(441284,'四会市',441200,3),(511129,'沐川县',511100,3),(611002,'商州区',611000,3),(210101,'市辖区',210100,3),(320211,'滨湖区',320200,3),(340221,'芜湖县',340200,3),(140821,'临猗县',140800,3),(450109,'邕宁区',450100,3),(370983,'肥城市',370900,3),(210283,'庄河市',210200,3),(360982,'樟树市',360900,3),(610700,'汉中市',610000,2),(513233,'红原县',513200,3),(150104,'玉泉区',150100,3),(610304,'陈仓区',610300,3),(360430,'彭泽县',360400,3),(350721,'顺昌县',350700,3),(371701,'市辖区',371700,3),(340123,'肥西县',340100,3),(330108,'滨江区',330100,3),(511803,'名山区',511800,3),(441826,'连南瑶族自治县',441800,3),(220103,'宽城区',220100,3),(411322,'方城县',411300,3),(430501,'市辖区',430500,3),(341003,'黄山区',341000,3),(411323,'西峡县',411300,3),(370503,'河口区',370500,3),(210300,'鞍山市',210000,2),(540227,'谢通门县',540200,3),(460201,'市辖区',460200,3),(610827,'米脂县',610800,3),(530924,'镇康县',530900,3),(360521,'分宜县',360500,3),(371083,'乳山市',371000,3),(150123,'和林格尔县',150100,3),(210502,'平山区',210500,3),(500118,'永川区',500100,3),(130825,'隆化县',130800,3),(210102,'和平区',210100,3),(330922,'嵊泗县',330900,3),(510311,'沿滩区',510300,3),(460400,'儋州市',460000,2),(150981,'丰镇市',150900,3),(411023,'许昌县',411000,3),(220303,'铁东区',220300,3),(320707,'赣榆区',320700,3),(530601,'市辖区',530600,3),(130127,'高邑县',130100,3),(370911,'岱岳区',370900,3),(150403,'元宝山区',150400,3),(441301,'市辖区',441300,3),(130104,'桥西区',130100,3),(140927,'神池县',140900,3),(320400,'常州市',320000,2),(622901,'临夏市',622900,3),(330304,'瓯海区',330300,3),(530624,'大关县',530600,3),(330822,'常山县',330800,3),(130324,'卢龙县',130300,3),(511923,'平昌县',511900,3),(210213,'金州区',210200,3),(230304,'滴道区',230300,3),(469007,'东方市',469000,3),(520527,'赫章县',520500,3),(110102,'西城区',110100,3),(330106,'西湖区',330100,3),(440232,'乳源瑶族自治县',440200,3),(520621,'江口县',520600,3),(371601,'市辖区',371600,3),(620123,'榆中县',620100,3),(370700,'潍坊市',370000,2),(652901,'阿克苏市',652900,3),(410184,'新郑市',410100,3),(440224,'仁化县',440200,3),(320813,'洪泽区',320800,3),(210106,'铁西区',210100,3),(110106,'丰台区',110100,3),(620621,'民勤县',620600,3),(130301,'市辖区',130300,3),(420281,'大冶市',420200,3),(440303,'罗湖区',440300,3),(421102,'黄州区',421100,3),(530800,'普洱市',530000,2),(513400,'凉山彝族自治州',510000,2),(421303,'曾都区',421300,3),(130322,'昌黎县',130300,3),(210423,'清原满族自治县',210400,3),(350921,'霞浦县',350900,3),(410328,'洛宁县',410300,3),(610402,'秦都区',610400,3),(370681,'龙口市',370600,3),(513301,'康定市',513300,3),(542427,'索县',542400,3),(371522,'莘县',371500,3),(640104,'兴庆区',640100,3),(411526,'潢川县',411500,3),(540122,'当雄县',540100,3),(610503,'华州区',610500,3),(330411,'秀洲区',330400,3),(420702,'梁子湖区',420700,3),(610900,'安康市',610000,2),(512001,'市辖区',512000,3),(120102,'河东区',120100,3),(610525,'澄城县',610500,3),(320703,'连云区',320700,3),(340323,'固镇县',340300,3),(340405,'八公山区',340400,3),(152923,'额济纳旗',152900,3),(220102,'南关区',220100,3),(430381,'湘乡市',430300,3),(450225,'融水苗族自治县',450200,3),(610481,'兴平市',610400,3),(130624,'阜平县',130600,3),(450123,'隆安县',450100,3),(330523,'安吉县',330500,3),(620602,'凉州区',620600,3),(350305,'秀屿区',350300,3),(440902,'茂南区',440900,3),(130500,'邢台市',130000,2),(131028,'大厂回族自治县',131000,3),(130427,'磁县',130400,3),(530102,'五华区',530100,3),(210881,'盖州市',210800,3),(330703,'金东区',330700,3),(230126,'巴彦县',230100,3),(340202,'镜湖区',340200,3),(431301,'市辖区',431300,3),(450327,'灌阳县',450300,3),(411522,'光山县',411500,3),(130627,'唐县',130600,3),(411102,'源汇区',411100,3),(361130,'婺源县',361100,3),(610623,'子长县',610600,3),(350481,'永安市',350400,3),(460106,'龙华区',460100,3),(150122,'托克托县',150100,3),(220211,'丰满区',220200,3),(440233,'新丰县',440200,3),(520523,'金沙县',520500,3),(211001,'市辖区',211000,3),(220621,'抚松县',220600,3),(341623,'利辛县',341600,3),(632722,'杂多县',632700,3),(152200,'兴安盟',150000,2),(500200,'县',500000,2),(340603,'相山区',340600,3),(630224,'化隆回族自治县',630200,3),(130404,'复兴区',130400,3),(130224,'滦南县',130200,3),(220801,'市辖区',220800,3),(620121,'永登县',620100,3),(532300,'楚雄彝族自治州',530000,2),(654201,'塔城市',654200,3),(450681,'东兴市',450600,3),(410311,'洛龙区',410300,3),(130630,'涞源县',130600,3),(410181,'巩义市',410100,3),(511529,'屏山县',511500,3),(632701,'玉树市',632700,3),(230400,'鹤岗市',230000,2),(230712,'汤旺河区',230700,3),(140122,'阳曲县',140100,3),(421126,'蕲春县',421100,3),(152529,'正镶白旗',152500,3),(640000,'宁夏回族自治区',0,1),(150624,'鄂托克旗',150600,3),(230221,'龙江县',230200,3),(610725,'勉县',610700,3),(341722,'石台县',341700,3),(433122,'泸溪县',433100,3),(410611,'淇滨区',410600,3),(421222,'通城县',421200,3),(520304,'播州区',520300,3),(440308,'盐田区',440300,3),(510521,'泸县',510500,3),(130600,'保定市',130000,2),(542521,'普兰县',542500,3),(650502,'伊州区',650500,3),(440881,'廉江市',440800,3),(321003,'邗江区',321000,3),(610422,'三原县',610400,3),(430900,'益阳市',430000,2),(431127,'蓝山县',431100,3),(532929,'云龙县',532900,3),(361121,'上饶县',361100,3),(130708,'万全区',130700,3),(220502,'东昌区',220500,3),(310112,'闵行区',310100,3),(433126,'古丈县',433100,3),(371327,'莒南县',371300,3),(441625,'东源县',441600,3),(150425,'克什克腾旗',150400,3),(360983,'高安市',360900,3),(451221,'南丹县',451200,3),(621000,'庆阳市',620000,2),(210311,'千山区',210300,3),(430702,'武陵区',430700,3),(231123,'逊克县',231100,3),(411281,'义马市',411200,3),(530802,'思茅区',530800,3),(511113,'金口河区',511100,3),(540124,'曲水县',540100,3),(430603,'云溪区',430600,3),(440523,'南澳县',440500,3),(469030,'琼中黎族苗族自治县',469000,3),(430721,'安乡县',430700,3),(230108,'平房区',230100,3),(320831,'金湖县',320800,3),(522600,'黔东南苗族侗族自治州',520000,2),(522624,'三穗县',522600,3),(411723,'平舆县',411700,3),(451421,'扶绥县',451400,3),(150207,'九原区',150200,3),(320322,'沛县',320300,3),(131024,'香河县',131000,3),(220701,'市辖区',220700,3),(411001,'市辖区',411000,3),(653222,'墨玉县',653200,3),(211122,'盘山县',211100,3),(430700,'常德市',430000,2),(210000,'辽宁省',0,1),(341023,'黟县',341000,3),(210726,'黑山县',210700,3),(231121,'嫩江县',231100,3),(610800,'榆林市',610000,2),(430112,'望城区',430100,3),(654028,'尼勒克县',654000,3),(411221,'渑池县',411200,3),(511526,'珙县',511500,3),(510683,'绵竹市',510600,3),(140724,'昔阳县',140700,3),(630123,'湟源县',630100,3),(371621,'惠民县',371600,3),(331127,'景宁畲族自治县',331100,3),(370611,'福山区',370600,3),(520524,'织金县',520500,3),(411600,'周口市',410000,2),(210200,'大连市',210000,2),(632221,'门源回族自治县',632200,3),(632600,'果洛藏族自治州',630000,2),(331003,'黄岩区',331000,3),(532530,'金平苗族瑶族傣族自治县',532500,3),(520330,'习水县',520300,3),(320321,'丰县',320300,3),(532623,'西畴县',532600,3),(532326,'大姚县',532300,3),(520100,'贵阳市',520000,2),(230705,'西林区',230700,3),(441721,'阳西县',441700,3),(430181,'浏阳市',430100,3),(150926,'察哈尔右翼前旗',150900,3),(441521,'海丰县',441500,3),(230811,'郊区',230800,3),(410102,'中原区',410100,3),(530921,'凤庆县',530900,3),(361000,'抚州市',360000,2),(210113,'沈北新区',210100,3),(440901,'市辖区',440900,3),(230708,'美溪区',230700,3),(141125,'柳林县',141100,3),(430300,'湘潭市',430000,2),(431024,'嘉禾县',431000,3),(430103,'天心区',430100,3),(540323,'类乌齐县',540300,3),(511903,'恩阳区',511900,3),(130533,'威县',130500,3),(469026,'昌江黎族自治县',469000,3),(210211,'甘井子区',210200,3),(411524,'商城县',411500,3),(141022,'翼城县',141000,3),(410725,'原阳县',410700,3),(370800,'济宁市',370000,2),(632621,'玛沁县',632600,3),(513300,'甘孜藏族自治州',510000,2),(331122,'缙云县',331100,3),(620800,'平凉市',620000,2),(513324,'九龙县',513300,3),(350213,'翔安区',350200,3),(542431,'双湖县',542400,3),(511400,'眉山市',510000,2),(532822,'勐海县',532800,3),(210501,'市辖区',210500,3),(511500,'宜宾市',510000,2),(330602,'越城区',330600,3),(420116,'黄陂区',420100,3),(411726,'泌阳县',411700,3),(360402,'濂溪区',360400,3),(330283,'奉化市',330200,3),(654021,'伊宁县',654000,3),(430921,'南县',430900,3),(611026,'柞水县',611000,3),(610825,'定边县',610800,3),(422802,'利川市',422800,3),(210500,'本溪市',210000,2),(140621,'山阴县',140600,3),(130701,'市辖区',130700,3),(460205,'崖州区',460200,3),(511826,'芦山县',511800,3),(540101,'市辖区',540100,3),(510802,'利州区',510800,3),(445300,'云浮市',440000,2),(360203,'珠山区',360200,3),(420501,'市辖区',420500,3),(340311,'淮上区',340300,3),(410212,'祥符区',410200,3),(231222,'兰西县',231200,3),(330122,'桐庐县',330100,3),(420528,'长阳土家族自治县',420500,3),(621026,'宁县',621000,3),(360825,'永丰县',360800,3),(140121,'清徐县',140100,3),(652824,'若羌县',652800,3),(330110,'余杭区',330100,3),(653126,'叶城县',653100,3),(110113,'顺义区',110100,3),(330282,'慈溪市',330200,3),(621025,'正宁县',621000,3),(140431,'沁源县',140400,3),(350681,'龙海市',350600,3),(610929,'白河县',610900,3),(650121,'乌鲁木齐县',650100,3),(623023,'舟曲县',623000,3),(610527,'白水县',610500,3),(371000,'威海市',370000,2),(520400,'安顺市',520000,2),(532926,'南涧彝族自治县',532900,3),(131025,'大城县',131000,3),(410182,'荥阳市',410100,3),(130705,'宣化区',130700,3),(420503,'伍家岗区',420500,3),(410324,'栾川县',410300,3),(510302,'自流井区',510300,3),(640201,'市辖区',640200,3),(451001,'市辖区',451000,3),(360124,'进贤县',360100,3),(152528,'镶黄旗',152500,3),(630000,'青海省',0,1),(621227,'徽县',621200,3),(150700,'呼伦贝尔市',150000,2),(510682,'什邡市',510600,3),(430408,'蒸湘区',430400,3),(321203,'高港区',321200,3),(371328,'蒙阴县',371300,3),(360723,'大余县',360700,3),(230826,'桦川县',230800,3),(370300,'淄博市',370000,2),(411681,'项城市',411600,3),(230882,'富锦市',230800,3),(130121,'井陉县',130100,3),(620623,'天祝藏族自治县',620600,3),(420525,'远安县',420500,3),(410728,'长垣县',410700,3),(530602,'昭阳区',530600,3),(610921,'汉阴县',610900,3),(320411,'新北区',320400,3),(630223,'互助土族自治县',630200,3),(542421,'那曲县',542400,3),(220402,'龙山区',220400,3),(410325,'嵩县',410300,3),(450203,'鱼峰区',450200,3),(230112,'阿城区',230100,3),(120116,'滨海新区',120100,3),(220122,'农安县',220100,3),(451000,'百色市',450000,2),(361030,'广昌县',361000,3),(411721,'西平县',411700,3),(340601,'市辖区',340600,3),(532627,'广南县',532600,3),(230804,'前进区',230800,3),(650500,'哈密市',650000,2),(500115,'长寿区',500100,3),(330501,'市辖区',330500,3),(654002,'伊宁市',654000,3),(140424,'屯留县',140400,3),(330201,'市辖区',330200,3),(532528,'元阳县',532500,3),(532901,'大理市',532900,3),(331081,'温岭市',331000,3),(451324,'金秀瑶族自治县',451300,3),(431229,'靖州苗族侗族自治县',431200,3),(513331,'白玉县',513300,3),(610926,'平利县',610900,3),(421281,'赤壁市',421200,3),(350504,'洛江区',350500,3),(350924,'寿宁县',350900,3),(652922,'温宿县',652900,3),(360722,'信丰县',360700,3),(620503,'麦积区',620500,3),(141082,'霍州市',141000,3),(361128,'鄱阳县',361100,3),(451226,'环江毛南族自治县',451200,3),(451381,'合山市',451300,3),(370829,'嘉祥县',370800,3),(410622,'淇县',410600,3),(320117,'溧水区',320100,3),(513231,'阿坝县',513200,3),(530825,'镇沅彝族哈尼族拉祜族自治县',530800,3),(620302,'金川区',620300,3),(421300,'随州市',420000,2),(431129,'江华瑶族自治县',431100,3),(371003,'文登区',371000,3),(411329,'新野县',411300,3),(310151,'崇明区',310100,3),(621100,'定西市',620000,2),(360826,'泰和县',360800,3),(440403,'斗门区',440400,3),(469022,'屯昌县',469000,3),(320903,'盐都区',320900,3),(230921,'勃利县',230900,3),(411104,'召陵区',411100,3),(610722,'城固县',610700,3),(610630,'宜川县',610600,3),(420529,'五峰土家族自治县',420500,3),(340302,'龙子湖区',340300,3),(620622,'古浪县',620600,3),(211301,'市辖区',211300,3),(610101,'市辖区',610100,3),(231002,'东安区',231000,3),(150783,'扎兰屯市',150700,3),(410411,'湛河区',410400,3),(350424,'宁化县',350400,3),(120000,'天津市',0,1),(420301,'市辖区',420300,3),(320381,'新沂市',320300,3),(150900,'乌兰察布市',150000,2),(540322,'贡觉县',540300,3),(653129,'伽师县',653100,3),(361126,'弋阳县',361100,3),(511602,'广安区',511600,3),(654027,'特克斯县',654000,3),(152527,'太仆寺旗',152500,3),(620701,'市辖区',620700,3),(350527,'金门县',350500,3),(431221,'中方县',431200,3),(431128,'新田县',431100,3),(210103,'沈河区',210100,3),(330783,'东阳市',330700,3),(152222,'科尔沁右翼中旗',152200,3),(510106,'金牛区',510100,3),(652800,'巴音郭楞蒙古自治州',650000,2),(152221,'科尔沁右翼前旗',152200,3),(340722,'枞阳县',340700,3),(431227,'新晃侗族自治县',431200,3),(371102,'东港区',371100,3),(371422,'宁津县',371400,3),(431027,'桂东县',431000,3),(450202,'城中区',450200,3),(230129,'延寿县',230100,3),(440784,'鹤山市',440700,3),(330105,'拱墅区',330100,3),(520302,'红花岗区',520300,3),(540330,'边坝县',540300,3),(522631,'黎平县',522600,3),(140981,'原平市',140900,3),(350302,'城厢区',350300,3),(320904,'大丰区',320900,3),(330303,'龙湾区',330300,3),(350200,'厦门市',350000,2),(330800,'衢州市',330000,2),(371703,'定陶区',371700,3),(210381,'海城市',210300,3),(230113,'双城区',230100,3),(441581,'陆丰市',441500,3),(310106,'静安区',310100,3),(320701,'市辖区',320700,3),(361024,'崇仁县',361000,3),(371424,'临邑县',371400,3),(610400,'咸阳市',610000,2),(640401,'市辖区',640400,3),(430400,'衡阳市',430000,2),(140203,'矿区',140200,3),(350783,'建瓯市',350700,3),(440229,'翁源县',440200,3),(150824,'乌拉特中旗',150800,3),(370725,'昌乐县',370700,3),(360102,'东湖区',360100,3),(130109,'藁城区',130100,3),(610200,'铜川市',610000,2),(440700,'江门市',440000,2),(440306,'宝安区',440300,3),(211221,'铁岭县',211200,3),(360701,'市辖区',360700,3),(469028,'陵水黎族自治县',469000,3),(150724,'鄂温克族自治旗',150700,3),(530402,'红塔区',530400,3),(621024,'合水县',621000,3),(320684,'海门市',320600,3),(340322,'五河县',340300,3),(450423,'蒙山县',450400,3),(330601,'市辖区',330600,3),(540127,'墨竹工卡县',540100,3),(530181,'安宁市',530100,3),(211302,'双塔区',211300,3),(433124,'花垣县',433100,3),(140225,'浑源县',140200,3),(140123,'娄烦县',140100,3),(140429,'武乡县',140400,3),(340802,'迎江区',340800,3),(140930,'河曲县',140900,3),(140300,'阳泉市',140000,2),(610117,'高陵区',610100,3),(430304,'岳塘区',430300,3),(320501,'市辖区',320500,3),(411203,'陕州区',411200,3),(321322,'沭阳县',321300,3),(511300,'南充市',510000,2),(340406,'潘集区',340400,3),(422823,'巴东县',422800,3),(340122,'肥东县',340100,3),(210411,'顺城区',210400,3),(370601,'市辖区',370600,3),(451423,'龙州县',451400,3),(430200,'株洲市',430000,2),(513424,'德昌县',513400,3),(430321,'湘潭县',430300,3),(130423,'临漳县',130400,3),(420323,'竹山县',420300,3),(421083,'洪湖市',421000,3),(653130,'巴楚县',653100,3),(620981,'玉门市',620900,3),(330802,'柯城区',330800,3),(210601,'市辖区',210600,3),(530523,'龙陵县',530500,3),(440701,'市辖区',440700,3),(320804,'淮阴区',320800,3),(360781,'瑞金市',360700,3),(420303,'张湾区',420300,3),(500151,'铜梁区',500100,3),(450328,'龙胜各族自治县',450300,3),(410305,'涧西区',410300,3),(331121,'青田县',331100,3),(540321,'江达县',540300,3),(360734,'寻乌县',360700,3),(513232,'若尔盖县',513200,3),(131026,'文安县',131000,3),(210181,'新民市',210100,3),(610322,'凤翔县',610300,3),(540000,'西藏自治区',0,1),(451030,'西林县',451000,3),(230701,'市辖区',230700,3),(441601,'市辖区',441600,3),(341300,'宿州市',340000,2),(150821,'五原县',150800,3),(230883,'抚远市',230800,3),(330782,'义乌市',330700,3),(511701,'市辖区',511700,3),(532628,'富宁县',532600,3),(440401,'市辖区',440400,3),(540421,'工布江达县',540400,3),(141021,'曲沃县',141000,3),(542424,'聂荣县',542400,3),(420104,'硚口区',420100,3),(640100,'银川市',640000,2),(511525,'高县',511500,3),(440803,'霞山区',440800,3),(320111,'浦口区',320100,3),(220200,'吉林市',220000,2),(512022,'乐至县',512000,3),(540100,'拉萨市',540000,2),(320600,'南通市',320000,2),(130683,'安国市',130600,3),(370321,'桓台县',370300,3),(130802,'双桥区',130800,3),(430225,'炎陵县',430200,3),(510411,'仁和区',510400,3),(141124,'临县',141100,3),(320612,'通州区',320600,3),(211102,'双台子区',211100,3),(520112,'乌当区',520100,3),(410326,'汝阳县',410300,3),(532325,'姚安县',532300,3),(511403,'彭山区',511400,3),(320682,'如皋市',320600,3),(530124,'富民县',530100,3),(341800,'宣城市',340000,2),(370634,'长岛县',370600,3),(540523,'桑日县',540500,3),(411200,'三门峡市',410000,2),(140922,'五台县',140900,3),(420381,'丹江口市',420300,3),(211100,'盘锦市',210000,2),(120111,'西青区',120100,3),(620500,'天水市',620000,2),(410421,'宝丰县',410400,3),(520603,'万山区',520600,3),(220403,'西安区',220400,3),(620104,'西固区',620100,3),(450222,'柳城县',450200,3),(650402,'高昌区',650400,3),(610330,'凤县',610300,3),(511325,'西充县',511300,3),(141129,'中阳县',141100,3),(370501,'市辖区',370500,3),(130727,'阳原县',130700,3),(110115,'大兴区',110100,3),(231221,'望奎县',231200,3),(130926,'肃宁县',130900,3),(371603,'沾化区',371600,3),(130706,'下花园区',130700,3),(370304,'博山区',370300,3),(440513,'潮阳区',440500,3),(330402,'南湖区',330400,3),(130430,'邱县',130400,3),(640381,'青铜峡市',640300,3),(621221,'成县',621200,3),(530629,'威信县',530600,3),(220282,'桦甸市',220200,3),(533324,'贡山独龙族怒族自治县',533300,3),(140211,'南郊区',140200,3),(411202,'湖滨区',411200,3),(371581,'临清市',371500,3),(320312,'铜山区',320300,3),(371322,'郯城县',371300,3),(421122,'红安县',421100,3),(150124,'清水河县',150100,3),(130000,'河北省',0,1),(620600,'武威市',620000,2),(150404,'松山区',150400,3),(230800,'佳木斯市',230000,2),(430502,'双清区',430500,3),(451229,'大化瑶族自治县',451200,3),(620721,'肃南裕固族自治县',620700,3),(520113,'白云区',520100,3),(610723,'洋县',610700,3),(632823,'天峻县',632800,3),(441802,'清城区',441800,3),(610922,'石泉县',610900,3),(230711,'乌马河区',230700,3),(440608,'高明区',440600,3),(441602,'源城区',441600,3),(650100,'乌鲁木齐市',650000,2),(110108,'海淀区',110100,3),(431202,'鹤城区',431200,3),(522634,'雷山县',522600,3),(360313,'湘东区',360300,3),(140723,'和顺县',140700,3),(650205,'乌尔禾区',650200,3),(622927,'积石山保安族东乡族撒拉族自治县',622900,3),(130983,'黄骅市',130900,3),(130401,'市辖区',130400,3),(440883,'吴川市',440800,3),(231084,'宁安市',231000,3),(371325,'费县',371300,3),(520301,'市辖区',520300,3),(610928,'旬阳县',610900,3),(451301,'市辖区',451300,3),(653023,'阿合奇县',653000,3),(330881,'江山市',330800,3),(231124,'孙吴县',231100,3),(320706,'海州区',320700,3),(441823,'阳山县',441800,3),(532531,'绿春县',532500,3),(141023,'襄汾县',141000,3),(150826,'杭锦后旗',150800,3),(451323,'武宣县',451300,3),(410801,'市辖区',410800,3),(411628,'鹿邑县',411600,3),(222406,'和龙市',222400,3),(220781,'扶余市',220700,3),(420682,'老河口市',420600,3),(130126,'灵寿县',130100,3),(441821,'佛冈县',441800,3),(140401,'市辖区',140400,3),(652822,'轮台县',652800,3),(140603,'平鲁区',140600,3),(520521,'大方县',520500,3),(430621,'岳阳县',430600,3),(522730,'龙里县',522700,3),(411724,'正阳县',411700,3),(320101,'市辖区',320100,3),(320611,'港闸区',320600,3),(230100,'哈尔滨市',230000,2),(411301,'市辖区',411300,3),(510921,'蓬溪县',510900,3),(340500,'马鞍山市',340000,2),(140522,'阳城县',140500,3),(350624,'诏安县',350600,3),(140322,'盂县',140300,3),(361027,'金溪县',361000,3),(410825,'温县',410800,3),(370285,'莱西市',370200,3),(451225,'罗城仫佬族自治县',451200,3),(330803,'衢江区',330800,3),(140728,'平遥县',140700,3),(150424,'林西县',150400,3),(532927,'巍山彝族回族自治县',532900,3),(430405,'珠晖区',430400,3),(370901,'市辖区',370900,3),(210402,'新抚区',210400,3),(140411,'郊区',140400,3),(450108,'良庆区',450100,3),(632625,'久治县',632600,3),(530829,'西盟佤族自治县',530800,3),(150902,'集宁区',150900,3),(419000,'省直辖县级行政区划',410000,2),(330109,'萧山区',330100,3),(340711,'郊区',340700,3),(140828,'夏县',140800,3),(445100,'潮州市',440000,2),(510524,'叙永县',510500,3),(451281,'宜州市',451200,3),(540223,'定日县',540200,3),(130827,'宽城满族自治县',130800,3),(370406,'山亭区',370400,3),(610204,'耀州区',610200,3),(510105,'青羊区',510100,3),(150722,'莫力达瓦达斡尔族自治旗',150700,3),(130930,'孟村回族自治县',130900,3),(610721,'南郑县',610700,3),(130132,'元氏县',130100,3),(330723,'武义县',330700,3),(441825,'连山壮族瑶族自治县',441800,3),(421023,'监利县',421000,3),(542426,'申扎县',542400,3),(321183,'句容市',321100,3),(341622,'蒙城县',341600,3),(441200,'肇庆市',440000,2),(230500,'双鸭山市',230000,2),(420300,'十堰市',420000,2),(220503,'二道江区',220500,3),(410301,'市辖区',410300,3),(420703,'华容区',420700,3),(150121,'土默特左旗',150100,3),(500105,'江北区',500100,3),(440404,'金湾区',440400,3),(430811,'武陵源区',430800,3),(141001,'市辖区',141000,3),(360981,'丰城市',360900,3),(350100,'福州市',350000,2),(370303,'张店区',370300,3),(450701,'市辖区',450700,3),(230505,'四方台区',230500,3),(220600,'白山市',220000,2),(361029,'东乡县',361000,3),(610000,'陕西省',0,1),(450924,'兴业县',450900,3),(440705,'新会区',440700,3),(152900,'阿拉善盟',150000,2),(140623,'右玉县',140600,3),(210421,'抚顺县',210400,3),(542428,'班戈县',542400,3),(510422,'盐边县',510400,3),(131003,'广阳区',131000,3),(211381,'北票市',211300,3),(210802,'站前区',210800,3),(530502,'隆阳区',530500,3),(511823,'汉源县',511800,3),(520103,'云岩区',520100,3),(230300,'鸡西市',230000,2),(650521,'巴里坤哈萨克自治县',650500,3),(530626,'绥江县',530600,3),(510304,'大安区',510300,3),(430626,'平江县',430600,3),(130306,'抚宁区',130300,3),(341821,'郎溪县',341800,3),(222424,'汪清县',222400,3),(654221,'额敏县',654200,3),(410106,'上街区',410100,3),(530926,'耿马傣族佤族自治县',530900,3),(230128,'通河县',230100,3),(440113,'番禺区',440100,3),(220422,'东辽县',220400,3),(320412,'武进区',320400,3),(410503,'北关区',410500,3),(370828,'金乡县',370800,3),(361102,'信州区',361100,3),(421001,'市辖区',421000,3),(411303,'卧龙区',411300,3),(230521,'集贤县',230500,3),(350104,'仓山区',350100,3),(510113,'青白江区',510100,3),(210921,'阜新蒙古族自治县',210900,3),(140108,'尖草坪区',140100,3),(522632,'榕江县',522600,3),(320413,'金坛区',320400,3),(431224,'溆浦县',431200,3),(131126,'故城县',131100,3),(640324,'同心县',640300,3),(410823,'武陟县',410800,3),(620200,'嘉峪关市',620000,2),(430682,'临湘市',430600,3),(340504,'雨山区',340500,3),(431322,'新化县',431300,3),(370000,'山东省',0,1),(420900,'孝感市',420000,2),(420526,'兴山县',420500,3),(130728,'怀安县',130700,3),(150901,'市辖区',150900,3),(130702,'桥东区',130700,3),(370782,'诸城市',370700,3),(542422,'嘉黎县',542400,3),(530321,'马龙县',530300,3),(210100,'沈阳市',210000,2),(430701,'市辖区',430700,3),(511028,'隆昌县',511000,3),(211382,'凌源市',211300,3),(310109,'虹口区',310100,3),(130531,'广宗县',130500,3),(540325,'察雅县',540300,3),(360222,'浮梁县',360200,3),(431226,'麻阳苗族自治县',431200,3),(451224,'东兰县',451200,3),(650101,'市辖区',650100,3),(530623,'盐津县',530600,3),(610621,'延长县',610600,3),(621125,'漳县',621100,3),(150304,'乌达区',150300,3),(632324,'河南蒙古族自治县',632300,3),(511321,'南部县',511300,3),(141030,'大宁县',141000,3),(654323,'福海县',654300,3),(411626,'淮阳县',411600,3),(210504,'明山区',210500,3),(420502,'西陵区',420500,3),(350781,'邵武市',350700,3),(610104,'莲湖区',610100,3),(361022,'黎川县',361000,3),(360828,'万安县',360800,3),(520322,'桐梓县',520300,3),(210422,'新宾满族自治县',210400,3),(341824,'绩溪县',341800,3),(131002,'安次区',131000,3),(130208,'丰润区',130200,3),(500112,'渝北区',500100,3),(650204,'白碱滩区',650200,3),(450405,'长洲区',450400,3),(440982,'化州市',440900,3),(350430,'建宁县',350400,3),(150923,'商都县',150900,3),(640181,'灵武市',640100,3),(659000,'自治区直辖县级行政区划',650000,2),(632224,'刚察县',632200,3),(500100,'重庆市',500000,2),(370523,'广饶县',370500,3),(150626,'乌审旗',150600,3),(460000,'海南省',0,1),(321111,'润州区',321100,3),(421000,'荆州市',420000,2),(510623,'中江县',510600,3),(450330,'平乐县',450300,3),(450323,'灵川县',450300,3),(511181,'峨眉山市',511100,3),(513329,'新龙县',513300,3),(231201,'市辖区',231200,3),(433130,'龙山县',433100,3),(360600,'鹰潭市',360000,2),(350124,'闽清县',350100,3),(440900,'茂名市',440000,2),(211003,'文圣区',211000,3),(130732,'赤城县',130700,3),(310118,'青浦区',310100,3),(540324,'丁青县',540300,3),(320602,'崇川区',320600,3),(411024,'鄢陵县',411000,3),(422826,'咸丰县',422800,3),(450881,'桂平市',450800,3),(141081,'侯马市',141000,3),(540224,'萨迦县',540200,3),(511523,'江安县',511500,3),(650202,'独山子区',650200,3),(410225,'兰考县',410200,3),(360829,'安福县',360800,3),(500230,'丰都县',500200,3),(620902,'肃州区',620900,3),(620801,'市辖区',620800,3),(341021,'歙县',341000,3),(640521,'中宁县',640500,3),(320324,'睢宁县',320300,3),(513428,'普格县',513400,3),(130227,'迁西县',130200,3),(440114,'花都区',440100,3),(230623,'林甸县',230600,3),(451302,'兴宾区',451300,3),(632200,'海北藏族自治州',630000,2),(520122,'息烽县',520100,3),(450311,'雁山区',450300,3),(630121,'大通回族土族自治县',630100,3),(230101,'市辖区',230100,3),(150102,'新城区',150100,3),(211404,'南票区',211400,3),(513322,'泸定县',513300,3),(532923,'祥云县',532900,3),(341822,'广德县',341800,3),(430000,'湖南省',0,1),(620521,'清水县',620500,3),(410506,'龙安区',410500,3),(110105,'朝阳区',110100,3),(320581,'常熟市',320500,3),(410581,'林州市',410500,3),(140430,'沁县',140400,3),(532504,'弥勒市',532500,3),(411327,'社旗县',411300,3),(520600,'铜仁市',520000,2),(433101,'吉首市',433100,3),(510321,'荣县',510300,3),(350304,'荔城区',350300,3),(321302,'宿城区',321300,3),(340103,'庐阳区',340100,3),(421022,'公安县',421000,3),(511527,'筠连县',511500,3),(230111,'呼兰区',230100,3),(451022,'田东县',451000,3),(441624,'和平县',441600,3),(371001,'市辖区',371000,3),(320801,'市辖区',320800,3),(210505,'南芬区',210500,3),(430624,'湘阴县',430600,3),(513200,'阿坝藏族羌族自治州',510000,2),(410425,'郏县',410400,3),(110109,'门头沟区',110100,3),(141025,'古县',141000,3),(370703,'寒亭区',370700,3),(532524,'建水县',532500,3),(130608,'清苑区',130600,3),(430481,'耒阳市',430400,3),(140824,'稷山县',140800,3),(441621,'紫金县',441600,3),(150222,'固阳县',150200,3),(513337,'稻城县',513300,3),(440203,'武江区',440200,3),(230123,'依兰县',230100,3),(441427,'蕉岭县',441400,3),(621228,'两当县',621200,3),(350501,'市辖区',350500,3),(320302,'鼓楼区',320300,3),(210803,'西市区',210800,3),(510184,'崇州市',510100,3),(360801,'市辖区',360800,3),(410322,'孟津县',410300,3),(141127,'岚县',141100,3),(654024,'巩留县',654000,3),(420205,'铁山区',420200,3),(410202,'龙亭区',410200,3),(511000,'内江市',510000,2),(420624,'南漳县',420600,3),(150500,'通辽市',150000,2),(371728,'东明县',371700,3),(230715,'红星区',230700,3),(330726,'浦江县',330700,3),(440512,'濠江区',440500,3),(140882,'河津市',140800,3),(530381,'宣威市',530300,3),(341001,'市辖区',341000,3),(230881,'同江市',230800,3),(440904,'电白区',440900,3),(440101,'市辖区',440100,3),(420101,'市辖区',420100,3),(410422,'叶县',410400,3),(430104,'岳麓区',430100,3),(652702,'阿拉山口市',652700,3),(370923,'东平县',370900,3),(131082,'三河市',131000,3),(650105,'水磨沟区',650100,3),(140402,'城区',140400,3),(350425,'大田县',350400,3),(331024,'仙居县',331000,3),(532322,'双柏县',532300,3),(340300,'蚌埠市',340000,2),(640423,'隆德县',640400,3),(440111,'白云区',440100,3),(330522,'长兴县',330500,3),(220381,'公主岭市',220300,3),(511133,'马边彝族自治县',511100,3),(230205,'昂昂溪区',230200,3),(371501,'市辖区',371500,3),(130581,'南宫市',130500,3),(211481,'兴城市',211400,3),(131102,'桃城区',131100,3),(140106,'迎泽区',140100,3),(445301,'市辖区',445300,3),(533325,'兰坪白族普米族自治县',533300,3),(371623,'无棣县',371600,3),(141028,'吉县',141000,3),(210114,'于洪区',210100,3),(140830,'芮城县',140800,3),(210604,'振安区',210600,3),(445224,'惠来县',445200,3),(610426,'永寿县',610400,3),(371403,'陵城区',371400,3),(410000,'河南省',0,1),(450421,'苍梧县',450400,3),(350600,'漳州市',350000,2),(511781,'万源市',511700,3),(610729,'留坝县',610700,3),(450422,'藤县',450400,3),(340881,'桐城市',340800,3),(360112,'新建区',360100,3),(530122,'晋宁县',530100,3),(220582,'集安市',220500,3),(533300,'怒江傈僳族自治州',530000,2),(320508,'姑苏区',320500,3),(152524,'苏尼特右旗',152500,3),(411725,'确山县',411700,3),(360602,'月湖区',360600,3),(653128,'岳普湖县',653100,3),(140423,'襄垣县',140400,3),(130400,'邯郸市',130000,2),(370402,'市中区',370400,3),(360901,'市辖区',360900,3),(410329,'伊川县',410300,3),(610424,'乾县',610400,3),(451031,'隆林各族自治县',451000,3),(530424,'华宁县',530400,3),(361129,'万年县',361100,3),(320582,'张家港市',320500,3),(130201,'市辖区',130200,3),(441424,'五华县',441400,3),(450205,'柳北区',450200,3),(410781,'卫辉市',410700,3),(530621,'鲁甸县',530600,3),(130800,'承德市',130000,2),(611022,'丹凤县',611000,3),(360202,'昌江区',360200,3),(650203,'克拉玛依区',650200,3),(540202,'桑珠孜区',540200,3),(340100,'合肥市',340000,2),(451002,'右江区',451000,3),(530923,'永德县',530900,3),(350421,'明溪县',350400,3),(520200,'六盘水市',520000,2),(621121,'通渭县',621100,3),(150400,'赤峰市',150000,2),(511827,'宝兴县',511800,3),(652325,'奇台县',652300,3),(530302,'麒麟区',530300,3),(140902,'忻府区',140900,3),(210521,'本溪满族自治县',210500,3),(220882,'大安市',220800,3),(522726,'独山县',522700,3),(320115,'江宁区',320100,3),(220421,'东丰县',220400,3),(610522,'潼关县',610500,3),(350125,'永泰县',350100,3),(220105,'二道区',220100,3),(530826,'江城哈尼族彝族自治县',530800,3),(441781,'阳春市',441700,3),(610102,'新城区',610100,3),(610826,'绥德县',610800,3),(430511,'北塔区',430500,3),(520181,'清镇市',520100,3),(440605,'南海区',440600,3),(230127,'木兰县',230100,3),(330281,'余姚市',330200,3),(431102,'零陵区',431100,3),(654321,'布尔津县',654300,3),(510812,'朝天区',510800,3),(620821,'泾川县',620800,3),(340104,'蜀山区',340100,3),(230281,'讷河市',230200,3),(431100,'永州市',430000,2),(410423,'鲁山县',410400,3),(451026,'那坡县',451000,3),(513325,'雅江县',513300,3),(522702,'福泉市',522700,3),(611001,'市辖区',611000,3),(630102,'城东区',630100,3),(141101,'市辖区',141100,3),(211004,'宏伟区',211000,3),(370602,'芝罘区',370600,3),(360400,'九江市',360000,2),(330204,'江东区',330200,3),(522325,'贞丰县',522300,3),(411622,'西华县',411600,3),(640500,'中卫市',640000,2),(150524,'库伦旗',150500,3),(410200,'开封市',410000,2),(430124,'宁乡县',430100,3),(211224,'昌图县',211200,3),(371300,'临沂市',370000,2),(430611,'君山区',430600,3),(341801,'市辖区',341800,3),(370785,'高密市',370700,3),(441223,'广宁县',441200,3),(410108,'惠济区',410100,3),(350111,'晋安区',350100,3),(522323,'普安县',522300,3),(440823,'遂溪县',440800,3),(350881,'漳平市',350800,3),(210782,'北镇市',210700,3),(659001,'石河子市',659000,3),(130434,'魏县',130400,3),(540234,'吉隆县',540200,3),(500153,'荣昌区',500100,3),(411700,'驻马店市',410000,2),(340400,'淮南市',340000,2),(130582,'沙河市',130500,3),(610602,'宝塔区',610600,3),(500236,'奉节县',500200,3),(469002,'琼海市',469000,3),(320104,'秦淮区',320100,3),(220101,'市辖区',220100,3),(141181,'孝义市',141100,3),(450400,'梧州市',450000,2),(451123,'富川瑶族自治县',451100,3),(430302,'雨湖区',430300,3),(441523,'陆河县',441500,3),(540422,'米林县',540400,3),(460202,'海棠区',460200,3),(140427,'壶关县',140400,3),(450981,'北流市',450900,3),(350722,'浦城县',350700,3),(211104,'大洼区',211100,3),(130901,'市辖区',130900,3),(210600,'丹东市',210000,2),(652301,'昌吉市',652300,3),(430102,'芙蓉区',430100,3),(130602,'竞秀区',130600,3),(360803,'青原区',360800,3),(440601,'市辖区',440600,3),(130283,'迁安市',130200,3),(530501,'市辖区',530500,3),(522701,'都匀市',522700,3),(440781,'台山市',440700,3),(141182,'汾阳市',141100,3),(420704,'鄂城区',420700,3),(341222,'太和县',341200,3),(410101,'市辖区',410100,3),(430105,'开福区',430100,3),(340404,'谢家集区',340400,3),(230603,'龙凤区',230600,3),(152522,'阿巴嘎旗',152500,3),(410922,'清丰县',410900,3),(450921,'容县',450900,3),(511323,'蓬安县',511300,3),(511124,'井研县',511100,3),(440305,'南山区',440300,3),(230422,'绥滨县',230400,3),(431230,'通道侗族自治县',431200,3),(450000,'广西壮族自治区',0,1),(341322,'萧县',341300,3),(340521,'当涂县',340500,3),(140109,'万柏林区',140100,3),(450406,'龙圩区',450400,3),(331023,'天台县',331000,3),(500114,'黔江区',500100,3),(131023,'永清县',131000,3),(510185,'简阳市',510100,3),(350703,'建阳区',350700,3),(610303,'金台区',610300,3),(361103,'广丰区',361100,3),(110101,'东城区',110100,3),(530524,'昌宁县',530500,3),(140928,'五寨县',140900,3),(440300,'深圳市',440000,2),(340402,'大通区',340400,3),(511424,'丹棱县',511400,3),(420112,'东西湖区',420100,3),(360733,'会昌县',360700,3),(431228,'芷江侗族自治县',431200,3),(341504,'叶集区',341500,3),(500231,'垫江县',500200,3),(330521,'德清县',330500,3),(370105,'天桥区',370100,3),(430500,'邵阳市',430000,2),(430221,'株洲县',430200,3),(430724,'临澧县',430700,3),(420802,'东宝区',420800,3),(230801,'市辖区',230800,3),(371625,'博兴县',371600,3),(140481,'潞城市',140400,3),(130426,'涉县',130400,3),(150429,'宁城县',150400,3),(411502,'浉河区',411500,3),(370812,'兖州区',370800,3),(450401,'市辖区',450400,3),(371301,'市辖区',371300,3),(350581,'石狮市',350500,3),(370801,'市辖区',370800,3),(232723,'漠河县',232700,3),(152922,'阿拉善右旗',152900,3),(440281,'乐昌市',440200,3),(654326,'吉木乃县',654300,3),(131121,'枣强县',131100,3),(520526,'威宁彝族回族苗族自治县',520500,3),(341002,'屯溪区',341000,3),(620421,'靖远县',620400,3),(150622,'准格尔旗',150600,3),(530129,'寻甸回族彝族自治县',530100,3),(350105,'马尾区',350100,3),(511322,'营山县',511300,3),(230405,'兴安区',230400,3),(410104,'管城回族区',410100,3),(330327,'苍南县',330300,3),(410822,'博爱县',410800,3),(331181,'龙泉市',331100,3),(130304,'北戴河区',130300,3),(370404,'峄城区',370400,3),(540228,'白朗县',540200,3),(320901,'市辖区',320900,3),(510703,'涪城区',510700,3),(450603,'防城区',450600,3),(450703,'钦北区',450700,3),(530111,'官渡区',530100,3),(350426,'尤溪县',350400,3),(320724,'灌南县',320700,3),(511524,'长宁县',511500,3),(130929,'献县',130900,3),(500120,'璧山区',500100,3),(451121,'昭平县',451100,3),(330329,'泰顺县',330300,3),(360483,'庐山市',360400,3),(210321,'台安县',210300,3),(110118,'密云区',110100,3),(140525,'泽州县',140500,3),(350423,'清流县',350400,3),(431222,'沅陵县',431200,3),(230700,'伊春市',230000,2),(623027,'夏河县',623000,3),(370786,'昌邑市',370700,3),(230201,'市辖区',230200,3),(820000,'澳门特别行政区',0,1),(130524,'柏乡县',130500,3),(440511,'金平区',440500,3),(610626,'吴起县',610600,3),(130731,'涿鹿县',130700,3),(211303,'龙城区',211300,3),(420000,'湖北省',0,1),(410900,'濮阳市',410000,2),(210401,'市辖区',210400,3),(341302,'埇桥区',341300,3),(520422,'普定县',520400,3),(131123,'武强县',131100,3),(230828,'汤原县',230800,3),(360725,'崇义县',360700,3),(130826,'丰宁满族自治县',130800,3),(330401,'市辖区',330400,3),(130982,'任丘市',130900,3),(411101,'市辖区',411100,3),(530724,'宁蒗彝族自治县',530700,3),(130107,'井陉矿区',130100,3),(230402,'向阳区',230400,3),(460105,'秀英区',460100,3),(130821,'承德县',130800,3),(630105,'城北区',630100,3),(130481,'武安市',130400,3),(460200,'三亚市',460000,2),(410926,'范县',410900,3),(130703,'桥西区',130700,3),(511801,'市辖区',511800,3),(340102,'瑶海区',340100,3),(520501,'市辖区',520500,3),(510522,'合江县',510500,3),(321182,'扬中市',321100,3),(610603,'安塞区',610600,3),(510501,'市辖区',510500,3),(450500,'北海市',450000,2),(340207,'鸠江区',340200,3),(410300,'洛阳市',410000,2),(340223,'南陵县',340200,3),(540235,'聂拉木县',540200,3),(653200,'和田地区',650000,2),(370305,'临淄区',370300,3),(630200,'海东市',630000,2),(341700,'池州市',340000,2),(630225,'循化撒拉族自治县',630200,3),(371500,'聊城市',370000,2),(530701,'市辖区',530700,3),(532601,'文山市',532600,3),(450312,'临桂区',450300,3),(542425,'安多县',542400,3),(421321,'随县',421300,3),(653131,'塔什库尔干塔吉克自治县',653100,3),(445321,'新兴县',445300,3),(131001,'市辖区',131000,3),(513333,'色达县',513300,3),(350724,'松溪县',350700,3),(440118,'增城区',440100,3),(420324,'竹溪县',420300,3),(150602,'东胜区',150600,3),(371526,'高唐县',371500,3),(420582,'当阳市',420500,3),(320922,'滨海县',320900,3),(150726,'新巴尔虎左旗',150700,3),(340522,'含山县',340500,3),(421181,'麻城市',421100,3),(350300,'莆田市',350000,2),(350622,'云霄县',350600,3),(522626,'岑巩县',522600,3),(610327,'陇县',610300,3),(360200,'景德镇市',360000,2),(321323,'泗阳县',321300,3),(533102,'瑞丽市',533100,3),(130204,'古冶区',130200,3),(650422,'托克逊县',650400,3),(513230,'壤塘县',513200,3),(340501,'市辖区',340500,3),(350982,'福鼎市',350900,3),(310120,'奉贤区',310100,3),(210801,'市辖区',210800,3),(330784,'永康市',330700,3),(510104,'锦江区',510100,3),(511722,'宣汉县',511700,3),(530423,'通海县',530400,3),(360421,'九江县',360400,3),(532323,'牟定县',532300,3),(540123,'尼木县',540100,3),(130229,'玉田县',130200,3),(442000,'中山市',440000,2),(500235,'云阳县',500200,3),(130981,'泊头市',130900,3),(540102,'城关区',540100,3),(361028,'资溪县',361000,3),(620403,'平川区',620400,3),(210224,'长海县',210200,3),(130202,'路南区',130200,3),(360201,'市辖区',360200,3),(511601,'市辖区',511600,3),(130632,'安新县',130600,3),(450223,'鹿寨县',450200,3),(500102,'涪陵区',500100,3),(510100,'成都市',510000,2),(420102,'江岸区',420100,3),(421200,'咸宁市',420000,2),(320118,'高淳区',320100,3),(210800,'营口市',210000,2),(210882,'大石桥市',210800,3),(360000,'江西省',0,1),(540226,'昂仁县',540200,3),(230306,'城子河区',230300,3),(451100,'贺州市',450000,2),(341601,'市辖区',341600,3),(210904,'太平区',210900,3),(150221,'土默特右旗',150200,3),(500243,'彭水苗族土家族自治县',500200,3),(540426,'朗县',540400,3),(440514,'潮南区',440500,3),(210304,'立山区',210300,3),(431124,'道县',431100,3),(632724,'治多县',632700,3),(220322,'梨树县',220300,3),(411722,'上蔡县',411700,3),(350211,'集美区',350200,3),(421202,'咸安区',421200,3),(210123,'康平县',210100,3),(320404,'钟楼区',320400,3),(620321,'永昌县',620300,3),(360111,'青山湖区',360100,3),(371600,'滨州市',370000,2),(433100,'湘西土家族苗族自治州',430000,2),(130636,'顺平县',130600,3),(361124,'铅山县',361100,3),(620900,'酒泉市',620000,2),(410481,'舞钢市',410400,3),(230307,'麻山区',230300,3),(450821,'平南县',450800,3),(210202,'中山区',210200,3),(441324,'龙门县',441300,3),(431001,'市辖区',431000,3),(150600,'鄂尔多斯市',150000,2),(610901,'市辖区',610900,3),(140925,'宁武县',140900,3),(340826,'宿松县',340800,3),(320921,'响水县',320900,3),(150300,'乌海市',150000,2),(130535,'临西县',130500,3),(630222,'民和回族土族自治县',630200,3),(500106,'沙坪坝区',500100,3),(621202,'武都区',621200,3),(340803,'大观区',340800,3),(532600,'文山壮族苗族自治州',530000,2),(511703,'达川区',511700,3),(441422,'大埔县',441400,3),(411381,'邓州市',411300,3),(320311,'泉山区',320300,3),(230403,'工农区',230400,3),(370831,'泗水县',370800,3),(110119,'延庆区',110100,3),(410403,'卫东区',410400,3),(130921,'沧县',130900,3),(652700,'博尔塔拉蒙古自治州',650000,2),(140311,'郊区',140300,3),(540424,'波密县',540400,3),(321202,'海陵区',321200,3),(140428,'长子县',140400,3),(370405,'台儿庄区',370400,3),(440000,'广东省',0,1),(520324,'正安县',520300,3),(140781,'介休市',140700,3),(450201,'市辖区',450200,3),(230606,'大同区',230600,3),(371326,'平邑县',371300,3),(431026,'汝城县',431000,3),(620723,'临泽县',620700,3),(211081,'灯塔市',211000,3),(431023,'永兴县',431000,3),(420981,'应城市',420900,3),(540521,'扎囊县',540500,3),(370322,'高青县',370300,3),(510723,'盐亭县',510700,3),(511900,'巴中市',510000,2),(340401,'市辖区',340400,3),(411525,'固始县',411500,3),(341201,'市辖区',341200,3),(371324,'兰陵县',371300,3),(530127,'嵩明县',530100,3),(410323,'新安县',410300,3),(370902,'泰山区',370900,3),(341522,'霍邱县',341500,3),(621021,'庆城县',621000,3),(440307,'龙岗区',440300,3),(371002,'环翠区',371000,3),(360922,'万载县',360900,3),(450721,'灵山县',450700,3),(640301,'市辖区',640300,3),(330182,'建德市',330100,3),(530301,'市辖区',530300,3),(230621,'肇州县',230600,3),(533100,'德宏傣族景颇族自治州',530000,2),(140602,'朔城区',140600,3),(220501,'市辖区',220500,3),(530000,'云南省',0,1),(360702,'章贡区',360700,3),(650522,'伊吾县',650500,3),(150921,'卓资县',150900,3),(440204,'浈江区',440200,3),(653223,'皮山县',653200,3),(150125,'武川县',150100,3),(330185,'临安市',330100,3),(513228,'黑水县',513200,3),(230714,'乌伊岭区',230700,3),(150621,'达拉特旗',150600,3),(632623,'甘德县',632600,3),(320114,'雨花台区',320100,3),(370522,'利津县',370500,3),(331021,'玉环县',331000,3),(520303,'汇川区',520300,3),(431125,'江永县',431100,3),(620122,'皋兰县',620100,3),(622924,'广河县',622900,3),(430401,'市辖区',430400,3),(632223,'海晏县',632200,3),(510108,'成华区',510100,3),(230713,'带岭区',230700,3),(430681,'汨罗市',430600,3),(511621,'岳池县',511600,3),(211300,'朝阳市',210000,2),(652829,'博湖县',652800,3),(620823,'崇信县',620800,3),(230208,'梅里斯达斡尔族区',230200,3),(513201,'马尔康市',513200,3),(131124,'饶阳县',131100,3),(450304,'象山区',450300,3),(330400,'嘉兴市',330000,2),(510722,'三台县',510700,3),(230231,'拜泉县',230200,3),(620700,'张掖市',620000,2),(640522,'海原县',640500,3),(410122,'中牟县',410100,3),(520222,'盘县',520200,3),(331002,'椒江区',331000,3),(371400,'德州市',370000,2),(421123,'罗田县',421100,3),(652924,'沙雅县',652900,3),(411321,'南召县',411300,3),(230503,'岭东区',230500,3),(130684,'高碑店市',130600,3),(130822,'兴隆县',130800,3),(340421,'凤台县',340400,3),(230224,'泰来县',230200,3),(360732,'兴国县',360700,3),(230200,'齐齐哈尔市',230000,2),(441501,'市辖区',441500,3),(652828,'和硕县',652800,3),(441881,'英德市',441800,3),(110112,'通州区',110100,3),(211002,'白塔区',211000,3),(542524,'日土县',542500,3),(150721,'阿荣旗',150700,3),(632323,'泽库县',632300,3),(141031,'隰县',141000,3),(341024,'祁门县',341000,3),(350428,'将乐县',350400,3),(141100,'吕梁市',140000,2),(320102,'玄武区',320100,3),(450600,'防城港市',450000,2),(370724,'临朐县',370700,3),(370213,'李沧区',370200,3),(532800,'西双版纳傣族自治州',530000,2),(120118,'静海区',120100,3),(611023,'商南县',611000,3),(422801,'恩施市',422800,3),(210104,'大东区',210100,3),(210911,'细河区',210900,3),(511423,'洪雅县',511400,3),(510114,'新都区',510100,3),(420902,'孝南区',420900,3),(140502,'城区',140500,3),(654026,'昭苏县',654000,3),(320925,'建湖县',320900,3),(620601,'市辖区',620600,3),(410500,'安阳市',410000,2),(320116,'六合区',320100,3),(130205,'开平区',130200,3),(532324,'南华县',532300,3),(441400,'梅州市',440000,2),(500240,'石柱土家族自治县',500200,3),(211403,'龙港区',211400,3),(130424,'成安县',130400,3),(330901,'市辖区',330900,3),(622925,'和政县',622900,3),(150924,'兴和县',150900,3),(653100,'喀什地区',650000,2),(510503,'纳溪区',510500,3),(610802,'榆阳区',610800,3),(340811,'宜秀区',340800,3),(220281,'蛟河市',220200,3),(620101,'市辖区',620100,3),(230204,'铁锋区',230200,3),(350821,'长汀县',350800,3),(341825,'旌德县',341800,3),(652300,'昌吉回族自治州',650000,2),(440200,'韶关市',440000,2),(450901,'市辖区',450900,3),(610112,'未央区',610100,3),(370502,'东营区',370500,3),(230110,'香坊区',230100,3),(450403,'万秀区',450400,3),(350926,'柘荣县',350900,3),(653125,'莎车县',653100,3),(360423,'武宁县',360400,3),(610830,'清涧县',610800,3),(140822,'万荣县',140800,3),(510626,'罗江县',510600,3),(530801,'市辖区',530800,3),(141002,'尧都区',141000,3),(320700,'连云港市',320000,2),(150103,'回民区',150100,3),(330701,'市辖区',330700,3),(610600,'延安市',610000,2),(370811,'任城区',370800,3),(340706,'义安区',340700,3),(430726,'石门县',430700,3),(450301,'市辖区',450300,3),(341125,'定远县',341100,3),(620105,'安宁区',620100,3),(341204,'颍泉区',341200,3),(152223,'扎赉特旗',152200,3),(360321,'莲花县',360300,3),(150202,'东河区',150200,3),(341102,'琅琊区',341100,3),(150928,'察哈尔右翼后旗',150900,3),(620501,'市辖区',620500,3),(632700,'玉树藏族自治州',630000,2),(211223,'西丰县',211200,3),(622900,'临夏回族自治州',620000,2),(120101,'和平区',120100,3),(341502,'金安区',341500,3),(321012,'江都区',321000,3),(140501,'市辖区',140500,3),(500228,'梁平县',500200,3),(652925,'新和县',652900,3),(320000,'江苏省',0,1),(450902,'玉州区',450900,3),(330326,'平阳县',330300,3),(370701,'市辖区',370700,3),(650000,'新疆维吾尔自治区',0,1),(410211,'金明区',410200,3),(632322,'尖扎县',632300,3),(611024,'山阳县',611000,3),(320300,'徐州市',320000,2),(451422,'宁明县',451400,3),(150785,'根河市',150700,3),(130100,'石家庄市',130000,2),(610601,'市辖区',610600,3),(220100,'长春市',220000,2),(321281,'兴化市',321200,3),(370683,'莱州市',370600,3),(421087,'松滋市',421000,3),(610582,'华阴市',610500,3),(130225,'乐亭县',130200,3),(141128,'方山县',141100,3),(340621,'濉溪县',340600,3),(520381,'赤水市',520300,3),(370403,'薛城区',370400,3),(320812,'清江浦区',320800,3),(440785,'恩平市',440700,3),(431381,'冷水江市',431300,3),(652926,'拜城县',652900,3),(140521,'沁水县',140500,3),(150101,'市辖区',150100,3),(540221,'南木林县',540200,3),(330727,'磐安县',330700,3),(510701,'市辖区',510700,3),(230900,'七台河市',230000,2),(330100,'杭州市',330000,2),(420801,'市辖区',420800,3),(150784,'额尔古纳市',150700,3),(530326,'会泽县',530300,3),(540423,'墨脱县',540400,3),(420222,'阳新县',420200,3),(420322,'郧西县',420300,3),(350000,'福建省',0,1),(610202,'王益区',610200,3),(360730,'宁都县',360700,3),(411025,'襄城县',411000,3),(341702,'贵池区',341700,3),(361127,'余干县',361100,3),(610902,'汉滨区',610900,3),(533123,'盈江县',533100,3),(210624,'宽甸满族自治县',210600,3),(350801,'市辖区',350800,3),(513330,'德格县',513300,3),(441900,'东莞市',440000,2),(360425,'永修县',360400,3),(340827,'望江县',340800,3),(341000,'黄山市',340000,2),(222405,'龙井市',222400,3),(420103,'江汉区',420100,3),(512000,'资阳市',510000,2),(210711,'太和区',210700,3),(510000,'四川省',0,1),(632500,'海南藏族自治州',630000,2),(130281,'遵化市',130200,3),(140932,'偏关县',140900,3),(410703,'卫滨区',410700,3),(511501,'市辖区',511500,3),(331022,'三门县',331000,3),(420984,'汉川市',420900,3),(620000,'甘肃省',0,1),(522328,'安龙县',522300,3),(310116,'金山区',310100,3),(420325,'房县',420300,3),(220821,'镇赉县',220800,3),(140500,'晋城市',140000,2),(430503,'大祥区',430500,3),(141026,'安泽县',141000,3),(500119,'南川区',500100,3),(620826,'静宁县',620800,3),(340208,'三山区',340200,3),(621223,'宕昌县',621200,3),(510181,'都江堰市',510100,3),(621225,'西和县',621200,3),(222404,'珲春市',222400,3),(371626,'邹平县',371600,3),(320402,'天宁区',320400,3),(410701,'市辖区',410700,3);
+
+/*Table structure for table `tb_consult_policy` */
+
+DROP TABLE IF EXISTS `tb_consult_policy`;
+
+CREATE TABLE `tb_consult_policy` (
+  `id` int(12) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `title` varchar(255) DEFAULT '' COMMENT '标题',
+  `type_id` tinyint(2) DEFAULT '1' COMMENT '类型',
+  `content` text COMMENT '内容',
+  `status` tinyint(2) DEFAULT '1' COMMENT '状态',
+  `publisher` varchar(255) DEFAULT '' COMMENT '发布人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_consult_policy` */
+
+insert  into `tb_consult_policy`(`id`,`title`,`type_id`,`content`,`status`,`publisher`,`create_time`,`update_time`) values (1,'测试咨询',1,'测试咨询内容',0,NULL,'2018-09-05 15:44:40','2018-09-05 15:44:40'),(3,'测试网页咨询',1,'测试网页咨询',1,NULL,'2018-09-05 15:49:28','2018-09-05 15:49:28');
+
+/*Table structure for table `tb_contract` */
+
 DROP TABLE IF EXISTS `tb_contract`;
+
 CREATE TABLE `tb_contract` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `contract_no` varchar(20) NOT NULL COMMENT '合同编号',
@@ -3687,18 +161,14 @@ CREATE TABLE `tb_contract` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_contract
--- ----------------------------
-INSERT INTO `tb_contract` VALUES ('4', 'CN5b8534e4aa545', 'OR5b8534e4a62dc', 'CT5b83a46b8131f', '', '16', '2018-08-28', '2019-08-28', null, '1', '2018-08-28 19:41:24', '2018-08-28 19:41:24');
-INSERT INTO `tb_contract` VALUES ('5', 'CN5b865f1aa602f', 'OR5b865f1aa2d66', 'CT5b83a46b8131f', '{\r\n	\"red\": \"红色\",\r\n	\"blue\": \"蓝色\",\r\n	\"black\": \"黑色\"\r\n}', '16', '2018-08-29', '2019-08-29', null, '1', '2018-08-29 16:53:46', '2018-08-29 16:53:46');
-INSERT INTO `tb_contract` VALUES ('6', 'CN5b865fae2e004', 'OR5b865fae2c0c3', 'CT5b83a46b8131f', '{\r\n	\"red\": \"红色\",\r\n	\"blue\": \"蓝色\",\r\n	\"black\": \"黑色\"\r\n}', '16', '2018-08-29', '2019-08-29', null, '1', '2018-08-29 16:56:14', '2018-08-29 16:56:14');
-INSERT INTO `tb_contract` VALUES ('7', 'CN5b86610884616', 'OR5b86610880b7d', 'CT5b83a46b8131f', '{\r\n	\"red\": \"红色\",\r\n	\"blue\": \"蓝色\",\r\n	\"black\": \"黑色\"\r\n}', '16', '2018-08-29', '2019-08-29', '2018-08-30', '3', '2018-08-29 17:02:00', '2018-08-30 13:58:24');
+/*Data for the table `tb_contract` */
 
--- ----------------------------
--- Table structure for tb_contract_template
--- ----------------------------
+insert  into `tb_contract`(`id`,`contract_no`,`order_no`,`contract_template_no`,`custom_content`,`operator_id`,`effective_time`,`failure_time`,`sign_date`,`status`,`create_time`,`update_time`) values (4,'CN5b8534e4aa545','OR5b8534e4a62dc','CT5b83a46b8131f','',16,'2018-08-28','2019-08-28',NULL,1,'2018-08-28 19:41:24','2018-08-28 19:41:24'),(5,'CN5b865f1aa602f','OR5b865f1aa2d66','CT5b83a46b8131f','{\r\n	\"red\": \"红色\",\r\n	\"blue\": \"蓝色\",\r\n	\"black\": \"黑色\"\r\n}',16,'2018-08-29','2019-08-29',NULL,1,'2018-08-29 16:53:46','2018-08-29 16:53:46'),(6,'CN5b865fae2e004','OR5b865fae2c0c3','CT5b83a46b8131f','{\r\n	\"red\": \"红色\",\r\n	\"blue\": \"蓝色\",\r\n	\"black\": \"黑色\"\r\n}',16,'2018-08-29','2019-08-29',NULL,1,'2018-08-29 16:56:14','2018-08-29 16:56:14'),(7,'CN5b86610884616','OR5b86610880b7d','CT5b83a46b8131f','{\r\n	\"red\": \"红色\",\r\n	\"blue\": \"蓝色\",\r\n	\"black\": \"黑色\"\r\n}',16,'2018-08-29','2019-08-29','2018-08-30',3,'2018-08-29 17:02:00','2018-08-30 13:58:24');
+
+/*Table structure for table `tb_contract_template` */
+
 DROP TABLE IF EXISTS `tb_contract_template`;
+
 CREATE TABLE `tb_contract_template` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL COMMENT '模板标题',
@@ -3712,53 +182,68 @@ CREATE TABLE `tb_contract_template` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_contract_template
--- ----------------------------
-INSERT INTO `tb_contract_template` VALUES ('1', '一般场地租赁合同', 'CT5b83a46b8131f', '一般场地租赁合同', '&lt;table&gt;111&lt;/table&gt;', '16', '1', '2018-08-27 14:16:46', '2018-08-27 15:12:43');
+/*Data for the table `tb_contract_template` */
 
--- ----------------------------
--- Table structure for tb_department
--- ----------------------------
+insert  into `tb_contract_template`(`id`,`name`,`template_no`,`remark`,`rich_text`,`operator_id`,`status`,`create_time`,`update_time`) values (1,'一般场地租赁合同','CT5b83a46b8131f','一般场地租赁合同','&lt;table&gt;111&lt;/table&gt;',16,1,'2018-08-27 14:16:46','2018-08-27 15:12:43');
+
+/*Table structure for table `tb_department` */
+
 DROP TABLE IF EXISTS `tb_department`;
+
 CREATE TABLE `tb_department` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL COMMENT '部门名称',
   `p_id` int(11) DEFAULT '0' COMMENT '部门名称',
   `description` varchar(255) NOT NULL COMMENT '部门描述',
+  `create_time` timestamp NULL DEFAULT NULL,
+  `update_time` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_department` */
+
+insert  into `tb_department`(`id`,`name`,`p_id`,`description`,`create_time`,`update_time`) values (1,'财务部',0,'财务','2018-08-26 14:48:33','2018-09-04 14:23:36'),(2,'出纳部',1,'出纳','2018-09-04 14:24:05','2018-09-04 14:24:05'),(3,'会计部',1,'会计','2018-09-04 14:24:19','2018-09-04 14:24:19'),(4,'审核部',1,'审核','2018-09-04 14:24:36','2018-09-04 14:24:36'),(5,'审核A部',4,'审核A组','2018-09-04 14:25:09','2018-09-04 14:25:09'),(6,'审核B部',4,'审核B组','2018-09-04 14:25:16','2018-09-04 14:25:16');
+
+/*Table structure for table `tb_department_user` */
+
+DROP TABLE IF EXISTS `tb_department_user`;
+
+CREATE TABLE `tb_department_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `department_id` int(11) NOT NULL COMMENT '部门id',
+  `user_id` int(11) NOT NULL COMMENT '成员id',
+  `role` int(2) NOT NULL DEFAULT '0' COMMENT '角色',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_department
--- ----------------------------
-INSERT INTO `tb_department` VALUES ('1', '人事', '0', '主要进行人事管理，团队内信息发布通知', '2018-08-26 14:48:33', '2018-08-26 14:49:42');
+/*Data for the table `tb_department_user` */
 
--- ----------------------------
--- Table structure for tb_development
--- ----------------------------
+insert  into `tb_department_user`(`id`,`department_id`,`user_id`,`role`,`create_time`,`update_time`) values (1,2,1,0,'2018-09-04 16:01:51','2018-09-04 16:07:39');
+
+/*Table structure for table `tb_development` */
+
 DROP TABLE IF EXISTS `tb_development`;
+
 CREATE TABLE `tb_development` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `enter_team_id` int(11) NOT NULL COMMENT '入驻团队',
-  `date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '日期',
+  `date_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '日期',
   `description` text NOT NULL COMMENT '描述',
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_time` timestamp NULL DEFAULT NULL,
   `update_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_development
--- ----------------------------
-INSERT INTO `tb_development` VALUES ('1', '1', '2018-08-23 14:32:18', '这里是纯文本介绍内容', '2018-08-23 14:32:18', null);
+/*Data for the table `tb_development` */
 
--- ----------------------------
--- Table structure for tb_enter_team
--- ----------------------------
+insert  into `tb_development`(`id`,`enter_team_id`,`date_time`,`description`,`create_time`,`update_time`) values (1,1,'2018-08-23 14:32:18','这里是纯文本介绍内容','2018-08-23 14:32:18',NULL);
+
+/*Table structure for table `tb_enter_team` */
+
 DROP TABLE IF EXISTS `tb_enter_team`;
+
 CREATE TABLE `tb_enter_team` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `company` varchar(50) NOT NULL DEFAULT '' COMMENT '公司名称',
@@ -3778,16 +263,14 @@ CREATE TABLE `tb_enter_team` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_enter_team
--- ----------------------------
-INSERT INTO `tb_enter_team` VALUES ('1', '上海真的是一个有限公司', 'admin', 'YINYEZHIZHAO', '/images/20180822/c6e473f1835a674fdaff0fc05e0c8e3a.JPEG', '赵四', '22023119901009421x', '[\"\\/images\\/20180822\\/77675f98f6240734fd2929035bbadef7.jpg\",\"\\/images\\/20180822\\/fea5295f6ff6f70bff293b8084da2135.JPEG\"]', '影视节目制作', '寻求融资', '我i们是一家致力于爱情动作片的影视制作企业，目前在全世界各地均有分公司设立。我i们是一家致力于爱情动作片的影视制作企业，目前在全世界各地均有分公司设立。', '/images/20180822/8989cacd27d32683cf73847b1aea16d5.JPEG', '2018-08-22 14:30:53', '2018-08-22 14:58:39', '1');
-INSERT INTO `tb_enter_team` VALUES ('2', '上海伪装者有限公司', 'admin', 'YINYEZHIZHAO', '/images/20180822/a023bea1952f543aa83203b2d513fe2d.jpg', '魏庄', '22023119901009421x', '[\"\\/images\\/20180822\\/2f9aa19a068b80bfcd994f75b32bf75f.jpg\",\"\\/images\\/20180822\\/3a9c4ba10fb5f85b4463d771b9aa791c.JPEG\"]', '影视节目制作', '寻求融资', '我i们是一家致力于爱情动作片的影视制作企业，目前在全世界各地均有分公司设立。我i们是一家致力于爱情动作片的影视制作企业，目前在全世界各地均有分公司设立。', '/images/20180822/35efaa2ceb29992ed47065e6e75b47de.JPEG', '2018-08-22 14:50:33', '2018-08-22 14:50:33', '1');
+/*Data for the table `tb_enter_team` */
 
--- ----------------------------
--- Table structure for tb_enter_team_member
--- ----------------------------
+insert  into `tb_enter_team`(`id`,`company`,`admin_account`,`business_license`,`bl_picture`,`legal_person`,`id_card`,`id_card_pictures`,`main_business`,`develop_stage`,`description`,`logo`,`create_time`,`update_time`,`status`) values (1,'上海真的是一个有限公司','admin','YINYEZHIZHAO','/images/20180822/c6e473f1835a674fdaff0fc05e0c8e3a.JPEG','赵四','22023119901009421x','[\"\\/images\\/20180822\\/77675f98f6240734fd2929035bbadef7.jpg\",\"\\/images\\/20180822\\/fea5295f6ff6f70bff293b8084da2135.JPEG\"]','影视节目制作','寻求融资','我i们是一家致力于爱情动作片的影视制作企业，目前在全世界各地均有分公司设立。我i们是一家致力于爱情动作片的影视制作企业，目前在全世界各地均有分公司设立。','/images/20180822/8989cacd27d32683cf73847b1aea16d5.JPEG','2018-08-22 14:30:53','2018-08-22 14:58:39',1),(2,'上海伪装者有限公司','admin','YINYEZHIZHAO','/images/20180822/a023bea1952f543aa83203b2d513fe2d.jpg','魏庄','22023119901009421x','[\"\\/images\\/20180822\\/2f9aa19a068b80bfcd994f75b32bf75f.jpg\",\"\\/images\\/20180822\\/3a9c4ba10fb5f85b4463d771b9aa791c.JPEG\"]','影视节目制作','寻求融资','我i们是一家致力于爱情动作片的影视制作企业，目前在全世界各地均有分公司设立。我i们是一家致力于爱情动作片的影视制作企业，目前在全世界各地均有分公司设立。','/images/20180822/35efaa2ceb29992ed47065e6e75b47de.JPEG','2018-08-22 14:50:33','2018-08-22 14:50:33',1);
+
+/*Table structure for table `tb_enter_team_member` */
+
 DROP TABLE IF EXISTS `tb_enter_team_member`;
+
 CREATE TABLE `tb_enter_team_member` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL DEFAULT '' COMMENT '姓名',
@@ -3802,15 +285,14 @@ CREATE TABLE `tb_enter_team_member` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_enter_team_member
--- ----------------------------
-INSERT INTO `tb_enter_team_member` VALUES ('1', '胖虎', '安保人员', '不服就是赶', '打大雄', '打大雄', '/images/20180822/23c4f20007da018af2cb3873a196b2d4.JPEG', '1', '2018-08-22 16:39:35', '2018-08-22 16:39:35');
+/*Data for the table `tb_enter_team_member` */
 
--- ----------------------------
--- Table structure for tb_equipment
--- ----------------------------
+insert  into `tb_enter_team_member`(`id`,`name`,`position`,`signature`,`achievement`,`resume`,`picture`,`enter_team_id`,`create_time`,`update_time`) values (1,'胖虎','安保人员','不服就是赶','打大雄','打大雄','/images/20180822/23c4f20007da018af2cb3873a196b2d4.JPEG',1,'2018-08-22 16:39:35','2018-08-22 16:39:35');
+
+/*Table structure for table `tb_equipment` */
+
 DROP TABLE IF EXISTS `tb_equipment`;
+
 CREATE TABLE `tb_equipment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `equipment_no` varchar(20) NOT NULL COMMENT '设备编号',
@@ -3823,15 +305,14 @@ CREATE TABLE `tb_equipment` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_equipment
--- ----------------------------
-INSERT INTO `tb_equipment` VALUES ('1', 'SHJK-G01', '投影', '1', '1', '1', '2018-08-24 18:48:30', '2018-08-24 18:48:30');
+/*Data for the table `tb_equipment` */
 
--- ----------------------------
--- Table structure for tb_equipment_type
--- ----------------------------
+insert  into `tb_equipment`(`id`,`equipment_no`,`name`,`type_id`,`space_id`,`status`,`create_time`,`update_time`) values (1,'SHJK-G01','投影',1,1,1,'2018-08-24 18:48:30','2018-08-24 18:48:30');
+
+/*Table structure for table `tb_equipment_type` */
+
 DROP TABLE IF EXISTS `tb_equipment_type`;
+
 CREATE TABLE `tb_equipment_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL COMMENT '设备类型名称',
@@ -3840,15 +321,167 @@ CREATE TABLE `tb_equipment_type` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_equipment_type
--- ----------------------------
-INSERT INTO `tb_equipment_type` VALUES ('1', '办公', '2018-08-24 18:16:05', '2018-08-24 18:16:05');
+/*Data for the table `tb_equipment_type` */
 
--- ----------------------------
--- Table structure for tb_history_template
--- ----------------------------
+insert  into `tb_equipment_type`(`id`,`name`,`create_time`,`update_time`) values (1,'办公','2018-08-24 18:16:05','2018-08-24 18:16:05');
+
+/*Table structure for table `tb_feedback` */
+
+DROP TABLE IF EXISTS `tb_feedback`;
+
+CREATE TABLE `tb_feedback` (
+  `id` int(12) NOT NULL AUTO_INCREMENT COMMENT '反馈主键',
+  `investigate_id` int(12) DEFAULT NULL COMMENT '调查主键',
+  `mobile` varchar(255) DEFAULT '' COMMENT '反馈手机',
+  `create_time` datetime DEFAULT NULL COMMENT '反馈创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '反馈更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='问卷调查反馈';
+
+/*Data for the table `tb_feedback` */
+
+insert  into `tb_feedback`(`id`,`investigate_id`,`mobile`,`create_time`,`update_time`) values (1,1,NULL,'2018-09-13 19:36:21','2018-09-13 19:36:21'),(2,2,'15900627585','2018-09-14 11:35:58','2018-09-14 11:36:01'),(3,2,'15874585522','2018-09-14 11:36:13','2018-09-14 11:36:15');
+
+/*Table structure for table `tb_flow` */
+
+DROP TABLE IF EXISTS `tb_flow`;
+
+CREATE TABLE `tb_flow` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `team_id` int(11) NOT NULL COMMENT '运营团队id',
+  `type` varchar(255) DEFAULT NULL COMMENT '流程类别',
+  `flow_name` varchar(255) NOT NULL DEFAULT '' COMMENT '流程名称',
+  `flow_desc` varchar(255) NOT NULL DEFAULT '' COMMENT '描述',
+  `sort_order` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0不可用1正常',
+  `is_del` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `uid` int(11) DEFAULT NULL,
+  `add_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='*工作流表';
+
+/*Data for the table `tb_flow` */
+
+insert  into `tb_flow`(`id`,`team_id`,`type`,`flow_name`,`flow_desc`,`sort_order`,`status`,`is_del`,`uid`,`add_time`) values (1,1,'order','订单审核','订单审核',0,0,0,NULL,1536298145),(2,1,'order','订单审核（二）','订单审核（二）',1,0,0,NULL,1536306654),(3,1,'order','订单审核（三）','订单审核（三）',0,0,0,NULL,1536314243),(4,1,'order','订单审核（四）','订单审核（四）',1,0,0,NULL,1536314993),(5,2,'order','销售订单审核流程','',0,1,0,NULL,1536645190),(6,2,'incidental','杂费收取审核流程','',0,1,0,NULL,1536645190),(7,4,'order','销售订单审核流程','',0,1,0,NULL,1536645343),(8,4,'incidental','杂费收取审核流程','杂费收取审核流程',0,1,0,NULL,1536645343);
+
+/*Table structure for table `tb_flow_process` */
+
+DROP TABLE IF EXISTS `tb_flow_process`;
+
+CREATE TABLE `tb_flow_process` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `flow_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '流程ID',
+  `process_name` varchar(255) NOT NULL DEFAULT '' COMMENT '步骤名称',
+  `process_type` char(10) NOT NULL DEFAULT '' COMMENT '步骤类型',
+  `process_to` varchar(255) NOT NULL DEFAULT '' COMMENT '转交下一步骤号',
+  `child_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'is_child 子流程id有return_step_to结束后继续父流程下一步',
+  `child_relation` text COMMENT '[保留功能]父子流程字段映射关系',
+  `child_after` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '子流程 结束后动作 0结束并更新父流程节点为结束  1结束并返回父流程步骤',
+  `child_back_process` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '子流程结束返回的步骤id',
+  `return_sponsor_ids` text COMMENT '[保留功能]主办人 子流程结束后下一步的主办人',
+  `return_respon_ids` text COMMENT '[保留功能]经办人 子流程结束后下一步的经办人',
+  `write_fields` text COMMENT '这个步骤可写的字段',
+  `secret_fields` text COMMENT '这个步骤隐藏的字段',
+  `lock_fields` text COMMENT '锁定不能更改宏控件的值',
+  `check_fields` text COMMENT '字段验证规则',
+  `auto_person` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '本步骤的自动选主办人规则0:为不自动选择1：流程发起人2：本部门主管3指定默认人4上级主管领导5. 一级部门主管6. 指定步骤主办人',
+  `auto_unlock` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否允许修改主办人auto_type>0 0不允许 1允许（默认）',
+  `auto_sponsor_ids` varchar(255) NOT NULL DEFAULT '' COMMENT '3指定步骤主办人ids',
+  `auto_sponsor_text` varchar(255) NOT NULL DEFAULT '' COMMENT '3指定步骤主办人text',
+  `auto_respon_ids` varchar(255) NOT NULL DEFAULT '' COMMENT '3指定步骤主办人ids',
+  `auto_respon_text` varchar(255) NOT NULL DEFAULT '' COMMENT '3指定步骤主办人text',
+  `auto_role_ids` varchar(255) NOT NULL DEFAULT '' COMMENT '制定默认角色ids',
+  `auto_role_text` varchar(255) NOT NULL DEFAULT '' COMMENT '制定默认角色 text',
+  `auto_dept_ids` varchar(255) NOT NULL DEFAULT '' COMMENT '制定默认部门ids',
+  `auto_dept_text` varchar(255) NOT NULL DEFAULT '' COMMENT '制定默认部门text',
+  `auto_process_sponsor` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '[保留功能]指定其中一个步骤的主办人处理',
+  `range_user_ids` text COMMENT '本步骤的经办人授权范围ids',
+  `range_user_text` text COMMENT '本步骤的经办人授权范围text',
+  `range_dept_ids` text COMMENT '本步骤的经办部门授权范围',
+  `range_dept_text` text COMMENT '本步骤的经办部门授权范围text',
+  `range_role_ids` text COMMENT '本步骤的经办角色授权范围ids',
+  `range_role_text` text COMMENT '本步骤的经办角色授权范围text',
+  `receive_type` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0明确指定主办人1先接收者为主办人',
+  `is_user_end` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '允许主办人在非最后步骤也可以办结流程',
+  `is_userop_pass` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '经办人可以转交下一步',
+  `is_sing` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '会签选项0禁止会签1允许会签（默认） 2强制会签',
+  `sign_look` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '会签可见性0总是可见（默认）,1本步骤经办人之间不可见2针对其他步骤不可见',
+  `is_back` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否允许回退0不允许（默认） 1允许退回上一步2允许退回之前步骤',
+  `out_condition` text COMMENT '转出条件',
+  `setleft` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '左 坐标',
+  `settop` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '上 坐标',
+  `style` text COMMENT '样式 序列化',
+  `is_del` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `updatetime` int(10) unsigned NOT NULL DEFAULT '0',
+  `dateline` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_flow_process` */
+
+insert  into `tb_flow_process`(`id`,`flow_id`,`process_name`,`process_type`,`process_to`,`child_id`,`child_relation`,`child_after`,`child_back_process`,`return_sponsor_ids`,`return_respon_ids`,`write_fields`,`secret_fields`,`lock_fields`,`check_fields`,`auto_person`,`auto_unlock`,`auto_sponsor_ids`,`auto_sponsor_text`,`auto_respon_ids`,`auto_respon_text`,`auto_role_ids`,`auto_role_text`,`auto_dept_ids`,`auto_dept_text`,`auto_process_sponsor`,`range_user_ids`,`range_user_text`,`range_dept_ids`,`range_dept_text`,`range_role_ids`,`range_role_text`,`receive_type`,`is_user_end`,`is_userop_pass`,`is_sing`,`sign_look`,`is_back`,`out_condition`,`setleft`,`settop`,`style`,`is_del`,`updatetime`,`dateline`) values (1,1,'订单初审','is_one','2',0,NULL,1,0,NULL,NULL,NULL,NULL,NULL,NULL,6,0,'','','','','','','4','审核部',0,'','','','','','',0,0,0,0,0,2,'[]',658,200,'{\"width\":120,\"height\":30,\"color\":\"#0e76a8\",\"icon\":\"icon-star\"}',0,1536316966,0),(2,1,'人事审核','is_step','3',0,NULL,1,0,NULL,NULL,NULL,NULL,NULL,NULL,5,0,'','','','','16','人事','','',0,'','','','','','',0,0,0,0,0,2,'[]',657,296,'{\"width\":120,\"height\":30,\"color\":\"#0e76a8\",\"icon\":\"icon-star\"}',0,1536316966,0),(3,1,'财务部审核','is_step','4',0,NULL,1,0,NULL,NULL,NULL,NULL,NULL,NULL,6,0,'','','','','','','1','财务部',0,'','','','','','',0,0,0,0,0,2,'[]',684,404,'{\"width\":120,\"height\":30,\"color\":\"#0e76a8\",\"icon\":\"icon-star\"}',0,1536316966,0),(4,1,'最终审核','is_step','',0,NULL,1,0,NULL,NULL,NULL,NULL,NULL,NULL,5,0,'','','','','1','超级管理员','','',0,'','','','','','',0,0,0,0,0,2,'[]',709,527,'{\"width\":120,\"height\":30,\"color\":\"#0e76a8\",\"icon\":\"icon-star\"}',0,1536316966,0),(5,4,'新建步骤','is_one','',0,NULL,1,0,NULL,NULL,NULL,NULL,NULL,NULL,0,1,'','','','','','','','',0,NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,0,0,0,NULL,716,211,'{\"icon\":\"icon-star\",\"width\":\"120\",\"height\":\"30\",\"color\":\"#0e76a8\"}',0,0,0),(9,5,'初审','is_one','10',0,NULL,1,0,NULL,NULL,NULL,NULL,NULL,NULL,4,0,'16','王','','','','','','',0,'','','','','','',0,0,0,0,0,2,'[]',602,163,'{\"width\":120,\"height\":30,\"color\":\"#0e76a8\",\"icon\":\"icon-star\"}',0,1536732173,0),(10,5,'最终审核','is_step','',0,NULL,1,0,NULL,NULL,NULL,NULL,NULL,NULL,6,0,'','','','','','','4','审核部',0,'','','','','','',0,0,0,0,0,2,'[]',602,318,'{\"width\":120,\"height\":30,\"color\":\"#0e76a8\",\"icon\":\"icon-star\"}',0,1536732173,0),(11,7,'初审','is_one','12',0,NULL,1,0,NULL,NULL,NULL,NULL,NULL,NULL,4,0,'16','王','','','','','','',0,'','','','','','',0,0,0,0,0,2,'[]',746,136,'{\"width\":120,\"height\":30,\"color\":\"#0e76a8\",\"icon\":\"icon-star\"}',0,1536732278,0),(12,7,'最终审核','is_step','',0,NULL,1,0,NULL,NULL,NULL,NULL,NULL,NULL,6,0,'','','','','','','4','审核部',0,'','','','','','',0,0,0,0,0,2,'[]',727,337,'{\"width\":120,\"height\":30,\"color\":\"#0e76a8\",\"icon\":\"icon-star\"}',0,1536732278,0),(13,6,'新建步骤','is_one','',0,NULL,1,0,NULL,NULL,NULL,NULL,NULL,NULL,0,1,'','','','','','','','',0,NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,0,0,0,NULL,674,174,'{\"icon\":\"icon-star\",\"width\":\"120\",\"height\":\"30\",\"color\":\"#0e76a8\"}',0,1536743366,0),(17,8,'新建步骤','is_one','',0,NULL,1,0,NULL,NULL,NULL,NULL,NULL,NULL,0,1,'','','','','','','','',0,NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,0,0,0,NULL,713,158,'{\"icon\":\"icon-star\",\"width\":\"120\",\"height\":\"30\",\"color\":\"#0e76a8\"}',0,1536749512,0);
+
+/*Table structure for table `tb_form` */
+
+DROP TABLE IF EXISTS `tb_form`;
+
+CREATE TABLE `tb_form` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL COMMENT '表单名称',
+  `name` varchar(255) DEFAULT NULL COMMENT '表名',
+  `file` varchar(255) DEFAULT NULL COMMENT '生成文件',
+  `menu` int(11) NOT NULL DEFAULT '0',
+  `flow` int(11) NOT NULL DEFAULT '0',
+  `ziduan` longtext,
+  `uid` varchar(255) DEFAULT NULL,
+  `add_time` int(11) DEFAULT NULL,
+  `status` int(11) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_form` */
+
+insert  into `tb_form`(`id`,`title`,`name`,`file`,`menu`,`flow`,`ziduan`,`uid`,`add_time`,`status`) values (1,'合同审核','test','all',0,0,'{\"fields\":[{\"label\":\"字段名\",\"field_type\":\"text\",\"required\":true,\"field_options\":{\"size\":\"small\"},\"cid\":\"c2\",\"name\":\"user\"},{\"label\":\"选择框\",\"field_type\":\"checkboxes\",\"required\":true,\"field_options\":{\"options\":[{\"label\":\"1\",\"checked\":false},{\"label\":\"2\",\"checked\":false}]},\"cid\":\"c6\",\"name\":\"selcet\"},{\"label\":\"年龄\",\"field_type\":\"number\",\"required\":true,\"field_options\":{\"min\":\"1\",\"max\":\"90\",\"units\":\"年龄大小\"},\"cid\":\"c10\",\"name\":\"1\"}]}','7',1522721520,1),(2,'采购申请','cgcnt','all',0,0,'{\"fields\":[{\"label\":\"年龄\",\"field_type\":\"text\",\"required\":true,\"field_options\":{\"size\":\"medium\"},\"cid\":\"c2\",\"name\":\"age\",\"search\":\"yes\",\"lists\":\"yes\"},{\"label\":\"标题\",\"field_type\":\"text\",\"required\":true,\"field_options\":{\"size\":\"medium\"},\"cid\":\"c6\",\"name\":\"title\",\"lists\":\"yes\",\"type\":\"text\",\"search\":\"no\"},{\"label\":\"Untitled\",\"field_type\":\"text\",\"required\":true,\"field_options\":{\"size\":\"small\"},\"lists\":\"yes\",\"search\":\"yes\",\"type\":\"text\",\"cid\":\"c9\"}]}','7',1522810306,0),(3,'业务测试','yw','all',0,0,'{\"fields\":[{\"label\":\"业务测试\",\"field_type\":\"text\",\"required\":true,\"field_options\":{\"size\":\"small\"},\"lists\":\"yes\",\"search\":\"yes\",\"type\":\"text\",\"cid\":\"c2\",\"name\":\"name\"},{\"label\":\"业务名称\",\"field_type\":\"text\",\"required\":true,\"field_options\":{\"size\":\"small\"},\"lists\":\"yes\",\"search\":\"yes\",\"type\":\"text\",\"cid\":\"c6\",\"name\":\"test\"}]}','7',1523152256,1);
+
+/*Table structure for table `tb_form_function` */
+
+DROP TABLE IF EXISTS `tb_form_function`;
+
+CREATE TABLE `tb_form_function` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fid` int(11) DEFAULT NULL,
+  `sql` longtext,
+  `name` varchar(255) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  `add_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_form_function` */
+
+insert  into `tb_form_function`(`id`,`fid`,`sql`,`name`,`uid`,`add_time`) values (2,1,'SELECT type FROM `leipi_news_type` ','新闻类别',7,1522727302);
+
+/*Table structure for table `tb_group` */
+
+DROP TABLE IF EXISTS `tb_group`;
+
+CREATE TABLE `tb_group` (
+  `id` int(12) NOT NULL AUTO_INCREMENT COMMENT '分组主键',
+  `name` varchar(255) DEFAULT '' COMMENT '分组名称',
+  `sort` tinyint(2) DEFAULT NULL COMMENT '分组排序',
+  `create_time` datetime DEFAULT NULL COMMENT '分组创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '分组更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_group` */
+
+insert  into `tb_group`(`id`,`name`,`sort`,`create_time`,`update_time`) values (1,'阿里服务商',2,'2018-09-13 14:08:50','2018-09-13 14:10:14'),(2,'腾讯服务商',1,'2018-09-13 17:02:44','2018-09-13 17:02:44');
+
+/*Table structure for table `tb_history_template` */
+
 DROP TABLE IF EXISTS `tb_history_template`;
+
 CREATE TABLE `tb_history_template` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL COMMENT '模板标题',
@@ -3863,15 +496,54 @@ CREATE TABLE `tb_history_template` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_history_template
--- ----------------------------
-INSERT INTO `tb_history_template` VALUES ('1', '一般场地租赁合同', 'CT5b83a45579133', '1', '一般场地租赁合同', '&lt;table&gt;111&lt;/table&gt;', '16', '1', '2018-08-27 15:12:43', '2018-08-27 15:12:43');
+/*Data for the table `tb_history_template` */
 
--- ----------------------------
--- Table structure for tb_information
--- ----------------------------
+insert  into `tb_history_template`(`id`,`name`,`template_no`,`template_id`,`remark`,`rich_text`,`editor`,`status`,`create_time`,`update_time`) values (1,'一般场地租赁合同','CT5b83a45579133',1,'一般场地租赁合同','&lt;table&gt;111&lt;/table&gt;',16,1,'2018-08-27 15:12:43','2018-08-27 15:12:43');
+
+/*Table structure for table `tb_incidental` */
+
+DROP TABLE IF EXISTS `tb_incidental`;
+
+CREATE TABLE `tb_incidental` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `project` varchar(20) NOT NULL COMMENT '收款项目',
+  `pay_type` int(2) NOT NULL COMMENT '收款方式',
+  `status` int(2) NOT NULL COMMENT '状态',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_incidental` */
+
+insert  into `tb_incidental`(`id`,`project`,`pay_type`,`status`,`create_time`,`update_time`) values (1,'年中大促',0,2,'2018-09-11 10:51:10','2018-09-11 18:42:58');
+
+/*Table structure for table `tb_incidental_order` */
+
+DROP TABLE IF EXISTS `tb_incidental_order`;
+
+CREATE TABLE `tb_incidental_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_no` varchar(20) NOT NULL COMMENT '订单号',
+  `incidental_id` int(11) NOT NULL COMMENT '杂费收款id',
+  `project` varchar(20) NOT NULL COMMENT '收款项目',
+  `pay_type` int(2) NOT NULL COMMENT '收款方式',
+  `team_id` int(11) NOT NULL COMMENT '收款对象',
+  `price` decimal(10,2) NOT NULL COMMENT '金额',
+  `status` int(2) NOT NULL COMMENT '状态',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_incidental_order` */
+
+insert  into `tb_incidental_order`(`id`,`order_no`,`incidental_id`,`project`,`pay_type`,`team_id`,`price`,`status`,`create_time`,`update_time`) values (1,'OR5b972d9eb65c4',1,'年中大促',0,1,'100.00',0,'2018-09-11 10:51:10','2018-09-11 10:51:10'),(2,'OR5b972d9eb6d95',1,'年中大促',0,2,'50.00',0,'2018-09-11 10:51:10','2018-09-11 10:51:10');
+
+/*Table structure for table `tb_information` */
+
 DROP TABLE IF EXISTS `tb_information`;
+
 CREATE TABLE `tb_information` (
   `id` int(12) NOT NULL AUTO_INCREMENT COMMENT '消息主键',
   `title` varchar(255) NOT NULL DEFAULT '' COMMENT '消息标题',
@@ -3883,18 +555,38 @@ CREATE TABLE `tb_information` (
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_information
--- ----------------------------
-INSERT INTO `tb_information` VALUES ('1', '最新产业联盟大会即将于2018年13月32号举行', '1', '0', '2018-08-05 21:53:02', '<a>111</a>');
-INSERT INTO `tb_information` VALUES ('5', '测试消息', '16', '0', '2018-08-21 15:07:42', '');
+/*Data for the table `tb_information` */
 
--- ----------------------------
--- Table structure for tb_invoice
--- ----------------------------
+insert  into `tb_information`(`id`,`title`,`publisher`,`status`,`publish_time`,`rich_text`) values (1,'最新产业联盟大会即将于2018年13月32号举行',1,0,'2018-08-05 21:53:02','<a>111</a>'),(5,'测试消息',16,0,'2018-08-21 15:07:42','');
+
+/*Table structure for table `tb_investigate` */
+
+DROP TABLE IF EXISTS `tb_investigate`;
+
+CREATE TABLE `tb_investigate` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '问卷调查主键',
+  `title` varchar(255) DEFAULT '' COMMENT '问卷调查标题',
+  `publisher` varchar(255) DEFAULT '' COMMENT '问卷调查发布人',
+  `status` tinyint(2) DEFAULT '1' COMMENT '问卷调查状态',
+  `type` tinyint(4) DEFAULT NULL COMMENT '问卷调查类型',
+  `count` int(60) DEFAULT '0' COMMENT '问卷调查统计',
+  `create_time` datetime DEFAULT NULL COMMENT '问卷调查创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '问卷调查更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `tb_investigate_id_uindex` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='问卷调查';
+
+/*Data for the table `tb_investigate` */
+
+insert  into `tb_investigate`(`id`,`title`,`publisher`,`status`,`type`,`count`,`create_time`,`update_time`) values (1,'这是什么家伙','你好',1,NULL,0,'2018-09-11 16:18:13','2018-09-11 16:18:13'),(2,'这是什么家伙','',1,NULL,0,'2018-09-11 16:33:05',NULL),(3,'这是什么家伙','',1,NULL,0,'2018-09-11 16:35:57',NULL);
+
+/*Table structure for table `tb_invoice` */
+
 DROP TABLE IF EXISTS `tb_invoice`;
+
 CREATE TABLE `tb_invoice` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `invoice_no` varchar(20) NOT NULL COMMENT '发票编号',
   `order_no` varchar(20) NOT NULL COMMENT '订单号',
   `opener_type` int(2) NOT NULL COMMENT '开具类型',
   `invoice_title` varchar(50) NOT NULL COMMENT '发票抬头',
@@ -3904,24 +596,20 @@ CREATE TABLE `tb_invoice` (
   `account` varchar(30) DEFAULT NULL COMMENT '开户账号',
   `address` varchar(255) DEFAULT NULL COMMENT '注册场所地址',
   `phone` varchar(13) DEFAULT NULL COMMENT '注册电话',
-  `status` int(2) NOT NULL COMMENT '状态',
+  `status` int(2) NOT NULL DEFAULT '0' COMMENT '状态',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_invoice
--- ----------------------------
-INSERT INTO `tb_invoice` VALUES ('25', 'OR5b8534e4a62dc', '1', '上海游达网络有限公司', '1', 'ks12345646', '中国工商银行上海浦东支行', 'ksnk1234565', '上海市浦东新区纳贤路800号', '021-65567577', '0', '2018-08-28 19:41:24', '2018-08-28 19:41:24');
-INSERT INTO `tb_invoice` VALUES ('35', 'OR5b865f1aa2d66', '1', '上海伪装者有限公司', '1', 'fasdf45646', '上海工商银行', 'adfas451', '上海浦东新区张江高科', '021-65587877', '-1', '2018-08-29 16:53:46', '2018-08-29 16:53:46');
-INSERT INTO `tb_invoice` VALUES ('36', 'OR5b865fae2c0c3', '1', '上海伪装者有限公司', '1', 'fasdf45646', '上海工商银行', 'adfas451', '上海浦东新区张江高科', '021-65587877', '-1', '2018-08-29 16:56:14', '2018-08-29 16:56:14');
-INSERT INTO `tb_invoice` VALUES ('46', 'OR5b86610880b7d', '1', '上海伪装者有限公司', '1', 'fasdf45646', '上海工商银行', 'adfas451', '上海浦东新区张江高科', '021-65587877', '-1', '2018-08-29 17:02:00', '2018-08-29 17:02:00');
+/*Data for the table `tb_invoice` */
 
--- ----------------------------
--- Table structure for tb_linkman
--- ----------------------------
+insert  into `tb_invoice`(`id`,`invoice_no`,`order_no`,`opener_type`,`invoice_title`,`type`,`tax`,`bank`,`account`,`address`,`phone`,`status`,`create_time`,`update_time`) values (25,'IN5b8534e4a62dc','OR5b8534e4a62dc',1,'上海游达网络有限公司',1,'ks12345646','中国工商银行上海浦东支行','ksnk1234565','上海市浦东新区纳贤路800号','021-65567577',0,'2018-08-28 19:41:24','2018-08-28 19:41:24'),(35,'IN5b865f1aa2d66','OR5b865f1aa2d66',1,'上海伪装者有限公司',1,'fasdf45646','上海工商银行','adfas451','上海浦东新区张江高科','021-65587877',-1,'2018-08-29 16:53:46','2018-08-29 16:53:46'),(36,'IN5b865fae2c0c3','OR5b865fae2c0c3',1,'上海伪装者有限公司',1,'fasdf45646','上海工商银行','adfas451','上海浦东新区张江高科','021-65587877',-1,'2018-08-29 16:56:14','2018-08-29 16:56:14'),(46,'IN5b86610880b7d','OR5b86610880b7d',1,'上海伪装者有限公司',1,'fasdf45646','上海工商银行','adfas451','上海浦东新区张江高科','021-65587877',-1,'2018-08-29 17:02:00','2018-08-29 17:02:00');
+
+/*Table structure for table `tb_linkman` */
+
 DROP TABLE IF EXISTS `tb_linkman`;
+
 CREATE TABLE `tb_linkman` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `enter_team_id` int(11) NOT NULL COMMENT '入驻团队id',
@@ -3942,16 +630,69 @@ CREATE TABLE `tb_linkman` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_linkman
--- ----------------------------
-INSERT INTO `tb_linkman` VALUES ('1', '1', '小小', '17826815704', '789@163.com', '1', '小李', '17826815701', '456@163.co', '2', '小孙', '17826815703', '456@163.com', '2', '2018-08-23 11:43:28', '2018-08-23 11:46:40');
-INSERT INTO `tb_linkman` VALUES ('2', '2', '', '', '', '0', '小为', '17826815706', '8467@163.com', '1', '', '', '', '0', '2018-08-23 11:48:16', '2018-08-23 11:48:16');
+/*Data for the table `tb_linkman` */
 
--- ----------------------------
--- Table structure for tb_operation_team
--- ----------------------------
+insert  into `tb_linkman`(`id`,`enter_team_id`,`a_linkman`,`a_mobile`,`a_email`,`a_remind`,`f_linkman`,`f_mobile`,`f_email`,`f_remind`,`e_linkman`,`e_mobile`,`e_email`,`e_remind`,`create_time`,`update_time`) values (1,1,'小小','17826815704','789@163.com',1,'小李','17826815701','456@163.co',2,'小孙','17826815703','456@163.com',2,'2018-08-23 11:43:28','2018-08-23 11:46:40'),(2,2,'','','',0,'小为','17826815706','8467@163.com',1,'','','',0,'2018-08-23 11:48:16','2018-08-23 11:48:16');
+
+/*Table structure for table `tb_menu` */
+
+DROP TABLE IF EXISTS `tb_menu`;
+
+CREATE TABLE `tb_menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `url` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  `add_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_menu` */
+
+insert  into `tb_menu`(`id`,`url`,`name`,`uid`,`add_time`) values (12,'yw/index','业务测试',7,0);
+
+/*Table structure for table `tb_news` */
+
+DROP TABLE IF EXISTS `tb_news`;
+
+CREATE TABLE `tb_news` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `uid` int(11) NOT NULL COMMENT '用户id',
+  `add_time` int(11) DEFAULT NULL COMMENT '新增时间',
+  `new_title` varchar(255) DEFAULT NULL COMMENT '新闻标题',
+  `new_type` int(11) DEFAULT NULL COMMENT '新闻类别',
+  `new_top` int(11) NOT NULL DEFAULT '0' COMMENT '是否置顶',
+  `new_con` longtext COMMENT '新闻内容',
+  `new_user` varchar(255) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT '0' COMMENT '-1回退修改0 保存中1流程中 2通过',
+  `uptime` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_news` */
+
+insert  into `tb_news`(`id`,`uid`,`add_time`,`new_title`,`new_type`,`new_top`,`new_con`,`new_user`,`status`,`uptime`) values (3,13,1522586765,'123',1,1,'&lt;p&gt;3123&lt;/p&gt;',NULL,2,1523444896),(4,7,1523429045,'流程测试',1,1,'&lt;p&gt;1123132&lt;/p&gt;',NULL,2,1523436079),(5,7,1523532395,'132',1,1,'&lt;p&gt;3123333333&lt;/p&gt;',NULL,2,1523532596);
+
+/*Table structure for table `tb_news_type` */
+
+DROP TABLE IF EXISTS `tb_news_type`;
+
+CREATE TABLE `tb_news_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  `add_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_news_type` */
+
+insert  into `tb_news_type`(`id`,`type`,`uid`,`add_time`) values (1,'公司新闻',1,1516462457),(2,'部门新闻',1,NULL),(3,'上级要闻',1,NULL),(4,'职称考试',1,NULL);
+
+/*Table structure for table `tb_operation_team` */
+
 DROP TABLE IF EXISTS `tb_operation_team`;
+
 CREATE TABLE `tb_operation_team` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL COMMENT '运营团队全称',
@@ -3963,17 +704,16 @@ CREATE TABLE `tb_operation_team` (
   `status` int(2) NOT NULL DEFAULT '1' COMMENT '状态',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_operation_team
--- ----------------------------
-INSERT INTO `tb_operation_team` VALUES ('1', '测试运营团队', '1', '测试运营团队', '0', '2018-08-08 18:37:50', '2018-08-20 18:38:05', '1');
+/*Data for the table `tb_operation_team` */
 
--- ----------------------------
--- Table structure for tb_operation_team_roles
--- ----------------------------
+insert  into `tb_operation_team`(`id`,`name`,`leader_id`,`description`,`management_type`,`create_time`,`update_time`,`status`) values (1,'测试运营团队',1,'测试运营团队',0,'2018-08-08 18:37:50','2018-08-20 18:38:05',1),(2,'测试团队',1,'测试团队',0,'2018-09-11 13:53:10','2018-09-11 13:53:10',1),(4,'最佳管理团队',1,'最佳管理团队',0,'2018-09-11 13:55:43','2018-09-11 13:55:43',1);
+
+/*Table structure for table `tb_operation_team_roles` */
+
 DROP TABLE IF EXISTS `tb_operation_team_roles`;
+
 CREATE TABLE `tb_operation_team_roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `operation_team_id` int(11) NOT NULL COMMENT '运营团队id',
@@ -3981,16 +721,33 @@ CREATE TABLE `tb_operation_team_roles` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_operation_team_roles
--- ----------------------------
+/*Data for the table `tb_operation_team_roles` */
 
--- ----------------------------
--- Table structure for tb_order
--- ----------------------------
+insert  into `tb_operation_team_roles`(`id`,`operation_team_id`,`role_id`,`create_time`,`update_time`) values (1,1,1,'2018-09-17 12:55:12',NULL);
+
+/*Table structure for table `tb_option` */
+
+DROP TABLE IF EXISTS `tb_option`;
+
+CREATE TABLE `tb_option` (
+  `id` int(12) NOT NULL AUTO_INCREMENT COMMENT '选项主键',
+  `content` varchar(255) DEFAULT '' COMMENT '选项内容',
+  `question_id` int(12) DEFAULT NULL COMMENT '问题主键',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_option` */
+
+insert  into `tb_option`(`id`,`content`,`question_id`,`create_time`,`update_time`) values (1,'这是灰熊',1,'2018-09-11 16:35:58','2018-09-11 16:35:58'),(2,'这是狮子',1,'2018-09-11 16:35:58','2018-09-11 16:35:58'),(3,'这是大象',2,'2018-09-11 16:35:58','2018-09-11 16:35:58'),(4,'这是蚂蚁',2,'2018-09-11 16:35:58','2018-09-11 16:35:58'),(5,'这是灰熊',3,'2018-09-11 16:35:58','2018-09-11 16:35:58'),(6,'这是狮子',3,'2018-09-11 16:35:58','2018-09-11 16:35:58'),(19,'这是大象',3,'2018-09-11 16:35:58','2018-09-11 16:35:58'),(20,'这是蚂蚁',3,'2018-09-11 16:35:58','2018-09-11 16:35:58');
+
+/*Table structure for table `tb_order` */
+
 DROP TABLE IF EXISTS `tb_order`;
+
 CREATE TABLE `tb_order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_no` varchar(20) NOT NULL COMMENT '订单编号',
@@ -4010,18 +767,14 @@ CREATE TABLE `tb_order` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_order
--- ----------------------------
-INSERT INTO `tb_order` VALUES ('27', 'OR5b8534e4a62dc', '1', 'CT5b83a46b8131f', '1', '1', '1000.00', '10000.00', 'IN5b8534e4a66c4', '1000.00', '测试', '1', '16', '2018-08-28 19:41:24', '2018-08-28 19:41:24');
-INSERT INTO `tb_order` VALUES ('37', 'OR5b865f1aa2d66', '2', 'CT5b83a46b8131f', '1', '1', '10000.00', null, 'IN5b865f1aa314e', '100.00', 'fjaskldfj', '1', '16', '2018-08-29 16:53:46', '2018-08-29 16:53:46');
-INSERT INTO `tb_order` VALUES ('38', 'OR5b865fae2c0c3', '2', 'CT5b83a46b8131f', '1', '1', '10000.00', '100000.00', 'IN5b865fae2c4ac', '100.00', 'fjaskldfj', '1', '16', '2018-08-29 16:56:14', '2018-08-29 16:56:14');
-INSERT INTO `tb_order` VALUES ('48', 'OR5b86610880b7d', '2', 'CT5b83a46b8131f', '1', '1', '10000.00', '100000.00', 'IN5b86610880f65', '100.00', 'fjaskldfj', '1', '16', '2018-08-29 17:02:00', '2018-08-29 17:02:00');
+/*Data for the table `tb_order` */
 
--- ----------------------------
--- Table structure for tb_order_workplace
--- ----------------------------
+insert  into `tb_order`(`id`,`order_no`,`team_id`,`contract_template_no`,`contract_years`,`pay_type`,`deposit`,`total_price`,`invoice_no`,`discount`,`remark`,`status`,`operator_id`,`create_time`,`update_time`) values (27,'OR5b8534e4a62dc',1,'CT5b83a46b8131f',1,1,'1000.00','10000.00','IN5b8534e4a66c4','1000.00','测试',-1,16,'2018-08-28 19:41:24','2018-09-13 13:45:01'),(37,'OR5b865f1aa2d66',2,'CT5b83a46b8131f',1,1,'10000.00','10000.00','IN5b865f1aa314e','100.00','fjaskldfj',1,16,'2018-08-29 16:53:46','2018-09-13 15:05:26'),(38,'OR5b865fae2c0c3',2,'CT5b83a46b8131f',1,1,'10000.00','100000.00','IN5b865fae2c4ac','100.00','fjaskldfj',2,16,'2018-08-29 16:56:14','2018-09-10 11:01:07'),(48,'OR5b86610880b7d',2,'CT5b83a46b8131f',1,1,'10000.00','100000.00','IN5b86610880f65','100.00','fjaskldfj',2,16,'2018-08-29 17:02:00','2018-09-07 18:55:14');
+
+/*Table structure for table `tb_order_workplace` */
+
 DROP TABLE IF EXISTS `tb_order_workplace`;
+
 CREATE TABLE `tb_order_workplace` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL COMMENT '订单id',
@@ -4032,17 +785,14 @@ CREATE TABLE `tb_order_workplace` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_order_workplace
--- ----------------------------
-INSERT INTO `tb_order_workplace` VALUES ('8', '48', '1', '0.00', '2018-08-28 19:41:24', '2018-08-28 19:41:24');
-INSERT INTO `tb_order_workplace` VALUES ('9', '27', '2', '200.00', '2018-08-28 19:41:24', '2018-08-28 19:41:24');
-INSERT INTO `tb_order_workplace` VALUES ('10', '48', '2', '300.50', '2018-08-29 17:02:00', '2018-08-29 17:02:00');
+/*Data for the table `tb_order_workplace` */
 
--- ----------------------------
--- Table structure for tb_permission
--- ----------------------------
+insert  into `tb_order_workplace`(`id`,`order_id`,`workplace_id`,`workplace_area`,`create_time`,`update_time`) values (8,48,1,'0.00','2018-08-28 19:41:24','2018-08-28 19:41:24'),(9,27,2,'200.00','2018-08-28 19:41:24','2018-08-28 19:41:24'),(10,48,2,'300.50','2018-08-29 17:02:00','2018-08-29 17:02:00');
+
+/*Table structure for table `tb_permission` */
+
 DROP TABLE IF EXISTS `tb_permission`;
+
 CREATE TABLE `tb_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '' COMMENT '权限名称',
@@ -4055,135 +805,33 @@ CREATE TABLE `tb_permission` (
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `icon` varchar(18) DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=utf8 COMMENT='权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8 COMMENT='权限表';
 
--- ----------------------------
--- Records of tb_permission
--- ----------------------------
-INSERT INTO `tb_permission` VALUES ('1', '系统管理', '/admin/server', '0', '系统管理的描述', '1', '1', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('2', '角色管理', '/admin/role/role_list', '1', '角色管理的描述', '2', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('3', '角色添加/编辑', '/admin/role/add', '2', '角色添加/编辑的描述', '3', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('4', '角色删除', '/admin/role/delete', '2', '角色删除的描述', '4', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('5', '角色获取', '/admin/role/detail', '2', '角色获取的描述', '5', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('6', '获取用户权限', '/admin/role/get_role_permission', '2', '获取用户权限的描述', '6', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('7', '修改用户权限', '/admin/role/assign_role_permission', '2', '修改用户权限的描述', '7', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('8', '管理员管理', '/admin/admin/admin_list', '7', '管理员管理的描述', '8', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('9', '管理员添加/编辑', '/admin/admin/assign_user_role', '8', '管理员添加/编辑的描述', '9', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('10', '管理员删除', '-', '8', '管理员删除的描述', '10', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('11', '管理员获取', '/admin/admin/detail', '8', '管理员获取的描述', '11', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('12', '权限管理', '/admin/permission/node_list', '11', '权限管理的描述', '12', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('13', '权限添加/编辑', '/admin/permission/add', '12', '权限添加/编辑的描述', '13', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('14', '权限删除', '/admin/permission/delete', '12', '权限删除的描述', '14', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('15', '权限获取', '/admin/permission/detail', '12', '权限获取的描述', '15', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('16', '当前用户权限列表', '/admin/permission/node', '12', '当前用户权限列表的描述', '16', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('17', '轮播管理', '/admin/carousel', '0', '轮播管理的描述', '17', '1', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('18', '轮播列表', '/admin/carousel/carousel_list', '17', '轮播列表的描述', '18', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('19', '轮播添加/编辑', '/admin/carousel/upload', '18', '轮播添加/编辑的描述', '19', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('20', '轮播删除', '/admin/carousel/delete', '18', '轮播删除的描述', '20', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('21', '轮播获取', '/admin/carousel/detail', '18', '轮播获取的描述', '21', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('22', '大赛管理', '/admin/competition', '0', '大赛管理的描述', '22', '1', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('23', '大赛列表', '/admin/competition/index', '22', '大赛列表的描述', '23', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('24', '大赛添加/编辑', '/admin/competition/save', '23', '大赛添加/编辑的描述', '24', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('25', '大赛详细', '/admin/competition/detail', '23', '大赛详细的描述', '25', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('26', '大赛编辑', '/admin/competition/introduce', '23', '大赛编辑的描述', '26', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('27', '大赛删除', '/admin/competition/delete', '23', '大赛删除的描述', '27', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('28', '创业导师', '/admin/tutor/index', '27', '创业导师的描述', '28', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('29', '导师添加/编辑', '/admin/tutor/save', '28', '导师添加/编辑的描述', '29', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('30', '导师详细', '/admin/tutor/detail', '28', '导师详细的描述', '30', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('31', '导师删除', '/admin/tutor/delete', '28', '导师删除的描述', '31', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('32', '参赛团队', '/admin/team/index', '31', '参赛团队的描述', '32', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('33', '团队添加/编辑', '/admin/team/save', '32', '团队添加/编辑的描述', '33', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('34', '团队详细', '/admin/team/detail', '32', '团队详细的描述', '34', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('35', '团队删除', '/admin/team/delete', '32', '团队删除的描述', '35', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('36', '大赛新闻', '/admin/news/index', '35', '大赛新闻的描述', '36', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('37', '新闻添加/编辑', '/admin/news/save', '36', '新闻添加/编辑的描述', '37', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('38', '新闻详细', '/admin/news/detail', '36', '新闻详细的描述', '38', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('39', '新闻删除', '/admin/news/delete', '36', '新闻删除的描述', '39', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('40', '投资机构', '/admin/investor/index', '39', '投资机构的描述', '40', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('41', '机构添加/编辑', '/admin/investor/save', '40', '机构添加/编辑的描述', '41', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('42', '机构详细', '/admin/investor/detail', '40', '机构详细的描述', '42', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('43', '机构删除', '/admin/investor/delete', '40', '机构删除的描述', '43', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('44', '服务商', '/admin/sp/index', '43', '服务商的描述', '44', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('45', '服务商添加/编辑', '/admin/sp/save', '44', '服务商添加/编辑的描述', '45', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('46', '服务商详细', '/admin/sp/detail', '44', '服务商详细的描述', '46', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('47', '服务商删除', '/admin/sp/delete', '44', '服务商删除的描述', '47', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('48', '组织机构分组', '/admin/organizer_group/index', '47', '组织机构分组的描述', '48', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('49', '组织机构分组添加/编辑', '/admin/organizer_group/save', '48', '组织机构分组添加/编辑的描述', '49', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('50', '组织机构分组详细', '/admin/organizer_group/detail', '48', '组织机构分组详细的描述', '50', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('51', '组织机构分组删除', '/admin/organizer_group/delete', '48', '组织机构分组删除的描述', '51', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('52', '组织机构', '/admin/organizer/index', '51', '组织机构的描述', '52', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('53', '组织机构添加/编辑', '/admin/organizer/save', '52', '组织机构添加/编辑的描述', '53', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('54', '组织机构详细', '/admin/organizer/detail', '52', '组织机构详细的描述', '54', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('55', '组织机构删除', '/admin/organizer/delete', '52', '组织机构删除的描述', '55', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('56', '大赛论坛', '', '55', '大赛论坛的描述', '56', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('57', '论坛关联添加/编辑', '', '56', '论坛关联添加/编辑的描述', '57', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('58', '论坛关联删除', '', '56', '论坛关联删除的描述', '58', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('59', '论坛活动', '/admin/active', '0', '论坛活动的描述', '59', '1', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('60', '活动管理', '/admin/active/index', '59', '活动管理的描述', '60', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('61', '活动添加/编辑活动', '/admin/active/save', '60', '活动添加/编辑活动的描述', '61', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('62', '活动删除', '/admin/active/delete', '60', '活动删除的描述', '62', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('63', '活动获取', '/admin/active/detail', '60', '活动获取的描述', '63', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('64', '活动已报名列表', '/admin/active/enroll_list', '60', '活动已报名列表的描述', '64', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('65', '活动报名审核', '/admin/active/check', '60', '活动报名审核的描述', '65', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('66', '活动回顾', '/admin/review/index', '65', '活动回顾的描述', '66', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('67', '回顾添加/编辑活动', '/admin/review/save', '66', '回顾添加/编辑活动的描述', '67', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('68', '回顾删除', '/admin/active/delete', '66', '回顾删除的描述', '68', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('69', '回顾获取', '/admin/review/detail', '66', '回顾获取的描述', '69', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('70', '服务资源商管理', '/admin/service', '0', '服务资源商管理的描述', '70', '1', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('71', '服务资源商列表', '/admin/service/index', '70', '服务资源商列表的描述', '71', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('72', '服务资源商添加/编辑活动', '/admin/service/save', '71', '服务资源商添加/编辑活动的描述', '72', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('73', '服务资源商删除', '/admin/service/delete', '71', '服务资源商删除的描述', '73', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('74', '服务资源商获取', '/admin/service/detail', '71', '服务资源商获取的描述', '74', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('75', '服务资源商分类添加', '/admin/category/save', '71', '服务资源商分类添加的描述', '75', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('76', '用户管理', '/admin/user', '0', '用户管理的描述', '76', '1', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('77', '用户列表', '/admin/user/user_list', '76', '用户列表的描述', '77', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('78', '用户添加/编辑活动', '/admin/user/create', '77', '用户添加/编辑活动的描述', '78', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('79', '用户删除', '/admin/user/delete', '77', '用户删除的描述', '79', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('80', '用户获取', '/admin/user/detail', '77', '用户获取的描述', '80', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('81', '消息管理', '/admin/information', '0', '消息管理的描述', '81', '1', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('82', '消息列表', '/admin/information/index', '81', '消息列表的描述', '82', '2', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('83', '消息添加/编辑活动', '/admin/information/save', '82', '消息添加/编辑活动的描述', '83', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('84', '消息删除', '/admin/information/delete', '82', '消息删除的描述', '84', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('85', '消息获取', '/admin/information/detail', '82', '消息获取的描述', '85', '3', '1', '1533780014', '');
-INSERT INTO `tb_permission` VALUES ('86', '', '/admin/competition/add_forum', null, '', null, null, '0', '0', '');
-INSERT INTO `tb_permission` VALUES ('87', '', '/admin/competition/delete_forum', null, '', null, null, '0', '0', '');
-INSERT INTO `tb_permission` VALUES ('108', '后台用户修改密码', '/admin//admin/change_password', null, '后台用户修改密码', '85', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('109', '运营团队管理', '/admin/operation_team', '0', '运营团队管理', '0', '1', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('110', '运营团队列表', '/admin/operation_team/index', '109', '运营团队列表的描述', '109', '2', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('111', '运营团队删除', '/admin/operation_team/delete', '109', '运营团队删除', '109', '2', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('112', '运营团队新增更新', '/admin/operation_team/save', '109', '运营团队新增更新', '109', '2', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('113', '运营团队详情', '/admin/operation_team/detail', '109', '运营团队详情的描述', '109', '2', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('114', '空间管理', '/admin/space', '0', '空间管理的描述', '114', '1', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('115', '空间添加/编辑', '/admin/space/save', '114', '空间添加、编辑的描述', '115', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('116', '空间所属地区', '/admin/area/index', '114', '空间所属地区的描述', '116', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('117', '空间列表', '/admin/space/index', '114', '空间列表的描述', '117', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('118', '空间详情', '/admin/space/detail', '114', '空间详情的描述', '118', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('119', '空间删除', '/admin/space/delete', '114', '空间删除的描述', '119', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('120', '工位管理', '/admin/workplace', '0', '工位管理的描述', '120', '1', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('121', '工位新增/编辑', '/admin/workplace/save', '120', '工位新增/编辑的描述', '121', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('122', '工位列表', '/admin/workplace/index', '120', '工位列表管理', '122', '2', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('123', '工位分组管理', '/admin/workplace_group', '0', '工位分组管理', '123', '1', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('124', '工位分组新增更新', '/admin/workplace_group/save', '123', '工位分组新增更新的描述', '124', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('125', '工位分组列表', '/admin/workplace_group/index', '123', '工位分组列表的管理', '125', '2', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('126', '工位分组详情', '/admin/workplace_group/detail', '123', '工位分组详情的管理', '126', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('127', '工位分组删除', '/admin/workplace_group/delete', '123', '工位分组删除', '127', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('128', '运营团队负责人下拉列表', '/admin/operation_team/leader', '109', '运营团队负责人下拉列表', '128', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('129', '运营团队下拉列表', '/admin/admin/operation_team', '77', '运营团队下拉列表', '129', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('130', '后台用户信息', '/admin/admin/info', '77', '后台用户信息', '130', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('131', '后台管理员更改密码', '/admin/admin/change_password', '77', '后台管理员更改密码', '131', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('132', '入驻团队管理', '/admin/enter_team', '0', '入驻团队管理的描述', '132', '1', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('133', '入驻团队列表', '/admin/enter_team/index', '132', '入驻团队列表的描述', '133', '2', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('134', '入驻团队新增更新', '/admin/enter_team/save', '132', '入驻团队新增更新', '134', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('135', '入驻团队详情', '/admin/enter_team/detail', '132', '入驻团队详情', '135', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('136', '入驻团队删除', '/admin/enter_team/delete', '132', '入驻团队删除', '136', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('137', '场馆预约审核', '/admin/reservation/check', null, '场馆预约审核', '137', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('138', '合同模板新增更新', '/admin/contract_template/save', null, '合同模板新增更新', '138', '3', '1', '0', '');
-INSERT INTO `tb_permission` VALUES ('139', '订单新增', '/admin/order/save', null, '订单新增', '139', '3', '1', '0', '');
+/*Data for the table `tb_permission` */
 
--- ----------------------------
--- Table structure for tb_repair
--- ----------------------------
+insert  into `tb_permission`(`id`,`name`,`path`,`pid`,`description`,`sort`,`level`,`status`,`create_time`,`icon`) values (1,'系统管理','/admin/server',0,'系统管理的描述',1,1,1,1533780014,''),(2,'角色管理','/admin/role/role_list',1,'角色管理的描述',2,2,1,1533780014,''),(3,'角色添加/编辑','/admin/role/add',2,'角色添加/编辑的描述',3,3,1,1533780014,''),(4,'角色删除','/admin/role/delete',2,'角色删除的描述',4,3,1,1533780014,''),(5,'角色获取','/admin/role/detail',2,'角色获取的描述',5,3,1,1533780014,''),(6,'获取用户权限','/admin/role/get_role_permission',2,'获取用户权限的描述',6,3,1,1533780014,''),(7,'修改用户权限','/admin/role/assign_role_permission',2,'修改用户权限的描述',7,3,1,1533780014,''),(8,'管理员管理','/admin/admin/admin_list',7,'管理员管理的描述',8,2,1,1533780014,''),(9,'管理员添加/编辑','/admin/admin/assign_user_role',8,'管理员添加/编辑的描述',9,3,1,1533780014,''),(10,'管理员删除','-',8,'管理员删除的描述',10,3,1,1533780014,''),(11,'管理员获取','/admin/admin/detail',8,'管理员获取的描述',11,3,1,1533780014,''),(12,'权限管理','/admin/permission/node_list',11,'权限管理的描述',12,2,1,1533780014,''),(13,'权限添加/编辑','/admin/permission/add',12,'权限添加/编辑的描述',13,3,1,1533780014,''),(14,'权限删除','/admin/permission/delete',12,'权限删除的描述',14,3,1,1533780014,''),(15,'权限获取','/admin/permission/detail',12,'权限获取的描述',15,3,1,1533780014,''),(16,'当前用户权限列表','/admin/permission/node',12,'当前用户权限列表的描述',16,3,1,1533780014,''),(17,'轮播管理','/admin/carousel',0,'轮播管理的描述',17,1,1,1533780014,''),(18,'轮播列表','/admin/carousel/carousel_list',17,'轮播列表的描述',18,2,1,1533780014,''),(19,'轮播添加/编辑','/admin/carousel/upload',18,'轮播添加/编辑的描述',19,3,1,1533780014,''),(20,'轮播删除','/admin/carousel/delete',18,'轮播删除的描述',20,3,1,1533780014,''),(21,'轮播获取','/admin/carousel/detail',18,'轮播获取的描述',21,3,1,1533780014,''),(22,'大赛管理','/admin/competition',0,'大赛管理的描述',22,1,1,1533780014,''),(23,'大赛列表','/admin/competition/index',22,'大赛列表的描述',23,2,1,1533780014,''),(24,'大赛添加/编辑','/admin/competition/save',23,'大赛添加/编辑的描述',24,3,1,1533780014,''),(25,'大赛详细','/admin/competition/detail',23,'大赛详细的描述',25,3,1,1533780014,''),(26,'大赛编辑','/admin/competition/introduce',23,'大赛编辑的描述',26,3,1,1533780014,''),(27,'大赛删除','/admin/competition/delete',23,'大赛删除的描述',27,3,1,1533780014,''),(28,'创业导师','/admin/tutor/index',27,'创业导师的描述',28,2,1,1533780014,''),(29,'导师添加/编辑','/admin/tutor/save',28,'导师添加/编辑的描述',29,3,1,1533780014,''),(30,'导师详细','/admin/tutor/detail',28,'导师详细的描述',30,3,1,1533780014,''),(31,'导师删除','/admin/tutor/delete',28,'导师删除的描述',31,3,1,1533780014,''),(32,'参赛团队','/admin/team/index',31,'参赛团队的描述',32,2,1,1533780014,''),(33,'团队添加/编辑','/admin/team/save',32,'团队添加/编辑的描述',33,3,1,1533780014,''),(34,'团队详细','/admin/team/detail',32,'团队详细的描述',34,3,1,1533780014,''),(35,'团队删除','/admin/team/delete',32,'团队删除的描述',35,3,1,1533780014,''),(36,'大赛新闻','/admin/news/index',35,'大赛新闻的描述',36,2,1,1533780014,''),(37,'新闻添加/编辑','/admin/news/save',36,'新闻添加/编辑的描述',37,3,1,1533780014,''),(38,'新闻详细','/admin/news/detail',36,'新闻详细的描述',38,3,1,1533780014,''),(39,'新闻删除','/admin/news/delete',36,'新闻删除的描述',39,3,1,1533780014,''),(40,'投资机构','/admin/investor/index',39,'投资机构的描述',40,2,1,1533780014,''),(41,'机构添加/编辑','/admin/investor/save',40,'机构添加/编辑的描述',41,3,1,1533780014,''),(42,'机构详细','/admin/investor/detail',40,'机构详细的描述',42,3,1,1533780014,''),(43,'机构删除','/admin/investor/delete',40,'机构删除的描述',43,3,1,1533780014,''),(44,'服务商','/admin/sp/index',43,'服务商的描述',44,2,1,1533780014,''),(45,'服务商添加/编辑','/admin/sp/save',44,'服务商添加/编辑的描述',45,3,1,1533780014,''),(46,'服务商详细','/admin/sp/detail',44,'服务商详细的描述',46,3,1,1533780014,''),(47,'服务商删除','/admin/sp/delete',44,'服务商删除的描述',47,3,1,1533780014,''),(48,'组织机构分组','/admin/organizer_group/index',47,'组织机构分组的描述',48,2,1,1533780014,''),(49,'组织机构分组添加/编辑','/admin/organizer_group/save',48,'组织机构分组添加/编辑的描述',49,3,1,1533780014,''),(50,'组织机构分组详细','/admin/organizer_group/detail',48,'组织机构分组详细的描述',50,3,1,1533780014,''),(51,'组织机构分组删除','/admin/organizer_group/delete',48,'组织机构分组删除的描述',51,3,1,1533780014,''),(52,'组织机构','/admin/organizer/index',51,'组织机构的描述',52,2,1,1533780014,''),(53,'组织机构添加/编辑','/admin/organizer/save',52,'组织机构添加/编辑的描述',53,3,1,1533780014,''),(54,'组织机构详细','/admin/organizer/detail',52,'组织机构详细的描述',54,3,1,1533780014,''),(55,'组织机构删除','/admin/organizer/delete',52,'组织机构删除的描述',55,3,1,1533780014,''),(56,'大赛论坛','',55,'大赛论坛的描述',56,2,1,1533780014,''),(57,'论坛关联添加/编辑','',56,'论坛关联添加/编辑的描述',57,3,1,1533780014,''),(58,'论坛关联删除','',56,'论坛关联删除的描述',58,3,1,1533780014,''),(59,'论坛活动','/admin/active',0,'论坛活动的描述',59,1,1,1533780014,''),(60,'活动管理','/admin/active/index',59,'活动管理的描述',60,2,1,1533780014,''),(61,'活动添加/编辑活动','/admin/active/save',60,'活动添加/编辑活动的描述',61,3,1,1533780014,''),(62,'活动删除','/admin/active/delete',60,'活动删除的描述',62,3,1,1533780014,''),(63,'活动获取','/admin/active/detail',60,'活动获取的描述',63,3,1,1533780014,''),(64,'活动已报名列表','/admin/active/enroll_list',60,'活动已报名列表的描述',64,3,1,1533780014,''),(65,'活动报名审核','/admin/active/check',60,'活动报名审核的描述',65,3,1,1533780014,''),(66,'活动回顾','/admin/review/index',65,'活动回顾的描述',66,2,1,1533780014,''),(67,'回顾添加/编辑活动','/admin/review/save',66,'回顾添加/编辑活动的描述',67,3,1,1533780014,''),(68,'回顾删除','/admin/active/delete',66,'回顾删除的描述',68,3,1,1533780014,''),(69,'回顾获取','/admin/review/detail',66,'回顾获取的描述',69,3,1,1533780014,''),(70,'服务资源商管理','/admin/service',0,'服务资源商管理的描述',70,1,1,1533780014,''),(71,'服务资源商列表','/admin/service/index',70,'服务资源商列表的描述',71,2,1,1533780014,''),(72,'服务资源商添加/编辑活动','/admin/service/save',71,'服务资源商添加/编辑活动的描述',72,3,1,1533780014,''),(73,'服务资源商删除','/admin/service/delete',71,'服务资源商删除的描述',73,3,1,1533780014,''),(74,'服务资源商获取','/admin/service/detail',71,'服务资源商获取的描述',74,3,1,1533780014,''),(75,'服务资源商分类添加','/admin/category/save',71,'服务资源商分类添加的描述',75,3,1,1533780014,''),(76,'用户管理','/admin/user',0,'用户管理的描述',76,1,1,1533780014,''),(77,'用户列表','/admin/user/user_list',76,'用户列表的描述',77,2,1,1533780014,''),(78,'用户添加/编辑活动','/admin/user/create',77,'用户添加/编辑活动的描述',78,3,1,1533780014,''),(79,'用户删除','/admin/user/delete',77,'用户删除的描述',79,3,1,1533780014,''),(80,'用户获取','/admin/user/detail',77,'用户获取的描述',80,3,1,1533780014,''),(81,'消息管理','/admin/information',0,'消息管理的描述',81,1,1,1533780014,''),(82,'消息列表','/admin/information/index',81,'消息列表的描述',82,2,1,1533780014,''),(83,'消息添加/编辑活动','/admin/information/save',82,'消息添加/编辑活动的描述',83,3,1,1533780014,''),(84,'消息删除','/admin/information/delete',82,'消息删除的描述',84,3,1,1533780014,''),(85,'消息获取','/admin/information/detail',82,'消息获取的描述',85,3,1,1533780014,''),(86,'','/admin/competition/add_forum',NULL,'',NULL,NULL,0,0,''),(87,'','/admin/competition/delete_forum',NULL,'',NULL,NULL,0,0,''),(108,'后台用户修改密码','/admin//admin/change_password',NULL,'后台用户修改密码',85,3,1,0,''),(109,'运营团队管理','/admin/operation_team',0,'运营团队管理',0,1,1,0,''),(110,'运营团队列表','/admin/operation_team/index',109,'运营团队列表的描述',109,2,1,0,''),(111,'运营团队删除','/admin/operation_team/delete',109,'运营团队删除',109,2,1,0,''),(112,'运营团队新增更新','/admin/operation_team/save',109,'运营团队新增更新',109,2,1,0,''),(113,'运营团队详情','/admin/operation_team/detail',109,'运营团队详情的描述',109,2,1,0,''),(114,'空间管理','/admin/space',0,'空间管理的描述',114,1,1,0,''),(115,'空间添加/编辑','/admin/space/save',114,'空间添加、编辑的描述',115,3,1,0,''),(116,'空间所属地区','/admin/area/index',114,'空间所属地区的描述',116,3,1,0,''),(117,'空间列表','/admin/space/index',114,'空间列表的描述',117,3,1,0,''),(118,'空间详情','/admin/space/detail',114,'空间详情的描述',118,3,1,0,''),(119,'空间删除','/admin/space/delete',114,'空间删除的描述',119,3,1,0,''),(120,'工位管理','/admin/workplace',0,'工位管理的描述',120,1,1,0,''),(121,'工位新增/编辑','/admin/workplace/save',120,'工位新增/编辑的描述',121,3,1,0,''),(122,'工位列表','/admin/workplace/index',120,'工位列表管理',122,2,1,0,''),(123,'工位分组管理','/admin/workplace_group',0,'工位分组管理',123,1,1,0,''),(124,'工位分组新增更新','/admin/workplace_group/save',123,'工位分组新增更新的描述',124,3,1,0,''),(125,'工位分组列表','/admin/workplace_group/index',123,'工位分组列表的管理',125,2,1,0,''),(126,'工位分组详情','/admin/workplace_group/detail',123,'工位分组详情的管理',126,3,1,0,''),(127,'工位分组删除','/admin/workplace_group/delete',123,'工位分组删除',127,3,1,0,''),(128,'运营团队负责人下拉列表','/admin/operation_team/leader',109,'运营团队负责人下拉列表',128,3,1,0,''),(129,'运营团队下拉列表','/admin/admin/operation_team',77,'运营团队下拉列表',129,3,1,0,''),(130,'后台用户信息','/admin/admin/info',77,'后台用户信息',130,3,1,0,''),(131,'后台管理员更改密码','/admin/admin/change_password',77,'后台管理员更改密码',131,3,1,0,''),(132,'入驻团队管理','/admin/enter_team',0,'入驻团队管理的描述',132,1,1,0,''),(133,'入驻团队列表','/admin/enter_team/index',132,'入驻团队列表的描述',133,2,1,0,''),(134,'入驻团队新增更新','/admin/enter_team/save',132,'入驻团队新增更新',134,3,1,0,''),(135,'入驻团队详情','/admin/enter_team/detail',132,'入驻团队详情',135,3,1,0,''),(136,'入驻团队删除','/admin/enter_team/delete',132,'入驻团队删除',136,3,1,0,''),(137,'场馆预约审核','/admin/reservation/check',NULL,'场馆预约审核',137,3,1,0,''),(138,'合同模板新增更新','/admin/contract_template/save',NULL,'合同模板新增更新',138,3,1,0,''),(139,'订单新增','/admin/order/save',NULL,'订单新增',139,3,1,0,''),(140,'管理模式编辑','/admin/operation_team/management',109,'管理模式编辑',140,3,1,0,'');
+
+/*Table structure for table `tb_question` */
+
+DROP TABLE IF EXISTS `tb_question`;
+
+CREATE TABLE `tb_question` (
+  `id` int(12) NOT NULL AUTO_INCREMENT COMMENT '问题主键',
+  `content` varchar(255) DEFAULT '' COMMENT '问题内容',
+  `investigate_id` int(12) DEFAULT NULL COMMENT '调查主键',
+  `create_time` datetime DEFAULT NULL COMMENT '问题创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '问题更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_question` */
+
+insert  into `tb_question`(`id`,`content`,`investigate_id`,`create_time`,`update_time`) values (37,'熊',3,'2018-09-11 16:33:05','2018-09-11 16:33:05'),(38,'狮子',3,'2018-09-11 16:33:05','2018-09-11 16:33:05'),(39,'大象',3,'2018-09-11 16:33:06','2018-09-11 16:33:06'),(40,'蚂蚁',3,'2018-09-11 16:33:06','2018-09-11 16:33:06'),(41,'熊',3,'2018-09-11 16:35:57','2018-09-11 16:35:57'),(42,'狮子',3,'2018-09-11 16:35:57','2018-09-11 16:35:57'),(43,'大象',12,'2018-09-11 16:35:57','2018-09-11 16:35:57'),(44,'蚂蚁',12,'2018-09-11 16:35:57','2018-09-11 16:35:57');
+
+/*Table structure for table `tb_repair` */
+
 DROP TABLE IF EXISTS `tb_repair`;
+
 CREATE TABLE `tb_repair` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(255) NOT NULL COMMENT '报修描述',
@@ -4196,16 +844,14 @@ CREATE TABLE `tb_repair` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_repair
--- ----------------------------
-INSERT INTO `tb_repair` VALUES ('1', '东边的墙塌了', 'SS24241472', 'wang', '13967741061', '0', '2018-08-26 16:10:16', '2018-08-26 16:10:16');
-INSERT INTO `tb_repair` VALUES ('2', '投影仪坏了', 'k520', 'wcw', '17826815702', '1', '2018-08-26 16:24:48', '2018-08-26 16:24:48');
+/*Data for the table `tb_repair` */
 
--- ----------------------------
--- Table structure for tb_reservation
--- ----------------------------
+insert  into `tb_repair`(`id`,`description`,`equipment_no`,`repair_man`,`mobile`,`status`,`create_time`,`update_time`) values (1,'东边的墙塌了','SS24241472','wang','13967741061',0,'2018-08-26 16:10:16','2018-08-26 16:10:16'),(2,'投影仪坏了','k520','wcw','17826815702',1,'2018-08-26 16:24:48','2018-08-26 16:24:48');
+
+/*Table structure for table `tb_reservation` */
+
 DROP TABLE IF EXISTS `tb_reservation`;
+
 CREATE TABLE `tb_reservation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `venue_id` int(11) NOT NULL COMMENT '场馆',
@@ -4214,22 +860,20 @@ CREATE TABLE `tb_reservation` (
   `reservation_time` varchar(100) NOT NULL COMMENT '预约时间',
   `check_user` int(11) DEFAULT NULL COMMENT '审核人',
   `check_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '审核时间',
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_time` timestamp NULL DEFAULT NULL,
   `update_time` timestamp NULL DEFAULT NULL,
   `status` int(2) NOT NULL DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_reservation
--- ----------------------------
-INSERT INTO `tb_reservation` VALUES ('1', '1', '1', '2018-08-25', '1', '16', '2018-08-26 17:35:38', '2018-08-24 16:45:13', '2018-08-26 17:35:38', '1');
-INSERT INTO `tb_reservation` VALUES ('2', '2', '2', '2018-08-25', '1', null, null, '2018-08-24 16:46:01', null, '0');
+/*Data for the table `tb_reservation` */
 
--- ----------------------------
--- Table structure for tb_role
--- ----------------------------
+insert  into `tb_reservation`(`id`,`venue_id`,`enter_team_id`,`date`,`reservation_time`,`check_user`,`check_time`,`create_time`,`update_time`,`status`) values (1,1,1,'2018-08-25','1',16,'2018-08-26 17:35:38','2018-08-24 16:45:13','2018-08-26 17:35:38',1),(2,2,2,'2018-08-25','1',NULL,NULL,'2018-08-24 16:46:01',NULL,0);
+
+/*Table structure for table `tb_role` */
+
 DROP TABLE IF EXISTS `tb_role`;
+
 CREATE TABLE `tb_role` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '' COMMENT '角色名称',
@@ -4246,165 +890,201 @@ CREATE TABLE `tb_role` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='角色';
 
--- ----------------------------
--- Records of tb_role
--- ----------------------------
-INSERT INTO `tb_role` VALUES ('1', '超级管理员', '0', '商品管理员负责商品的查看修改删除等操作', '1', '10', '39', '40', null, '2018-08-01 00:48:53', '1', '0');
-INSERT INTO `tb_role` VALUES ('2', '管理员', '0', '商品管理员负责财产的查看修改删除等操作', '0', '10', '37', '38', null, '2018-08-16 16:09:39', '1', '0');
-INSERT INTO `tb_role` VALUES ('3', '会员', '0', '商品管理员负责宝物的查看修改删除等操作', '1', '10', '35', '36', null, '2018-08-16 16:09:41', '1', '0');
-INSERT INTO `tb_role` VALUES ('16', '人事', '0', '主要进行人事管理，团队内信息发布通知', '1', '0', '1', '2', '2018-08-20 16:28:19', null, '1', '0');
+/*Data for the table `tb_role` */
 
--- ----------------------------
--- Table structure for tb_role_permission
--- ----------------------------
+insert  into `tb_role`(`id`,`name`,`parent_id`,`description`,`status`,`sort_num`,`left_key`,`right_key`,`create_time`,`update_time`,`level`,`type`) values (1,'超级管理员',0,'商品管理员负责商品的查看修改删除等操作',1,10,39,40,NULL,'2018-08-01 00:48:53',1,0),(2,'管理员',0,'商品管理员负责财产的查看修改删除等操作',0,10,37,38,NULL,'2018-08-16 16:09:39',1,0),(3,'会员',0,'商品管理员负责宝物的查看修改删除等操作',1,10,35,36,NULL,'2018-08-16 16:09:41',1,0),(16,'人事',0,'主要进行人事管理，团队内信息发布通知',1,0,1,2,'2018-08-20 16:28:19',NULL,1,0);
+
+/*Table structure for table `tb_role_permission` */
+
 DROP TABLE IF EXISTS `tb_role_permission`;
+
 CREATE TABLE `tb_role_permission` (
   `role_id` int(11) NOT NULL DEFAULT '0' COMMENT '角色Id',
   `permission_id` int(11) NOT NULL DEFAULT '0' COMMENT '权限ID',
   PRIMARY KEY (`role_id`,`permission_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色权限对应表';
 
--- ----------------------------
--- Records of tb_role_permission
--- ----------------------------
-INSERT INTO `tb_role_permission` VALUES ('1', '1');
-INSERT INTO `tb_role_permission` VALUES ('1', '2');
-INSERT INTO `tb_role_permission` VALUES ('1', '3');
-INSERT INTO `tb_role_permission` VALUES ('1', '4');
-INSERT INTO `tb_role_permission` VALUES ('1', '5');
-INSERT INTO `tb_role_permission` VALUES ('1', '6');
-INSERT INTO `tb_role_permission` VALUES ('1', '7');
-INSERT INTO `tb_role_permission` VALUES ('1', '8');
-INSERT INTO `tb_role_permission` VALUES ('1', '9');
-INSERT INTO `tb_role_permission` VALUES ('1', '10');
-INSERT INTO `tb_role_permission` VALUES ('1', '11');
-INSERT INTO `tb_role_permission` VALUES ('1', '12');
-INSERT INTO `tb_role_permission` VALUES ('1', '13');
-INSERT INTO `tb_role_permission` VALUES ('1', '14');
-INSERT INTO `tb_role_permission` VALUES ('1', '15');
-INSERT INTO `tb_role_permission` VALUES ('1', '16');
-INSERT INTO `tb_role_permission` VALUES ('1', '17');
-INSERT INTO `tb_role_permission` VALUES ('1', '18');
-INSERT INTO `tb_role_permission` VALUES ('1', '19');
-INSERT INTO `tb_role_permission` VALUES ('1', '20');
-INSERT INTO `tb_role_permission` VALUES ('1', '21');
-INSERT INTO `tb_role_permission` VALUES ('1', '22');
-INSERT INTO `tb_role_permission` VALUES ('1', '23');
-INSERT INTO `tb_role_permission` VALUES ('1', '24');
-INSERT INTO `tb_role_permission` VALUES ('1', '25');
-INSERT INTO `tb_role_permission` VALUES ('1', '26');
-INSERT INTO `tb_role_permission` VALUES ('1', '27');
-INSERT INTO `tb_role_permission` VALUES ('1', '28');
-INSERT INTO `tb_role_permission` VALUES ('1', '29');
-INSERT INTO `tb_role_permission` VALUES ('1', '30');
-INSERT INTO `tb_role_permission` VALUES ('1', '31');
-INSERT INTO `tb_role_permission` VALUES ('1', '32');
-INSERT INTO `tb_role_permission` VALUES ('1', '33');
-INSERT INTO `tb_role_permission` VALUES ('1', '34');
-INSERT INTO `tb_role_permission` VALUES ('1', '35');
-INSERT INTO `tb_role_permission` VALUES ('1', '36');
-INSERT INTO `tb_role_permission` VALUES ('1', '37');
-INSERT INTO `tb_role_permission` VALUES ('1', '38');
-INSERT INTO `tb_role_permission` VALUES ('1', '39');
-INSERT INTO `tb_role_permission` VALUES ('1', '40');
-INSERT INTO `tb_role_permission` VALUES ('1', '41');
-INSERT INTO `tb_role_permission` VALUES ('1', '42');
-INSERT INTO `tb_role_permission` VALUES ('1', '43');
-INSERT INTO `tb_role_permission` VALUES ('1', '44');
-INSERT INTO `tb_role_permission` VALUES ('1', '45');
-INSERT INTO `tb_role_permission` VALUES ('1', '46');
-INSERT INTO `tb_role_permission` VALUES ('1', '47');
-INSERT INTO `tb_role_permission` VALUES ('1', '48');
-INSERT INTO `tb_role_permission` VALUES ('1', '49');
-INSERT INTO `tb_role_permission` VALUES ('1', '50');
-INSERT INTO `tb_role_permission` VALUES ('1', '51');
-INSERT INTO `tb_role_permission` VALUES ('1', '52');
-INSERT INTO `tb_role_permission` VALUES ('1', '53');
-INSERT INTO `tb_role_permission` VALUES ('1', '54');
-INSERT INTO `tb_role_permission` VALUES ('1', '55');
-INSERT INTO `tb_role_permission` VALUES ('1', '56');
-INSERT INTO `tb_role_permission` VALUES ('1', '57');
-INSERT INTO `tb_role_permission` VALUES ('1', '58');
-INSERT INTO `tb_role_permission` VALUES ('1', '59');
-INSERT INTO `tb_role_permission` VALUES ('1', '60');
-INSERT INTO `tb_role_permission` VALUES ('1', '61');
-INSERT INTO `tb_role_permission` VALUES ('1', '62');
-INSERT INTO `tb_role_permission` VALUES ('1', '63');
-INSERT INTO `tb_role_permission` VALUES ('1', '64');
-INSERT INTO `tb_role_permission` VALUES ('1', '65');
-INSERT INTO `tb_role_permission` VALUES ('1', '66');
-INSERT INTO `tb_role_permission` VALUES ('1', '67');
-INSERT INTO `tb_role_permission` VALUES ('1', '68');
-INSERT INTO `tb_role_permission` VALUES ('1', '69');
-INSERT INTO `tb_role_permission` VALUES ('1', '70');
-INSERT INTO `tb_role_permission` VALUES ('1', '71');
-INSERT INTO `tb_role_permission` VALUES ('1', '72');
-INSERT INTO `tb_role_permission` VALUES ('1', '73');
-INSERT INTO `tb_role_permission` VALUES ('1', '74');
-INSERT INTO `tb_role_permission` VALUES ('1', '75');
-INSERT INTO `tb_role_permission` VALUES ('1', '76');
-INSERT INTO `tb_role_permission` VALUES ('1', '77');
-INSERT INTO `tb_role_permission` VALUES ('1', '78');
-INSERT INTO `tb_role_permission` VALUES ('1', '79');
-INSERT INTO `tb_role_permission` VALUES ('1', '80');
-INSERT INTO `tb_role_permission` VALUES ('1', '81');
-INSERT INTO `tb_role_permission` VALUES ('1', '82');
-INSERT INTO `tb_role_permission` VALUES ('1', '83');
-INSERT INTO `tb_role_permission` VALUES ('1', '84');
-INSERT INTO `tb_role_permission` VALUES ('1', '85');
-INSERT INTO `tb_role_permission` VALUES ('1', '86');
-INSERT INTO `tb_role_permission` VALUES ('1', '87');
-INSERT INTO `tb_role_permission` VALUES ('1', '88');
-INSERT INTO `tb_role_permission` VALUES ('1', '89');
-INSERT INTO `tb_role_permission` VALUES ('1', '90');
-INSERT INTO `tb_role_permission` VALUES ('1', '91');
-INSERT INTO `tb_role_permission` VALUES ('1', '92');
-INSERT INTO `tb_role_permission` VALUES ('1', '93');
-INSERT INTO `tb_role_permission` VALUES ('1', '94');
-INSERT INTO `tb_role_permission` VALUES ('1', '95');
-INSERT INTO `tb_role_permission` VALUES ('1', '96');
-INSERT INTO `tb_role_permission` VALUES ('1', '97');
-INSERT INTO `tb_role_permission` VALUES ('1', '98');
-INSERT INTO `tb_role_permission` VALUES ('1', '99');
-INSERT INTO `tb_role_permission` VALUES ('1', '100');
-INSERT INTO `tb_role_permission` VALUES ('1', '101');
-INSERT INTO `tb_role_permission` VALUES ('1', '108');
-INSERT INTO `tb_role_permission` VALUES ('1', '109');
-INSERT INTO `tb_role_permission` VALUES ('1', '110');
-INSERT INTO `tb_role_permission` VALUES ('1', '111');
-INSERT INTO `tb_role_permission` VALUES ('1', '112');
-INSERT INTO `tb_role_permission` VALUES ('1', '113');
-INSERT INTO `tb_role_permission` VALUES ('1', '114');
-INSERT INTO `tb_role_permission` VALUES ('1', '115');
-INSERT INTO `tb_role_permission` VALUES ('1', '116');
-INSERT INTO `tb_role_permission` VALUES ('1', '117');
-INSERT INTO `tb_role_permission` VALUES ('1', '118');
-INSERT INTO `tb_role_permission` VALUES ('1', '119');
-INSERT INTO `tb_role_permission` VALUES ('1', '120');
-INSERT INTO `tb_role_permission` VALUES ('1', '121');
-INSERT INTO `tb_role_permission` VALUES ('1', '122');
-INSERT INTO `tb_role_permission` VALUES ('1', '123');
-INSERT INTO `tb_role_permission` VALUES ('1', '124');
-INSERT INTO `tb_role_permission` VALUES ('1', '125');
-INSERT INTO `tb_role_permission` VALUES ('1', '126');
-INSERT INTO `tb_role_permission` VALUES ('1', '127');
-INSERT INTO `tb_role_permission` VALUES ('1', '128');
-INSERT INTO `tb_role_permission` VALUES ('1', '129');
-INSERT INTO `tb_role_permission` VALUES ('1', '130');
-INSERT INTO `tb_role_permission` VALUES ('1', '131');
-INSERT INTO `tb_role_permission` VALUES ('1', '132');
-INSERT INTO `tb_role_permission` VALUES ('1', '133');
-INSERT INTO `tb_role_permission` VALUES ('1', '134');
-INSERT INTO `tb_role_permission` VALUES ('1', '135');
-INSERT INTO `tb_role_permission` VALUES ('1', '136');
-INSERT INTO `tb_role_permission` VALUES ('1', '137');
-INSERT INTO `tb_role_permission` VALUES ('1', '138');
-INSERT INTO `tb_role_permission` VALUES ('1', '139');
+/*Data for the table `tb_role_permission` */
 
--- ----------------------------
--- Table structure for tb_space
--- ----------------------------
+insert  into `tb_role_permission`(`role_id`,`permission_id`) values (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(1,17),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,24),(1,25),(1,26),(1,27),(1,28),(1,29),(1,30),(1,31),(1,32),(1,33),(1,34),(1,35),(1,36),(1,37),(1,38),(1,39),(1,40),(1,41),(1,42),(1,43),(1,44),(1,45),(1,46),(1,47),(1,48),(1,49),(1,50),(1,51),(1,52),(1,53),(1,54),(1,55),(1,56),(1,57),(1,58),(1,59),(1,60),(1,61),(1,62),(1,63),(1,64),(1,65),(1,66),(1,67),(1,68),(1,69),(1,70),(1,71),(1,72),(1,73),(1,74),(1,75),(1,76),(1,77),(1,78),(1,79),(1,80),(1,81),(1,82),(1,83),(1,84),(1,85),(1,86),(1,87),(1,88),(1,89),(1,90),(1,91),(1,92),(1,93),(1,94),(1,95),(1,96),(1,97),(1,98),(1,99),(1,100),(1,101),(1,108),(1,109),(1,110),(1,111),(1,112),(1,113),(1,114),(1,115),(1,116),(1,117),(1,118),(1,119),(1,120),(1,121),(1,122),(1,123),(1,124),(1,125),(1,126),(1,127),(1,128),(1,129),(1,130),(1,131),(1,132),(1,133),(1,134),(1,135),(1,136),(1,137),(1,138),(1,139),(1,140);
+
+/*Table structure for table `tb_run` */
+
+DROP TABLE IF EXISTS `tb_run`;
+
+CREATE TABLE `tb_run` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'work_run父流转公文ID 值大于0则这个是子流程，完成后或者要返回父流程',
+  `from_table` varchar(255) DEFAULT NULL COMMENT '单据表，不带前缀',
+  `from_id` int(11) DEFAULT NULL,
+  `pid_flow_step` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '父pid的flow_id中的第几步骤进入的,取回这个work_flow_step的child_over决定结束子流程的动作',
+  `cache_run_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '多个子流程时pid无法识别cache所以加这个字段pid>0',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0',
+  `flow_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '流程id 正常流程',
+  `cat_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '流程分类ID即公文分类ID',
+  `run_name` varchar(255) DEFAULT '' COMMENT '公文名称',
+  `run_flow_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '流转到什么流程 最新流程，查询优化，进入子流程时将简化查询，子流程与父流程同步',
+  `run_flow_process` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '流转到第几步',
+  `att_ids` varchar(255) NOT NULL DEFAULT '' COMMENT '公文附件ids',
+  `endtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '结束时间',
+  `status` int(1) unsigned NOT NULL DEFAULT '0' COMMENT '状态，0流程中，1通过,2回退',
+  `is_del` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `updatetime` int(10) unsigned NOT NULL DEFAULT '0',
+  `dateline` int(10) unsigned NOT NULL DEFAULT '0',
+  `is_sing` int(11) NOT NULL DEFAULT '0',
+  `sing_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pid` (`pid`),
+  KEY `pid_flow_step` (`pid_flow_step`),
+  KEY `cache_run_id` (`cache_run_id`),
+  KEY `uid` (`uid`),
+  KEY `is_del` (`is_del`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_run` */
+
+insert  into `tb_run`(`id`,`pid`,`from_table`,`from_id`,`pid_flow_step`,`cache_run_id`,`uid`,`flow_id`,`cat_id`,`run_name`,`run_flow_id`,`run_flow_process`,`att_ids`,`endtime`,`status`,`is_del`,`updatetime`,`dateline`,`is_sing`,`sing_id`) values (1,0,'incidental',1,0,0,16,8,0,'1',8,8,'',1536662578,1,0,0,1536662257,0,NULL),(2,0,'order',27,0,0,16,7,0,'27',7,11,'',1536817501,1,0,0,1536732300,0,NULL),(3,0,'order',37,0,0,16,7,0,'37',7,11,'',0,0,0,0,1536822326,0,NULL);
+
+/*Table structure for table `tb_run_cache` */
+
+DROP TABLE IF EXISTS `tb_run_cache`;
+
+CREATE TABLE `tb_run_cache` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `run_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT ' 缓存run工作的全部流程模板步骤等信息,确保修改流程后工作依然不变',
+  `form_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `flow_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '流程ID',
+  `run_form` text COMMENT '模板信息',
+  `run_flow` text COMMENT '流程信息',
+  `run_flow_process` text COMMENT '流程步骤信息 ',
+  `is_del` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `updatetime` int(10) unsigned NOT NULL DEFAULT '0',
+  `dateline` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `run_id` (`run_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_run_cache` */
+
+insert  into `tb_run_cache`(`id`,`run_id`,`form_id`,`flow_id`,`run_form`,`run_flow`,`run_flow_process`,`is_del`,`updatetime`,`dateline`) values (1,1,1,1,'','{\"id\":1,\"project\":\"\\u5e74\\u4e2d\\u5927\\u4fc3\",\"pay_type\":0,\"status\":0,\"create_time\":\"2018-09-11 10:51:10\",\"update_time\":\"2018-09-11 18:29:20\"}','{\"id\":6,\"flow_id\":8,\"process_name\":\"\\u521d\\u5ba1\",\"process_type\":\"is_one\",\"process_to\":\"7\",\"child_id\":0,\"child_relation\":null,\"child_after\":1,\"child_back_process\":0,\"return_sponsor_ids\":null,\"return_respon_ids\":null,\"write_fields\":null,\"secret_fields\":null,\"lock_fields\":null,\"check_fields\":null,\"auto_person\":4,\"auto_unlock\":0,\"auto_sponsor_ids\":\"16\",\"auto_sponsor_text\":\"\\u738b\",\"auto_respon_ids\":\"\",\"auto_respon_text\":\"\",\"auto_role_ids\":\"\",\"auto_role_text\":\"\",\"auto_dept_ids\":\"4\",\"auto_dept_text\":\"\\u5ba1\\u6838\\u90e8\",\"auto_process_sponsor\":0,\"range_user_ids\":\"\",\"range_user_text\":\"\",\"range_dept_ids\":\"\",\"range_dept_text\":\"\",\"range_role_ids\":\"\",\"range_role_text\":\"\",\"receive_type\":0,\"is_user_end\":0,\"is_userop_pass\":0,\"is_sing\":0,\"sign_look\":0,\"is_back\":2,\"out_condition\":\"[]\",\"setleft\":708,\"settop\":173,\"style\":\"{\\\"width\\\":120,\\\"height\\\":30,\\\"color\\\":\\\"#0e76a8\\\",\\\"icon\\\":\\\"icon-star\\\"}\",\"is_del\":0,\"updatetime\":1536661035,\"dateline\":0}',0,0,1536662257),(2,2,27,27,'','{\"id\":27,\"order_no\":\"OR5b8534e4a62dc\",\"team_id\":1,\"contract_template_no\":\"CT5b83a46b8131f\",\"contract_years\":1,\"pay_type\":1,\"deposit\":\"1000.00\",\"total_price\":\"10000.00\",\"invoice_no\":\"IN5b8534e4a66c4\",\"discount\":\"1000.00\",\"remark\":\"\\u6d4b\\u8bd5\",\"status\":0,\"operator_id\":16,\"create_time\":\"2018-08-28 19:41:24\",\"update_time\":\"2018-09-10 11:22:32\"}','{\"id\":11,\"flow_id\":7,\"process_name\":\"\\u521d\\u5ba1\",\"process_type\":\"is_one\",\"process_to\":\"12\",\"child_id\":0,\"child_relation\":null,\"child_after\":1,\"child_back_process\":0,\"return_sponsor_ids\":null,\"return_respon_ids\":null,\"write_fields\":null,\"secret_fields\":null,\"lock_fields\":null,\"check_fields\":null,\"auto_person\":4,\"auto_unlock\":0,\"auto_sponsor_ids\":\"16\",\"auto_sponsor_text\":\"\\u738b\",\"auto_respon_ids\":\"\",\"auto_respon_text\":\"\",\"auto_role_ids\":\"\",\"auto_role_text\":\"\",\"auto_dept_ids\":\"\",\"auto_dept_text\":\"\",\"auto_process_sponsor\":0,\"range_user_ids\":\"\",\"range_user_text\":\"\",\"range_dept_ids\":\"\",\"range_dept_text\":\"\",\"range_role_ids\":\"\",\"range_role_text\":\"\",\"receive_type\":0,\"is_user_end\":0,\"is_userop_pass\":0,\"is_sing\":0,\"sign_look\":0,\"is_back\":2,\"out_condition\":\"[]\",\"setleft\":746,\"settop\":136,\"style\":\"{\\\"width\\\":120,\\\"height\\\":30,\\\"color\\\":\\\"#0e76a8\\\",\\\"icon\\\":\\\"icon-star\\\"}\",\"is_del\":0,\"updatetime\":1536732278,\"dateline\":0}',0,0,1536732300),(3,3,37,37,'','{\"id\":37,\"order_no\":\"OR5b865f1aa2d66\",\"team_id\":2,\"contract_template_no\":\"CT5b83a46b8131f\",\"contract_years\":1,\"pay_type\":1,\"deposit\":\"10000.00\",\"total_price\":\"10000.00\",\"invoice_no\":\"IN5b865f1aa314e\",\"discount\":\"100.00\",\"remark\":\"fjaskldfj\",\"status\":0,\"operator_id\":16,\"create_time\":\"2018-08-29 16:53:46\",\"update_time\":\"2018-09-07 18:06:58\"}','{\"id\":11,\"flow_id\":7,\"process_name\":\"\\u521d\\u5ba1\",\"process_type\":\"is_one\",\"process_to\":\"12\",\"child_id\":0,\"child_relation\":null,\"child_after\":1,\"child_back_process\":0,\"return_sponsor_ids\":null,\"return_respon_ids\":null,\"write_fields\":null,\"secret_fields\":null,\"lock_fields\":null,\"check_fields\":null,\"auto_person\":4,\"auto_unlock\":0,\"auto_sponsor_ids\":\"16\",\"auto_sponsor_text\":\"\\u738b\",\"auto_respon_ids\":\"\",\"auto_respon_text\":\"\",\"auto_role_ids\":\"\",\"auto_role_text\":\"\",\"auto_dept_ids\":\"\",\"auto_dept_text\":\"\",\"auto_process_sponsor\":0,\"range_user_ids\":\"\",\"range_user_text\":\"\",\"range_dept_ids\":\"\",\"range_dept_text\":\"\",\"range_role_ids\":\"\",\"range_role_text\":\"\",\"receive_type\":0,\"is_user_end\":0,\"is_userop_pass\":0,\"is_sing\":0,\"sign_look\":0,\"is_back\":2,\"out_condition\":\"[]\",\"setleft\":746,\"settop\":136,\"style\":\"{\\\"width\\\":120,\\\"height\\\":30,\\\"color\\\":\\\"#0e76a8\\\",\\\"icon\\\":\\\"icon-star\\\"}\",\"is_del\":0,\"updatetime\":1536732278,\"dateline\":0}',0,0,1536822326);
+
+/*Table structure for table `tb_run_log` */
+
+DROP TABLE IF EXISTS `tb_run_log`;
+
+CREATE TABLE `tb_run_log` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL DEFAULT '0',
+  `from_id` int(11) DEFAULT NULL,
+  `from_table` varchar(255) DEFAULT NULL,
+  `run_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '流转id',
+  `run_flow` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '流程ID,子流程时区分run step',
+  `content` text NOT NULL COMMENT '日志内容',
+  `dateline` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
+  `btn` varchar(255) DEFAULT NULL,
+  `art` longtext,
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`),
+  KEY `run_id` (`run_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_run_log` */
+
+insert  into `tb_run_log`(`id`,`uid`,`from_id`,`from_table`,`run_id`,`run_flow`,`content`,`dateline`,`btn`,`art`) values (1,16,1,'incidental',1,0,'123',1536662257,'Send',''),(2,16,1,'incidental',1,0,'通过',1536662565,'ok',''),(3,16,1,'incidental',1,0,'通过',1536662571,'ok',''),(4,16,1,'incidental',1,0,'通过',1536662578,'ok',''),(5,16,27,'order',2,0,'123',1536732300,'Send',''),(6,16,27,'order',2,0,'金额不对',1536817501,'Back',''),(7,16,37,'order',3,0,'123',1536822326,'Send','');
+
+/*Table structure for table `tb_run_process` */
+
+DROP TABLE IF EXISTS `tb_run_process`;
+
+CREATE TABLE `tb_run_process` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL DEFAULT '0',
+  `run_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '当前流转id',
+  `run_flow` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '属于那个流程的id',
+  `run_flow_process` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '当前步骤编号',
+  `parent_flow` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上一步流程',
+  `parent_flow_process` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '上一步骤号',
+  `run_child` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '开始转入子流程run_id 如果转入子流程，则在这里也记录',
+  `remark` text COMMENT '备注',
+  `is_receive_type` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否先接收人为主办人',
+  `auto_person` tinyint(4) DEFAULT NULL,
+  `sponsor_text` varchar(255) DEFAULT NULL,
+  `sponsor_ids` varchar(255) DEFAULT NULL,
+  `is_sponsor` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否步骤主办人 0否(默认) 1是',
+  `is_singpost` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否已会签过',
+  `is_back` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '被退回的 0否(默认) 1是',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '状态 0为未接收（默认），1为办理中 ,2为已转交,3为已结束4为已打回',
+  `js_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '接收时间',
+  `bl_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '办理时间',
+  `jj_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '转交时间,最后一步等同办结时间',
+  `is_del` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `updatetime` int(10) unsigned NOT NULL DEFAULT '0',
+  `dateline` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`),
+  KEY `run_id` (`run_id`),
+  KEY `status` (`status`),
+  KEY `is_del` (`is_del`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_run_process` */
+
+insert  into `tb_run_process`(`id`,`uid`,`run_id`,`run_flow`,`run_flow_process`,`parent_flow`,`parent_flow_process`,`run_child`,`remark`,`is_receive_type`,`auto_person`,`sponsor_text`,`sponsor_ids`,`is_sponsor`,`is_singpost`,`is_back`,`status`,`js_time`,`bl_time`,`jj_time`,`is_del`,`updatetime`,`dateline`) values (1,16,1,8,6,0,0,0,'通过',0,4,'王','16',0,0,0,2,1536662257,1536662564,0,0,0,1536662257),(2,16,1,8,7,0,0,0,'通过',0,6,'审核部','4',0,0,0,2,1536662565,1536662571,0,0,0,1536662565),(3,16,1,8,8,0,0,0,'通过',0,4,'王','16',0,0,0,2,1536662571,1536662578,0,0,0,1536662571),(4,16,2,7,11,0,0,0,'金额不对',0,4,'王','16',0,0,0,2,1536732300,1536817501,0,0,0,1536732300),(5,16,3,7,11,0,0,0,'',0,4,'王','16',0,0,0,0,1536822326,0,0,0,0,1536822326);
+
+/*Table structure for table `tb_run_sign` */
+
+DROP TABLE IF EXISTS `tb_run_sign`;
+
+CREATE TABLE `tb_run_sign` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL DEFAULT '0',
+  `run_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `run_flow` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '流程ID,子流程时区分run step',
+  `run_flow_process` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '当前步骤编号',
+  `content` text NOT NULL COMMENT '会签内容',
+  `is_agree` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '审核意见：1同意；2不同意',
+  `sign_att_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `sign_look` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '步骤设置的会签可见性,0总是可见（默认）,1本步骤经办人之间不可见2针对其他步骤不可见',
+  `dateline` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`),
+  KEY `run_id` (`run_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_run_sign` */
+
+/*Table structure for table `tb_service` */
+
+DROP TABLE IF EXISTS `tb_service`;
+
+CREATE TABLE `tb_service` (
+  `id` int(12) NOT NULL AUTO_INCREMENT COMMENT '服务主键',
+  `name` varchar(80) DEFAULT '' COMMENT '商品名称',
+  `group_id` int(12) DEFAULT NULL COMMENT '分组主键',
+  `profile` varchar(255) DEFAULT '' COMMENT '商品简介',
+  `description` varchar(255) DEFAULT '' COMMENT '商品描述',
+  `picture` varchar(255) DEFAULT '' COMMENT '商品图片',
+  `url` varchar(255) DEFAULT '' COMMENT '商品链接',
+  `price` decimal(14,2) DEFAULT NULL COMMENT '商品价格',
+  `recommend` tinyint(1) DEFAULT '1' COMMENT '商品是否推荐',
+  `status` tinyint(1) DEFAULT '1' COMMENT '商品状态',
+  `address` varchar(255) DEFAULT '' COMMENT '商品地址',
+  `publisher` varchar(255) DEFAULT '' COMMENT '商品发布者',
+  `create_time` datetime DEFAULT NULL COMMENT '商品创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '商品更新时间',
+  `validate_time` datetime DEFAULT NULL COMMENT '商品有效时间',
+  `rich_text` text COMMENT '商品富文本',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_service` */
+
+insert  into `tb_service`(`id`,`name`,`group_id`,`profile`,`description`,`picture`,`url`,`price`,`recommend`,`status`,`address`,`publisher`,`create_time`,`update_time`,`validate_time`,`rich_text`) values (1,'阿里服务提供者',1,'杭州阿里巴巴公司','阿里是马云创建的公司','/images/20180913/48f80ef74a896102215fa1285d6f7dd7.png','http://www.ali.com','1234.68',1,1,'asfdsfsfsadfq34dfdsf',NULL,'2018-09-13 16:45:07','2018-09-13 16:45:07','2018-09-13 16:45:07',''),(2,'腾讯服务商',2,'腾讯是一家IT公司','主营产品QQ，微信等等','/images/20180913/48f80ef74a896102215fa1285d6f7dd7.png','http://www.tencent.com','2385.23',1,1,'撒旦法',NULL,'2018-09-13 17:04:54','2018-09-13 17:04:54','2018-09-13 17:04:54','阿尔戈为');
+
+/*Table structure for table `tb_space` */
+
 DROP TABLE IF EXISTS `tb_space`;
+
 CREATE TABLE `tb_space` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL COMMENT '空间全称',
@@ -4425,16 +1105,14 @@ CREATE TABLE `tb_space` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_space
--- ----------------------------
-INSERT INTO `tb_space` VALUES ('1', '测试空间', '0', '120000', '120100', '120101', '空间简称', '上海浦东', '空间简述', null, '/images/20180821/59a9645d66fccd00e09ba83f9fc7c35f.JPEG', '[\"\\/images\\/20180821\\/d498830363ef90bbeaf9a5e11f4e913c.jpg\",\"\\/images\\/20180821\\/7b6e0717bb55dc6a25dce95089f9eee0.jpg\"]', '2018-08-21 12:34:46', '2018-08-21 12:34:46', '0.00');
-INSERT INTO `tb_space` VALUES ('2', '浦东创想空间', '1', '310000', '310100', '310115', '创想空间', '纳贤路800号', '浦东创想空间', null, '/images/20180821/616fc2518d8edffb7e333ccc5da6d8db.JPEG', '[\"\\/images\\/20180821\\/013e4c926ca0ecd00c35ac15e6692d4f.jpg\",\"\\/images\\/20180821\\/89fefa7de2ef0bc13cf6ccc060b1cdb2.jpg\"]', '2018-08-21 14:03:32', '2018-08-21 14:03:32', '0.00');
+/*Data for the table `tb_space` */
 
--- ----------------------------
--- Table structure for tb_user
--- ----------------------------
+insert  into `tb_space`(`id`,`name`,`operation_team_id`,`province_id`,`city_id`,`district_id`,`short_name`,`address`,`short_description`,`description`,`position_picture`,`space_pictures`,`create_time`,`update_time`,`enter_rate`) values (1,'测试空间',4,120000,'120100','120101','空间简称','上海浦东','空间简述',NULL,'/images/20180821/59a9645d66fccd00e09ba83f9fc7c35f.JPEG','[\"\\/images\\/20180821\\/d498830363ef90bbeaf9a5e11f4e913c.jpg\",\"\\/images\\/20180821\\/7b6e0717bb55dc6a25dce95089f9eee0.jpg\"]','2018-08-21 12:34:46','2018-08-21 12:34:46','0.00'),(2,'浦东创想空间',1,310000,'310100','310115','创想空间','纳贤路800号','浦东创想空间',NULL,'/images/20180821/616fc2518d8edffb7e333ccc5da6d8db.JPEG','[\"\\/images\\/20180821\\/013e4c926ca0ecd00c35ac15e6692d4f.jpg\",\"\\/images\\/20180821\\/89fefa7de2ef0bc13cf6ccc060b1cdb2.jpg\"]','2018-08-21 14:03:32','2018-08-21 14:03:32','0.00');
+
+/*Table structure for table `tb_user` */
+
 DROP TABLE IF EXISTS `tb_user`;
+
 CREATE TABLE `tb_user` (
   `id` int(12) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `username` varchar(30) DEFAULT '' COMMENT '姓名',
@@ -4454,56 +1132,46 @@ CREATE TABLE `tb_user` (
   UNIQUE KEY `mobile` (`mobile`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_user
--- ----------------------------
-INSERT INTO `tb_user` VALUES ('1', 'znlccy', 'e35cf7b66449df565f93c607d5a81d09', '15900795242', '752255448@qq.com', '上海游达网络科技有限公司', 'Java开发', 'IT行业', '0', '0000-00-00 00:00:00', null, '0000-00-00 00:00:00', '127.0.0.1');
-INSERT INTO `tb_user` VALUES ('2', '', 'a5dafec32f5fa8a644f94a1ba32dfbb4', '15900785382', '', '', '', '', '0', '0000-00-00 00:00:00', null, '0000-00-00 00:00:00', '');
-INSERT INTO `tb_user` VALUES ('3', '张三丰', '7eadafc40e72c85d36be5edcb7a7368d', '15900785383', '12345678@qq.com', '上海游达网络科技邮箱公司', 'Java架构师', 'IT软件行业', '0', '0000-00-00 00:00:00', null, '0000-00-00 00:00:00', '127.0.0.1');
-INSERT INTO `tb_user` VALUES ('4', '', 'a5dafec32f5fa8a644f94a1ba32dfbb4', '15001056491', '', '', '', '', '0', '0000-00-00 00:00:00', null, '0000-00-00 00:00:00', '');
-INSERT INTO `tb_user` VALUES ('6', '', '5053f342b0dff7356813525495497267', '189155422711', '', '', '', '', '0', '0000-00-00 00:00:00', null, null, '');
-INSERT INTO `tb_user` VALUES ('7', '', '554b87ed693d97518fb73869f36e4dba', '18915542277', '', '', '', '', '0', '0000-00-00 00:00:00', null, null, '');
-INSERT INTO `tb_user` VALUES ('8', 'guo jun', '52030ea4ad1ef3ba886605eec0c6a5ad', '18915542275', '1@1.com', '1', '2', '3', '0', '0000-00-00 00:00:00', null, '0000-00-00 00:00:00', '222.71.239.112');
-INSERT INTO `tb_user` VALUES ('9', '于东', '25d55ad283aa400af464c76d713c07ad', '18237177660', 'ycplay@qq.com', '上海游达', '5', '60303', '0', '0000-00-00 00:00:00', null, null, '');
-INSERT INTO `tb_user` VALUES ('13', '过骏', '65235524', '18915542280', '4922@q.com', '1212', '1', '1', '0', '2018-08-08 15:12:34', null, null, '');
-INSERT INTO `tb_user` VALUES ('15', '过骏2', '652355241', '18915542281', '4922@q.com', '1212', '1', '1', '0', '2018-08-08 15:14:26', null, null, '');
-INSERT INTO `tb_user` VALUES ('17', '1123123', '3dbe00a167653a1aaee01d93e77e730e', '18915542312', '123@q.com', '1', '1', '1', '0', '2018-08-08 16:09:42', null, null, '');
-INSERT INTO `tb_user` VALUES ('18', '11231234444', '3dbe00a167653a1aaee01d93e77e730e', '18915542311', '12443@q.com', '14', '2', '2', '0', '2018-08-08 16:12:09', null, null, '');
-INSERT INTO `tb_user` VALUES ('19', '123', '5053f342b0dff7356813525495497267', '18915542276', '1@qq.com', '123', '1', '1', '0', '2018-08-15 21:48:58', '2018-08-15 21:50:05', '2018-08-15 21:50:09', '');
-INSERT INTO `tb_user` VALUES ('20', '', '7373a72b2055c268492d6610fc9372c3', '13967741060', '', '', '', '', '0', null, null, null, '');
-INSERT INTO `tb_user` VALUES ('21', 'wcw', '25f9e794323b453885f5181f1b624d0b', '17826815702', '846758255', '', '', '', '0', '2018-08-20 17:31:27', null, null, '');
+/*Data for the table `tb_user` */
 
--- ----------------------------
--- Table structure for tb_user_information
--- ----------------------------
+insert  into `tb_user`(`id`,`username`,`password`,`mobile`,`email`,`company`,`career`,`occupation`,`status`,`register_time`,`update_time`,`login_time`,`login_ip`) values (1,'znlccy','e35cf7b66449df565f93c607d5a81d09','15900795242','752255448@qq.com','上海游达网络科技有限公司','Java开发','IT行业',0,'0000-00-00 00:00:00',NULL,'0000-00-00 00:00:00','127.0.0.1'),(2,'','a5dafec32f5fa8a644f94a1ba32dfbb4','15900785382','','','','',0,'0000-00-00 00:00:00',NULL,'0000-00-00 00:00:00',''),(3,'张三丰','7eadafc40e72c85d36be5edcb7a7368d','15900785383','12345678@qq.com','上海游达网络科技邮箱公司','Java架构师','IT软件行业',0,'0000-00-00 00:00:00',NULL,'0000-00-00 00:00:00','127.0.0.1'),(4,'','a5dafec32f5fa8a644f94a1ba32dfbb4','15001056491','','','','',0,'0000-00-00 00:00:00',NULL,'0000-00-00 00:00:00',''),(6,'','5053f342b0dff7356813525495497267','189155422711','','','','',0,'0000-00-00 00:00:00',NULL,NULL,''),(7,'','554b87ed693d97518fb73869f36e4dba','18915542277','','','','',0,'0000-00-00 00:00:00',NULL,NULL,''),(8,'guo jun','52030ea4ad1ef3ba886605eec0c6a5ad','18915542275','1@1.com','1','2','3',0,'0000-00-00 00:00:00',NULL,'0000-00-00 00:00:00','222.71.239.112'),(9,'于东','25d55ad283aa400af464c76d713c07ad','18237177660','ycplay@qq.com','上海游达','5','60303',0,'0000-00-00 00:00:00',NULL,NULL,''),(13,'过骏','65235524','18915542280','4922@q.com','1212','1','1',0,'2018-08-08 15:12:34',NULL,NULL,''),(15,'过骏2','652355241','18915542281','4922@q.com','1212','1','1',0,'2018-08-08 15:14:26',NULL,NULL,''),(17,'1123123','3dbe00a167653a1aaee01d93e77e730e','18915542312','123@q.com','1','1','1',0,'2018-08-08 16:09:42',NULL,NULL,''),(18,'11231234444','3dbe00a167653a1aaee01d93e77e730e','18915542311','12443@q.com','14','2','2',0,'2018-08-08 16:12:09',NULL,NULL,''),(19,'123','5053f342b0dff7356813525495497267','18915542276','1@qq.com','123','1','1',0,'2018-08-15 21:48:58','2018-08-15 21:50:05','2018-08-15 21:50:09',''),(20,'','7373a72b2055c268492d6610fc9372c3','13967741060','','','','',0,NULL,NULL,NULL,''),(21,'wcw','25f9e794323b453885f5181f1b624d0b','17826815702','846758255','','','',0,'2018-08-20 17:31:27',NULL,NULL,'');
+
+/*Table structure for table `tb_user_activity` */
+
+DROP TABLE IF EXISTS `tb_user_activity`;
+
+CREATE TABLE `tb_user_activity` (
+  `user_id` int(12) NOT NULL COMMENT '用户主键',
+  `activity_id` int(12) NOT NULL COMMENT '活动主键',
+  `apply_time` datetime DEFAULT NULL COMMENT '活动申请时间',
+  PRIMARY KEY (`user_id`,`activity_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_user_activity` */
+
+insert  into `tb_user_activity`(`user_id`,`activity_id`,`apply_time`) values (1,1,'2018-09-10 15:29:25'),(1,2,'2018-09-10 15:29:28'),(2,1,'2018-09-10 15:29:34'),(2,2,'2018-09-10 15:29:37'),(3,3,'2018-09-10 15:28:51');
+
+/*Table structure for table `tb_user_information` */
+
 DROP TABLE IF EXISTS `tb_user_information`;
+
 CREATE TABLE `tb_user_information` (
   `user_id` int(12) NOT NULL COMMENT '用户主键',
   `info_id` int(12) NOT NULL COMMENT '消息主键',
   `status` tinyint(2) DEFAULT '0' COMMENT '状态',
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`user_id`,`info_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_user_information
--- ----------------------------
-INSERT INTO `tb_user_information` VALUES ('1', '1', '1', '2018-08-21 15:02:04', '2018-08-21 15:02:04');
-INSERT INTO `tb_user_information` VALUES ('3', '1', '1', '2018-08-21 15:02:04', '2018-08-21 15:02:04');
-INSERT INTO `tb_user_information` VALUES ('5', '1', '1', '2018-08-21 15:02:04', '2018-08-21 15:02:04');
-INSERT INTO `tb_user_information` VALUES ('6', '1', '1', '2018-08-21 15:02:04', '2018-08-21 15:02:04');
-INSERT INTO `tb_user_information` VALUES ('6', '2', '1', '2018-08-21 15:02:04', '2018-08-21 15:02:04');
-INSERT INTO `tb_user_information` VALUES ('9', '1', '1', '2018-08-21 15:02:04', '2018-08-21 15:02:04');
-INSERT INTO `tb_user_information` VALUES ('9', '2', '1', '2018-08-21 15:02:04', '2018-08-21 15:02:04');
-INSERT INTO `tb_user_information` VALUES ('9', '3', '1', '2018-08-21 15:02:04', '2018-08-21 15:02:04');
-INSERT INTO `tb_user_information` VALUES ('9', '4', '1', '2018-08-21 15:02:04', '2018-08-21 15:02:04');
-INSERT INTO `tb_user_information` VALUES ('19', '1', '1', '2018-08-21 15:02:04', '2018-08-21 15:02:04');
+/*Data for the table `tb_user_information` */
 
--- ----------------------------
--- Table structure for tb_venue
--- ----------------------------
+insert  into `tb_user_information`(`user_id`,`info_id`,`status`,`create_time`,`update_time`) values (1,1,1,'2018-08-21 15:02:04','2018-08-21 15:02:04'),(3,1,1,'2018-08-21 15:02:04','2018-08-21 15:02:04'),(5,1,1,'2018-08-21 15:02:04','2018-08-21 15:02:04'),(6,1,1,'2018-08-21 15:02:04','2018-08-21 15:02:04'),(6,2,1,'2018-08-21 15:02:04','2018-08-21 15:02:04'),(9,1,1,'2018-08-21 15:02:04','2018-08-21 15:02:04'),(9,2,1,'2018-08-21 15:02:04','2018-08-21 15:02:04'),(9,3,1,'2018-08-21 15:02:04','2018-08-21 15:02:04'),(9,4,1,'2018-08-21 15:02:04','2018-08-21 15:02:04'),(19,1,1,'2018-08-21 15:02:04','2018-08-21 15:02:04');
+
+/*Table structure for table `tb_venue` */
+
 DROP TABLE IF EXISTS `tb_venue`;
+
 CREATE TABLE `tb_venue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `venue_no` varchar(10) NOT NULL COMMENT '场馆编号',
@@ -4518,15 +1186,14 @@ CREATE TABLE `tb_venue` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_venue
--- ----------------------------
-INSERT INTO `tb_venue` VALUES ('1', 'AK-47', '会议大厅', '1', '100', '举行重要的大会', null, '1', '2018-08-24 11:22:28', null);
+/*Data for the table `tb_venue` */
 
--- ----------------------------
--- Table structure for tb_verification_code
--- ----------------------------
+insert  into `tb_venue`(`id`,`venue_no`,`name`,`space_id`,`accommodate_num`,`remark`,`disable_time`,`status`,`create_time`,`update_time`) values (1,'AK-47','会议大厅','1',100,'举行重要的大会',NULL,1,'2018-08-24 11:22:28',NULL);
+
+/*Table structure for table `tb_verification_code` */
+
 DROP TABLE IF EXISTS `tb_verification_code`;
+
 CREATE TABLE `tb_verification_code` (
   `id` int(12) NOT NULL AUTO_INCREMENT COMMENT '验证码主键',
   `mobile` varchar(30) DEFAULT '' COMMENT '手机号',
@@ -4537,15 +1204,14 @@ CREATE TABLE `tb_verification_code` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_verification_code
--- ----------------------------
-INSERT INTO `tb_verification_code` VALUES ('16', '13967741060', '862896', '2018-08-19 23:45:49', '2018-08-20 17:05:55', '2018-08-20 17:15:55');
+/*Data for the table `tb_verification_code` */
 
--- ----------------------------
--- Table structure for tb_workplace
--- ----------------------------
+insert  into `tb_verification_code`(`id`,`mobile`,`code`,`create_time`,`update_time`,`expiration_time`) values (16,'13967741060',862896,'2018-08-19 23:45:49','2018-08-20 17:05:55','2018-08-20 17:15:55');
+
+/*Table structure for table `tb_workplace` */
+
 DROP TABLE IF EXISTS `tb_workplace`;
+
 CREATE TABLE `tb_workplace` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `workplace_no` varchar(10) NOT NULL DEFAULT '0' COMMENT '工位ID',
@@ -4555,24 +1221,22 @@ CREATE TABLE `tb_workplace` (
   `enter_team_id` int(11) DEFAULT NULL COMMENT '租赁团队',
   `price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '租赁单价',
   `status` int(2) NOT NULL DEFAULT '0' COMMENT '状态',
-  `deadline` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '到期时间',
+  `deadline` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '到期时间',
   `total_area` decimal(10,2) DEFAULT NULL COMMENT '总面积',
   `residual_area` decimal(10,2) DEFAULT NULL COMMENT '剩余面积',
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_time` timestamp NULL DEFAULT NULL,
   `update_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_workplace
--- ----------------------------
-INSERT INTO `tb_workplace` VALUES ('1', 'SHJK-A01', '1', '0', '1', '1', '10000.00', '1', '2018-08-30 10:57:00', null, '0.00', '2018-08-21 16:58:59', '2018-08-28 19:41:24');
-INSERT INTO `tb_workplace` VALUES ('2', 'SHJK-A02', '2', '1', '1', null, '10000.00', '1', '2018-08-29 19:57:08', '1000.00', '299.50', '2018-08-21 16:59:23', '2018-08-29 17:02:00');
+/*Data for the table `tb_workplace` */
 
--- ----------------------------
--- Table structure for tb_workplace_group
--- ----------------------------
+insert  into `tb_workplace`(`id`,`workplace_no`,`space_id`,`type`,`group_id`,`enter_team_id`,`price`,`status`,`deadline`,`total_area`,`residual_area`,`create_time`,`update_time`) values (1,'SHJK-A01',1,0,1,1,'10000.00',1,'2018-08-30 10:57:00',NULL,'0.00','2018-08-21 16:58:59','2018-08-28 19:41:24'),(2,'SHJK-A02',2,1,1,NULL,'10000.00',1,'2018-08-29 19:57:08','1000.00','299.50','2018-08-21 16:59:23','2018-08-29 17:02:00');
+
+/*Table structure for table `tb_workplace_group` */
+
 DROP TABLE IF EXISTS `tb_workplace_group`;
+
 CREATE TABLE `tb_workplace_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(10) NOT NULL DEFAULT '0' COMMENT '分组名称',
@@ -4581,7 +1245,72 @@ CREATE TABLE `tb_workplace_group` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_workplace_group
--- ----------------------------
-INSERT INTO `tb_workplace_group` VALUES ('1', 'A01', '2018-08-21 19:47:30', '2018-08-21 19:47:30');
+/*Data for the table `tb_workplace_group` */
+
+insert  into `tb_workplace_group`(`id`,`name`,`create_time`,`update_time`) values (1,'A01','2018-08-21 19:47:30','2018-08-21 19:47:30');
+
+/*Table structure for table `wf_role` */
+
+DROP TABLE IF EXISTS `wf_role`;
+
+CREATE TABLE `wf_role` (
+  `id` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL COMMENT '后台组名',
+  `pid` smallint(6) unsigned NOT NULL DEFAULT '0' COMMENT '父ID',
+  `status` tinyint(1) unsigned DEFAULT '0' COMMENT '是否激活 1：是 0：否',
+  `sort` smallint(6) unsigned NOT NULL DEFAULT '0' COMMENT '排序权重',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注说明',
+  PRIMARY KEY (`id`),
+  KEY `pid` (`pid`),
+  KEY `status` (`status`)
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+
+/*Data for the table `wf_role` */
+
+insert  into `wf_role`(`id`,`name`,`pid`,`status`,`sort`,`remark`) values (15,'市场部',0,1,0,''),(16,'工程部',0,1,0,''),(17,'新闻部',0,1,0,''),(18,'新闻部经理',0,1,0,''),(19,'工程部经理',0,1,0,''),(20,'市场部经理',0,1,0,''),(21,'总经理',0,1,0,'');
+
+/*Table structure for table `wf_role_user` */
+
+DROP TABLE IF EXISTS `wf_role_user`;
+
+CREATE TABLE `wf_role_user` (
+  `user_id` int(10) unsigned NOT NULL,
+  `role_id` smallint(6) unsigned NOT NULL,
+  KEY `group_id` (`role_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+/*Data for the table `wf_role_user` */
+
+insert  into `wf_role_user`(`user_id`,`role_id`) values (7,15),(8,15),(9,17),(10,18),(11,20),(12,19),(13,21);
+
+/*Table structure for table `wf_user` */
+
+DROP TABLE IF EXISTS `wf_user`;
+
+CREATE TABLE `wf_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` char(32) NOT NULL,
+  `tel` varchar(255) DEFAULT NULL,
+  `mail` varchar(255) DEFAULT NULL,
+  `role` smallint(6) unsigned NOT NULL COMMENT '组ID',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '状态 1:启用 0:禁止',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注说明',
+  `last_login_time` int(11) unsigned NOT NULL COMMENT '最后登录时间',
+  `last_login_ip` varchar(15) DEFAULT NULL COMMENT '最后登录IP',
+  `login_count` int(11) DEFAULT '0',
+  `last_location` varchar(100) DEFAULT NULL COMMENT '最后登录位置',
+  `add_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `username` (`username`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='用户表';
+
+/*Data for the table `wf_user` */
+
+insert  into `wf_user`(`id`,`username`,`password`,`tel`,`mail`,`role`,`status`,`remark`,`last_login_time`,`last_login_ip`,`login_count`,`last_location`,`add_time`) values (7,'市场部员工1','c4ca4238a0b923820dcc509a6f75849b','1','1',15,0,'1',1522372036,'127.0.0.1',0,'新建用户',1522372036),(8,'工程部员工1','c4ca4238a0b923820dcc509a6f75849b','1','1',15,0,'1',1522372556,'127.0.0.1',0,'新建用户',1522372556),(9,'新闻部员工1','c4ca4238a0b923820dcc509a6f75849b','1','1',17,0,'1',1522376353,'127.0.0.1',0,'新建用户',1522376353),(10,'新闻部经理','c4ca4238a0b923820dcc509a6f75849b','1','1',18,0,'1',1522376372,'127.0.0.1',0,'新建用户',1522376372),(11,'市场部经理','c4ca4238a0b923820dcc509a6f75849b','1','1',20,0,'1',1522376385,'127.0.0.1',0,'新建用户',1522376385),(12,'工程部经理','c4ca4238a0b923820dcc509a6f75849b','1','1',19,0,'1',1522376401,'127.0.0.1',0,'新建用户',1522376401),(13,'总经理','c4ca4238a0b923820dcc509a6f75849b','1','1',21,0,'1',1522376413,'127.0.0.1',0,'新建用户',1522376413);
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

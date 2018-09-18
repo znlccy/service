@@ -54,7 +54,9 @@ class Order extends Validate
     // 验证场景
     public function sceneIndex()
     {
-        return $this->only(['page_size', 'jump_page', 'id', 'order_no', 'status']);
+        return $this->only(['page_size', 'jump_page', 'id', 'order_no', 'status'])
+            ->remove('order_no', 'require')
+            ->remove('status', 'require');
     }
 
     public function sceneDetail()

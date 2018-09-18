@@ -18,10 +18,10 @@ class OperationTeam extends Validate
         'id' => 'number',
         'status' => 'require|number',
         'name' => 'require|max:50',
-        'leader_id' => 'require|number',
+        'leader_id' => 'number',
         'description' => 'require|max:255',
         'management_type' => 'number',
-        'operation_team_id' => 'require|number',
+        'operation_team_id' => 'number',
         'user_id' => 'number',
         'role_id' => 'number',
     ];
@@ -46,17 +46,7 @@ class OperationTeam extends Validate
     /**
      * 定义验证场景
      *
-     * @var array
      */
-    protected $scene = [
-        'index' => ['page_size', 'jump_page', 'id|number', 'name|max:50', 'leader_id|number', 'status|number'],
-//        'save' => ['id|number', 'name', 'leader_id', 'description', 'management_type', 'status'],
-        'detail' => ['id'],
-        'delete' => ['id'],
-        'delete_user' => ['operation_team_id', 'user_id'],
-        'delete_role' => ['operation_team_id', 'role_id'],
-    ];
-
     public function sceneIndex()
     {
         return $this->only(['page_size', 'jump_page', 'id', 'name'])
@@ -87,5 +77,11 @@ class OperationTeam extends Validate
         return $this->only(['operation_team_id','role_id'])
             ->append('operation_team_id', 'require')
             ->append('role_id', 'require');
+    }
+
+    public function sceneLeader()
+    {
+        return $this->only(['operation_team_id'])
+            ->append('operation_team_id', 'require|egt:1');
     }
 }

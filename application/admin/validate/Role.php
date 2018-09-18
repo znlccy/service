@@ -64,6 +64,12 @@ class Role extends BaseValidate
             ->append('id', 'require');
     }
 
+    public function sceneDetail()
+    {
+        return $this->only(['id'])
+            ->append('id', 'require');
+    }
+
     public function sceneAssignRolePermission()
     {
         return $this->only(['id', 'permission_id'])

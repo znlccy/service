@@ -9,7 +9,7 @@
 
 namespace app\index\model;
 
-class ConsultPolicy extends BasisModel {
+class ConsultPolicy extends BaseModel {
 
     /**
      * 自动写入读取时间
@@ -22,16 +22,6 @@ class ConsultPolicy extends BasisModel {
      * @var string
      */
     protected $table = 'tb_consult_policy';
-
-    /* 设置富文本区域 */
-    public function setRichTextAttr($value) {
-        return htmlspecialchars($value);
-    }
-
-    /* 获取富文本区域 */
-    public function getRichTextAttr($value) {
-        return htmlspecialchars_decode($value);
-    }
 
     /**
      * 一对一关联

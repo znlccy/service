@@ -5,7 +5,7 @@ use think\Request;
 use app\admin\model\Department as DepartmentModel;
 use app\admin\model\DepartmentUser;
 use app\admin\model\Admin as Member;
-class Department extends Controller
+class Department extends BaseController
 {
     /**
      * 显示资源列表

@@ -12,7 +12,7 @@ use app\admin\model\Contract;
 use think\Db;
 use workflow\Db\ProcessDb;
 
-class Order extends Controller
+class Order extends BaseController
 {
     /**
      * 显示资源列表

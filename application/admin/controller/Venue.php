@@ -6,7 +6,7 @@ use think\Controller;
 use think\Request;
 use app\admin\model\Venue as VenueModel;
 
-class Venue extends Controller
+class Venue extends BaseController
 {
     /**
      * 场馆列表

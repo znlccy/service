@@ -1,0 +1,77 @@
+{include file='pub/base' /}
+<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
+	<div class="Hui-tabNav-wp">
+		<ul id="min_title_list" class="acrossTab cl">
+			<li class="active">
+				<span title="工作流列表" data-href="welcome.html">工作流列表</span><em></em></li>
+		</ul>
+	</div>
+	<div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a></div>
+</div>
+
+<!--<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i>  Tpflow 工作流插件示例 <a href="{:url('index/welcome')}"  class="btn btn-primary radius"> 返回</a>-->
+<!--<a onclick="layer_show('添加工作流','{:url('add')}','550','400')" class="btn btn-primary radius">添加工作流</a>-->
+</nav>
+<div class="page-container">
+
+<table class="table table-border table-bordered table-bg">
+    <tr>
+        <th>ID</th>
+        <th>流程名称</th>
+		<th>状态</th>
+        <th>操作</th>
+    </tr>
+    {volist name="list.flow" id="vo"}
+    <tr>
+        <td>{$vo.id}</td>
+        <td><span title="{$vo.flow_name}">{$vo.flow_name}</span></td>
+		 <td>
+		 {if condition='$vo.status == 0'}
+		   未设置
+			{else/}
+		   已设置
+		 {/if}</td>
+        <td>
+		{if condition='$vo.edit ==""'}
+	   <a class='btn  radius size-S' onclick="layer_show('修改','{:url('/admin/flowdesign/edit',['id'=>$vo.id])}','550','400')"> 修改</a>
+       <a class='btn  radius size-S' data-title="设计流程" data-href="{:url('/admin/flowdesign/index',['flow_id'=>$vo['id']])}" onclick="edit_flow(this)" > 设计流程</a>
+		{else/}
+		<a class='btn  radius size-S'> 运行中....</a>
+	   {/if}
+	   <!--{if condition='$vo.status == 0'}-->
+		   <!--<a class='btn  radius size-S' onclick="status('{:url('/admin/flowdesign/change',['id'=>$vo.id,'status'=>1])}')"> 禁用</a>-->
+			<!--{else/}-->
+		 <!--<a class='btn  radius size-S' onclick="status('{:url('/admin/flowdesign/change',['id'=>$vo.id,'status'=>0])}')"> 启用</a>-->
+	   <!--{/if}-->
+
+
+	   </td>
+    </tr>
+    {/volist}
+</table>
+</div>
+<script type="text/javascript">
+	function status(url) {
+		$.ajax({
+			url:url,
+			type:"GET",
+            contentType: "application/json",
+            dataType: "json",
+            processData: true,
+			success(data) {
+			    if(data.code == 0){
+                    layer.msg(data.msg,{icon:1,time: 1500},function(){
+                        parent.location.reload(); // 父页面刷新
+                    });
+                } else {
+                    layer.msg(data.msg,{icon:2,time: 1500});
+				}
+			}
+		})
+	}
+	function edit_flow(obj) {
+        href = $(obj).attr('data-href'),
+		window.location.href=href;
+	}
+</script>
+

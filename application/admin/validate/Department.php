@@ -17,6 +17,7 @@ class Department extends Validate
         'name' => 'require|max:30',
         'p_id' => 'number',
         'description' => 'require',
+        'ids' => 'array'
     ];
 
     /**
@@ -26,7 +27,7 @@ class Department extends Validate
      * @var array
      */
     protected $field = [
-        'id' => '类型id',
+        'id' => '部门id',
         'name' => '名称',
         'p_id' => '上级部门',
         'description' => '部门描述'
@@ -49,5 +50,17 @@ class Department extends Validate
     {
         return $this->only(['id'])
             ->append('id', 'require');
+    }
+
+    public function sceneMember()
+    {
+        return $this->only(['id'])
+            ->append('id','require');
+    }
+
+    public function sceneLeader()
+    {
+        return $this->only(['ids'])
+            ->append('ids','require');
     }
 }

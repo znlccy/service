@@ -154,6 +154,7 @@ class Admin extends BaseController
         $password = request()->param('password');
         $confirm_pass = request()->param('confirm_pass');
         $real_name = request()->param('real_name');
+        $nickname = request()->param('real_name');
         $status = request()->param('status');
         $role_id = request()->param('role_id/a');
         $operation_team_id = request()->param('operation_team_id', 0);
@@ -216,6 +217,7 @@ class Admin extends BaseController
         /* 封装数据 */
         $user_data = [
             'real_name' => $real_name,
+            'nickname' => $real_name,
             'status' => $status,
             'create_ip' => request()->ip(),
             'operation_team_id' => $operation_team_id,
@@ -426,9 +428,10 @@ class Admin extends BaseController
      */
     public function role()
     {
+        $operation_team_id = request()->param('operation_team_id/d', 0);
         //实例化模型
         $role_model = new RoleModel();
-        $roles = $role_model->where('status = 1')->field('id,name')->select();
+        $roles = $role_model->where(['status' => 1, 'operation_team_id' => $operation_team_id])->field('id,name')->select();
         if (!empty($roles)) {
             return json(['code' => 200, 'message' => '获取列表成功', 'data' => $roles]);
         } else {

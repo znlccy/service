@@ -7,7 +7,7 @@ use think\Request;
 use app\admin\model\ContractTemplate as ContractTemplateModel;
 use app\admin\model\HistoryTemplate;
 
-class ContractTemplate extends Controller
+class ContractTemplate extends BaseController
 {
     /**
      * 显示资源列表

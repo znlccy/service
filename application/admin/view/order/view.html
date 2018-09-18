@@ -1,0 +1,16 @@
+{include file='pub/base' /}
+<article class="page-container">
+    <table class="table table-border table-bordered table-bg">
+        <tr>
+            <td style='width:70px'>订单ID：</td><td style='width:330px' colspan="3">
+            {$info.order_no}</td>
+        </tr>
+        <tr>
+            <td>订单金额：</td><td>{$info.total_price}</td>
+            <td></td><td></td>
+        </tr><td>创建时间:</td><td colspan="3" >{$info.create_time}
+    </td></tr>
+    </table>
+</article>
+</body>
+</html>

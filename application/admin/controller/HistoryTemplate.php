@@ -6,7 +6,7 @@ use think\Controller;
 use think\Request;
 use app\admin\model\HistoryTemplate as HistoryTemplateModel;
 
-class HistoryTemplate extends Controller
+class HistoryTemplate extends BaseController
 {
     /**
      * 显示资源列表

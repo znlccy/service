@@ -29,7 +29,7 @@ class Role extends BaseController {
         /* 获取客户端提供的数据 */
         $page_size = request()->param('page_size', $page['PAGE_SIZE']);
         $jump_page = request()->param('jump_page', $page['JUMP_PAGE']);
-        $operation_team_id = request()->param('operation_team_id');
+        $operation_team_id = request()->param('operation_team_id', 0);
 
         $id = request()->param('id');
         $status = request()->param('status');
@@ -73,9 +73,10 @@ class Role extends BaseController {
             $conditions[] = ['create_time', 'between time', [$active_start, $active_end]];
         }
         // 获取角色id
-        $role_ids = OperationTeamRole::where('operation_team_id', $operation_team_id)->column('role_id');
+//        $role_ids = OperationTeamRole::where('operation_team_id', $operation_team_id)->column('role_id');
 
-        $role = $role_model->whereIn('id', $role_ids)->where($conditions)
+        $role = $role_model->where($conditions)
+            ->where('operation_team_id', $operation_team_id)
             ->paginate($page_size, false, ['page' => $jump_page]);
 
         return json([
@@ -96,7 +97,7 @@ class Role extends BaseController {
         $status = request()->param('status',1);
         $sort = request()->param('sort_num', 0);
         $type = request()->param('type', 0);
-        $operation_team_id = request()->param('operation_team_id');
+        $operation_team_id = request()->param('operation_team_id',0);
 
         $data = [
             'id'            => $id,
@@ -214,11 +215,9 @@ class Role extends BaseController {
             'id'    => $roleid
         ];
 
-        $validate = Loader::validate('Role');
-
-        $result   = $validate->scene('detail')->check($data);
-        if (!$result) {
-            return json(['code' => 401, 'message' => $validate->getError()]);
+        $result   = $this->validate($data, 'Role.detail');
+        if (true !== $result) {
+            return json(['code' => 401, 'message' => $result]);
         }
 
         $role = Db::table('tb_role')

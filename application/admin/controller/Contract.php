@@ -9,7 +9,7 @@ use Mpdf\Mpdf;
 use app\admin\model\Order;
 use app\admin\model\OrderWorkplace;
 
-class Contract extends Controller
+class Contract extends BaseController
 {
     /**
      * 显示资源列表

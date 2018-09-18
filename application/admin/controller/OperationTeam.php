@@ -10,6 +10,7 @@ use app\admin\model\Admin;
 use app\admin\model\Role;
 use think\Db;
 use app\admin\model\Space;
+use app\admin\model\Department;
 
 class OperationTeam extends Controller
 {
@@ -51,8 +52,19 @@ class OperationTeam extends Controller
         if ($leader_id) {
             $conditions[] = ['leader_id', '=', $leader_id];
         }
-        if ($status) {
-            $conditions[] = ['status', '=', $status];
+        if (is_null($status)) {
+            $conditions[] = ['status', 'in',[0,1]];
+        } else {
+            switch ($status) {
+                case 0:
+                    $conditions[] = ['status', '=', $status];
+                    break;
+                case 1:
+                    $conditions[] = ['status', '=', $status];
+                    break;
+                default:
+                    break;
+            }
         }
 
         $teams = OperationTeamModel::where($conditions)
@@ -102,6 +114,8 @@ class OperationTeam extends Controller
         if (empty($id)) {
             $team = new OperationTeamModel();
             $result = $team->save($data);
+            // 创建工作流
+            $flow_result = $this->addFlow($team->id);
         } else {
             // 更新
             if (empty($logo)) {
@@ -111,8 +125,16 @@ class OperationTeam extends Controller
             $result = $team->save($data, ['id', $id]);
         }
         if ($result) {
-            // 同时更新负责人所属团队
-            $user = User::where('id', $leader_id)->update(['operation_team_id' => $team->id]);
+            if (empty($id)) {
+                // 同时创建名字相同的部门
+                $department = new Department();
+                $data = [
+                    'name' => $name,
+                    'p_id' => 0,
+                    'description' => $name
+                ];
+                $department->save($data);
+            }
             return json(['code' => 200, 'message' => '保存成功!']);
         } else {
             return json(['code' => 404, 'message' => '保存失败!']);
@@ -131,14 +153,16 @@ class OperationTeam extends Controller
         $data = [
             'id' => $id,
         ];
-
         $result   = $this->validate($data, 'OperationTeam.detail');
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
-        $detail = OperationTeamModel::where('id', $id)->find();
+        $detail = OperationTeamModel::where('id', $id)->with(['leader' => function($query){
+            $query->field('id,nickname');
+        }])->field('id,name,description,leader_id')->find();
 
         if ($detail) {
+            unset($detail->leader_id);
             return json(['code' => 200, 'message' => '获取详情成功!', 'data' => $detail]);
         } else {
             return json(['code' => 404, 'message' => '获取详情失败!']);
@@ -229,7 +253,15 @@ class OperationTeam extends Controller
      */
     public function leader()
     {
-        $leaders = Admin::field('id,nickname')->select();
+        $operation_team_id = request()->param('operation_team_id/d');
+        $data = [
+            'operation_team_id' => $operation_team_id
+        ];
+        $result = $this->validate($data, 'OperationTeam.leader');
+        if (true !== $result) {
+            return json(['code' => 401, 'message' => $result]);
+        }
+        $leaders = Admin::where('operation_team_id', $operation_team_id)->field('id,nickname')->select();
         if (!empty($leaders)) {
             return json(['code' => 200, 'message' => '获取列表成功', 'data' => $leaders]);
         } else {
@@ -280,5 +312,85 @@ class OperationTeam extends Controller
         } else {
             return json(['code' => 404, 'message' => '获取列表失败']);
         }
+    }
+
+    /**
+     * 创建工作流
+     */
+    public function addFlow($team_id)
+    {
+        // 订单工作流数据
+        $data = [
+            ['team_id' => $team_id, 'type' => 'order', 'flow_name' => '销售订单审核流程', 'uid' => session('admin.id'), 'add_time' => time()],
+            ['team_id' => $team_id, 'type' => 'incidental', 'flow_name' => '杂费收取审核流程', 'uid' => session('admin.id'), 'add_time' => time()]
+        ];
+        $result = Db::table('tb_flow')->insertAll($data);
+        return $result;
+    }
+
+    /**
+     * 工作流列表
+     */
+    public function flow_list()
+    {
+        $operation_team_id = request()->param('operation_team_id');
+        /* 验证 */
+        $data = [
+            'id' => $operation_team_id,
+        ];
+        $result   = $this->validate($data, 'OperationTeam.detail');
+        if (true !== $result) {
+            return json(['code' => 401, 'message' => $result]);
+        }
+        $data = [];
+        // 管理模式
+        $management_type = OperationTeamModel::where('id', $operation_team_id)->value('management_type');
+        $data['management_type'] = $management_type;
+        // 工作流编辑
+        $flow = Db::table('tb_flow')->where('team_id', $operation_team_id)->field('id,flow_name,status')->paginate('10');
+        $data['flow'] = $flow->each(function($item, $key){
+            $item['edit'] = db('tb_run')->where('flow_id',$item['id'])->where('status','0')->value('id');
+            return $item;
+        });
+//        $this->assign('list', $data);
+//        return $this->fetch('flowdesign/lists');
+        return json(['code' => 200, 'message' => '获取列表成功', 'data' => $data]);
+
+    }
+
+    /**
+     * 流程编辑
+     */
+    public function flow_design()
+    {
+
+        $flow_id = request()->param('flow_id');
+        if($flow_id<=0){
+            return json(['code' => 401, 'message' => '参数有误']);
+        }
+        $one = db('tb_flow')->find($flow_id);
+        if(!$one){
+            return json(['code' => 404, 'message' => '未找到数据，请重试!']);
+        }
+        $list = db('tb_flow_process')->where('flow_id',$flow_id)->order('id asc')->select();
+        $process_data = [];
+        $process_total = 0;
+        foreach($list as $value)
+        {
+            $process_total +=1;
+            $style = json_decode($value['style'],true);
+            $process_data[] = array(
+                'id'=>$value['id'],
+                'flow_id'=>$value['flow_id'],
+                'process_name'=>$value['process_name'],
+                'process_to'=>$value['process_to'],
+                'icon'=>$style['icon'],//图标
+                'style'=>'width:'.$style['width'].'px;height:'.$style['height'].'px;line-height:'.$style['height'].'px;color:'.$style['color'].';left:'.$value['setleft'].'px;top:'.$value['settop'].'px;',
+            );
+        }
+        $this->assign('one', $one);
+
+        $this->assign('process_data', json_encode(array('total'=>$process_total,'list'=>$process_data)));
+        return $this->fetch('flowdesign/index', ['flow_id' => $flow_id]);
     }
 }
