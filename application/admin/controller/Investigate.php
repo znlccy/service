@@ -149,7 +149,6 @@ class Investigate extends Controller {
         $status = $this->request->param('status', 1);
         $publisher = session('admin.mobile');
         $questions = $this->request->param('question/a');
-        $options = $this->request->param('option/a');
 
         //验证数据
         $validate_data = [
@@ -159,7 +158,6 @@ class Investigate extends Controller {
             'status'    => $status,
             'publisher' => $publisher,
             'questions'  => $questions,
-            'options'    => $options
         ];
 
         //验证结果
@@ -178,10 +176,10 @@ class Investigate extends Controller {
         }
 
         /* 添加选项列表 */
-        $option_list = array();
+        /*$option_list = array();
         foreach ($options as $key => $option) {
             $option_list[$key]['content'] = $option;
-        }
+        }*/
 
         $investigate = null;
         $question_result = null;
@@ -200,10 +198,10 @@ class Investigate extends Controller {
             $investigate = $this->investigate_model->insertGetId($insert_data);
             $investigate_instance = $this->investigate_model->where('id', $investigate)->find();
             $investigate_result = $investigate_instance->Question()->saveAll($question_list);
-            $question_instances = Question::all([1,2,3,4]);
+            /*$question_instances = Question::all([1,2,3,4]);
             foreach ($question_instances as $key => $question_instance) {
                 $question_result = $question_instance->Option()->saveAll($option_list);
-            }
+            }*/
 
         } else {
             $investigate_result = $this->investigate_model->save($validate_data, ['id' => $id]);

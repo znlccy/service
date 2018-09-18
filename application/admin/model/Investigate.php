@@ -21,9 +21,4 @@ class Investigate extends BaseModel {
     public function question() {
         return $this->hasMany('Question', 'investigate_id', 'id');
     }
-
-    /* 关联的数据表 */
-    public function feedback() {
-        return $this->hasMany('Feedback', 'investigate_id', 'id');
-    }
 }
