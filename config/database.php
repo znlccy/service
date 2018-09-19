@@ -15,11 +15,11 @@ return [
     // 服务器地址
     'hostname'        => '127.0.0.1',
     // 数据库名
-    'database'        => 'db_public_service',
+    'database'        => 'db_service',
     // 用户名
     'username'        => 'root',
     // 密码
-    'password'        => 'GUOjun815',
+    'password'        => 'root',
     // 端口
     'hostport'        => '',
     // 连接dsn

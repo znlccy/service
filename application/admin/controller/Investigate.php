@@ -374,6 +374,7 @@ class Investigate extends Controller {
             ->join('tb_investigate ti', 'ti.id = fm.investigate_id')
             ->field('fm.id, ti.title, ti.id as investigate_id, fm.mobile, fm.create_time as feedback_time')
             ->paginate($page_size, false, ['page' => $jump_page]);
+
         if ($feedback) {
             return json([
                 'code'      => '200',
@@ -386,5 +387,50 @@ class Investigate extends Controller {
                 'message'   => '反馈失败'
             ]);
         }
+    }
+
+    /* 统计 */
+    public function statics() {
+        /* 接收客户端提交过来的数据 */
+        $id = $this->request->param('id');
+
+        /* 验证数据 */
+        $validate_data = [
+            'id'        => $id
+        ];
+
+        /* 验证结果 */
+        $result = $this->validate($validate_data, 'Investigate.detail');
+
+        if (true !== $result) {
+            return json([
+                'code'      => '401',
+                'message'   => $result
+            ]);
+        }
+
+        /* 返回结果 */
+        $investigate = $this->investigate_model
+            ->with('question',function ($query){
+                $query->field('id,content');
+            })
+            ->where('id', $id)
+            ->order('id','desc')
+            ->find();
+
+        $option_list = [];
+        for ( $i = 0; $i < count($investigate['question']); $i++ ) {
+            $option_list[$i] = $this->option_model->where('question_id', '=',$investigate['question'][$i]['id'])->select();
+            $investigate['question'][$i]['option'] = $option_list[$i];
+            for ($j = 0; $j < count($investigate['question'][$i]['option']); $j++ ) {
+                $investigate['question'][$i]['option'][$j]['percent'] = ($option_list[$i][$j]['count']/$investigate['count'])*100;
+            }
+        }
+
+        return json([
+            'code'      => '200',
+            'message'   => '查询数据成功',
+            'data'      => $investigate
+        ]);
     }
 }
