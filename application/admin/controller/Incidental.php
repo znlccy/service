@@ -6,8 +6,10 @@ use think\Controller;
 use think\Request;
 use app\admin\model\IncidentalOrder;
 use app\admin\model\Incidental as IncidentalModel;
+use app\admin\model\RecOrder;
+use app\admin\model\Invoice;
 
-class Incidental extends BaseController
+class Incidental extends Controller
 {
     /**
      * 显示资源列表
@@ -21,7 +23,7 @@ class Incidental extends BaseController
         $jump_page = request()->param('jump_page/d', $page['JUMP_PAGE']);
         $id = request()->param('id');
         $order_no = request()->param('order_no');
-        $status = request()->param('status/d');
+        $status = request()->param('status');
 
         // 验证参数
         $data = [
@@ -30,7 +32,7 @@ class Incidental extends BaseController
             'id'               => $id,
             'status'           => $status,
         ];
-        $result = $this->validate($data, 'IncidentalOrder.index');
+        $result = $this->validate($data, 'Incidental.index');
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
@@ -39,15 +41,19 @@ class Incidental extends BaseController
         if ($id) {
             $conditions[] = ['id', '=', $id];
         }
-        if ($status || $status === 0) {
+        if (!is_null($status)) {
             $conditions[] = ['status', '=', $status];
         }
-        $incidental = IncidentalModel::where($conditions)
+        $incidental = IncidentalModel::with('operator')
+            ->where($conditions)
             ->order('create_time', 'desc')
-            ->paginate($page_size, false, ['page' => $jump_page]);
-//        return json(['code'=> 200, 'message' => '获取列表成功', 'data' => $incidental]);
-        $this->assign('list', $incidental);
-        return $this->fetch();
+            ->paginate($page_size, false, ['page' => $jump_page])->each(function($item) {
+                unset($item['operator_id']);
+                return $item;
+            });
+        return json(['code'=> 200, 'message' => '获取列表成功', 'data' => $incidental]);
+//        $this->assign('list', $incidental);
+//        return $this->fetch();
     }
 
     /**
@@ -64,6 +70,7 @@ class Incidental extends BaseController
         $data = [
             'project' => $project,
             'pay_type' => $pay_type,
+            'operator_id' => session('admin.id'),
             'teams' => $teams,
             'status' => $status
         ];
@@ -71,14 +78,24 @@ class Incidental extends BaseController
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
-        // 插入杂费收款表
-        $incidental = new IncidentalModel($data);
+        $incidental = new IncidentalModel();
+        $invoice = new Invoice();
         $incidental->startTrans();
-        $result = $incidental->save();
-        if ($result) {
-            foreach ($teams as $team) {
+        try {
+            $invoice_datas = [];
+            if (empty($id)) {
+                // 插入杂费收款表
+                $incidental->save($data);
+            } else {
+                $incidental->save($data, ['id' => $id]);
+                // 删除原先数据
+                $order_ids = IncidentalOrder::where('incidental_id', $id)->column('id');
+                IncidentalOrder::where('incidental_id', $id)->delete();
+                Invoice::whereIn('rec_order_id', $order_ids)->delete();
+            }
+            foreach ($teams as $key => $team) {
                 $data = [
-                    'order_no' => 'OR' . uniqid(),
+                    'order_no' => 'ZFDD' . uniqid(),
                     'incidental_id' => $incidental->id,
                     'project' => $project,
                     'pay_type' => $pay_type,
@@ -90,17 +107,122 @@ class Incidental extends BaseController
                 if (true !== $result) {
                     return json(['code' => 401, 'message' => $result]);
                 }
-                $incidental = new IncidentalOrder();
-                $result = $incidental->save($data);
-                if (!$result) {
-                    return json(['code' => 404, 'message' => '保存失败']);
+                $incidental = new IncidentalOrder($data);
+                $incidental->save();
+                // 保存发票信息
+                $rec_order = RecOrder::where('team_id', $team['team_id'])->field('id')->find();
+                $invoice_data = Invoice::where('rec_order_id', $rec_order['id'])->find()->toArray();
+                if (empty($invoice_data)) {
+                    return json(['code' => 401, 'message' => '收款对象还未签约租赁合同']);
                 }
+                unset($invoice_data['id'],$invoice_data['create_time'],$invoice_data['update_time'],$invoice_data['open_time']);
+                $invoice_datas[$key] = $invoice_data;
+                $invoice_datas[$key]['invoice_no'] = 'IN' . uniqid();
+                $invoice_datas[$key]['sale_order_id'] = $incidental->id;
+                $invoice_datas[$key]['rec_order_id'] = $incidental->id;
+                $invoice_datas[$key]['price'] = $team['price'];
+                $invoice_datas[$key]['order_type'] = 2;
             }
+            $invoice->saveAll($invoice_datas);
             $incidental->commit();
             return json(['code' => 200, 'message' => '保存成功']);
-        } else {
-            return json(['code' => 404, 'message' => '保存失败']);
+        } catch (\Exception $e) {
+            $incidental->rollback(); // 事务回滚
+            return json(['code' => 404, 'message'=> '保存失败', 'data'=>$e->getMessage()]);
         }
+
+    }
+
+    /**
+     * 详细
+     */
+    public function detail()
+    {
+        $id = request()->param('id');
+        $data = [
+            'id' => $id,
+        ];
+        $result = $this->validate($data, 'Incidental.detail');
+        if (true !== $result) {
+            return json(['code' => 401, 'message' => $result]);
+        }
+        $detail = [];
+        $incidental = IncidentalModel::with('operator')->find($id);
+        $detail['incidental'] = $incidental;
+        unset($incidental['operator_id']);
+        $incidental_order = IncidentalOrder::with(['team','invoice' => function($query) {
+            return $query->where('order_type', '=', 2);
+        }])->field('')->where('incidental_id', $id)->select();
+        $order_info = [];
+        foreach ($incidental_order as $key => $value) {
+            unset($value['invoice']['rec_order_id']);
+            $order_info[$key]['price'] = $value['price'];
+            $order_info[$key]['team'] = $value['team'];
+            $order_info[$key]['invoice'] = $value['invoice'];
+        }
+        $detail['order_info'] = $order_info;
+//        dump($incidental_order);die;
+
+        return json(['code' => 200, 'message' => '获取成功', 'data' => $detail]);
+
+    }
+
+    public function process()
+    {
+        $order_id = request()->param('id');
+        $data = [
+            'id' => $order_id,
+        ];
+        $data = [];
+        // 审核流程
+        $incidental = IncidentalModel::with('operator')->find($order_id);
+        $creator['user'] = $incidental['operator']['nickname'];
+        $creator['dateline'] = $incidental['create_time'];
+        $creator['status'] = 0;
+        $data[] = $creator;
+        $run = db('tb_run')->where(['from_table' => 'incidental', 'from_id' => $order_id])->field('id,flow_id')->find();
+        $run_id = $run['id'];
+        $flow_id = $run['flow_id'];
+        $flow_process = db('tb_flow_process')->where('flow_id', $flow_id)->select();
+        foreach ($flow_process as $process) {
+            $run_process = db('tb_run_process')->where(['run_flow_process' => $process['id'], 'run_id' => $run_id])->find();
+            if ($run_process['status'] === 2) {
+                $run_log = db('tb_run_log')
+                    ->alias('l')
+                    ->leftJoin('tb_admin a', 'l.uid = a.id')
+                    ->field('a.nickname as user,l.dateline')
+                    ->find();
+                $run_log['dateline'] = date('Y-m-d H:i:s', $run_log['dateline']);
+                $run_log['status'] = 1;
+                $data[] = $run_log;
+            } elseif($run_process['status'] === 0) {
+                // 待审核(找出符合条件的审核人)
+                $run_process_data = [];
+                $run_process_data['user'] = $run_process['sponsor_text'];
+                $run_process_data['dateline'] = '';
+                $run_process_data['status'] = 2;
+                $data[] = $run_process_data;
+            } else {
+                $flow_process_data = [];
+                switch ($process['auto_person']) {
+                    case 4:
+                        $flow_process_data['user'] = $process['auto_sponsor_text'];
+                        break;
+                    case 5:
+                        $flow_process_data['user'] = $process['auto_role_text'];
+                        break;
+                    case 6:
+                        $flow_process_data['user'] = $process['auto_dept_text'];
+                        break;
+                }
+
+                $flow_process_data['dateline'] = '';
+                $flow_process_data['status'] = 2;
+                $data[] = $flow_process_data;
+            }
+        }
+        return json(['code' => 200, 'data' => $data]);
+
     }
 
 

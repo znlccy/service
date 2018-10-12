@@ -10,7 +10,7 @@ class Equipment extends BaseModel
 
     public function type()
     {
-        return $this->hasOne('Equipment', 'id', 'type_id');
+        return $this->hasOne('EquipmentType', 'id', 'type_id');
     }
 
     public function space()

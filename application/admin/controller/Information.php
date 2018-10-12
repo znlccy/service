@@ -26,6 +26,7 @@ class Information extends BaseController
     public function index()
     {
         // 获取参数
+        $id = request()->param('id');
         $page = config('page.pagination');
         $page_size = request()->param('page_size/d', $page['PAGE_SIZE']);
         $jump_page = request()->param('jump_page/d', $page['JUMP_PAGE']);
@@ -50,10 +51,23 @@ class Information extends BaseController
 
         /* 组合过滤条件 */
         $conditions = [];
-        if ($status || $status === 0) {
-            $conditions[] = ['status', '=', $status];
+        if (is_null($status)) {
+            $conditions[] = ['status', 'in',[0,1]];
+        } else {
+            switch ($status) {
+                case 0:
+                    $conditions[] = ['status', '=', $status];
+                    break;
+                case 1:
+                    $conditions[] = ['status', '=', $status];
+                    break;
+                default:
+                    break;
+            }
         }
-
+        if ($id) {
+            $conditions[] = ['id', '=', $id];
+        }
         if ($title) {
             $conditions[] = ['title', 'like', '%' . $title . '%'];
         }
@@ -94,7 +108,7 @@ class Information extends BaseController
         $publisher_id = session('admin.id');
         $publish_time = date('Y-m-d H:i:s', time());
         $rich_text     = request()->param('rich_text');
-
+        $status = request()->param('status', 0);
         /* 验证规则 */
         $data = [
             'id'           => $id,
@@ -102,6 +116,7 @@ class Information extends BaseController
             'publisher'    => $publisher_id,
             'publish_time' => $publish_time,
             'rich_text'     => $rich_text,
+            'status' => $status
         ];
         $result   = $this->validate($data, 'Information');
         if (true !== $result) {

@@ -20,12 +20,12 @@ class Workplace extends Validate
         'space_id' => 'require|number',
         'type' => 'require|number',
         'group_id' => 'require|number',
-        'enter_team_id' => 'require|number',
+//        'enter_team_id' => 'require|number',
         'price' => 'require|float',
         'status' => 'require|number',
         'deadline' => 'require|date',
         'total_area' => 'requireIf:type,1|float',
-        'residual_area' => 'requireIf:type,1|float'
+//        'residual_area' => 'requireIf:type,1|float'
     ];
 
     /**
@@ -42,12 +42,12 @@ class Workplace extends Validate
         'space_id' => '所属空间id',
         'type' => '工位类型',
         'group_id' => '分组id',
-        'enter_team_id' => '租赁团队',
+//        'enter_team_id' => '租赁团队',
         'price' => '租赁价格',
         'status' => '状态',
         'deadline' => '到期时间',
         'total_area' => '工位面积',
-        'residual_area' => '剩余面积'
+//        'residual_area' => '剩余面积'
     ];
 
     /**

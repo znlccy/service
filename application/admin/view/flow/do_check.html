@@ -57,25 +57,12 @@
 				</span>
 				</th>
 				</tr>
-				<tr style='display:none' id='sing_process'>
-				<th style='width:30px'>会签步骤</th>
-				<th>
-					<span class="select-box">
-					<select name="wf_singflow" id='singflow'  class="select"  datatype="*" >
-					<option value="">请选择会签人</option>
-					{volist name='$flowinfo.singuser' id='sing'}
-					<option value="{$sing.id}">{$sing.username}</option>
-					{/volist}
-					</select>
-				
-				</th>
-				</tr>
 				<tr>
 				<td colspan=2 class='text-c'>
 				<input id='submit_to_save' name='submit_to_save' value='' type='hidden'>
 				<input id='upload' name='art' value='' type='hidden'>
 				<input  name='sing_st' value='{$flowinfo.sing_st}' type='hidden'>
-					<a class="btn btn-primary radius" id='nexbton' onclick='tj("ok")' >提交</a> 
+					<a class="btn btn-primary radius" id='nexbton' onclick='tj("ok")' >通过</a>
 					<a class="btn btn-primary radius" id='backbton' onclick='tj("back")'value='back' >回退</a>
 					<!--<a class="btn btn-primary radius" id='bupload'onclick="layer_show('上传','{:url(\'upindex\', [\'id\' => \'upload\'])}','140','160')">附件</a>-->
 				</td>

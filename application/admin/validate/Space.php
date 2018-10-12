@@ -24,8 +24,8 @@ class Space extends Validate
         'short_name' => 'require|max:20',
         'address' => 'require|max:100',
         'short_description' => 'require|max:100',
-        'position_picture' => 'require|max:100',
-        'space_picture' => 'require|max:255',
+        'position_picture' => 'max:100',
+        'space_picture' => 'max:255',
     ];
     
     /**

@@ -9,7 +9,7 @@ use app\admin\model\Space;
 use app\admin\model\OrderWorkplace;
 use app\admin\model\Contract;
 
-class Workplace extends BaseController
+class Workplace extends Controller
 {
     /**
      * 工位列表
@@ -24,7 +24,7 @@ class Workplace extends BaseController
         $type = request()->param('type/d',0);
         $id = request()->param('id/d');
         $workplace_no= request()->param('workplace_no');
-        $status = request()->param('status/d');
+        $status = request()->param('status');
 
         // 验证参数
         $data = [
@@ -47,16 +47,34 @@ class Workplace extends BaseController
         if ($workplace_no) {
             $conditions[] = ['workplace_no', 'like', '%' . $workplace_no . '%'];
         }
-        if ($status || $status === 0) {
-            $conditions[] = ['status', '=', $status];
+        if (is_null($status)) {
+            $conditions[] = ['status', 'in',[0,1]];
+        } else {
+            switch ($status) {
+                case 0:
+                    $conditions[] = ['status', '=', $status];
+                    break;
+                case 1:
+                    $conditions[] = ['status', '=', $status];
+                    break;
+                default:
+                    break;
+            }
         }
         $conditions[] = ['type', '=', $type];
         $workplace = WorkplaceModel::with(['workplaceGroup' => function($query) {
             $query->field('id,name');
-        }])->where($conditions)
+        }, 'enterTeam', 'space'])->where($conditions)
             ->order('id')
             ->paginate($page_size, false, ['page' => $jump_page])
             ->each(function($item) {
+                if ($item['type'] === 1){
+                    $use_area = OrderWorkplace::where('workplace_id', $item['id'])->sum('workplace_area');
+                    $item['residual_area'] = (string)($item['total_area'] - $use_area);
+                } else {
+                    unset($item['total_area']);
+                }
+                unset($item['enter_team_id']);
                 unset($item['group_id']);
                 return $item;
             });
@@ -80,7 +98,6 @@ class Workplace extends BaseController
         $status = request()->param('status/d', 0);
         $deadline = request()->param('deadline');
         $total_area = request()->param('total_area');
-        $residual_area = request()->param('residual_area', $total_area);
 
         $data = [
             'id' => $id,
@@ -97,7 +114,6 @@ class Workplace extends BaseController
             // 按面积租赁
             $new_data = [
                 'total_area' => $total_area,
-                'residual_area' => $residual_area
             ];
             // 验证
             $data = array_merge($data,$new_data);
@@ -155,34 +171,43 @@ class Workplace extends BaseController
         $workplace = WorkplaceModel::where($data)
             ->with(['space','workplaceGroup'])
             ->field("enter_team_id,create_time,update_time",true)
-            ->find();
+            ->find()
+            ->toArray();
         if ($workplace) {
+            $use_area = OrderWorkplace::where('workplace_id', $id)->sum('workplace_area');
             $lease = [];
             // 按面积工位详情
-            if ($workplace->type == 1) {
+            if ($workplace['type'] == 1) {
+                $workplace['residual_area'] = (string)($workplace['total_area'] - $use_area);
                 // 获取租赁信息
                 $order_workplace = OrderWorkplace::where(['workplace_id' => $id])
                     ->with('order.team')
                     ->select();
                 foreach ($order_workplace as $value) {
-                    $contract = Contract::where('order_no',$value->order->order_no)
-                        ->field("id,contract_no,effective_time,failure_time")
+                    $contract = Contract::where('order_id',$value->order->id)
+                        ->field("id,contract_no,begin_time,end_time")
                         ->find();
                     $lease['pay_type'] = $value->order->pay_type;
+                    $lease['area'] = $value->workplace_area;
                     $lease['contract'] = $contract;
                     $lease['team'] = $value->order->team;
+                    $lease['pay_type'] = $value->order->pay_type;
                 }
             } else {
                 // 按个租赁详情
                 $order_workplace = OrderWorkplace::where(['workplace_id' => $id])
                     ->with('order,order.team')
                     ->find();
-                $contract = Contract::where('order_no',$order_workplace->order->order_no)
-                    ->field("id,contract_no,effective_time,failure_time")
-                    ->find();
-                $lease['pay_type'] = $order_workplace->order->pay_type;
-                $lease['contract'] = $contract;
-                $lease['team'] = $order_workplace->order->team;
+                if ($order_workplace) {
+                    $contract = Contract::where('order_id',$order_workplace->order->id)
+                        ->field("id,contract_no,begin_time,end_time")
+                        ->find();
+                    $lease['pay_type'] = $order_workplace->order->pay_type;
+                    $lease['contract'] = $contract;
+                    $lease['team'] = $order_workplace->order->team;
+                    $lease['pay_type'] = $order_workplace->order->pay_type;
+                }
+                unset($workplace['total_area']);
             }
 //            return json(['lease'=>$lease_data]);
             return json(['code' => 200, 'message' => '获取详情成功!', 'data' => ['workplace' => $workplace, 'lease' => $lease]]);
@@ -221,12 +246,23 @@ class Workplace extends BaseController
     public function select()
     {
         $space_id = request()->param('space_id/d');
+        $type = request()->param('type');
         if (empty($space_id)) {
             $space = Space::field('id,name')->select();
             return json(['code' => 200, 'message' => '获取空间列表成功', 'data' => $space]);
         } else {
-            $workplace = WorkplaceModel::where(['status' => 0])->whereOr('residual_area','>', 0)->field('id,workplace_no,type,price')->select();
-            return json(['code' => 200, 'message' => '获取工位列表成功', 'data' => $workplace]);
+            $workplaces = WorkplaceModel::where(['status' => 0, 'space_id' => $space_id, 'type' => $type])->field('id,workplace_no,type,total_area,price')->select();
+            $data = [];
+            foreach ($workplaces as $workplace) {
+                if ($workplace['type'] === 1){
+                    $use_area = OrderWorkplace::where('workplace_id', $workplace['id'])->sum('workplace_area');
+                    $max_area = $workplace['total_area'] - $use_area;
+                    $workplace['max_area'] = $max_area;
+                }
+                unset($workplace['total_area']);
+                $data[] = $workplace;
+            }
+            return json(['code' => 200, 'message' => '获取工位列表成功', 'data' => $data]);
         }
     }
 }

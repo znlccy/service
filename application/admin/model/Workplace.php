@@ -8,7 +8,7 @@ class Workplace extends BaseModel
 {
     protected $table = 'tb_workplace';
 
-    public function workplaceGroup() 
+    public function workplaceGroup()
     {
         return $this->hasOne('WorkplaceGroup', 'id', 'group_id')->field('id,name');
     }
@@ -18,15 +18,9 @@ class Workplace extends BaseModel
 		return $this->hasOne('Space', 'id', 'space_id')->field('id,name,address');
     }
 
-    public function getTotalAreaAttr($value)
+    public function enterTeam()
     {
-        $value = (float)$value .'㎡';
-        return $value;
+        return $this->hasOne('EnterTeam', 'id', 'enter_team_id')->field('id,company');
     }
 
-    public function getResidualAreaAttr($value)
-    {
-        $value = (float)$value .'㎡';
-        return $value;
-    }
 }

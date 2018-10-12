@@ -6,7 +6,7 @@ use think\Controller;
 use think\Request;
 use app\admin\model\Repair as RepairModel;
 
-class Repair extends BaseController
+class Repair extends Controller
 {
     /**
      * 显示资源列表
@@ -134,6 +134,38 @@ class Repair extends BaseController
             return json(['code' => 200, 'message' => '删除成功!']);
         } else {
             return json(['code' => 404, 'message' => '删除失败!']);
+        }
+    }
+
+    /**
+     * 报修审核
+     *
+     */
+    public function check()
+    {
+        $id = request()->param('id');
+        $user = session('admin');
+        $check_user = $user['id'];
+        $check_time = date('Y-m-d H:i:s', time());
+        $remark = request()->param('remark');
+        $status = request()->param('status/d');
+        /* 验证 */
+        $data = [
+            'id' => $id,
+            'status' => $status,
+            'remark' => $remark,
+            'check_user' => $check_user,
+            'check_time' => $check_time
+        ];
+        $result   = $this->validate($data, 'Repair.check');
+        if (true !== $result) {
+            return json(['code' => 401, 'message' => $result]);
+        }
+        $repair = RepairModel::update($data);
+        if ($repair) {
+            return json(['code' => 200, 'message' => '审核成功']);
+        } else {
+            return json(['code' => 404, 'message' => '审核失败']);
         }
     }
 }

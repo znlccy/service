@@ -296,6 +296,7 @@ $(function(){
             ajaxPost:true,
             showAllError:true,
             callback:function(ret){
+                console.log(ret);
                 if(ret.code == 0){
                     layer.msg(ret.msg,{icon:1,time: 1500},function(){
                         parent.location.reload(); // 父页面刷新

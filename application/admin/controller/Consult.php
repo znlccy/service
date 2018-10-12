@@ -12,8 +12,9 @@ namespace app\admin\controller;
 use think\App;
 use app\admin\model\ConsultPolicy as ConsultPolicyModel;
 use app\admin\validate\Consult as ConsultValidate;
+use think\Controller;
 
-class Consult extends BaseController {
+class Consult extends Controller {
 
     /* 声明咨询政策模型 */
     protected $consult_policy_model;
@@ -69,7 +70,7 @@ class Consult extends BaseController {
         $result = $this->validate($validate_data, 'Consult.index');
         if (true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -97,10 +98,10 @@ class Consult extends BaseController {
         } else {
             switch ($status) {
                 case 0:
-                    $conditions['status'] = $status;
+                    $conditions[] = ['status', '=', $status];
                     break;
                 case 1:
-                    $conditions['status'] = $status;
+                    $conditions[] = ['status', '=', $status];
                     break;
                 default:
                     break;
@@ -120,13 +121,13 @@ class Consult extends BaseController {
 
         if ($consult_entry) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '查询信息成功',
                 'data'      => $consult_entry
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '查询信息失败，数据不存在',
             ]);
         }
@@ -141,6 +142,17 @@ class Consult extends BaseController {
         $status = request()->param('status', 1);
         $type_id = 1;
         $publisher = session('admin.mobile');
+        $rich_text = request()->param('rich_text');
+        $picture = request()->file('picture');
+
+        /* 移动图片 */
+        if ($picture) {
+            $info = $picture->move(ROOT_PATH . 'public' . DS . 'images');
+            if ($info) {
+                $sub_path = str_replace('\\', '/', $info->getSaveName());
+                $picture = '/images/' . $sub_path;
+            }
+        }
 
         //验证数据
         $validate_data = [
@@ -149,14 +161,16 @@ class Consult extends BaseController {
             'content'   => $content,
             'status'    => $status,
             'type_id'   => $type_id,
-            'publisher' => $publisher
+            'publisher' => $publisher,
+            'rich_text' => $rich_text,
+            'picture'   => $picture
         ];
 
         //验证结果
         $result = $this->validate($validate_data, 'Consult.save');
         if(true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -165,17 +179,20 @@ class Consult extends BaseController {
         if (empty($id)) {
             $operation = $this->consult_policy_model->save($validate_data);
         } else {
+            if (empty($picture)) {
+                unset($validate_data['picture']);
+            }
             $operation = $this->consult_policy_model->save($validate_data, ['id' => $id]);
         }
 
         if ($operation) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '数据操作成功'
             ]);
         } else {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => '数据操作失败'
             ]);
         }
@@ -196,7 +213,7 @@ class Consult extends BaseController {
         $result = $this->validate($validate_data, 'Consult.detail');
         if (true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -205,17 +222,17 @@ class Consult extends BaseController {
         $consult = $this->consult_policy_model
             ->where('id', $id)
             ->where('type_id = 1')
-            ->field('id,title,content,status,publisher,create_time,update_time')
+            ->field('id,title,content,picture,rich_text,status,publisher,create_time,update_time')
             ->find();
         if ($consult) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '查询信息成功',
                 'data'      => $consult
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '查询信息失败，数据库中不存在',
             ]);
         }
@@ -235,7 +252,7 @@ class Consult extends BaseController {
         $result = $this->validate($validate_data, 'Consult.delete');
         if (true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -247,12 +264,12 @@ class Consult extends BaseController {
             ->delete();
         if ($consult) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '删除信息成功'
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '删除信息失败，数据库中不存在',
             ]);
         }

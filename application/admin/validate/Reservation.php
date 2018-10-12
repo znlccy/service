@@ -17,10 +17,11 @@ class Reservation extends Validate
         'venue_id' => 'require|number',
         'enter_team_id' => 'require|number',
         'date' => 'require|date',
-        'reservation_time' => 'require',
+        'reservation_time' => 'require|array',
         'check_user' => 'number',
         'check_time' => 'date',
-        'status' => 'require|number'
+        'status' => 'require|number',
+        'remark' => 'requireIf:status,2'
     ];
 
     /**
@@ -38,14 +39,14 @@ class Reservation extends Validate
         'reservation_time' => '预约时间段',
         'check_user' => '审核人',
         'check_time' => '审核时间',
-        'status' => '状态'
+        'status' => '状态',
+        'remark' => '拒绝理由'
     ];
 
     //验证场景
     public function sceneIndex()
     {
         return $this->only(['page_size', 'jump_page', 'venue_id', 'date'])
-            ->remove('venue_id', 'require')
             ->remove('date', 'require');
     }
 
@@ -63,7 +64,7 @@ class Reservation extends Validate
 
     public function sceneCheck()
     {
-        return $this->only(['id', 'status', 'check_user', 'check_time' => 'require|date'])
+        return $this->only(['id', 'status', 'check_user', 'check_time', 'remark'])
             ->append('id', 'require')
             ->append('check_user', 'require')
             ->append('check_time', 'require');

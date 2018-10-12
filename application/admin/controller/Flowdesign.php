@@ -1,9 +1,10 @@
 <?php
 namespace app\admin\Controller;
-use app\common\controller\admin;
+//use app\common\controller\admin;
 use think\Controller;
 use think\Db;
 use app\admin\controller\Department;
+use app\admin\model\Admin;
 
 class Flowdesign extends Controller {
 	/**
@@ -390,12 +391,12 @@ class Flowdesign extends Controller {
     public function save_attribute()
     {
         $flow_id = intval(input('post.flow_id'));//流程ID
-		$process_id = intval(input('post.process_id'));//步骤ID
+        $process_id = intval(input('post.process_id'));//步骤ID
         $process_name = trim(input('post.process_name'));//步骤名称
         $process_type = trim(input('post.process_type'));//类型
-		$auto_person = intval(input('post.auto_person'));//自动选人
-		$process_to = ids_parse(input('post.process_to/a'));//下一步
-		$auto_unlock = intval(input('post.auto_unlock'));//>预先设置自动选人，更方便转交工作
+        $auto_person = intval(input('post.auto_person'));//自动选人
+        $process_to = ids_parse(input('post.process_to/a'));//下一步
+        $auto_unlock = intval(input('post.auto_unlock'));//>预先设置自动选人，更方便转交工作
 		$auto_sponsor_ids = trim(input('post.auto_sponsor_ids'));//指定主办人
         $auto_sponsor_text = trim(input('post.auto_sponsor_text'));
         $auto_respon_ids = trim(input('post.auto_respon_ids'));//指定经办人
@@ -422,6 +423,7 @@ class Flowdesign extends Controller {
        $process_condition =  trim(input('post.process_condition'),',');//process_to
        $process_condition = explode(',',$process_condition);
        $out_condition = array();
+
        foreach($process_condition as $value)
        {
            $value = intval($value);
@@ -532,7 +534,16 @@ class Flowdesign extends Controller {
 	//用户选择控件
     public function super_user()
     {
-		$this->assign('user',db('tb_admin')->field('id,nickname as username')->select());
+        $operation_team_id = session('admin.operation_team_id');
+        $user = Admin::where('operation_team_id',$operation_team_id)->with('department')->field('id,department_id,nickname as username')->select()->toArray();
+		$data = [];
+		foreach ($user as $value) {
+		    if($value['department_id'] === 0) {
+		        $value['department'] = ['id' => 0, 'name' => '公司'];
+            }
+            $data[] = $value;
+        }
+        $this->assign('user',$data);
 		
 		$this->assign('kid',input('kid'));
         return $this->fetch();
@@ -540,26 +551,29 @@ class Flowdesign extends Controller {
 	//角色选择控件
     public function super_role()
     {
-		$this->assign('role',db('tb_role')->field('id,name as username')->select());
+        $operation_team_id = session('admin.operation_team_id');
+		$this->assign('role',db('tb_role')->where('operation_team_id',$operation_team_id)->field('id,name as username')->select());
         return $this->fetch();
     }
     //部门选择控件
     public function super_department()
     {
-        $department = db('tb_department')->field('id,name as username')->select();
+        $operation_team_id = session('admin.operation_team_id');
+        $department = db('tb_department')->where('operation_team_id',$operation_team_id)->field('id,name as username')->select();
 //        $list = Department::generateTree($department);
-        $this->assign('department',db('tb_department')->field('id,name as username')->select());
+        $this->assign('department',db('tb_department')->where('operation_team_id',$operation_team_id)->field('id,name as username')->select());
         return $this->fetch();
     }
 	public function super_get()
 	{
+        $operation_team_id = session('admin.operation_team_id');
 		 $type = trim(input('type'));
 		 if($type=='user'){
-			$info =  db('tb_admin')->where('nickname','like','%'.input('key').'%')->field('id as value,nickname as text')->select();
+			$info =  db('tb_admin')->where('operation_team_id',$operation_team_id)->where('nickname','like','%'.input('key').'%')->field('id as value,nickname as text')->select();
 		 }elseif($type=='role'){
-			 $info =  db('tb_role')->where('name','like','%'.input('key').'%')->field('id as value,name as text')->select();
+			 $info =  db('tb_role')->where('operation_team_id',$operation_team_id)->where('name','like','%'.input('key').'%')->field('id as value,name as text')->select();
 		 }else{
-             $info =  db('tb_department')->where('name','like','%'.input('key').'%')->field('id as value,name as text')->select();
+             $info =  db('tb_department')->where('operation_team_id',$operation_team_id)->where('name','like','%'.input('key').'%')->field('id as value,name as text')->select();
          }
 		 return ['data'=>$info,'code'=>1,'msg'=>'查询成功！'];
 	}

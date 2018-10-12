@@ -52,8 +52,8 @@ class Service extends BaseController {
         $validate_start = $this->request->param('validate_start');
         $validate_end = $this->request->param('validate_end');
         $publisher = $this->request->param('publisher');
-        $page_size = $this->request->param('page_size', $this->service_page['PAGE_SIZE']);
-        $jump_page = $this->request->param('jump_page', $this->service_page['JUMP_PAGE']);
+        $page_size = $this->request->param('page_size/d', $this->service_page['PAGE_SIZE']);
+        $jump_page = $this->request->param('jump_page/d', $this->service_page['JUMP_PAGE']);
 
         /* 验证数据 */
         $validate_data = [

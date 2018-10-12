@@ -67,6 +67,7 @@ class Space extends BaseController
         $short_name = request()->param('short_name');
         $address = request()->param('address');
         $short_description = request()->param('short_description');
+        $description = request()->param('description');
         $position_picture = request()->file('position_picture');
         $space_pictures = request()->file('space_pictures');
         if ($position_picture) {
@@ -98,6 +99,10 @@ class Space extends BaseController
         if ($space_pictures) {
             $arr_space_picture = [];
             foreach ($space_pictures as $space_picture) {
+                $i = 0;
+                if ($i > 6) {
+                    return json(['code' => 401, 'message' => '空间图片最多上传6张']);
+                }
                 $info = $space_picture->move(ROOT_PATH . 'public' . DS . 'images');
                 if ($info) {
                     //成功上传后，获取上传信息
@@ -122,6 +127,7 @@ class Space extends BaseController
                     $sub_path     = str_replace('\\', '/', $info->getSaveName());
                     $arr_space_picture[] = '/images/' . $sub_path;
                 }
+                $i++;
             }
             $space_pictures = json_encode($arr_space_picture);
         }
@@ -136,6 +142,7 @@ class Space extends BaseController
             'short_name' => $short_name,
             'address' => $address,
             'short_description' => $short_description,
+            'description' => $description,
             'position_picture' => $position_picture,
             'space_pictures' => $space_pictures
         ];
@@ -147,6 +154,12 @@ class Space extends BaseController
             $space = new SpaceModel();
             $result = $space->save($data);
         } else {
+            if (empty($position_picture)) {
+                unset($data['position_picture']);
+            }
+            if (empty($space_pictures)) {
+                unset($data['space_pictures']);
+            }
             $space = new SpaceModel();
             $result = $space->save($data, ['id' => $id]);
         }
@@ -175,9 +188,10 @@ class Space extends BaseController
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
-        $detail = SpaceModel::where('id', $id)->find();
+        $detail = SpaceModel::with(['operationTeam','province','city','district'])->where('id', $id)->find();
 
         if ($detail) {
+            unset($detail['operation_team_id'],$detail['province_id'],$detail['city_id'],$detail['district_id']);
             return json(['code' => 200, 'message' => '获取详情成功!', 'data' => $detail]);
         } else {
             return json(['code' => 404, 'message' => '获取详情失败!']);

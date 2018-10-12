@@ -17,14 +17,15 @@ class Contract extends Validate
         'page_size' => 'number',
         'jump_page' => 'number',
         'contract_no' => 'require|max:20',
-        'order_no' => 'require',
+        'order_id' => 'require',
         'contract_template_no' => 'require',
         'operator_id' => 'require|number',
-        'custom_content' => 'require',
+//        'custom_content' => 'require',
         'status' => 'require|number',
-        'effective_time' => 'require|date',
-        'failure_time' => 'require|date',
+        'begin_time' => 'require|date',
+        'end_time' => 'require|date',
         'sign_date' => 'date',
+        'scan' => 'max:255'
     ];
 
     /**
@@ -37,14 +38,15 @@ class Contract extends Validate
         'page_size' => '每页数量',
         'jump_page' => '页码',
         'contract_no' => '合同编号',
-        'order_no' => '合同关联的订单编号',
+        'order_id' => '合同关联订单id',
         'contract_template_no' => '合同关联的模板编号',
-        'custom_content' => '合同自定义列表',
+//        'custom_content' => '合同自定义列表',
         'operator_id' => '创建者',
         'status' => '状态',
-        'effective_time' => '生效时间',
-        'failure_time' => '过期时间',
-        'sign_date' => '签署日期'
+        'begin_time' => '起租时间',
+        'end_time' => '过期时间',
+        'sign_date' => '签署日期',
+        'scan' => '扫描件'
     ];
 
     public function sceneIndex()
@@ -74,8 +76,9 @@ class Contract extends Validate
 
     public function sceneSigning()
     {
-        return $this->only(['id', 'sign_date'])
-            ->append('id', 'require');
+        return $this->only(['id', 'sign_date', 'scan'])
+            ->append('id', 'require')
+            ->append('scan', 'require');
     }
 
 }

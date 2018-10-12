@@ -17,7 +17,7 @@ class Department extends Validate
         'name' => 'require|max:30',
         'p_id' => 'number',
         'description' => 'require',
-        'ids' => 'array'
+        'id' => 'number'
     ];
 
     /**
@@ -60,7 +60,7 @@ class Department extends Validate
 
     public function sceneLeader()
     {
-        return $this->only(['ids'])
-            ->append('ids','require');
+        return $this->only(['id'])
+            ->append('id','require');
     }
 }

@@ -47,6 +47,7 @@ class ContractTemplate extends BaseController
             $conditions[] = ['status', '=', $status];
         }
         $template = ContractTemplateModel::where($conditions)
+            ->with('operator')
             ->order('id')
             ->paginate($page_size, false, ['page' => $jump_page]);
         return json(['code'=> 200, 'message' => '获取列表成功', 'data' => $template]);
@@ -64,6 +65,7 @@ class ContractTemplate extends BaseController
         $name = request()->param('name');
         $remark = request()->param('remark');
         $rich_text = request()->param('rich_text');
+        $content = request()->param('content');
         $template_no = 'CT' . uniqid();
         $operator_id = session('admin.id');
         $status = request()->param('status', 1);
@@ -72,6 +74,7 @@ class ContractTemplate extends BaseController
             'name' => $name,
             'remark' => $remark,
             'rich_text' => $rich_text,
+            'content' => $content,
             'template_no' => $template_no,
             'operator_id' => $operator_id,
             'status' => $status,
@@ -93,6 +96,7 @@ class ContractTemplate extends BaseController
                 'template_id' => $history->id,
                 'remark' => $history->remark,
                 'rich_text' => $history->rich_text,
+                'content' => $history->content,
                 'editor' => $history->operator_id,
                 'status' => $history->status,
             ];
@@ -168,7 +172,7 @@ class ContractTemplate extends BaseController
      */
     public function select()
     {
-        $template = ContractTemplateModel::where('status', 1)->field('template_no,name,rich_text')->select();
+        $template = ContractTemplateModel::where('status', 1)->select();
         if ($template) {
             return json(['code' => 200, 'message' => '获取列表成功', 'data' => $template]);
         } else {

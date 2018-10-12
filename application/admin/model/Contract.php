@@ -14,7 +14,18 @@ class Contract extends BaseModel
      */
     public function template()
     {
-        return $this->hasOne('ContactTemplate', 'template_no', 'contact_template_no');
+        return $this->hasOne('ContractTemplate', 'template_no', 'contract_template_no');
+    }
+
+    public function getContractTemplateNoAttr($value)
+    {
+        $template = ContractTemplate::where('template_no', $value)->field('id,name,template_no')->find();
+        if ($template) {
+            return $template;
+        } else {
+            $template = HistoryTemplate::where('template_no', $value)->field('id,name,template_no')->find();
+            return $template;
+        }
     }
 
     /**
@@ -23,7 +34,7 @@ class Contract extends BaseModel
      */
     public function order()
     {
-        return $this->hasOne('Order', 'order_no', 'order_no');
+        return $this->hasOne('Order', 'id', 'order_id')->field('id,order_no');
     }
 
     /**

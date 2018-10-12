@@ -17,6 +17,7 @@ class ContractTemplate extends Validate
         'name' => 'require|max:50',
         'remark' => 'require',
         'rich_text' => 'require',
+        'content' => 'array',
         'template_no' => 'require|unique:tb_contract_template',
         'operator_id' => 'require|number',
         'status' => 'require|number',

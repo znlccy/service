@@ -85,7 +85,7 @@ class Activity extends Controller {
         $result = $this->validate($validate_data, 'Activity.index');
         if (!$result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -163,13 +163,13 @@ class Activity extends Controller {
 
         if ($activity) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '查询数据成功',
                 'data'      => $activity
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '查询数据失败'
             ]);
         }
@@ -225,7 +225,7 @@ class Activity extends Controller {
         //验证结果
         $result   = $this->validate($validate_data, 'Activity.save');
         if (!$result) {
-            return json(['code' => '401', 'message' => $result]);
+            return json(['code' => 401, 'message' => $result]);
         }
 
         //返回结果
@@ -238,10 +238,10 @@ class Activity extends Controller {
             $result = $this->activity_model->save($validate_data);
         }
         if ($result) {
-            $data = ['code' => '200', 'message' => '保存成功!'];
+            $data = ['code' => 200, 'message' => '保存成功!'];
             return json($data);
         } else {
-            $data = ['code' => '404', 'message' => '保存失败!'];
+            $data = ['code' => 404, 'message' => '保存失败!'];
             return json($data);
         }
     }
@@ -260,7 +260,7 @@ class Activity extends Controller {
         $result = $this->validate($validate_data, 'Activity.detail');
         if (!$result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -269,13 +269,13 @@ class Activity extends Controller {
         $service = $this->activity_model->where('id', $id)->find();
         if ($service) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '查询数据成功',
                 'data'      => $service
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '查询数据失败,数据不存在'
             ]);
         }
@@ -295,7 +295,7 @@ class Activity extends Controller {
         $result = $this->validate($validate_data, 'Activity.delete');
         if (!$result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -304,12 +304,12 @@ class Activity extends Controller {
         $delete = $this->activity_model->where('id', $id)->delete();
         if ($delete) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '删除数据成功'
             ]);
         } else {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => '删除数据失败'
             ]);
         }
@@ -335,7 +335,7 @@ class Activity extends Controller {
         //验证结果
         $result   = $this->validate($data, 'Activity.apply_entry');
         if (!$result) {
-            return json(['code' => '401', 'message' => $result]);
+            return json(['code' => 401, 'message' => $result]);
         }
 
         //返回数据
@@ -345,9 +345,9 @@ class Activity extends Controller {
             -> field('au.user_id, u.mobile, au.activity_id, au.status, au.apply_time, u.mobile, u.email, u.industry, u.occupation, u.company')
             ->paginate($page_size, false, ['page' => $jump_page]);
         if ($result) {
-            return json(['code' => '200', 'message' => '查询成功', 'data' => $activity_data]);
+            return json(['code' => 200, 'message' => '查询成功', 'data' => $activity_data]);
         } else {
-            return json(['code' => '404', 'message' => '查询失败']);
+            return json(['code' => 404, 'message' => '查询失败']);
         }
 
     }
@@ -368,15 +368,15 @@ class Activity extends Controller {
         //验证结果
         $result   = $this->validate($data, 'Activity.auditor');
         if (!$result) {
-            return json(['code' => '401', 'message' => $result]);
+            return json(['code' => 401, 'message' => $result]);
         }
 
         //返回结果
         $activity_data = $this->user_activity_model->save($data,['activity_id' => $activity_id]);
         if ($activity_data) {
-            return json(['code' => '200', 'message' => '审核通过']);
+            return json(['code' => 200, 'message' => '审核通过']);
         } else {
-            return json(['code' => '404', 'message' => '审核失败']);
+            return json(['code' => 404, 'message' => '审核失败']);
         }
     }
 

@@ -37,8 +37,8 @@ class Group extends BaseController {
         $create_end = $this->request->param('create_end');
         $update_start = $this->request->param('update_start');
         $update_end = $this->request->param('update_end');
-        $page_size = $this->request->param('page_size', $this->group_page['PAGE_SIZE']);
-        $jump_page = $this->request->param('jump_page', $this->group_page['JUMP_PAGE']);
+        $page_size = $this->request->param('page_size/d', $this->group_page['PAGE_SIZE']);
+        $jump_page = $this->request->param('jump_page/d', $this->group_page['JUMP_PAGE']);
 
         /* 验证数据 */
         $validate_data = [

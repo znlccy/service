@@ -15,8 +15,8 @@ class WorkplaceGroup extends BaseController
     public function index()
     {
         $page = config('pagination');
-        $page_size = request()->param('page_size', $page['PAGE_SIZE']);
-        $jump_page = request()->param('jump_page', $page['JUMP_PAGE']);
+        $page_size = request()->param('page_size/d', $page['PAGE_SIZE']);
+        $jump_page = request()->param('jump_page/d', $page['JUMP_PAGE']);
         $name = request()->param('name');
         $id = request()->param('id');
 
@@ -124,6 +124,19 @@ class WorkplaceGroup extends BaseController
             return json(['code' => 200, 'message' => '删除成功!']);
         } else {
             return json(['code' => 404, 'message' => '删除失败!']);
+        }
+    }
+
+    /**
+     * 分组下拉
+     */
+    public function select()
+    {
+        $group = WorkplaceGroupModel::field('id,name')->select();
+        if (!empty($group)) {
+            return json(['code' => 200, 'message' => '获取下拉列表成功', 'data' => $group]);
+        } else {
+            return json(['code' => 404, 'message' => '获取下拉列表失败']);
         }
     }
 }

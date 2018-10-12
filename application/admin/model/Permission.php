@@ -25,4 +25,9 @@ class Permission extends BaseModel {
      */
     protected $table = 'tb_permission';
 
+    public function getCreateTimeAttr($value)
+    {
+        return date('Y-m-d H:i:s', $value);
+    }
+
 }

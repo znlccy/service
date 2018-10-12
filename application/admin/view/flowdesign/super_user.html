@@ -18,7 +18,7 @@
 			 <select name="dialog_searchable" id="dialog_searchable" multiple="multiple" style="display:none;">
            <!--  <option value="all">【全部】</option> -->
 			{volist name='user' id='k'}
-            <option value="{$k.id}" >{$k.username}</option>
+            <option value="{$k.id}" >{$k.department.name}---{$k.username}</option>
 			{/volist}
         </select>
 			</td></tr>

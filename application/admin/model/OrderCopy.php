@@ -15,6 +15,6 @@ class OrderCopy extends BaseModel
 
     public function user()
     {
-        return $this->hasOne('Admin', 'id', 'user_id');
+        return $this->hasOne('Admin', 'id', 'user_id')->field('id,nickname');
     }
 }

@@ -20,13 +20,14 @@ class Order extends Validate
         'contract_template_no' => 'require|max:20',
         'contract_years' => 'require',
         'pay_type' => 'require|number',
-        'deposit' => 'require|number',
+        'deposit' => 'require|float',
         'discount' => 'number',
         'remark' => 'require|max:255',
-        'total_price' => 'require|number',
+        'workplaces' => 'require|array',
+//        'total_price' => 'require|float',
         'operator_id' => 'require|number',
         'status' => 'require|number',
-        'invoice_no' => 'require|max:20',
+//        'invoice_no' => 'require|max:20',
     ];
 
     /**
@@ -38,7 +39,7 @@ class Order extends Validate
     protected $field = [
         'id' => '主键id',
         'order_no' => '订单编号',
-        'team_id' => '团队id',
+        'team_id' => '入驻团队id',
         'contract_template_no' => '合同模板编号',
         'contract_years' => '合同年限',
         'pay_type' => '支付方式',
@@ -48,7 +49,8 @@ class Order extends Validate
         'total_price' => '总计金额',
         'operator_id' => '创建人',
         'status' => '状态',
-        'invoice_no' => '发票编号',
+        'workplaces' => '工位信息'
+//        'invoice_no' => '发票编号',
     ];
 
     // 验证场景

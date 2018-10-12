@@ -19,6 +19,7 @@ class Venue extends Validate
         'space_id' => 'require|number',
         'accommodate_num' => 'require|number',
         'remark' => 'require',
+        'disable_time' => 'array',
         'status' => 'require|number',
     ];
 
@@ -34,6 +35,7 @@ class Venue extends Validate
         'id' => '场馆id',
         'venue_no' => '场馆编号',
         'name' => '场馆名称',
+        'disable_time' => '禁用时间段',
         'space_id' => '所属空间',
         'accommodate_num' => '容纳人数',
         'remark' => '备注',

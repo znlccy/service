@@ -14,7 +14,8 @@ class Incidental extends Validate
      */
     protected $rule = [
         'id' => 'number',
-        'project' => 'require|max:50|unique:tb_incidental_order',
+        'project' => 'require|max:50|unique:tb_incidental',
+        'operator_id' => 'require|number',
         'pay_type' => 'require|number',
         'teams' => 'require|array',
         'status' => 'require|number'

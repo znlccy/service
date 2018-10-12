@@ -5,7 +5,7 @@ use think\Request;
 use app\admin\model\Department as DepartmentModel;
 use app\admin\model\DepartmentUser;
 use app\admin\model\Admin as Member;
-class Department extends BaseController
+class Department extends Controller
 {
     /**
      * 显示资源列表
@@ -38,7 +38,7 @@ class Department extends BaseController
         if ($name) {
             $conditions[] = ['name', 'like', '%' . $name . '%'];
         }
-        $department = DepartmentModel::where($conditions)->field('id,name,p_id')->select()->toArray();
+        $department = DepartmentModel::where($conditions)->field('id,name,p_id,description')->select()->toArray();
         $list = $this->generateTree($department);
         return json(['code'=> 200, 'message' => '获取列表成功', 'data' => $list]);
     }
@@ -116,27 +116,40 @@ class Department extends BaseController
         }
         $result = DepartmentModel::destroy($id);
         if ($result) {
+            // 删除中间表
+            DepartmentUser::where(['department_id' => $id])->delete();
             return json(['code' => 200, 'message' => '删除成功!']);
         } else {
             return json(['code' => 404, 'message' => '删除失败!']);
         }
     }
+
     /**
-     * 部门下拉选择
+     * 设置负责人
+     *
      */
-//    public function select()
-//    {
-//        $department = DepartmentModel::field('id,name')->select();
-//        if ($department) {
-//            return json(['code' => 200, 'message' => '获取列表成功', 'data' => $department]);
-//        } else {
-//            return json(['code' => 404, 'message' => '获取列表失败']);
-//        }
-//    }
+    public function leader()
+    {
+        $id = request()->param('id');
+        $data = [
+            'id' => $id
+        ];
+        $result = $this->validate($data, 'Department.leader');
+        if (true !== $result) {
+            return json(['code' => 401, 'message' => $result]);
+        }
+        $result = DepartmentUser::where('user_id', $id)->update(['role' => 1]);
+        if ($result) {
+            return json(['code' => 200, 'message' => '设置成功']);
+        } else {
+            return json(['code' => 404, 'message' => '设置失败']);
+        }
+    }
+
     /**
-     * 显示部门成员
+     * 成员下拉列表
      */
-    public function member()
+    public function select_member()
     {
         $id = request()->param('id');
         /* 验证 */
@@ -147,7 +160,47 @@ class Department extends BaseController
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
-        $member = DepartmentUser::where(['department_id' => $id])->with(['user'])->select();
+        $member = Member::where(['department_id' => $id])->field('id,nickname')->select();
+        return json(['code' => 200, 'message' => '获取成员信息成功', 'data' => $member]);
+    }
+
+    /**
+     * 部门下拉选择
+     */
+    public function select()
+    {
+        $team_id = request()->param('operation_team_id/d', 0);
+        $department = DepartmentModel::where('operation_team_id', $team_id)->field('id,p_id,name')->select();
+        $tree = $this->buildTrees($department, 0);
+        if ($tree) {
+            return json(['code' => 200, 'message' => '获取列表成功', 'data' => $tree]);
+        } else {
+            return json(['code' => 404, 'message' => '获取列表失败']);
+        }
+    }
+    /**
+     * 显示部门成员
+     */
+    public function member()
+    {
+        $id = request()->param('id');
+        $page = config('page.pagination');
+        $page_size = request()->param('page_size/d', $page['PAGE_SIZE']);
+        $jump_page = request()->param('jump_page/d', $page['JUMP_PAGE']);
+        /* 验证 */
+        $data = [
+            'id' => $id,
+        ];
+        $result   = $this->validate($data, 'Department.member');
+        if (true !== $result) {
+            return json(['code' => 401, 'message' => $result]);
+        }
+        $member = DepartmentUser::where(['department_id' => $id])
+            ->with(['user'])->paginate($page_size, false, ['page' => $jump_page])
+            ->each(function($item) {
+                unset($item['id'],$item['user_id'],$item['update_time']);
+                return $item;
+            });
         return json(['code' => 200, 'message' => '获取成员信息成功', 'data' => $member]);
     }
     /**
@@ -200,5 +253,20 @@ class Department extends BaseController
             }
         }
         return $tree;
+    }
+
+
+    public function buildTrees($data, $pId)
+    {
+        $tree_nodes = array();
+        foreach($data as $k => $v)
+        {
+            if($v['p_id'] == $pId)
+            {
+                $v['child'] = $this->buildTrees($data, $v['id']);
+                $tree_nodes[] = $v;
+            }
+        }
+        return $tree_nodes;
     }
 }

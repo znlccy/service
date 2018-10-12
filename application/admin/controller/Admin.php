@@ -17,6 +17,8 @@ use app\admin\model\VerificationCode as VerificationCodeModel;
 use app\admin\model\AdminRole  as AdminRoleModel;
 use app\admin\model\Role as RoleModel;
 use app\admin\model\OperationTeam;
+use app\admin\model\DepartmentUser;
+use app\admin\model\Department;
 
 class Admin extends BaseController
 {
@@ -129,7 +131,7 @@ class Admin extends BaseController
         //检查是否实名
         if (!($admin['authentication'] === 1)) {
             $authentication_data = ['mobile' => $mobile];
-            return json(['code' => '302', 'message' => '需进行手机真实性认证', 'data' => $authentication_data]);
+            return json(['code' => 302, 'message' => '需进行手机真实性认证', 'data' => $authentication_data]);
         }
 
         Session::set('admin', $admin);
@@ -159,6 +161,9 @@ class Admin extends BaseController
         $role_id = request()->param('role_id/a');
         $operation_team_id = request()->param('operation_team_id', 0);
         $department_id = request()->param('department_id', 0);
+        if ($operation_team_id) {
+            $department_id = Department::where('operation_team_id', $operation_team_id)->value('id');
+        }
 
         $admin_model = new AdminModel();
         $admin_role_model = new AdminRoleModel();
@@ -195,17 +200,33 @@ class Admin extends BaseController
             'department_id' => '部门id'
         ];
 
-        $validate_data = [
-            'id' => $id,
-            'mobile' => $mobile,
-            'password' => $password,
-            'confirm_pass' => $confirm_pass,
-            'real_name' => $real_name,
-            'status' => $status,
-            'role_id' => $role_id,
-            'operation_team_id' => $operation_team_id,
-            'department_id' => $department_id,
-        ];
+        if (!empty($id)) {
+            $validate_data = [
+                'id' => $id,
+//                'mobile' => $mobile,
+//                'password' => $password,
+//                'confirm_pass' => $confirm_pass,
+                'real_name' => $real_name,
+                'status' => $status,
+                'role_id' => $role_id,
+                'operation_team_id' => $operation_team_id,
+                'department_id' => $department_id,
+            ];
+        } else {
+            $validate_data = [
+                'id' => $id,
+                'mobile' => $mobile,
+                'password' => $password,
+                'confirm_pass' => $confirm_pass,
+                'real_name' => $real_name,
+                'status' => $status,
+                'role_id' => $role_id,
+                'operation_team_id' => $operation_team_id,
+                'department_id' => $department_id,
+            ];
+        }
+//        dump($validate_data);die;
+
 
         $validate = new Validate($rule, [], $message);
         $result = $validate->check($validate_data);
@@ -246,7 +267,11 @@ class Admin extends BaseController
             $update_result = $admin_model->where('id', '=', $id)->update($user_data);
             $admin_role_model->where('user_id', $id)->delete();
             $result = $rbacObj->assignUserRole($id, $role_id);
-
+            /* 更新部门成员表 */
+            $department_member = DepartmentUser::where(['user_id' => $id])->update([
+                'department_id' => $department_id,
+                'role' => 0,
+            ]);
             if ($result) {
                 return json([
                     'code' => 200,
@@ -261,7 +286,12 @@ class Admin extends BaseController
             if ($uid) {
                 /* 用户添加成功后，添加用户角色表 */
                 $result = $rbacObj->assignUserRole($uid, $role_id);
-
+                /* 添加到部门成员表 */
+                $department_member = DepartmentUser::create([
+                    'department_id' => $department_id,
+                    'user_id' => $uid,
+                    'role' => 0,
+                ]);
                 if ($result) {
                     return json([
                         'code' => 200,
@@ -290,12 +320,13 @@ class Admin extends BaseController
     {
         $page = config('pagination');
         /* 获取客户端提供的数据 */
-        $page_size = request()->param('page_size', $page['PAGE_SIZE']);
-        $jump_page = request()->param('jump_page', $page['JUMP_PAGE']);
+        $page_size = request()->param('page_size/d', $page['PAGE_SIZE']);
+        $jump_page = request()->param('jump_page/d', $page['JUMP_PAGE']);
 
         //过滤参数
         $id = request()->param('id');
-        $operation_team_id = request()->param('operation_team_id');
+//        $operation_team_id = request()->param('operation_team_id', 0);
+        $operation_team_id = session('admin.operation_team_id');
         $department_id = request()->param('department_id');
         $status = request()->param('status/d');
         $real_name = request()->param('real_name');
@@ -358,19 +389,23 @@ class Admin extends BaseController
             $conditions['create_ip'] = ['like', '%' . $create_ip . '%'];
         }
 
-        if ($operation_team_id) {
-            $conditions['operation_team_id'] = $operation_team_id;
+        if ($operation_team_id === 0) {
+            $operation_team = request()->param('operation_team_id');
+            if ($operation_team) {
+                $conditions['operation_team_id'] = $operation_team;
+            }
         }
 
-        if ($department_id) {
-            $conditions['department_id'] = $department_id;
-        }
 
         $admin_model = new AdminModel();
         $admin_data = $admin_model->where($conditions)
             ->with(['role' => function ($query) {
                 $query->withField("pivot");
-            }])->paginate($page_size, false, ['page' => $jump_page]);
+            }, 'department'])->paginate($page_size, false, ['page' => $jump_page])
+            ->each(function($item,$key){
+                unset($item['operation_team_id'],$item['department_id']);
+                return $item;
+            });
 
         return json([
             'code' => 200,
@@ -406,6 +441,9 @@ class Admin extends BaseController
             }, 'department' => function ($query) {
                 $query->withField("id,name");
             }])->find();
+        if ($admin_data['operation_team_id'] === 0) {
+            $admin_data['operation_team'] = ['id' => 0, 'name' => '公司'];
+        }
 
         if ($admin_data) {
             unset($admin_data->operation_team_id, $admin_data->department_id);

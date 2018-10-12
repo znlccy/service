@@ -69,7 +69,7 @@ class Policy extends BaseController {
         $result = $this->validate($validate_data, 'Policy.index');
         if (true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -97,10 +97,10 @@ class Policy extends BaseController {
         } else {
             switch ($status) {
                 case 0:
-                    $conditions['status'] = $status;
+                    $conditions[] = ['status', '=', $status];
                     break;
                 case 1:
-                    $conditions['status'] = $status;
+                    $conditions[] = ['status', '=', $status];
                     break;
                 default:
                     break;
@@ -120,13 +120,13 @@ class Policy extends BaseController {
 
         if ($consult_entry) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '查询信息成功',
                 'data'      => $consult_entry
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '查询信息失败，数据不存在',
             ]);
         }
@@ -141,6 +141,17 @@ class Policy extends BaseController {
         $status = request()->param('status', 1);
         $type_id = 2;
         $publisher = session('admin.mobile');
+        $rich_text = request()->param('rich_text');
+        $picture = request()->file('picture');
+
+        /* 移动图片 */
+        if ($picture) {
+            $info = $picture->move(ROOT_PATH . 'public' . DS . 'images');
+            if ($info) {
+                $sub_path = str_replace('\\', '/', $info->getSaveName());
+                $picture = '/images/' . $sub_path;
+            }
+        }
 
         //验证数据
         $validate_data = [
@@ -149,14 +160,16 @@ class Policy extends BaseController {
             'content'   => $content,
             'status'    => $status,
             'type_id'   => $type_id,
-            'publisher' => $publisher
+            'publisher' => $publisher,
+            'rich_text' => $rich_text,
+            'picture'   => $picture
         ];
 
         //验证结果
         $result = $this->validate($validate_data, 'Policy.save');
         if(true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -170,12 +183,12 @@ class Policy extends BaseController {
 
         if ($operation) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '数据操作成功'
             ]);
         } else {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => '数据操作失败'
             ]);
         }
@@ -196,7 +209,7 @@ class Policy extends BaseController {
         $result = $this->validate($validate_data, 'Policy.detail');
         if (true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -205,17 +218,17 @@ class Policy extends BaseController {
         $consult = $this->consult_policy_model
             ->where('id', $id)
             ->where('type_id = 2')
-            ->field('id,title,content,status,publisher,create_time,update_time')
+            ->field('id,title,content,picture,rich_text,status,publisher,create_time,update_time')
             ->find();
         if ($consult) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '查询信息成功',
                 'data'      => $consult
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '查询信息失败，数据库中不存在',
             ]);
         }
@@ -235,7 +248,7 @@ class Policy extends BaseController {
         $result = $this->validate($validate_data, 'Policy.delete');
         if (true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -247,12 +260,12 @@ class Policy extends BaseController {
             ->delete();
         if ($consult) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '删除信息成功'
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '删除信息失败，数据库中不存在',
             ]);
         }

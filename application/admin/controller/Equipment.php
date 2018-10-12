@@ -53,19 +53,16 @@ class Equipment extends BaseController
         if ($space_id) {
             $conditions[] = ['space_id', '=', $space_id];
         }
-        if ($type_id) {
-            $conditions[] = ['type_id', '=', $type_id];
-        }
         if ($status) {
             $conditions[] = ['status', '=', $status];
         }
-        $type = EquipmentModel::with(['type' => function($query) {
-            $query->field('id,name');
-        }, 'space' => function($query) {
-            $query->field('id,name');
-        }])->where($conditions)
-            ->order('id')
-            ->paginate($page_size, false, ['page' => $jump_page]);
+        $type = EquipmentModel::where($conditions)
+            ->with(['type' => function($query) {
+                $query->field('id,name');
+            }, 'space' => function($query) {
+                $query->field('id,name');
+            }])->order('id')
+                ->paginate($page_size, false, ['page' => $jump_page]);
         return json(['code'=> 200, 'message' => '获取列表成功', 'data' => $type]);
     }
 

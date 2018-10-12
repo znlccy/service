@@ -6,7 +6,7 @@ use think\Controller;
 use think\Request;
 use app\admin\model\Invoice as InvoiceModel;
 
-class Invoice extends BaseController
+class Invoice extends Controller
 {
     /**
      * 显示资源列表
@@ -42,10 +42,22 @@ class Invoice extends BaseController
         if ($order_no) {
             $conditions[] = ['order_no', 'like', '%' . $order_no . '%'];
         }
-        if ($status || $status === 0) {
-            $conditions[] = ['status', '=', $status];
+        if (is_null($status)) {
+            $conditions[] = ['status', 'in',[0,1]];
+        } else {
+            switch ($status) {
+                case 0:
+                    $conditions[] = ['status', '=', $status];
+                    break;
+                case 1:
+                    $conditions[] = ['status', '=', $status];
+                    break;
+                default:
+                    break;
+            }
         }
         $invoice = InvoiceModel::where($conditions)
+            ->with('opener')
             ->order('create_time', 'desc')
             ->paginate($page_size, false, ['page' => $jump_page]);
         return json(['code'=> 200, 'message' => '获取列表成功', 'data' => $invoice]);
@@ -69,16 +81,14 @@ class Invoice extends BaseController
     {
         // 获取参数
         $id = request()->param('id');
-        $invoice_no = request()->param('invoice_no');
         $data = [
             'id' => $id,
-            'invoice_no' => $invoice_no
         ];
         $result = $this->validate($data,'Invoice.detail');
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
-        $detail = InvoiceModel::where('id',$id)->whereOr('invoice_no',$invoice_no)->find();
+        $detail = InvoiceModel::where('id',$id)->find();
         if ($detail) {
             return json(['code' => 200, 'message' => '获取详情成功', 'data' => $detail]);
         } else {
@@ -86,6 +96,32 @@ class Invoice extends BaseController
         }
     }
 
+    /**
+     * 开票状态
+     *
+     */
+    public function open()
+    {
+        $id = request()->param('id');
+        $user_id = session('admin.id');
+        $status = request()->param('status/d', 0);
+        $data = [
+            'id' => $id,
+            'status' => $status,
+            'opener_id' => $user_id,
+            'open_time' => date('Y-m-d H:i:s', time())
+        ];
+        $result = $this->validate($data, 'Invoice.open');
+        if (true !== $result) {
+            return json(['code' => 401, 'message' => $result]);
+        }
+        $status = InvoiceModel::update($data);
+        if ($status) {
+            return json(['code' => 200, 'message' => '开票成功']);
+        } else {
+            return json(['code' => 404, 'message' => '开票失败']);
+        }
+    }
     /**
      * 删除指定资源
      *

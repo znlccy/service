@@ -23,4 +23,9 @@ class Venue extends BaseModel
     {
         return $this->hasMany('Reservation','venue_id', 'id');
     }
+
+    public function getDisableTimeAttr($value)
+    {
+        return json_decode($value, true);
+    }
 }

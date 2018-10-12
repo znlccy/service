@@ -27,8 +27,8 @@ class Role extends BaseController {
 
         $page = config('pagination');
         /* 获取客户端提供的数据 */
-        $page_size = request()->param('page_size', $page['PAGE_SIZE']);
-        $jump_page = request()->param('jump_page', $page['JUMP_PAGE']);
+        $page_size = request()->param('page_size/d', $page['PAGE_SIZE']);
+        $jump_page = request()->param('jump_page/d', $page['JUMP_PAGE']);
         $operation_team_id = request()->param('operation_team_id', 0);
 
         $id = request()->param('id');
@@ -76,7 +76,6 @@ class Role extends BaseController {
 //        $role_ids = OperationTeamRole::where('operation_team_id', $operation_team_id)->column('role_id');
 
         $role = $role_model->where($conditions)
-            ->where('operation_team_id', $operation_team_id)
             ->paginate($page_size, false, ['page' => $jump_page]);
 
         return json([
@@ -122,6 +121,7 @@ class Role extends BaseController {
             'description' => $description,
             'sort_num' => $sort,
             'create_time' => date('Y-m-d H:i:s', time()),
+            'operation_team_id' => $operation_team_id,
             'parent_id' => 0
         ];
 
@@ -133,6 +133,7 @@ class Role extends BaseController {
             'sort_num' => $sort,
             'type' => $type,
             'update_time' => date('Y-m-d H:i:s', time()),
+            'operation_team_id' => $operation_team_id,
             'parent_id' => 0
         ];
 

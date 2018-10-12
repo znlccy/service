@@ -16,7 +16,6 @@ class OperationTeam extends Validate
         'page_size'     => 'number',
         'jump_page'     => 'number',
         'id' => 'number',
-        'status' => 'require|number',
         'name' => 'require|max:50',
         'leader_id' => 'number',
         'description' => 'require|max:255',
@@ -81,7 +80,6 @@ class OperationTeam extends Validate
 
     public function sceneLeader()
     {
-        return $this->only(['operation_team_id'])
-            ->append('operation_team_id', 'require|egt:1');
+        return $this->only(['operation_team_id']);
     }
 }

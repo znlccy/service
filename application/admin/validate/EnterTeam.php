@@ -19,14 +19,14 @@ class EnterTeam extends Validate
         'company' => 'require|max:50',
         'admin_account' => 'require|max:20',
         'business_license' => 'require|max:30',
-        'bl_picture' => 'require|max:80',
+        'bl_picture' => 'requireCallback:id_null|max:80',
         'legal_person' => 'require|max:20',
         'id_card' => 'require|idCard',
-        'id_card_pictures' => 'require|max:255',
+        'id_card_pictures' => 'requireCallback:id_null|max:255',
         'main_business' => 'require|max:30',
         'develop_stage' => 'require|max:30',
         'description' => 'require',
-        'logo' => 'require|max:80',
+        'logo' => 'requireCallback:id_null|max:80',
         'status' => 'require|number'
     ];
 
@@ -70,5 +70,11 @@ class EnterTeam extends Validate
     {
         return $this->only(['id'])
             ->append('id', 'require');
+    }
+
+    public function id_null($value, $data) {
+        if (empty($data['id'])) {
+            return true;
+        }
     }
 }

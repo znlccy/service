@@ -91,13 +91,13 @@ class Question extends BaseController {
 
         if ($question) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '查询数据成功',
                 'data'      => $question
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '查询数据失败, 数据不存在'
             ]);
         }
@@ -123,7 +123,7 @@ class Question extends BaseController {
 
         if (true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -146,12 +146,12 @@ class Question extends BaseController {
 
         if ($operator) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '操作数据成功'
             ]);
         } else {
             return json([
-                'code'      => '401',
+                'code'      => 404,
                 'message'   => '操作数据失败'
             ]);
         }
@@ -173,7 +173,7 @@ class Question extends BaseController {
 
         if (true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -187,13 +187,13 @@ class Question extends BaseController {
 
         if ($question) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '查询数据成功',
                 'data'      => $question
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '查询数据失败'
             ]);
         }
@@ -215,7 +215,7 @@ class Question extends BaseController {
 
         if (true !== $result) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => $result
             ]);
         }
@@ -226,12 +226,12 @@ class Question extends BaseController {
 
         if ($question && $operator) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '删除数据成功'
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '删除数据失败'
             ]);
         }

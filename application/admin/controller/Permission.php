@@ -23,11 +23,9 @@ class Permission extends BaseController {
      * 权限节点api接口
      */
     public function node() {
-
         $admin_role_model = new AdminRoleModel();
-
         /* 获得权限节点 */
-        $admin = Session::get('admin');
+        $admin = session('admin');
         $id = $admin['id'];
         $node = $admin_role_model->alias('ar')
             ->where('level', '<>', '3')

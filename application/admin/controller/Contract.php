@@ -8,6 +8,7 @@ use app\admin\model\Contract as ContractModel;
 use Mpdf\Mpdf;
 use app\admin\model\Order;
 use app\admin\model\OrderWorkplace;
+use app\admin\model\ContractTemplate;
 
 class Contract extends BaseController
 {
@@ -45,17 +46,21 @@ class Contract extends BaseController
         if ($contract_no) {
             $conditions[] = ['contract_no', 'like', '%' . $contract_no . '%'];
         }
-        if ($status || $status === 0) {
+        if (is_null($status)) {
+            $conditions[] = ['status', 'in',[1,2,3,4]];
+        } else {
             $conditions[] = ['status', '=', $status];
         }
         $contract = ContractModel::where($conditions)
-            ->with(['operator'])
+            ->with(['operator','order'])
             ->order('create_time', 'desc')
             ->paginate($page_size, false, ['page' => $jump_page])->each(function($item) {
-                unset($item['operator_id']);
+                $item['contract_template'] = $item['contract_template_no'];
+                unset($item['operator_id'],$item['order_id'],$item['contract_template_no']);
                 return $item;
             });
-        return json(['code'=> 200, 'message' => '获取列表成功', 'data' => $contract]);
+        return json(['code'=> 200, 'message' => '获取列表成功',
+            'data' => $contract]);
     }
 
     /**
@@ -85,6 +90,8 @@ class Contract extends BaseController
 
         $detail = ContractModel::where($data)->find();
         if ($detail) {
+            $detail['contract_template'] = $detail['contract_template_no'];
+            unset($detail['contract_template_no']);
             return json(['code' => 200, 'message' => '获取详情成功!', 'data' => $detail]);
         } else {
             return json(['code' => 404, 'message' => '获取详情失败!']);
@@ -103,19 +110,46 @@ class Contract extends BaseController
 
     /**
      * 合同确认签署
+     *
      */
     public function signing() {
         // 获取参数
         $id = request()->param('id');
         $sign_date = request()->param('sign_date', date('Y-m-d', time()));
-        if (!strtotime($sign_date)) {
-            return json(['code' => 401, 'message' => '签署日期格式不正确']);
+        $scan = request()->file('scan');
+        if ($scan) {
+            $info = $scan->move(ROOT_PATH . 'public' . DS . 'images');
+            if ($info) {
+                //成功上传后，获取上传信息
+                //输出jpg
+                /*echo '文件扩展名:' . $info->getExtension() .'<br>';*/
+                $ext = strtolower($info->getExtension());
+                // 允许上传的格式
+                $allow_ext = ['jpg', 'gif', 'png', 'jpeg'];
+                if (!in_array($ext, $allow_ext)) {
+                    return json(['code' => 401, 'message' => '上传图片格式不正确(仅支持jpg、gif、 png、 psd)']);
+                }
+                // 图片文件大小
+                $size = $info->getSize();
+                $picture_max_size = config('picture_max_size');
+                if ($size > $picture_max_size) {
+                    return json(['code' => 401, 'message' => '上传的图片过大(最不不超过3M)']);
+                }
+                //输出文件格式
+                /*echo '文件详细的路径加文件名:' . $info->getSaveName() .'<br>';*/
+                //输出文件名称
+                /*echo '文件保存的名:' . $info->getFilename();*/
+                $sub_path     = str_replace('\\', '/', $info->getSaveName());
+                $scan = '/images/' . $sub_path;
+            }
         }
+
         // 验证参数
         $data = [
             'id' => $id,
             'sign_date' => $sign_date,
             'operator_id' =>session('admin.id'),
+            'scan' => $scan,
             // 合同状态(0=>待审核,1=>待签署,2=>已签署,3=>已失效,4=>即将失效)
             'status' => 2,
         ];
@@ -134,7 +168,17 @@ class Contract extends BaseController
     }
 
     /**
+     * 合同历史
+     *
+     */
+    public function history()
+    {
+
+    }
+
+    /**
      * 合同下载
+     *
      */
     public function download()
     {
@@ -152,8 +196,8 @@ class Contract extends BaseController
         $contract = ContractModel::get($id);
         if (!empty($contract)) {
             // 获取订单信息
-            $order_no = $contract->order_no;
-            $order = Order::where('order_no',$order_no)
+            $order_id = $contract->order_id;
+            $order = Order::where('id',$order_id)
                 ->with(['team'])
                 ->find();
             if (!empty($order)) {
@@ -196,10 +240,12 @@ class Contract extends BaseController
                 // 定金
                 $deposit = $order->deposit .'元';
                 // 自定义内容
-                $custom_content = json_decode($contract->custom_content, false);
+                $custom_content = json_decode($contract->custom_content, true);
                 $custom = '';
-                foreach ($custom_content as $k => $value) {
-                    $custom = $custom . $k . ':'. $value .'<br>';
+                if (!empty($custom_content)) {
+                    foreach ($custom_content as $k => $value) {
+                        $custom = $custom . $k . ':'. $value .'<br>';
+                    }
                 }
             } else {
                 return json(['code' => 404, 'message' => '下载失败(未找到该合同相关订单信息)']);
@@ -210,7 +256,7 @@ class Contract extends BaseController
         $mpdf = new Mpdf();
         $mpdf->autoScriptToLang = true;
         $mpdf->autoLangToFont = true;
-        $html = file_get_contents('public/contract-temp/contract-template.html');
+        $html = file_get_contents(PUBLIC_PATH . DS ."contract-temp". DS ."contract-template.html");
         // 替换html中的占位符
         $html = str_replace('{company_name}', $company_name, $html);
 
@@ -223,7 +269,38 @@ class Contract extends BaseController
         $mpdf->WriteHTML($html);
         $mpdf->Output('contract.pdf', 'D');
 
+    }
 
-
+    /**
+     * 合同汇总
+     *
+     */
+    public function collect(){
+        // 获取参数
+        $page = config('page.pagination');
+        $page_size = request()->param('page_size/d', $page['PAGE_SIZE']);
+        $jump_page = request()->param('jump_page/d', $page['JUMP_PAGE']);
+        $contract_template_no = request()->param('contract_template_no');
+        $conditions = [];
+        if ($contract_template_no) {
+            $conditions[] = ['template_no', '=', $contract_template_no];
+        }
+        // 合同模板
+        $template = ContractTemplate::where($conditions)
+            ->order('id')
+            ->field("id,template_no")
+            ->paginate($page_size, false, ['page' => $jump_page])
+            ->each(function($item){
+                $contract_sum = ContractModel::where('contract_template_no', $item['template_no'])->count();
+                $effect_sum = ContractModel::where(['contract_template_no' => $item['template_no'], 'status' => 2])->count();
+                $expiry_sum = ContractModel::where(['contract_template_no' => $item['template_no'], 'status' => 3])->count();
+                $check_sum = ContractModel::where(['contract_template_no' => $item['template_no'], 'status' => 0])->count();
+                $item['contract_sum'] = $contract_sum;
+                $item['effect_sum'] = $effect_sum;
+                $item['expiry_sum'] = $expiry_sum;
+                $item['check_sum'] = $check_sum;
+                return $item;
+            });
+        return json(['code' => 200, 'message' => '获取信息成功', 'data' => $template]);
     }
 }

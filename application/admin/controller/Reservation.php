@@ -7,7 +7,7 @@ use think\Request;
 use app\admin\model\Reservation as ReservationModel;
 use app\admin\model\Venue;
 
-class Reservation extends BaseController
+class Reservation extends Controller
 {
     /**
      * 显示场馆预约列表
@@ -41,9 +41,15 @@ class Reservation extends BaseController
         if ($date) {
             $conditions['date'] = $date;
         }
-        $teams = ReservationModel::with(['team','venue'])->where($conditions)
+        $data = [];
+        $teams = ReservationModel::with(['team'])->where($conditions)
             ->select();
-        return json(['code' => 200, 'message' => '获取消息列表成功', 'data' => $teams]);
+        $venue = Venue::with(['space' => function($query){
+            $query->field('id,name');
+        }])->where('id',$venue_id)->find();
+        $data['venue'] = $venue;
+        $data['teams'] = $teams;
+        return json(['code' => 200, 'message' => '获取消息列表成功', 'data' => $data]);
     }
 
 
@@ -141,6 +147,7 @@ class Reservation extends BaseController
 
     /**
      * 预约审核
+     *
      */
     public function check()
     {
@@ -150,13 +157,15 @@ class Reservation extends BaseController
         $check_user = $user['id'];
         $check_time = date('Y-m-d H:i:s', time());
         $status = request()->param('status');
+        $remark = request()->param('remark');
         $id = request()->param('id');
         // 验证
         $data = [
             'id' => $id,
             'check_user' => $check_user,
             'check_time' => $check_time,
-            'status' => $status
+            'status' => $status,
+            'remark' => $remark
         ];
         $result = $this->validate($data, 'Reservation.check');
         if (true !== $result) {

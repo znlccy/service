@@ -27,10 +27,10 @@ class Flow extends Controller {
 		return $this->fetch();
 		
 	}
-	public function btn($wf_fid,$wf_type,$status)
+	public function btn($wf_fid,$wf_type,$status,$wf_title)
 	{
-		$url = url("/admin/flow/do_check/",["wf_type"=>$wf_type,"wf_title"=>'2','wf_fid'=>$wf_fid]);
-		$url_star = url("/admin/flow/start/",["wf_type"=>$wf_type,"wf_title"=>'2','wf_fid'=>$wf_fid]);
+		$url = url("/admin/flow/do_check/",["wf_type"=>$wf_type,"wf_title"=>$wf_title,'wf_fid'=>$wf_fid]);
+		$url_star = url("/admin/flow/start/",["wf_type"=>$wf_type,"wf_title"=>$wf_title,'wf_fid'=>$wf_fid]);
 		switch ($status)
 		{
 		case 0:
@@ -111,7 +111,11 @@ class Flow extends Controller {
         $flow = $workflow->startworkflow($data,$this->uid);
         if($flow['code']==1){
 			return msg_return('Success!');
-		} else {
+		} elseif ($flow['code']==2) {
+            // 订单审核通过，更新订单
+            $info = Db::name('tb_'. $data['wf_type'])->where('id',$data['wf_fid'])->update(['status' => 2]);
+            return msg_return('Success!');
+        } else {
             return msg_return($flow['msg'],$flow['code']);
         }
 	}
@@ -149,7 +153,7 @@ class Flow extends Controller {
 		$flowinfo = $workflow->getprocessinfo($pid,$run_id);
 		return $flowinfo;
 	}
-	 public function upindex()
+	public function upindex()
     {
         return $this->fetch('upload');
     }

@@ -6,7 +6,7 @@ use think\Controller;
 use think\Request;
 use app\admin\model\Venue as VenueModel;
 
-class Venue extends BaseController
+class Venue extends Controller
 {
     /**
      * 场馆列表
@@ -20,6 +20,7 @@ class Venue extends BaseController
         $jump_page = request()->param('jump_page/d', $page['JUMP_PAGE']);
         $id = request()->param('id');
         $name = request()->param('name');
+        $venue_no = request()->param('venue_no');
 
         // 验证参数
         $data = [
@@ -40,12 +41,18 @@ class Venue extends BaseController
         if ($name) {
             $conditions[] = ['name', 'like', '%' . $name . '%'];
         }
+        if ($venue_no) {
+            $conditions[] = ['venue_no', 'like', '%' . $venue_no . '%'];
+        }
         $space = VenueModel::with(['space' => function($query) {
             $query->field('id,name');
         }])->where($conditions)
             ->order('id')
             ->paginate($page_size, false, ['page' => $jump_page]);
         return json(['code'=> 200, 'message' => '获取列表成功', 'data' => $space]);
+
+
+
     }
 
 
@@ -62,7 +69,7 @@ class Venue extends BaseController
         $space_id = request()->param('space_id');
         $accommodate_num = request()->param('accommodate_num/d', 0);
         $remark = request()->param('remark');
-        $disable_time = request()->param('disable_time');
+        $disable_time = request()->param('disable_time/a');
         $status = request()->param('status/d');
         $data = [
             'id' => $id,
@@ -79,6 +86,7 @@ class Venue extends BaseController
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
+        $data['disable_time'] = json_encode($disable_time);
         $venue = new VenueModel();
         if (empty($id)) {
             $result = $venue->save($data);
@@ -111,7 +119,7 @@ class Venue extends BaseController
         }
         $detail = VenueModel::with(['space' => function ($query) {
             $query->field('id,name');
-        }])->where('id', $id)->find();
+        }, 'reservations'])->where('id', $id)->find();
 
         if ($detail) {
             unset($detail['space_id']);

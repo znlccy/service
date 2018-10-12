@@ -30,7 +30,11 @@ class BaseController extends Controller
     protected  $except_auth = [
         'Admin' => ['login', 'account_login', 'role', 'mobile_login'],
         'Information' => ['publisher'],
-        'Service' => ['category']
+        'Service' => ['category'],
+        'Permission' => ['node'],
+        'WorkplaceGroup' => ['select'],
+        'Space' =>['select'],
+        'Image' => ['upload'],
     ];
 
     public function __construct(App $app = null)

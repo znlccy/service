@@ -65,15 +65,15 @@ class EnterTeam extends BaseController
         $bl_picture = request()->file('bl_picture');
         $legal_person = request()->param('legal_person');
         $id_card = request()->param('id_card');
-        $id_card_picture = request()->file('id_card_picture');
+        $id_card_pictures = request()->file('id_card_pictures');
         $main_business = request()->param('main_business');
         $develop_stage = request()->param('develop_stage');
         $description = request()->param('description');
         $logo = request()->file('logo');
         $status = request()->param('status', 1);
-        if ($id_card_picture) {
+        if ($id_card_pictures) {
             $arr_picture = [];
-            foreach ($id_card_picture as $value) {
+            foreach ($id_card_pictures as $value) {
                 $info = $value->move(ROOT_PATH . 'public' . DS . 'images');
                 if ($info) {
                     //成功上传后，获取上传信息
@@ -99,7 +99,7 @@ class EnterTeam extends BaseController
                     $arr_picture[] = '/images/' . $sub_path;
                 }
             }
-            $id_card_picture = json_encode($arr_picture);
+            $id_card_pictures = json_encode($arr_picture);
         }
         // 移动图片到框架应用根目录/public/images
         if ($bl_picture) {
@@ -125,7 +125,7 @@ class EnterTeam extends BaseController
                 //输出文件名称
                 /*echo '文件保存的名:' . $info->getFilename();*/
                 $sub_path     = str_replace('\\', '/', $info->getSaveName());
-                $bl_img = '/images/' . $sub_path;
+                $bl_picture = '/images/' . $sub_path;
             }
         }
         // 移动图片到框架应用根目录/public/images
@@ -164,7 +164,7 @@ class EnterTeam extends BaseController
             'bl_picture' => $bl_picture,
             'legal_person' => $legal_person,
             'id_card' => $id_card,
-            'id_card_picture' => $id_card_picture,
+            'id_card_pictures' => $id_card_pictures,
             'main_business' => $main_business,
             'develop_stage' => $develop_stage,
             'description' => $description,
@@ -180,6 +180,15 @@ class EnterTeam extends BaseController
             $enter_team = new EnterTeamModel();
             $result = $enter_team->save($data);
         } else {
+            if (!$bl_picture) {
+                unset($data['bl_picture']);
+            }
+            if (!$logo) {
+                unset($data['logo']);
+            }
+            if (!$id_card_pictures) {
+                unset($data['id_card_pictures']);
+            }
             $enter_team = new EnterTeamModel();
             $result = $enter_team->save($data,['id', $id]);
         }
@@ -189,6 +198,7 @@ class EnterTeam extends BaseController
             return json(['code' => 404, 'message' => '保存失败!']);
         }
     }
+
 
     /**
      * 入驻团队详情
@@ -206,7 +216,7 @@ class EnterTeam extends BaseController
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
-        $detail = EnterTeamModel::where('id', $id)->find();
+        $detail = EnterTeamModel::with(['developments','members', 'linkman'])->where($data)->find();
 
         if ($detail) {
             return json(['code' => 200, 'message' => '获取详情成功!', 'data' => $detail]);

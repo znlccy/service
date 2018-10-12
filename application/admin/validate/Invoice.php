@@ -14,17 +14,20 @@ class Invoice extends BaseValidate
      */	
 	protected $rule = [
 	    'id' => 'number',
-        'order_no' => 'require',
+        'sale_order_id' => 'require',
+        'rec_order_id' => 'require',
         'invoice_no' => 'require',
         'opener_type' => 'require',
         'invoice_title' => 'require',
         'type' => 'require|number',
-        'tax' => 'require',
-        'bank' => 'requireIf:type,1',
-        'account' => 'requireIf:type,1',
-        'address' => 'requireIf:type,1',
-        'phone' => 'requireIf:type,1|regex:phone',
-        'status' => 'require',
+        'tax' => 'requireIf:opener_type,2',
+        'bank' => 'requireIf:opener_type,2',
+        'account' => 'requireIf:opener_type,2',
+        'address' => 'requireIf:opener_type,2',
+        'phone' => 'requireIf:opener_type,2|regex:phone',
+        'status' => 'require|number',
+        'opener_id' => 'number',
+        'open_time' => 'date'
     ];
 
     /**
@@ -36,7 +39,8 @@ class Invoice extends BaseValidate
     protected $field = [
         'id' => '发票id',
         'invoice_no' => '发票编号',
-        'order_no' => '订单编号',
+        'sale_order_id' => '销售订单id',
+        'rec_order_id' => '收款订单id',
         'opener_type' => '开具类型',
         'invoice_title' => '发票抬头',
         'type' => '发票类型',
@@ -46,6 +50,8 @@ class Invoice extends BaseValidate
         'address' => '注册场所地址',
         'phone' => '注册固定电话',
         'status' => '发票状态',
+        'opener_id' => '开票人',
+        'open_time' => '开票时间'
     ];
 
     //验证场景
@@ -64,5 +70,13 @@ class Invoice extends BaseValidate
     {
         return $this->only(['id'])
             ->append('id', 'require');
+    }
+
+    public function sceneOpen()
+    {
+        return $this->only(['id', 'status', 'opener', 'open_time'])
+            ->append('id', 'require')
+            ->append('opener_id', 'require')
+            ->append('open_time', 'require');
     }
 }

@@ -17,6 +17,30 @@ class Space extends BaseModel
     }
 
     public function operationTeam() {
-        return $this->hasOne('OperationTeam', 'id', 'operation_team_id');
+        return $this->hasOne('OperationTeam', 'id', 'operation_team_id')->field('id,name');
+    }
+
+    /**
+     *  关联省份
+     */
+    public function province()
+    {
+        return $this->hasOne('Area', 'id', 'province_id')->field('id,name');
+    }
+
+    /**
+     *  关联城市
+     */
+    public function city()
+    {
+        return $this->hasOne('Area', 'id', 'city_id')->field('id,name');
+    }
+
+    /**
+     * 关联区县
+     */
+    public function district()
+    {
+        return $this->hasOne('Area', 'id', 'district_id')->field('id,name');
     }
 }

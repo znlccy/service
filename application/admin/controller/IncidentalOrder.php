@@ -20,7 +20,7 @@ class IncidentalOrder extends BaseController
         $jump_page = request()->param('jump_page/d', $page['JUMP_PAGE']);
         $id = request()->param('id');
         $order_no = request()->param('order_no');
-        $status = request()->param('status/d');
+        $status = request()->param('status');
 
         // 验证参数
         $data = [
@@ -42,7 +42,7 @@ class IncidentalOrder extends BaseController
         if ($order_no) {
             $conditions[] = ['order_no', 'like', '%' . $order_no . '%'];
         }
-        if ($status || $status === 0) {
+        if (!is_null($status)) {
             $conditions[] = ['status', '=', $status];
         }
         $incidental = IncidentalOrderModel::where($conditions)
@@ -76,8 +76,8 @@ class IncidentalOrder extends BaseController
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
-        // 插入杂费收款表
         foreach ($teams as $team) {
+            // 插入杂费收款表
             $team['project'] = $project;
             $team['order_no'] = 'OR' . uniqid();
             $team['pay_type'] = $pay_type;

@@ -27,7 +27,6 @@ class OperationTeam extends Controller
         $id = request()->param('id');
         $name = request()->param('name');
         $leader_id = request()->param('leader_id');
-        $status = request()->param('status/d');
         // 参数验证
         $data = [
             'id' => $id,
@@ -51,20 +50,6 @@ class OperationTeam extends Controller
         }
         if ($leader_id) {
             $conditions[] = ['leader_id', '=', $leader_id];
-        }
-        if (is_null($status)) {
-            $conditions[] = ['status', 'in',[0,1]];
-        } else {
-            switch ($status) {
-                case 0:
-                    $conditions[] = ['status', '=', $status];
-                    break;
-                case 1:
-                    $conditions[] = ['status', '=', $status];
-                    break;
-                default:
-                    break;
-            }
         }
 
         $teams = OperationTeamModel::where($conditions)
@@ -91,11 +76,9 @@ class OperationTeam extends Controller
         // 获取前端传的参数
         $id = request()->param('id');
         $name = request()->param('name');
-        $leader_id = request()->param('leader_id');
+        $leader_id = request()->param('leader_id/d', 0);
         $description = request()->param('description');
         $management_type = request()->param('management_type', 0);
-        $status = request()->param('status', 1);
-
         // 验证参数
         $data = [
             'id'               => $id,
@@ -103,42 +86,43 @@ class OperationTeam extends Controller
             'leader_id'        => $leader_id,
             'description'      => $description,
             'management_type'  => $management_type,
-            'status'           => $status,
         ];
 
         $result = $this->validate($data, 'OperationTeam');
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
-
-        if (empty($id)) {
-            $team = new OperationTeamModel();
-            $result = $team->save($data);
-            // 创建工作流
-            $flow_result = $this->addFlow($team->id);
-        } else {
-            // 更新
-            if (empty($logo)) {
-                unset($data['logo']);
-            }
-            $team = new OperationTeamModel();
-            $result = $team->save($data, ['id', $id]);
-        }
-        if ($result) {
-            if (empty($id)) {
-                // 同时创建名字相同的部门
+        $team = new OperationTeamModel();
+        $team->startTrans();
+        try{
+            if (empty($id)) {                    // 同时创建名字相同的部门
+                $result = $team->save($data);
                 $department = new Department();
-                $data = [
+                $department_data = [
                     'name' => $name,
                     'p_id' => 0,
-                    'description' => $name
+                    'description' => $name,
+                    'team_id' => $team->id
                 ];
-                $department->save($data);
+                $department->save($department_data);
+            } else {
+                $result = $team->save($data, ['id', $id]);
             }
-            return json(['code' => 200, 'message' => '保存成功!']);
-        } else {
-            return json(['code' => 404, 'message' => '保存失败!']);
+            if ($result) {
+                if (empty($id)) {
+                    // 创建工作流
+                    $flow_result = $this->addFlow($team->id);
+                }
+                $team->commit();
+                return json(['code' => 200, 'message' => '保存成功!']);
+            } else {
+                return json(['code' => 404, 'message' => '保存失败!']);
+            }
+        } catch (\Exception $e) {
+            $team->rollback();
+            return json(['code' => 404, 'message'=> '保存失败', 'data'=>$e->getMessage()]);
         }
+
     }
 
     /**
@@ -159,7 +143,7 @@ class OperationTeam extends Controller
         }
         $detail = OperationTeamModel::where('id', $id)->with(['leader' => function($query){
             $query->field('id,nickname');
-        }])->field('id,name,description,leader_id')->find();
+        }])->find();
 
         if ($detail) {
             unset($detail->leader_id);
@@ -187,7 +171,8 @@ class OperationTeam extends Controller
         $team = OperationTeamModel::get($id, 'users');
         if (!empty($team)) {
             // 启动事务
-            Db::startTrans();
+//            Db::startTrans();
+            $team->startTrans();
             try {
                 // 删除用户角色中间表数据
                 $user_ids= [];
@@ -202,11 +187,13 @@ class OperationTeam extends Controller
                 // 删除运营团队的同时删除下面的所有自建角色
                 $roles = Role::whereIn('id', $role_ids)->where('type', 1)->delete();
                 $operation_team_roles = OperationTeamRole::where('operation_team_id', $id)->delete();
-                Db::commit();
+                // 删除同名部门
+                Department::where('operation_team_id', $id)->delete();
+                $team->commit();
                 return json(['code' => 200, 'message' => '删除成功!']);
             } catch (\Exception $e) {
                 // 回滚事务
-                Db::rollback();
+                $team->rollback();
                 return json(['code' => 404, 'message' => '删除失败!']);
             }
         } else {
@@ -253,7 +240,7 @@ class OperationTeam extends Controller
      */
     public function leader()
     {
-        $operation_team_id = request()->param('operation_team_id/d');
+        $operation_team_id = request()->param('operation_team_id');
         $data = [
             'operation_team_id' => $operation_team_id
         ];
@@ -261,7 +248,11 @@ class OperationTeam extends Controller
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
-        $leaders = Admin::where('operation_team_id', $operation_team_id)->field('id,nickname')->select();
+        if (is_null($operation_team_id)) {
+            $leaders = Admin::where('operation_team_id', '<>', 0)->field('id,nickname')->select();
+        } else {
+            $leaders = Admin::where('operation_team_id', $operation_team_id)->field('id,nickname')->select();
+        }
         if (!empty($leaders)) {
             return json(['code' => 200, 'message' => '获取列表成功', 'data' => $leaders]);
         } else {
@@ -306,7 +297,8 @@ class OperationTeam extends Controller
      * 运营团队下拉接口
      */
     public function select() {
-        $team = OperationTeamModel::field('id,name')->select();
+        $team = OperationTeamModel::field('id,name')->select()->toArray();
+        array_unshift($team, ['id' => 0, 'name' => '公司']);
         if (!empty($team)) {
             return json(['code' => 200, 'message' => '获取列表成功', 'data' => $team]);
         } else {
@@ -321,8 +313,8 @@ class OperationTeam extends Controller
     {
         // 订单工作流数据
         $data = [
-            ['team_id' => $team_id, 'type' => 'order', 'flow_name' => '销售订单审核流程', 'uid' => session('admin.id'), 'add_time' => time()],
-            ['team_id' => $team_id, 'type' => 'incidental', 'flow_name' => '杂费收取审核流程', 'uid' => session('admin.id'), 'add_time' => time()]
+            ['team_id' => $team_id, 'type' => 'order', 'flow_name' => '销售订单审核流程', 'flow_desc' => '销售订单审核流程', 'uid' => session('admin.id'), 'add_time' => time()],
+            ['team_id' => $team_id, 'type' => 'incidental', 'flow_name' => '杂费收取审核流程', 'flow_desc' => '销售订单审核流程', 'uid' => session('admin.id'), 'add_time' => time()]
         ];
         $result = Db::table('tb_flow')->insertAll($data);
         return $result;
@@ -349,7 +341,12 @@ class OperationTeam extends Controller
         // 工作流编辑
         $flow = Db::table('tb_flow')->where('team_id', $operation_team_id)->field('id,flow_name,status')->paginate('10');
         $data['flow'] = $flow->each(function($item, $key){
-            $item['edit'] = db('tb_run')->where('flow_id',$item['id'])->where('status','0')->value('id');
+            $item['is_edit'] = db('tb_run')->where('flow_id',$item['id'])->where('status','0')->value('id');
+            if ($item['is_edit']) {
+                $item['is_edit'] = 1;
+            } else {
+                $item['is_edit'] = 0;
+            }
             return $item;
         });
 //        $this->assign('list', $data);
