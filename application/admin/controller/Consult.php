@@ -12,9 +12,8 @@ namespace app\admin\controller;
 use think\App;
 use app\admin\model\ConsultPolicy as ConsultPolicyModel;
 use app\admin\validate\Consult as ConsultValidate;
-use think\Controller;
 
-class Consult extends Controller {
+class Consult extends BaseController {
 
     /* 声明咨询政策模型 */
     protected $consult_policy_model;

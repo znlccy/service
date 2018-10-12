@@ -71,7 +71,7 @@ class ActivityRegistration extends BaseController {
 
         if (true !== $result) {
             return json([
-                'code'      => '200',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -111,13 +111,13 @@ class ActivityRegistration extends BaseController {
 
         if ($activity_registration) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '查询信息成功',
                 'data'      =>$activity_registration
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '查询信息失败'
             ]);
         }
@@ -140,7 +140,7 @@ class ActivityRegistration extends BaseController {
         $result = $this->validate($validate_data, 'ActivityRegistration.attach');
         if (true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -149,7 +149,7 @@ class ActivityRegistration extends BaseController {
         $apply = $this->user_activity_model->where('user_id', $user_id)->where('activity_id', $activity_id)->find();
         if ($apply) {
             return json([
-                'code'      => '201',
+                'code'      => 201,
                 'message'   => '已经报名'
             ]);
             exit();
@@ -159,12 +159,12 @@ class ActivityRegistration extends BaseController {
         $res = $this->user_activity_model->save(['user_id' => $user_id, 'activity_id' => $activity_id, 'apply_time' => date('Y-m-d H:i:s', time())]);
         if ($res) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '添加报名成功'
             ]);
         } else {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => '添加报名失败'
             ]);
         }
@@ -188,7 +188,7 @@ class ActivityRegistration extends BaseController {
         $result = $this->validate($validate_data, 'ActivityRegistration.detach');
         if (true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -198,7 +198,7 @@ class ActivityRegistration extends BaseController {
 
         if (empty($apply) || is_null($apply)) {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '你还没报名这项活动'
             ]);
         }
@@ -210,12 +210,12 @@ class ActivityRegistration extends BaseController {
         $res = $user->Activity()->detach($activity);
         if ($res) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '取消报名成功'
             ]);
         } else {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => '取消报名失败'
             ]);
         }
@@ -236,7 +236,7 @@ class ActivityRegistration extends BaseController {
         $result = $this->validate($validate_data, 'ActivityRegistration.detail');
         if (true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -246,13 +246,13 @@ class ActivityRegistration extends BaseController {
 
         if ($activity) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '查询数据成功',
                 'data'      => $activity
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '查询诗句就失败'
             ]);
         }
