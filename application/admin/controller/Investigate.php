@@ -184,13 +184,28 @@ class Investigate extends Controller {
             $investigate = $this->investigate_model->insertGetId($insert_data);
             $investigate_instance = $this->investigate_model->where('id', $investigate)->find();
 
+            if (empty($questions)) {
+                return json([
+                    'code'   => 404,
+                    'message'=> '问题不能为空'
+                ]);
+            }
+
             foreach ($questions as $key => $question) {
                 $type = $question['type'];
+
+
                 switch ($type) {
                     case 1:
-                        $investigate_instance->Question()->save(['content' => $question['title'], 'type' => 1, 'max' => 1]);
+                        $investigate_instance->Question()->save(['content' => $question['title'], 'type' => 1, 'max' => 1, 'must' => $question['must']]);
                         $question_instance = $this->question_model->order('id','desc')->limit(1)->find();
                         $options = $question['option'];
+                        if (empty($question['option'])) {
+                            return json([
+                                'code'      => 404,
+                                'message'   => '问题选项不能为空'
+                            ]);
+                        }
                         $option_list = array();
                         foreach ($options as $key => $option) {
                             $option_list[$key]['content'] = $option;
@@ -198,7 +213,7 @@ class Investigate extends Controller {
                         $investigate_result = $question_instance->Option()->saveAll($option_list);
                         break;
                     case 2:
-                        $investigate_instance->Question()->save(['content' => $question['title'], 'type' => 2, 'max' => $question['max']]);
+                        $investigate_instance->Question()->save(['content' => $question['title'], 'type' => 2, 'max' => $question['max'], 'must' => $question['must']]);
                         $question_instance = $this->question_model->order('id','desc')->limit(1)->find();
                         $options = $question['option'];
                         $option_list = array();
@@ -208,7 +223,7 @@ class Investigate extends Controller {
                         $investigate_result = $question_instance->Option()->saveAll($option_list);
                         break;
                     case 3:
-                        $investigate_instance->Question()->save(['content' => $question['title'], 'type' => 3, 'max' => 1]);
+                        $investigate_instance->Question()->save(['content' => $question['title'], 'type' => 3, 'max' => 1, 'must' => $question['must']]);
                         $question_instance = $this->question_model->order('id','desc')->limit(1)->find();
                         $options = $question['option'];
                         $option_list = array();
@@ -242,39 +257,44 @@ class Investigate extends Controller {
     /* 问卷调查详情 */
     public function detail() {
 
-        //获取客户端提交过来的数据
+        /* 接收客户端提交过来的数据 */
         $id = $this->request->param('id');
 
-        //验证数据
+        /* 验证数据 */
         $validate_data = [
             'id'        => $id
         ];
 
-        //验证结果
+        /* 验证结果 */
         $result = $this->validate($validate_data, 'Investigate.detail');
 
         if (true !== $result) {
             return json([
-                'code'      => 401,
+                'code'      => '401',
                 'message'   => $result
             ]);
         }
 
-        //返回结果
-        $investigate = $this->investigate_model->where('id', $id)->find();
+        /* 返回结果 */
+        $investigate = $this->investigate_model
+            ->with('question',function ($query){
+                $query->field('id,content');
+            })
+            ->where('id', $id)
+            ->order('id','desc')
+            ->find();
 
-        if ($investigate) {
-            return json([
-                'code'      => 200,
-                'message'   => '查询数据成功',
-                'data'      => $investigate
-            ]);
-        } else {
-            return json([
-                'code'      => 404,
-                'message'   => '查询数据失败，数据不存在'
-            ]);
+        $option_list = [];
+        for ( $i = 0; $i < count($investigate['question']); $i++ ) {
+            $option_list[$i] = $this->option_model->where('question_id', '=',$investigate['question'][$i]['id'])->select();
+            $investigate['question'][$i]['option'] = $option_list[$i];
         }
+
+        return json([
+            'code'      => '200',
+            'message'   => '查询数据成功',
+            'data'      => $investigate
+        ]);
     }
 
     /* 问卷调查删除 */
@@ -439,7 +459,14 @@ class Investigate extends Controller {
             $option_list[$i] = $this->option_model->where('question_id', '=',$investigate['question'][$i]['id'])->select();
             $investigate['question'][$i]['option'] = $option_list[$i];
             for ($j = 0; $j < count($investigate['question'][$i]['option']); $j++ ) {
-                $investigate['question'][$i]['option'][$j]['percent'] = ($option_list[$i][$j]['count']/$investigate['count'])*100;
+                try {
+                    $investigate['question'][$i]['option'][$j]['percent'] = ($option_list[$i][$j]['count'] / $investigate['count']) * 100;
+                } catch (\Exception $e) {
+                    return json([
+                        'code'      => 402,
+                        'message'   => ''.$e
+                    ]);
+                }
             }
         }
 
