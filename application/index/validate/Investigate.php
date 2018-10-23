@@ -41,8 +41,8 @@ class Investigate extends BasisValidate {
     }
 
     public function sceneSubmit() {
-        return $this->only(['investigate_id', 'answer'])
+        return $this->only(['investigate_id', 'question'])
             ->append('id', 'require|number')
-            ->append('answer', 'max:800');
+            ->append('question', 'max:800');
     }
 }

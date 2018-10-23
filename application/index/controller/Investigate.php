@@ -130,13 +130,16 @@ class Investigate extends Controller {
     public function submit() {
 
         /* 接收客户端提交过来的数据 */
-        $investigate_id = $this->request->param('investigate_id');
-        $answer = $this->request->param('answer');
+        $data = file_get_contents('php://input');
+        $data = json_decode($data, true);
+
+        $investigate_id = $data['investigate_id'];
+        $question = $data['question'];
 
         /* 验证数据 */
         $validate_data = [
             'investigate_id' => $investigate_id,
-            'answer'         => $answer
+            'question'       => $question
         ];
 
         /* 验证结果 */
@@ -150,26 +153,31 @@ class Investigate extends Controller {
         }
 
         /* 返回数据 */
-        $investigate = $this->investigate_model
-            ->where('id',$investigate_id)
-            ->with('question', function ($query) {
-                $query->field('id,content');
-            })
-            ->find();
+        $result_inc = $this->investigate_model->where('id', $investigate_id)->setInc('count');
 
-        $this->investigate_model->where('id', $investigate_id)->setInc('count');
+        for ( $i = 0; $i < count($question); $i++ ) {
+            $question_instance = $this->question_model->where('id', $question[$i]['id'])->find();
 
-        for ( $i = 0; $i < count($investigate['question']); $i++ ) {
-            if ($investigate['question'][$i]['type'] == 1) {
-                $this->question_model->where('id', $investigate['question'][$i]['id'])->update(['answer' => $answer]);
-                $option = $this->option_model->where('id', $answer)->setInc('count');
-            }
-            if ($investigate['question'][$i]['type'] == 2) {
-                $this->question_model->where('id', $investigate['question'][$i]['id'])->update(['answer' => $answer]);
-                $option = $this->option_model->where('id', 'in', $answer)->setInc('count');
-            }
-            if ($investigate['question'][$i]['type'] == 3) {
-                $this->question_model->where('id', $investigate['question'][$i]['id'])->update(['answer' => $answer]);
+            switch (intval($question_instance['type'])) {
+                case 1:
+
+                    $this->question_model->where('id', $question[$i]['id'])->update(['answer' => $question[$i]['answer']]);
+                    $option = $this->option_model->where('id', $question[$i]['answer'])->find();
+
+                    dump('12');die();
+                    break;
+                case 2:
+                    dump(2);die();
+                    $this->question_model->where('id', $question[$i]['id'])->update(['answer' => $question[$i]['answer']]);
+                    $option = $this->option_model->where('id', 'in', $question[$i]['answer'])->setInc('count');
+                    break;
+                case 3:
+                    dump(3);die();
+                    $data = [
+                        'answer'    => $question[$i]['answer']
+                    ];
+                    $this->question_model->save($data,['id' => $question[$i]['id']]);
+                    break;
             }
         }
 
