@@ -197,7 +197,7 @@ class Investigate extends Controller {
 
                 switch ($type) {
                     case 1:
-                        $investigate_instance->Question()->save(['content' => $question['title'], 'type' => 1, 'max' => 1, 'must' => $question['must']]);
+                        $investigate_instance->Question()->save(['content' => $question['title'], 'type' => 1, 'max' => 1, 'must' => intval($question['must'])]);
                         $question_instance = $this->question_model->order('id','desc')->limit(1)->find();
                         $options = $question['option'];
                         if (empty($question['option'])) {
@@ -213,7 +213,7 @@ class Investigate extends Controller {
                         $investigate_result = $question_instance->Option()->saveAll($option_list);
                         break;
                     case 2:
-                        $investigate_instance->Question()->save(['content' => $question['title'], 'type' => 2, 'max' => $question['max'], 'must' => $question['must']]);
+                        $investigate_instance->Question()->save(['content' => $question['title'], 'type' => 2, 'max' => $question['max'], 'must' => intval($question['must'])]);
                         $question_instance = $this->question_model->order('id','desc')->limit(1)->find();
                         $options = $question['option'];
                         $option_list = array();
@@ -223,7 +223,7 @@ class Investigate extends Controller {
                         $investigate_result = $question_instance->Option()->saveAll($option_list);
                         break;
                     case 3:
-                        $investigate_instance->Question()->save(['content' => $question['title'], 'type' => 3, 'max' => 1, 'must' => $question['must']]);
+                        $investigate_instance->Question()->save(['content' => $question['title'], 'type' => 3, 'max' => 1, 'must' => intval($question['must'])]);
                         $question_instance = $this->question_model->order('id','desc')->limit(1)->find();
                         $options = $question['option'];
                         $option_list = array();
@@ -240,17 +240,10 @@ class Investigate extends Controller {
             $investigate_result = $this->investigate_model->save($validate_data, ['id' => $id]);
         }
 
-        if ($investigate_result) {
-            return json([
-                'code'      => 200,
-                'message'   => '数据操作成功'
-            ]);
-        } else {
-            return json([
-                'code'      => 401,
-                'message'   => '数据操作失败'
-            ]);
-        }
+        return json([
+            'code'      => 200,
+            'message'   => '数据操作成功'
+        ]);
 
     }
 
@@ -337,17 +330,12 @@ class Investigate extends Controller {
             ]);
         }
 
-        if ($question && $option && $investigate) {
-            return json([
-                'code'      => 200,
-                'message'   => '删除数据成功'
-            ]);
-        } else {
-            return json([
-                'code'      => 404,
-                'message'   => '删除数据失败'
-            ]);
-        }
+
+        return json([
+            'code'      => 200,
+            'message'   => '删除数据成功'
+        ]);
+
 
     }
 
