@@ -5,6 +5,8 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 use app\admin\model\Space as SpaceModel;
+use app\admin\model\Workplace;
+use app\admin\model\OrderWorkplace;
 
 class Space extends BaseController
 {
@@ -46,6 +48,8 @@ class Space extends BaseController
             ->order('id')
             ->paginate($page_size, false, ['page' => $jump_page])
             ->each(function($item){
+                $rate = $this->rate($item['id']);
+                $item['enter_rate'] = $rate;
                 unset($item['operation_team_id']);
             });
         return json(['code'=> 200, 'message' => '获取列表成功', 'data' => $space]);
@@ -53,6 +57,8 @@ class Space extends BaseController
 
     /**
      * 新增更新保存
+     *
+     *
      *
      */
     public function save()
@@ -150,8 +156,8 @@ class Space extends BaseController
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
+        $space = new SpaceModel();
         if (empty($id)) {
-            $space = new SpaceModel();
             $result = $space->save($data);
         } else {
             if (empty($position_picture)) {
@@ -160,7 +166,6 @@ class Space extends BaseController
             if (empty($space_pictures)) {
                 unset($data['space_pictures']);
             }
-            $space = new SpaceModel();
             $result = $space->save($data, ['id' => $id]);
         }
         if ($result) {
@@ -189,6 +194,7 @@ class Space extends BaseController
             return json(['code' => 401, 'message' => $result]);
         }
         $detail = SpaceModel::with(['operationTeam','province','city','district'])->where('id', $id)->find();
+        $detail['enter_rate'] = $this->rate($detail['id']);
 
         if ($detail) {
             unset($detail['operation_team_id'],$detail['province_id'],$detail['city_id'],$detail['district_id']);
@@ -223,6 +229,7 @@ class Space extends BaseController
 
     /**
      * 空间下拉列表
+     *
      */
     public function select()
     {
@@ -233,4 +240,38 @@ class Space extends BaseController
             return json(['code' => 404, 'message' => '获取下拉列表失败']);
         }
     }
+
+    /**
+     * 计算空间入驻率
+     *
+     */
+    public function rate($id)
+    {
+        // 计算按个工位入驻率
+        $one_sum_count = Workplace::where(['space_id' => $id, 'type' => 0])->count();
+        if ($one_sum_count) {
+            $one_lease_count = Workplace::where(['space_id' => $id, 'type' => 0, 'status' => 0])->count();
+            $one_rate = bcdiv($one_lease_count, $one_sum_count, 2);
+        }
+        // 计算按面积工位入驻率
+        $area_sum = Workplace::where(['space_id' => $id, 'type' => 1])->sum('total_area');
+        if ($area_sum) {
+            // 获取该空间下的所有按面积计算工位id
+            $area_workplace_ids = Workplace::where(['space_id' => $id, 'type' => 1])->column('id');
+            $area_lease_sum = OrderWorkplace::whereIn('workplace_id', $area_workplace_ids)->sum('workplace_area');
+            $area_rate = bcdiv($area_lease_sum, $area_sum, 2);
+        }
+        if (isset($one_rate) && isset($area_rate)) {
+            $rate = bcdiv($one_rate + $area_rate, 2, 2);
+        } elseif(isset($one_rate)) {
+            $rate = $one_rate;
+        } elseif(isset($area_rate)) {
+            $rate = $area_rate;
+        } else {
+            $rate = 0;
+        }
+        // 最终入驻率
+        return $rate;
+    }
+
 }

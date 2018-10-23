@@ -26,4 +26,12 @@ class Question extends BasisModel {
     public function option() {
         return $this->hasMany('Option', 'question_id', 'id');
     }
+
+    public function setAnswerAttr($value) {
+        return json_encode($value);
+    }
+
+    public function getAnswerAttr($value) {
+        return json_decode($value, true);
+    }
 }

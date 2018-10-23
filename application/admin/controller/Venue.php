@@ -71,6 +71,33 @@ class Venue extends Controller
         $remark = request()->param('remark');
         $disable_time = request()->param('disable_time/a');
         $status = request()->param('status/d');
+        $picture = request()->file('picture');
+        if ($picture) {
+            $info = $picture->move(ROOT_PATH . 'public' . DS . 'images');
+            if ($info) {
+                //成功上传后，获取上传信息
+                //输出jpg
+                /*echo '文件扩展名:' . $info->getExtension() .'<br>';*/
+                $ext = strtolower($info->getExtension());
+                // 允许上传的格式
+                $allow_ext = ['jpg', 'gif', 'png', 'jpeg'];
+                if (!in_array($ext, $allow_ext)) {
+                    return json(['code' => 401, 'message' => '上传图片格式不正确(仅支持jpg、gif、 png、 psd)']);
+                }
+                // 图片文件大小
+                $size = $info->getSize();
+                $picture_max_size = config('picture_max_size');
+                if ($size > $picture_max_size) {
+                    return json(['code' => 401, 'message' => '上传的图片过大(最不不超过3M)']);
+                }
+                //输出文件格式
+                /*echo '文件详细的路径加文件名:' . $info->getSaveName() .'<br>';*/
+                //输出文件名称
+                /*echo '文件保存的名:' . $info->getFilename();*/
+                $sub_path     = str_replace('\\', '/', $info->getSaveName());
+                $picture = '/images/' . $sub_path;
+            }
+        }
         $data = [
             'id' => $id,
             'venue_no' => $venue_no,
@@ -79,6 +106,7 @@ class Venue extends Controller
             'accommodate_num' => $accommodate_num,
             'remark' => $remark,
             'disable_time' =>$disable_time,
+            'picture' => $picture,
             'status' => $status,
         ];
         // 验证
@@ -91,6 +119,9 @@ class Venue extends Controller
         if (empty($id)) {
             $result = $venue->save($data);
         } else {
+            if (!$picture) {
+                unset($data['picture']);
+            }
             $result = $venue->save($data,['id' => $id]);
         }
         if ($result) {
@@ -119,8 +150,7 @@ class Venue extends Controller
         }
         $detail = VenueModel::with(['space' => function ($query) {
             $query->field('id,name');
-        }, 'reservations'])->where('id', $id)->find();
-
+        }, 'reservations.team'])->where('id', $id)->find();
         if ($detail) {
             unset($detail['space_id']);
             return json(['code' => 200, 'message' => '获取详情成功!', 'data' => $detail]);

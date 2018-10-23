@@ -4,7 +4,7 @@ namespace app\admin\validate;
 
 use think\Validate;
 
-class Venue extends Validate
+class Venue extends BaseValidate
 {
     /**
      * 定义验证规则
@@ -21,6 +21,7 @@ class Venue extends Validate
         'remark' => 'require',
         'disable_time' => 'array',
         'status' => 'require|number',
+        'picture' => 'requireCallback:id_null|max:80'
     ];
 
     /**
@@ -40,6 +41,7 @@ class Venue extends Validate
         'accommodate_num' => '容纳人数',
         'remark' => '备注',
         'status' => '状态',
+        'picture' => '场馆图片'
     ];
 
     //验证场景

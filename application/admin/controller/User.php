@@ -190,11 +190,9 @@ class User extends BaseController {
             'id'        => $id
         ];
 
-        $validate = Loader::validate('User');
-
-        $result   = $validate->scene('detail')->check($data);
-        if (!$result) {
-            return json(['code' => 401, 'message' => $validate->getError()]);
+        $result = $this->validate($data,'User.detail');
+        if (true !== $result) {
+            return json(['code' => 401, 'message' => $result]);
         }
 
         $user = $user_model->where('id', '=', $id)->find();
@@ -221,12 +219,9 @@ class User extends BaseController {
         $data = [
             'id'        => $id
         ];
-
-        $validate = Loader::validate('User');
-
-        $result   = $validate->scene('delete')->check($data);
-        if (!$result) {
-            return json(['code' => 401, 'message' => $validate->getError()]);
+        $result = $this->validate($data,'User.delete');
+        if (true !== $result) {
+            return json(['code' => 401, 'message' => $result]);
         }
 
         $delete_result = $user_model->where('id', '=', $id)->delete();
@@ -242,5 +237,13 @@ class User extends BaseController {
                 'message'   => '删除用户失败'
             ]);
         }
+    }
+
+    /**
+     * 前台用户下拉
+     */
+    public function select() {
+        $user = UserModel::field('id,mobile')->select();
+        return json(['code' => 200, 'data' => $user]);
     }
 }

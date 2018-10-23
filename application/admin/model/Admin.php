@@ -35,4 +35,10 @@ class Admin extends BaseModel {
     public function department() {
         return $this->hasOne('Department', 'id', 'department_id')->field('id,name');
     }
+    /**
+     * 所属空间
+     */
+    public function space() {
+        return $this->belongsTo('Space', 'operation_team_id', 'operation_team_id')->field('id,name');
+    }
 }

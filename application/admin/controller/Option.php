@@ -57,7 +57,7 @@ class Option extends BaseController {
 
         if (true !== $result) {
             return json([
-                'code'      => 401,
+                'code'      => '401',
                 'message'   => $result
             ]);
         }
@@ -86,13 +86,13 @@ class Option extends BaseController {
 
         if ($option) {
             return json([
-                'code'      => 200,
+                'code'      => '200',
                 'message'   => '查询数据成功',
                 'data'      => $option
             ]);
         } else {
             return json([
-                'code'      => 404,
+                'code'      => '404',
                 'message'   => '查询数据失败,数据不存在'
             ]);
         }
@@ -118,7 +118,7 @@ class Option extends BaseController {
 
         if (true !== $result) {
             return json([
-                'code'      => 401,
+                'code'      => '401',
                 'message'   => $result
             ]);
         }
@@ -132,12 +132,12 @@ class Option extends BaseController {
 
         if ($operation) {
             return json([
-                'code'      => 200,
+                'code'      => '200',
                 'message'   => '操作数据成功'
             ]);
         } else {
             return json([
-                'code'      => 401,
+                'code'      => '401',
                 'message'   => '操作数据失败'
             ]);
         }
@@ -159,7 +159,7 @@ class Option extends BaseController {
 
         if (true !== $result) {
             return json([
-                'code'      => 401,
+                'code'      => '401',
                 'message'   => $result
             ]);
         }
@@ -169,12 +169,12 @@ class Option extends BaseController {
 
         if ($policy) {
             return json([
-                'code'      => 200,
+                'code'      => '200',
                 'message'   => '查询数据成功'
             ]);
         } else {
             return json([
-                'code'      => 404,
+                'code'      => '404',
                 'message'   => '查询数据失败，数据不存在'
             ]);
         }
@@ -196,7 +196,7 @@ class Option extends BaseController {
 
         if (true !== $result) {
             return json([
-                'code'      => 401,
+                'code'      => '401',
                 'message'   => $result
             ]);
         }
@@ -205,12 +205,12 @@ class Option extends BaseController {
         $operation = $this->option_model->where('id', $id)->delete();
         if ($operation) {
             return json([
-                'code'      => 200,
+                'code'      => '200',
                 'message'   => '删除数据成功',
             ]);
         } else {
             return json([
-                'code'      => 404,
+                'code'      => '404',
                 'message'   => '删除数据失败，数据不存在'
             ]);
         }

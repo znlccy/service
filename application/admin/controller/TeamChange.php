@@ -134,22 +134,21 @@ class TeamChange extends Controller
             return json(['code' => 401, 'message' => $result]);
         }
         $team_change = TeamChangeModel::get($id);
+        $team_change->startTrans();
         if ($team_change && $status === 1) {
-            $team_change->startTrans();
             try {
                 $team_change->status = $status;
                 $team_change->check_user = $check_user;
                 $team_change->check_time = $check_time;
                 $team_change->save();
-                // 根据变更项目修改原来的数据
+                $after_data = $team_change->after_change;
                 switch ($team_change->project) {
                     case 1: // 发展历程
-                        $after_data = $team_change->after_change;
-                        $develop = Development::update($after_data);
+                        $develop = Development::where('id', $after_data['id'])->update(['status' => 1]);
                         break;
                     case 2: // 团队成员
-                        $after_data = $team_change->after_change;
-                        $member = EnterTeamMember::update($after_data);
+//                        $after_data = $team_change->after_change;
+                        $member = EnterTeamMember::where('id', $after_data['id'])->update(['status' => 1]);
                         break;
                     default:
                         break;
@@ -158,16 +157,42 @@ class TeamChange extends Controller
                 return json(['code' => 200, 'message' => '审核成功']);
             } catch (\Exception $e) {
                 $team_change->rollback();
-                return json(['code' => 404, 'message' => '审核失败']);
+                return json(['code' => 404, 'message' => $e->getMessage()]);
             }
         } elseif ($status === 2) {
-            $team_change->status = $status;
-            $team_change->check_user = $check_user;
-            $team_change->check_time = $check_time;
-            if($team_change->save()) {
+            try {
+                $team_change->status = $status;
+                $team_change->check_user = $check_user;
+                $team_change->check_time = $check_time;
+                $team_change->save();
+                switch ($team_change->project) {
+                    case 1: // 发展历程
+                        $before_data = $team_change->before_change;
+                        $after_data = $team_change->after_change;
+                        if ($before_data) {
+                            $before_data['status'] = 1;
+                            $develop = Development::update($before_data);
+                        } else {
+                            $develop = Development::where(['id' => $after_data['id']])->delete();
+                        }
+                        break;
+                    case 2: // 团队成员
+                        $before_data = $team_change->before_change;
+                        $after_data = $team_change->after_change;
+                        if ($before_data) {
+                            $member = EnterTeamMember::update($before_data);
+                        } else {
+                            $member = EnterTeamMember::where(['id' => $after_data['id']])->delete();
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                $team_change->commit();
                 return json(['code' => 200, 'message' => '拒绝成功']);
-            } else {
-                return json(['code' => 404, 'message' => '拒绝失败']);
+            } catch (\Exception $e) {
+                $team_change->rollback();
+                return json(['code' => 404, 'message' => $e->getMessage()]);
             }
         }
 

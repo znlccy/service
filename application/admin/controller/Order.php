@@ -80,7 +80,7 @@ class Order extends Controller
     {
         // 获取销售订单参数
         $id = request()->param('id');
-        $order_no = 'XSDD' . uniqid();
+        $order_no = 'XSDD' . time() . uniqid();
         $team_id = request()->param('team_id');
         $contract_template_no = request()->param('contract_template_no');
         $begin_time = request()->param('begin_time', date('Y-m-d',time()));
@@ -92,7 +92,7 @@ class Order extends Controller
         $remark = request()->param('remark');
         $order_status = request()->param('order_status/d', 0);
 //        $total_price = request()->param('total_price');
-//        $invoice_no = 'IN' . uniqid();
+//        $invoice_no = 'IN' . time() . uniqid();
         // 获取发票参数
         $opener_type = request()->param('opener_type');
         $invoice_title = request()->param('invoice_title');
@@ -173,6 +173,7 @@ class Order extends Controller
             'account' => $account,
             'address' => $address,
             'phone' => $phone,
+            'team_id' => $team_id,
 //            'price' => $deposit,
             'status' => $invoice_status,
         ];
@@ -263,8 +264,8 @@ class Order extends Controller
                         for ($i = 0; $i < $months; $i++) {
                             $rec_order = new RecOrder();
                             $invoice = new Invoice();
-                            $rec_order_no = 'XSDD' . uniqid();
-                            $invoice_no = 'IN' . uniqid();
+                            $rec_order_no = 'XSDD' . time() . uniqid();
+                            $invoice_no = 'IN' . time() . uniqid();
                             // 第一次订单金额需要加上定金金额
                             if ($i === 0) {
                                 $real_price = $price + $deposit;
@@ -310,8 +311,8 @@ class Order extends Controller
                         for ($i = 0; $i < $quarter; $i++) {
                             $rec_order = new RecOrder();
                             $invoice = new Invoice();
-                            $rec_order_no = 'XSDD' . uniqid();
-                            $invoice_no = 'IN' . uniqid();
+                            $rec_order_no = 'XSDD' . time() . uniqid();
+                            $invoice_no = 'IN' . time() . uniqid();
                             // 收款订单数据
                             // 第一次订单金额需要加上定金金额
                             if ($i === 0) {
@@ -357,8 +358,8 @@ class Order extends Controller
                         for ($i = 0; $i < $half_year; $i++) {
                             $rec_order = new RecOrder();
                             $invoice = new Invoice();
-                            $rec_order_no = 'XSDD' . uniqid();
-                            $invoice_no = 'IN' . uniqid();
+                            $rec_order_no = 'XSDD' . time() . uniqid();
+                            $invoice_no = 'IN' . time() . uniqid();
                             // 收款订单数据
                             // 第一次订单金额需要加上定金金额
                             if ($i === 0) {
@@ -403,8 +404,8 @@ class Order extends Controller
                         for ($i = 0; $i < $contract_years; $i++) {
                             $rec_order = new RecOrder();
                             $invoice = new Invoice();
-                            $rec_order_no = 'XSDD' . uniqid();
-                            $invoice_no = 'IN' . uniqid();
+                            $rec_order_no = 'XSDD' . time() . uniqid();
+                            $invoice_no = 'IN' . time() . uniqid();
                             // 收款订单数据
                             // 第一次订单金额需要加上定金金额
                             if ($i === 0) {
@@ -447,8 +448,8 @@ class Order extends Controller
                     default: // 金额
                         $rec_order = new RecOrder();
                         $invoice = new Invoice();
-                        $rec_order_no = 'XSDD' . uniqid();
-                        $invoice_no = 'IN' . uniqid();
+                        $rec_order_no = 'XSDD' . time() . uniqid();
+                        $invoice_no = 'IN' . time() . uniqid();
                         // 收款订单数据
                         $data = [
                             'sale_order_id' => $order->id,
@@ -563,8 +564,8 @@ class Order extends Controller
                         for ($i = 0; $i < $months; $i++) {
                             $rec_order = new RecOrder();
                             $invoice = new Invoice();
-                            $rec_order_no = 'XSDD' . uniqid();
-                            $invoice_no = 'IN' . uniqid();
+                            $rec_order_no = 'XSDD' . time() . uniqid();
+                            $invoice_no = 'IN' . time() . uniqid();
                             // 第一次订单金额需要加上定金金额
                             if ($i === 0) {
                                 $real_price = $price + $deposit;
@@ -604,8 +605,8 @@ class Order extends Controller
                         for ($i = 0; $i < $quarter; $i++) {
                             $rec_order = new RecOrder();
                             $invoice = new Invoice();
-                            $rec_order_no = 'XSDD' . uniqid();
-                            $invoice_no = 'IN' . uniqid();
+                            $rec_order_no = 'XSDD' . time() . uniqid();
+                            $invoice_no = 'IN' . time() . uniqid();
                             // 第一次订单金额需要加上定金金额
                             if ($i === 0) {
                                 $real_price = $price + $deposit;
@@ -645,8 +646,8 @@ class Order extends Controller
                         for ($i = 0; $i < $half_year; $i++) {
                             $rec_order = new RecOrder();
                             $invoice = new Invoice();
-                            $rec_order_no = 'XSDD' . uniqid();
-                            $invoice_no = 'IN' . uniqid();
+                            $rec_order_no = 'XSDD' . time() . uniqid();
+                            $invoice_no = 'IN' . time() . uniqid();
                             // 第一次订单金额需要加上定金金额
                             if ($i === 0) {
                                 $real_price = $price + $deposit;
@@ -685,8 +686,8 @@ class Order extends Controller
                         for ($i = 0; $i < $contract_years; $i++) {
                             $rec_order = new RecOrder();
                             $invoice = new Invoice();
-                            $rec_order_no = 'XSDD' . uniqid();
-                            $invoice_no = 'IN' . uniqid();
+                            $rec_order_no = 'XSDD' . time() . uniqid();
+                            $invoice_no = 'IN' . time() . uniqid();
                             // 第一次订单金额需要加上定金金额
                             if ($i === 0) {
                                 $real_price = $price + $deposit;
@@ -723,8 +724,8 @@ class Order extends Controller
                     default: // 金额
                         $rec_order = new RecOrder();
                         $invoice = new Invoice();
-                        $rec_order_no = 'XSDD' . uniqid();
-                        $invoice_no = 'IN' . uniqid();
+                        $rec_order_no = 'XSDD' . time() . uniqid();
+                        $invoice_no = 'IN' . time() . uniqid();
                         // 收款订单数据
                         $data = [
                             'sale_order_id' => $id,

@@ -6,7 +6,7 @@ use workflow\workflow;
 use think\facade\Session;
 use think\Db;
 
-class Flow extends Controller {
+class Flow extends BaseController {
 
     protected $uid;
     protected $role;

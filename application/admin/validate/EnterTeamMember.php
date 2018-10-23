@@ -21,8 +21,9 @@ class EnterTeamMember extends Validate
         'signature' => 'require|max:100',
         'achievement' => 'require',
         'resume' => 'require',
-        'picture' => 'require|max:80',
+        'picture' => 'requireCallback:id_null|max:80',
         'enter_team_id' => 'require|number',
+        'status' => 'number',
     ];
 
     /**
@@ -64,5 +65,11 @@ class EnterTeamMember extends Validate
     {
         return $this->only(['id'])
             ->append('id', 'require');
+    }
+
+    public function id_null($value, $data) {
+        if (empty($data['id'])) {
+            return true;
+        }
     }
 }

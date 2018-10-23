@@ -71,6 +71,7 @@ class EnterTeam extends BaseController
         $description = request()->param('description');
         $logo = request()->file('logo');
         $status = request()->param('status', 1);
+        $user_id = request()->param('user_id');
         if ($id_card_pictures) {
             $arr_picture = [];
             foreach ($id_card_pictures as $value) {
@@ -169,7 +170,8 @@ class EnterTeam extends BaseController
             'develop_stage' => $develop_stage,
             'description' => $description,
             'logo' => $logo,
-            'status' => $status
+            'status' => $status,
+            'user_id' => $user_id
         ];
         $result = $this->validate($data,'EnterTeam');
         if (true !== $result) {
@@ -216,7 +218,7 @@ class EnterTeam extends BaseController
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
-        $detail = EnterTeamModel::with(['developments','members', 'linkman'])->where($data)->find();
+        $detail = EnterTeamModel::with(['developments','members', 'linkman', 'user'])->where($data)->find();
 
         if ($detail) {
             return json(['code' => 200, 'message' => '获取详情成功!', 'data' => $detail]);

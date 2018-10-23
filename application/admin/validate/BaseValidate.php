@@ -23,4 +23,10 @@ class BaseValidate extends Validate {
         'zip'         => '/\d{6}/',
         'phone'       => '/^(0?1[34578]\d{9})$|^0\d{2,3}-?\d{7,8}$/'
     ];
+
+    public function id_null($value, $data) {
+        if (empty($data['id'])) {
+            return true;
+        }
+    }
 }

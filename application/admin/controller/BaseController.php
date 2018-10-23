@@ -34,7 +34,9 @@ class BaseController extends Controller
         'Permission' => ['node'],
         'WorkplaceGroup' => ['select'],
         'Space' =>['select'],
+        'User' => ['select'],
         'Image' => ['upload'],
+        'Contract' => ['download']
     ];
 
     public function __construct(App $app = null)

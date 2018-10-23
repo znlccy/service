@@ -35,7 +35,7 @@ class Workplace extends Controller
             'status'           => $status,
             'id'               => $id,
         ];
-        $result = $this->validate($data, 'Space.index');
+        $result = $this->validate($data, 'Workplace.index');
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }

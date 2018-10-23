@@ -79,7 +79,7 @@ class IncidentalOrder extends BaseController
         foreach ($teams as $team) {
             // 插入杂费收款表
             $team['project'] = $project;
-            $team['order_no'] = 'OR' . uniqid();
+            $team['order_no'] = 'ZFDD' . time() . uniqid();
             $team['pay_type'] = $pay_type;
             $team['status'] = $status;
             $incidental = new IncidentalOrderModel();

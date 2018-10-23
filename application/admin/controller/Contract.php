@@ -268,7 +268,6 @@ class Contract extends BaseController
 
         $mpdf->WriteHTML($html);
         $mpdf->Output('contract.pdf', 'D');
-
     }
 
     /**

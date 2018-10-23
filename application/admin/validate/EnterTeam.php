@@ -27,7 +27,8 @@ class EnterTeam extends Validate
         'develop_stage' => 'require|max:30',
         'description' => 'require',
         'logo' => 'requireCallback:id_null|max:80',
-        'status' => 'require|number'
+        'status' => 'number',
+        'user_id' => 'require|number'
     ];
 
     /**
@@ -50,7 +51,8 @@ class EnterTeam extends Validate
         'develop_stage' => '发展阶段',
         'description' => '团队介绍',
         'logo' => '公司LOGO',
-        'status' => '状态'
+        'status' => '状态',
+        'user_id' => '前端用户'
     ];
 
     //验证场景

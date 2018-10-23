@@ -57,9 +57,14 @@ class Invoice extends Controller
             }
         }
         $invoice = InvoiceModel::where($conditions)
-            ->with('opener')
+            ->with(['opener'])
+            ->where('order_type', '<>', 0)
             ->order('create_time', 'desc')
-            ->paginate($page_size, false, ['page' => $jump_page]);
+            ->paginate($page_size, false, ['page' => $jump_page])->each(function($item){
+                $item['order_no'] = $item['rec_order_id'];
+                unset($item['sale_order_id'], $item['rec_order_id']);
+                return $item;
+            });
         return json(['code'=> 200, 'message' => '获取列表成功', 'data' => $invoice]);
     }
 
@@ -104,10 +109,9 @@ class Invoice extends Controller
     {
         $id = request()->param('id');
         $user_id = session('admin.id');
-        $status = request()->param('status/d', 0);
         $data = [
             'id' => $id,
-            'status' => $status,
+            'status' => 1,
             'opener_id' => $user_id,
             'open_time' => date('Y-m-d H:i:s', time())
         ];
@@ -115,8 +119,8 @@ class Invoice extends Controller
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
-        $status = InvoiceModel::update($data);
-        if ($status) {
+        $result = InvoiceModel::update($data);
+        if ($result) {
             return json(['code' => 200, 'message' => '开票成功']);
         } else {
             return json(['code' => 404, 'message' => '开票失败']);

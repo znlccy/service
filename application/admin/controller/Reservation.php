@@ -79,6 +79,15 @@ class Reservation extends Controller
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
+        $is_res_time = ReservationModel::where(['venue_id' => $venue_id, 'date' => $date])->column('reservation_time');
+        $data = [];
+        foreach ($is_res_time as $value) {
+            $data = array_unique(array_merge($data, json_decode($value, true)));
+        }
+        $diff = array_intersect($reservation_time, $data);
+        if ($diff) {
+            return json(['code' => 404, 'message' => '预约时间段冲突']);
+        }
         $reservation = new ReservationModel();
         if (empty($id)) {
             $result = $reservation->save($data);

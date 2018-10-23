@@ -34,7 +34,7 @@ class Development extends BaseController
         $data = [
             'id' => $id,
             'enter_team_id' => $enter_team_id,
-            'date_time' => $date_time,
+            'date' => $date_time,
             'description' => $description
         ];
         $result = $this->validate($data, 'Development');
@@ -42,24 +42,31 @@ class Development extends BaseController
             return json(['code' => 401, 'message' => $result]);
         }
         $development = new DevelopmentModel();
-        if (empty($id)) {
-            $result = $development->save($data);
-        } else {
-            /* 插入资料审核表 */
-            // 获取原来数据
-            $develop = DevelopmentModel::get($id)->toArray();
-            $before = [];
-            $after = [];
-            $diff = array_diff($develop, $data);
-            if (!empty($diff)) {
-                $before = $develop;
+        $development->startTrans();
+        try{
+            if (empty($id)) {
+                $development->save($data);
+                $data['id'] = $development->id;
+                $before = [];
                 $after = $data;
+            } else {
+                /* 插入资料审核表 */
+                // 获取原来数据
+                $develop = DevelopmentModel::get($id)->toArray();
+                $before = [];
+                $after = [];
+                $diff = array_diff($develop, $data);
+                if (!empty($diff)) {
+                    $before = $develop;
+                    $after = $data;
+                    $data['status'] = 0;
+                }
+                $development->save($data, ['id' => $id]);
             }
             if (!empty($after)) {
-                $after['id'] = $id;
                 $change = new TeamChange();
                 $data = [
-                    'enter_team_id' => $develop->enter_team_id,
+                    'enter_team_id' => $enter_team_id,
                     'project' => 1,
                     'before_change' => $before,
                     'after_change' => $after,
@@ -69,13 +76,13 @@ class Development extends BaseController
                 if (true !== $result) {
                     return json(['code' => 401, 'message' => $result]);
                 }
-                if ($change->save($data)) {
-                    return json(['code' => 200, 'message' => '提交审核成功']);
-                } else {
-                    return json(['code' => 200, 'message' => '保存失败']);
-                }
+                $change->save($data);
             }
-//            $result = $development->save($data,['id' => $id]);
+            $development->commit();
+            return json(['code' => 200, 'message' => '提交成功']);
+        } catch (\Exception $e) {
+            $development->rollback();
+            return json(['code' => 404, 'message' => $e->getMessage()]);
         }
     }
 

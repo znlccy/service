@@ -95,7 +95,7 @@ class Incidental extends Controller
             }
             foreach ($teams as $key => $team) {
                 $data = [
-                    'order_no' => 'ZFDD' . uniqid(),
+                    'order_no' => 'ZFDD' . time() . uniqid(),
                     'incidental_id' => $incidental->id,
                     'project' => $project,
                     'pay_type' => $pay_type,
@@ -117,11 +117,12 @@ class Incidental extends Controller
                 }
                 unset($invoice_data['id'],$invoice_data['create_time'],$invoice_data['update_time'],$invoice_data['open_time']);
                 $invoice_datas[$key] = $invoice_data;
-                $invoice_datas[$key]['invoice_no'] = 'IN' . uniqid();
+                $invoice_datas[$key]['invoice_no'] = 'IN' . time() . uniqid();
                 $invoice_datas[$key]['sale_order_id'] = $incidental->id;
                 $invoice_datas[$key]['rec_order_id'] = $incidental->id;
                 $invoice_datas[$key]['price'] = $team['price'];
                 $invoice_datas[$key]['order_type'] = 2;
+                $invoice_datas[$key]['team_id'] = $team['team_id'];
             }
             $invoice->saveAll($invoice_datas);
             $incidental->commit();

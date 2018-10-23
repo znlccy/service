@@ -107,7 +107,7 @@ class Investigate extends Controller {
         /* 返回结果 */
         $investigate = $this->investigate_model
             ->with('question',function ($query){
-                $query->field('id,content');
+                $query->field('id,content,answer');
             })
             ->where('id', $id)
             ->order('id','desc')
@@ -131,12 +131,12 @@ class Investigate extends Controller {
 
         /* 接收客户端提交过来的数据 */
         $investigate_id = $this->request->param('investigate_id');
-        $option_id = $this->request->param('option_id/a');
+        $answer = $this->request->param('answer');
 
         /* 验证数据 */
         $validate_data = [
-            'investigate_id'    => $investigate_id,
-            'option_id'         => $option_id
+            'investigate_id' => $investigate_id,
+            'answer'         => $answer
         ];
 
         /* 验证结果 */
@@ -150,28 +150,33 @@ class Investigate extends Controller {
         }
 
         /* 返回数据 */
-        try {
-            Db::startTrans();
-            $investigate = $this->investigate_model->where('id', $investigate_id)->setInc('count');
-            $option = $this->option_model->where('id', 'in', $option_id)->setInc('count');
-            Db::commit();
-        } catch (Exception $e) {
-            return json([
-                'code'      => '401',
-                'message'   => ''.$e
-            ]);
+        $investigate = $this->investigate_model
+            ->where('id',$investigate_id)
+            ->with('question', function ($query) {
+                $query->field('id,content');
+            })
+            ->find();
+
+        $this->investigate_model->where('id', $investigate_id)->setInc('count');
+
+        for ( $i = 0; $i < count($investigate['question']); $i++ ) {
+            if ($investigate['question'][$i]['type'] == 1) {
+                $this->question_model->where('id', $investigate['question'][$i]['id'])->update(['answer' => $answer]);
+                $option = $this->option_model->where('id', $answer)->setInc('count');
+            }
+            if ($investigate['question'][$i]['type'] == 2) {
+                $this->question_model->where('id', $investigate['question'][$i]['id'])->update(['answer' => $answer]);
+                $option = $this->option_model->where('id', 'in', $answer)->setInc('count');
+            }
+            if ($investigate['question'][$i]['type'] == 3) {
+                $this->question_model->where('id', $investigate['question'][$i]['id'])->update(['answer' => $answer]);
+            }
         }
-        if ($investigate && $option) {
-            return json([
-                'code'      => '200',
-                'message'   => '提交成功'
-            ]);
-        } else {
-            return json([
-                'code'      => '401',
-                'message'   => '提交失败'
-            ]);
-        }
+
+        return json([
+            'code'      => '200',
+            'message'   => '提交成功'
+        ]);
     }
 
 }

@@ -82,7 +82,7 @@ class Service extends BaseController {
 
         if (true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -159,13 +159,13 @@ class Service extends BaseController {
 
         if ($service) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '查询数据成功',
                 'data'      => $service
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '查询数据失败'
             ]);
         }
@@ -191,7 +191,7 @@ class Service extends BaseController {
         $picture = $this->request->file('picture');
         // 移动图片到框架应用根目录/public/images
         if ($picture) {
-            $info = $picture->move(ROOT_PATH . 'public' . DS . 'upload');
+            $info = $picture->move(ROOT_PATH . 'public' . DS . 'images');
             if ($info) {
                 //成功上传后，获取上传信息
                 //输出文件保存路径
@@ -224,7 +224,7 @@ class Service extends BaseController {
 
         if (true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -238,12 +238,12 @@ class Service extends BaseController {
 
         if ($operation) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '操作数据成功'
             ]);
         } else {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => '操作数据失败'
             ]);
         }
@@ -265,7 +265,7 @@ class Service extends BaseController {
 
         if (true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -275,13 +275,13 @@ class Service extends BaseController {
 
         if ($service) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '查询数据成功',
                 'data'      => $service
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '查询数据失败，数据不存在'
             ]);
         }
@@ -303,7 +303,7 @@ class Service extends BaseController {
 
         if (true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -313,13 +313,13 @@ class Service extends BaseController {
 
         if ($service) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '删除数据成功',
                 'data'      => $service
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '删除数据失败，数据不存在'
             ]);
         }
@@ -334,13 +334,13 @@ class Service extends BaseController {
 
         if ($group) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '分组下拉获取成功',
                 'data'      => $group
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '分组下拉获取失败',
             ]);
         }

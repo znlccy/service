@@ -6,7 +6,7 @@ use think\Db;
 use app\admin\controller\Department;
 use app\admin\model\Admin;
 
-class Flowdesign extends Controller {
+class Flowdesign extends BaseController {
 	/**
 	 *前置方法
 	 */
