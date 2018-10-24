@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>baidu ad</title>
+  <style>* {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  </style>
+</head>
+<body>
+<script type="text/javascript" src="//bd-s.baixing.net/source/static/api/pj1t0.js?mhzeeqip=d">
+  !function () {
+    var e = '111000';
+    try {
+      !function (t) {
+        function n(e, t) {
+          return e ? t ? e + ',' + t : e : t
+        }
+
+        function i(e) {
+          var t;
+          if (document.currentScript) t = document.currentScript; else for (var n, i = document.getElementsByTagName('script'), r = 0; r < i.length; ++r) if (n = i[r], n.getAttribute('src') && n.getAttribute('src').indexOf(e) >= 0) {
+            t = n;
+            break
+          }
+          return t && (t.getAttribute('defer') || t.getAttribute('async'))
+        }
+
+        function r(e, t) {
+          for (var i = {}, r = 0; r < e.length; r++) if (i = e[r], t.id === i.id) {
+            var a = {};
+            for (var o in t) o && t.hasOwnProperty(o) && (a[o] = t[o]);
+            a.container = i.container || t.container, a.exps = n(i.exps, t.exps), a.enableHttps = i.enableHttps || !1, h.push(a)
+          } else window.slotbyds.push(i)
+        }
+
+        function a(e) {
+          var i = e.id && t.asyncDeliveryList[e.id];
+          if (i) {
+            var r = {};
+            for (var a in i) a && i.hasOwnProperty(a) && (r[a] = i[a]);
+            if ('delivery' === i.deliveryType) r.container = e.container || i.container, r.exps = n(e.exps, i.exps), r.enableHttps = e.enableHttps || !1, this.api().push(r); else if ('deliveryOld' === i.deliveryType) {
+              for (var o in e) o && e.hasOwnProperty(o) && (r[o] = e[o]);
+              (window.slotbydup = window.slotbydup || []).push(e)
+            }
+          } else this.unshift(e)
+        }
+
+        window._SF_ && window._SF_._global_ && window._SF_._global_._ssp && (t = window._SF_._global_._ssp);
+        var o = '___delivery___global___counter___', s = '___delivery___global___list___';
+        try {
+          top.location;
+          t.counter = top[o] = top[o] || {}, t.asyncDeliveryList = top[s] = top[s] || {}
+        } catch (d) {
+          t.counter = window[o] = window[o] || {}, t.asyncDeliveryList = window[s] = window[s] || {}
+        }
+        var p = !1, l = 'bd-s.baixing.net/source/static/api/pj1t0.js?mhzeeqip=d', c = 'mhzeeqipd', y = c,
+          w = document.getElementById(y);
+        i(l) ? p = !0 : w || (y = '_' + Math.random().toString(36).slice(2), document.currentScript && document.currentScript.parentNode ? (w = document.createElement('div'), w.id = y, w.style.width = '100%', document.currentScript.parentNode.insertBefore(w, document.currentScript)) : document.write('<div id="' + y + '" style="width:100%"></div>'));
+        var u = {
+          id: 'u3551794',
+          container: y,
+          painterType: '1',
+          mixOffset: parseInt('1642', 10),
+          gldiOffset: parseInt('4', 10),
+          mixType: 2,
+          proxy: parseInt('-1', 10),
+          exps: '',
+          adInfo: new Function('return {"tuid":"u3551794","painter":1,"platformType":"union","placement":{"basic":{"flowType":1,"userId":3183498,"cname":"30024088_20_cpr","sspId":1,"conBackEnv":1,"rspFormat":1,"sellType":2,"mediumType":1,"tuId":9223372032563361000,"publisherDomain":{"dup":"bd-s.baixing.net","ubmc":"bd-js.baixing.net/svjgy","pos":"bd-js.baixing.net","wn":"bd-js.baixing.net/bso"}},"container":{"anchoredType":1,"width":350,"height":250,"sizeType":1,"floated":{}}},"update":1539312994000,"mixOffset":1642}')()
+        };
+        'undefined' != typeof e && e && (u.exps = e);
+        var _ = 1e4 * Math.random();
+        1e3 > _ ? u.exps = u.exps ? u.exps + ',114007' : '114007' : _ >= 1e3 && 2e3 > _ && (u.exps = u.exps ? u.exps + ',114017' : '114017'), t.api = t.api || [];
+        var f = 'u3551794', v = window['_' + c] || null;
+        if (window['_' + c] = null, v) {
+          var b;
+          if (v instanceof Array) {
+            var m = v.shift();
+            m && m.container && (u.container = m.container), u.apiInfo = m, b = m.exps, u.enableHttps = m.enableHttps || !1
+          } else u.apiInfo = v, u.exps = n(v.exps, u.exps), u.enableHttps = v.enableHttps || !1
+        }
+        var g = [], h = [];
+        p && window.slotbyds && window.slotbyds instanceof Array && window.slotbyds.length > 0 && (g = g.concat(window.slotbyds), window.slotbyds.length = 0, r(g, u)), p && (t.asyncDeliveryList[f] = u, t.asyncDeliveryList[f].deliveryType = 'delivery', window.slotbyds = window.slotbyds || [], window.slotbyds.push = a, !window.slotbyds.api && t.api && (window.slotbyds.api = function () {
+          return t.api
+        })), setTimeout(function () {
+          if (p) {
+            if (h.length > 0) for (var e = 0; e < h.length; e++) t.api.push(h[e])
+          } else t.api.push(u)
+        }, 1);
+        var x = "iicgkse";
+        if (!t[x]) {
+          t[x] = !0;
+          var S = document.createElement('script');
+          S.type = 'text/javascript', S.async = !0, S.src = ('https:' === document.location.protocol ? 'https:' : 'http:') + "//bd-s.baixing.net/icgkse.js";
+          var I = document.getElementsByTagName('script')[0];
+          I.parentNode.insertBefore(S, I)
+        }
+      }(window.__delivery_global_ = window.__delivery_global_ || {})
+    } catch (t) {
+      (new Image).src = "//eclick.baidu.com/se.jpg?type=delivery&date=1011&mes=" + encodeURIComponent(t.stack)
+    }
+  }();
+</script>
+</body>
+</html>

