@@ -155,24 +155,23 @@ class Investigate extends Controller {
         /* 返回数据 */
         $result_inc = $this->investigate_model->where('id', $investigate_id)->setInc('count');
 
+        $result_status = $this->investigate_model->where('id', $investigate_id)->update(['status' => 1]);
+
         for ( $i = 0; $i < count($question); $i++ ) {
             $question_instance = $this->question_model->where('id', $question[$i]['id'])->find();
 
             switch (intval($question_instance['type'])) {
                 case 1:
 
-                    $this->question_model->where('id', $question[$i]['id'])->update(['answer' => $question[$i]['answer']]);
+                    $this->question_model->where('id', $question[$i]['id'])->update(['answer' => $question[$i]['answer'],'status' => 1]);
                     $option = $this->option_model->where('id', $question[$i]['answer'])->setInc('count');
                     break;
                 case 2:
-                    $this->question_model->where('id', $question[$i]['id'])->update(['answer' => '['.implode(',',$question[$i]['answer']).']']);
+                    $this->question_model->where('id', $question[$i]['id'])->update(['answer' => '['.implode(',',$question[$i]['answer']).']', 'status' => 1]);
                     $option = $this->option_model->where('id', 'in', $question[$i]['answer'])->setInc('count');
                     break;
                 case 3:
-                    $data = [
-                        'answer'    => $question[$i]['answer']
-                    ];
-                    $this->question_model->where('id', $question[$i]['id'])->update(['answer' => $question[$i]['answer']]);
+                    $this->question_model->where('id', $question[$i]['id'])->update(['answer' => $question[$i]['answer'],'status' => 1]);
                     break;
             }
         }

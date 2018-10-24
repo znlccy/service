@@ -146,7 +146,7 @@ class Investigate extends Controller {
         $id = $this->request->param('id');
         $title = $this->request->param('title');
         $type = $this->request->param('type');
-        $status = $this->request->param('status', 1);
+        $status = $this->request->param('status', 0);
         $publisher = session('admin.mobile');
         $questions = $this->request->param('question/a');
         $options = $this->request->param('option/a');
@@ -173,14 +173,10 @@ class Investigate extends Controller {
 
         /* 添加问题列表 */
         $question_list = array();
+        $option_list = null;
         foreach ($questions as $key => $question) {
-            $question_list[$key]['content'] = $question;
-        }
-
-        /* 添加选项列表 */
-        $option_list = array();
-        foreach ($options as $key => $option) {
-            $option_list[$key]['content'] = $option;
+            $question_list[$key] = $question;
+            $option_list[$key] = $question_list[$key]['option'];
         }
 
         $investigate = null;
@@ -197,12 +193,24 @@ class Investigate extends Controller {
                 'publisher'  => $publisher,
                 'create_time'=> date('Y-m-d H:i:s', time())
             ];
+
             $investigate = $this->investigate_model->insertGetId($insert_data);
+
             $investigate_instance = $this->investigate_model->where('id', $investigate)->find();
-            $investigate_result = $investigate_instance->Question()->saveAll($question_list);
-            $question_instances = Question::all([1,2,3,4]);
+
+            /* 问题点 */
+            $investigate_result = $investigate_instance->question()->saveAll($question_list);
+            $question_instances = $this->question_model->order('id', 'desc')->limit(count($question_list))->select();
+
+            /* 三维数组转二维 */
+            foreach ($option_list as $options) {
+                foreach ($options as $option) {
+                    $option_array[] = $option;
+                }
+            }
+
             foreach ($question_instances as $key => $question_instance) {
-                $question_result = $question_instance->Option()->saveAll($option_list);
+                $question_result = $question_instance->option()->saveAll($option_array);
             }
 
         } else {
@@ -220,7 +228,6 @@ class Investigate extends Controller {
                 'message'   => '数据操作失败'
             ]);
         }
-
     }
 
     /* 问卷调查详情 */
