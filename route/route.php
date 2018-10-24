@@ -20,6 +20,6 @@ Route::rule('admin/operation_team/add_user','admin/OperationTeam/addUser');
 Route::rule('admin/operation_team/delete_user','admin/OperationTeam/deleteUser');
 Route::rule('admin/operation_team/add_role','admin/OperationTeam/addRole');
 Route::rule('admin/operation_team/delete_role','admin/OperationTeam/deleteRole');
-
+Route::rule('admin/department/select_department','admin/Department/selectDepartment');
 return [
 ];

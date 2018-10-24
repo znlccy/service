@@ -24,7 +24,9 @@
         "topthink/think-queue": "^2.0",
         "gmars/tp5-nestedsets": "dev-master",
         "gmars/tp5-rbac": "dev-master",
-        "weiwei/api-doc": "^1.6"
+        "weiwei/api-doc": "^1.6",
+        "pingplusplus/pingpp-php": "^2.4",
+        "mpdf/mpdf": "^7.1"
     },
     "autoload": {
         "psr-4": {
@@ -35,6 +37,7 @@
         "think-path": "thinkphp"
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "secure-http": true
     }
 }

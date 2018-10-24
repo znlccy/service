@@ -32,4 +32,11 @@ return [
     'taglib_begin' => '{',
     // 标签库标签结束标记
     'taglib_end'   => '}',
+	 // 视图输出字符串内容替换
+    'tpl_replace_string' => [
+        '__HUI__' => '/static/h-ui',
+		'__HUIADMIN__' => '/static/h-ui.admin',
+        '__LIB__'    => '/static/lib',
+		'__Flow__'    => '/static/work',
+    ]
 ];
