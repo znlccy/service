@@ -146,7 +146,7 @@ class Investigate extends Controller {
         $id = $this->request->param('id');
         $title = $this->request->param('title');
         $type = $this->request->param('type');
-        $status = $this->request->param('status', 1);
+        $status = $this->request->param('status', 0);
         $publisher = session('admin.mobile');
         $questions = $this->request->param('question/a');
 
