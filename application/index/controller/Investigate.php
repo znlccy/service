@@ -162,21 +162,17 @@ class Investigate extends Controller {
                 case 1:
 
                     $this->question_model->where('id', $question[$i]['id'])->update(['answer' => $question[$i]['answer']]);
-                    $option = $this->option_model->where('id', $question[$i]['answer'])->find();
-
-                    dump('12');die();
+                    $option = $this->option_model->where('id', $question[$i]['answer'])->setInc('count');
                     break;
                 case 2:
-                    dump(2);die();
-                    $this->question_model->where('id', $question[$i]['id'])->update(['answer' => $question[$i]['answer']]);
+                    $this->question_model->where('id', $question[$i]['id'])->update(['answer' => '['.implode(',',$question[$i]['answer']).']']);
                     $option = $this->option_model->where('id', 'in', $question[$i]['answer'])->setInc('count');
                     break;
                 case 3:
-                    dump(3);die();
                     $data = [
                         'answer'    => $question[$i]['answer']
                     ];
-                    $this->question_model->save($data,['id' => $question[$i]['id']]);
+                    $this->question_model->where('id', $question[$i]['id'])->update(['answer' => $question[$i]['answer']]);
                     break;
             }
         }
