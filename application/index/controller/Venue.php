@@ -4,9 +4,10 @@ namespace app\index\controller;
 
 use think\Controller;
 use think\Request;
-use app\admin\model\Venue as VenueModel;
+use app\index\model\Venue as VenueModel;
+use app\index\model\Reservation;
 
-class Venue extends Controller
+class Venue extends BasisController
 {
     /**
      * 场馆列表
@@ -40,12 +41,12 @@ class Venue extends Controller
         if ($name) {
             $conditions[] = ['name', 'like', '%' . $name . '%'];
         }
-        $space = VenueModel::with(['space' => function($query) {
+        $venue = VenueModel::with(['space' => function($query) {
             $query->field('id,name');
         }])->where($conditions)
             ->order('id')
             ->paginate($page_size, false, ['page' => $jump_page]);
-        return json(['code'=> 200, 'message' => '获取列表成功', 'data' => $space]);
+        return json(['code'=> 200, 'message' => '获取列表成功', 'data' => $venue]);
     }
 
 
@@ -100,6 +101,7 @@ class Venue extends Controller
     {
         // 获取前端传的参数
         $id = request()->param('id');
+        $date = request()->param('date_time');
         /* 验证 */
         $data = [
             'id' => $id,
@@ -112,6 +114,14 @@ class Venue extends Controller
         $detail = VenueModel::with(['space' => function ($query) {
             $query->field('id,name');
         }])->where('id', $id)->find();
+
+        $is_res_time = Reservation::where(['venue_id' => $id, 'date' => $date])->column('reservation_time');
+        $data = [];
+        foreach ($is_res_time as $value) {
+            $data = array_unique(array_merge($data, json_decode($value, true)));
+        }
+
+        $detail['is_res_time'] =  $data;
 
         if ($detail) {
             unset($detail['space_id']);
@@ -146,6 +156,7 @@ class Venue extends Controller
 
     /**
      * 场馆下拉列表
+     *
      */
     public function select()
     {

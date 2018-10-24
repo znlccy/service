@@ -248,6 +248,48 @@ function passport_key($txt, $encrypt_key) {
     }
     return $tmp;
 }
+
+/**
+ * ajax数据返回，规范格式
+ */
+function msg_return($msg = "操作成功！", $code = 0,$data = [],$redirect = 'parent',$alert = '', $close = false, $url = '')
+{
+    $ret = ["code" => $code, "msg" => $msg, "data" => $data];
+    $extend['opt'] = [
+        'alert'    => $alert,
+        'close'    => $close,
+        'redirect' => $redirect,
+        'url'      => $url,
+    ];
+    $ret = array_merge($ret, $extend);
+    return Response::create($ret, 'json');
+}
+
+function ids_parse($str,$dot_tmp=',')
+{
+    if(!$str) return '';
+    if(is_array($str))
+    {
+        $idarr = $str;
+    }else
+    {
+        $idarr = explode(',',$str);
+    }
+    $idarr = array_unique($idarr);
+    $dot = '';
+    $idstr ='';
+    foreach($idarr as $id)
+    {
+        $id = intval($id);
+        if($id>0)
+        {
+            $idstr.=$dot.$id;
+            $dot = $dot_tmp;
+        }
+    }
+    if(!$idstr) $idstr=0;
+    return $idstr;
+}
 ?>
 
 

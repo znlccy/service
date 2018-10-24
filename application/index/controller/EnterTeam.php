@@ -6,7 +6,7 @@ use think\Controller;
 use think\Request;
 use app\index\model\EnterTeam as EnterTeamModel;
 
-class EnterTeam extends Controller
+class EnterTeam extends BasisController
 {
     /**
      * 显示资源列表
@@ -62,18 +62,19 @@ class EnterTeam extends Controller
         $company = request()->param('company');
         $admin_account = request()->param('admin_account');
         $business_license = request()->param('business_license');
-        $bl_img = request()->file('bl_img');
+        $bl_picture = request()->file('bl_picture');
         $legal_person = request()->param('legal_person');
         $id_card = request()->param('id_card');
-        $id_card_picture = request()->file('id_card_picture');
+        $id_card_pictures = request()->file('id_card_pictures');
         $main_business = request()->param('main_business');
         $develop_stage = request()->param('develop_stage');
         $description = request()->param('description');
         $logo = request()->file('logo');
         $status = request()->param('status', 1);
-        if ($id_card_picture) {
+        $user_id = request()->param('user_id');
+        if ($id_card_pictures) {
             $arr_picture = [];
-            foreach ($id_card_picture as $value) {
+            foreach ($id_card_pictures as $value) {
                 $info = $value->move(ROOT_PATH . 'public' . DS . 'images');
                 if ($info) {
                     //成功上传后，获取上传信息
@@ -99,11 +100,11 @@ class EnterTeam extends Controller
                     $arr_picture[] = '/images/' . $sub_path;
                 }
             }
-            $id_card_picture = json_encode($arr_picture);
+            $id_card_pictures = json_encode($arr_picture);
         }
         // 移动图片到框架应用根目录/public/images
-        if ($bl_img) {
-            $info = $bl_img->move(ROOT_PATH . 'public' . DS . 'images');
+        if ($bl_picture) {
+            $info = $bl_picture->move(ROOT_PATH . 'public' . DS . 'images');
             if ($info) {
                 //成功上传后，获取上传信息
                 //输出jpg
@@ -125,7 +126,7 @@ class EnterTeam extends Controller
                 //输出文件名称
                 /*echo '文件保存的名:' . $info->getFilename();*/
                 $sub_path     = str_replace('\\', '/', $info->getSaveName());
-                $bl_img = '/images/' . $sub_path;
+                $bl_picture = '/images/' . $sub_path;
             }
         }
         // 移动图片到框架应用根目录/public/images
@@ -161,15 +162,16 @@ class EnterTeam extends Controller
             'company' => $company,
             'admin_account' => $admin_account,
             'business_license' => $business_license,
-            'bl_img' => $bl_img,
+            'bl_picture' => $bl_picture,
             'legal_person' => $legal_person,
             'id_card' => $id_card,
-            'id_card_picture' => $id_card_picture,
+            'id_card_pictures' => $id_card_pictures,
             'main_business' => $main_business,
             'develop_stage' => $develop_stage,
             'description' => $description,
             'logo' => $logo,
-            'status' => $status
+            'status' => $status,
+            'user_id' => $user_id
         ];
         $result = $this->validate($data,'EnterTeam');
         if (true !== $result) {
@@ -180,6 +182,15 @@ class EnterTeam extends Controller
             $enter_team = new EnterTeamModel();
             $result = $enter_team->save($data);
         } else {
+            if (!$bl_picture) {
+                unset($data['bl_picture']);
+            }
+            if (!$logo) {
+                unset($data['logo']);
+            }
+            if (!$id_card_pictures) {
+                unset($data['id_card_pictures']);
+            }
             $enter_team = new EnterTeamModel();
             $result = $enter_team->save($data,['id', $id]);
         }
@@ -196,23 +207,27 @@ class EnterTeam extends Controller
      */
     public function detail(){
         // 获取前端传的参数
-        $id = request()->param('id');
-        /* 验证 */
-        $data = [
-            'id' => $id,
-        ];
-
-        $result   = $this->validate($data, 'EnterTeam.detail');
-        if (true !== $result) {
-            return json(['code' => 401, 'message' => $result]);
+//        $id = request()->param('id');
+//        /* 验证 */
+//        $data = [
+//            'id' => $id,
+//        ];
+//
+//        $result   = $this->validate($data, 'EnterTeam.detail');
+//        if (true !== $result) {
+//            return json(['code' => 401, 'message' => $result]);
+//        }
+        // 获取当前用户的team_id
+        $user = session('user');
+        if ($user) {
+            $detail = EnterTeamModel::with(['developments' => function($query){
+                $query->order('date');
+            },'members', 'linkman'])->where('user_id', $user['id'])->find();
+            if ($detail) {
+                return json(['code' => 200, 'message' => '获取详情成功!', 'data' => $detail]);
+            }
         }
-        $detail = EnterTeamModel::where('id', $id)->find();
-
-        if ($detail) {
-            return json(['code' => 200, 'message' => '获取详情成功!', 'data' => $detail]);
-        } else {
-            return json(['code' => 404, 'message' => '获取详情失败!']);
-        }
+        return json(['code' => 404, 'message' => '获取详情失败!']);
     }
 
     /**
@@ -237,4 +252,5 @@ class EnterTeam extends Controller
             return json(['code' => 404, 'message'=>'获取信息失败']);
         }
     }
+
 }

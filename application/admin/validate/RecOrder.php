@@ -16,7 +16,7 @@ class RecOrder extends Validate
         'page_size' => 'number',
         'jump_page' => 'number',
         'sale_order_id' => 'require|number',
-        'order_no' => 'require|max:20',
+        'order_no' => 'require|max:50',
 //        'invoice_id' => 'require|max:20',
         'team_id' => 'require|number',
         'price' => 'require|float',

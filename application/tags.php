@@ -25,4 +25,9 @@ return [
     'log_write'    => [],
     // 应用结束
     'app_end'      => [],
+    // 响应发送标签位
+    'response_send' => [
+        // 前台跨域
+        'app\\index\\behavior\\Cross'
+    ],
 ];

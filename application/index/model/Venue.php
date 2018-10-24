@@ -11,10 +11,10 @@ class Venue extends BasisModel
 //    /**
 //     * @return \think\model\relation\HasOne
 //     */
-//    public function space()
-//    {
-//        return $this->hasOne('Space', 'id', 'space_id');
-//    }
+    public function space()
+    {
+        return $this->hasOne('Space', 'id', 'space_id');
+    }
 //
 //    /**
 //     * @return \think\model\relation\HasMany
@@ -23,4 +23,8 @@ class Venue extends BasisModel
 //    {
 //        return $this->hasMany('Reservation','venue_id', 'id');
 //    }
+    public function getDisableTimeAttr($value)
+    {
+        return json_decode($value, true);
+    }
 }

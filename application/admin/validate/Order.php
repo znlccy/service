@@ -15,9 +15,9 @@ class Order extends Validate
     protected $rule = [
         'page_size' => 'number',
         'jump_page' => 'number',
-        'order_no' => 'require|max:20',
+        'order_no' => 'require|max:50',
         'team_id' => 'require|number',
-        'contract_template_no' => 'require|max:20',
+        'contract_template_no' => 'require|max:50',
         'contract_years' => 'require',
         'pay_type' => 'require|number',
         'deposit' => 'require|float',

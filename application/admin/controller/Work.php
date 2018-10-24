@@ -14,7 +14,7 @@ use app\admin\model\Space;
 use app\admin\model\Workplace;
 use app\admin\model\OrderWorkplace;
 
-class Work extends baseController
+class Work extends Controller
 {
     /**
      * 工作概览
@@ -241,86 +241,75 @@ class Work extends baseController
             $space = '';
         }
 
-        $data = [];
-        $total_data = [];
-        $all_check_data = db('tb_run_process')
-            ->alias('p')
-            ->leftJoin('tb_run_log l', 'p.run_id = l.run_id')
-            ->leftJoin('tb_run r', 'p.run_id = r.id')
-            ->where('l.uid', $user_id)
-            ->where('l.btn','<>', 'Send')
-            ->whereOr('p.status', 0)
-            ->join('tb_admin a', 'r.uid = a.id')
-            ->order('p.status')
-            ->field('l.from_id,l.from_table,l.uid,l.btn,l.run_id,l.content,p.auto_person,p.sponsor_ids,p.status,r.uid,r.dateline,a.nickname')
+        /* start */
+        $no_checks = db('tb_run_process')
+            ->where(['status' => 0])
+            ->field('id,auto_person,sponsor_ids')
+            ->select();
+        $no_check_ids = [];
+        foreach ($no_checks as $no_check) {
+            $sponsor_ids = explode(',', $no_check['sponsor_ids']);
+            switch ($no_check['auto_person']){
+                case 4;
+                    if (in_array($user_id, $sponsor_ids)) {
+                        $no_check_ids[] = $no_check['id'];
+                    }
+                    break;
+                case 5;
+                    if (array_intersect($sponsor_ids,$role_ids)) {
+                        $no_check_ids[] = $no_check['id'];
+                    }
+                    break;
+                case 6;
+                    if (in_array($department_id, $sponsor_ids)) {
+                        $no_check_ids[] = $no_check['id'];
+                    }
+                    break;
+            }
+        }
+        $check_data = Db::field('status,run_id,remark as content')
+            ->table('tb_run_process')
+            ->whereIn('id', $no_check_ids)
+            ->union(function ($query) {
+                $query->field('status,run_id,content')->table('tb_run_log')->where('status', '<>', 0);
+            })->select();
+        $run_ids = [];
+        foreach ($check_data as $value) {
+            $run_ids[] = $value['run_id'];
+        }
+        $run = db('tb_run')
+            ->alias('r')
+            ->whereIn('r.id', $run_ids)
+            ->leftJoin('tb_admin a', 'r.uid = a.id')
+            ->order('r.status')
+            ->field('r.id,r.uid,r.from_table,r.from_id,r.dateline,a.nickname')
             ->paginate($page_size, false, ['page' => $jump_page])
-            ->each(function($item,$key) use ($user_id,$space,$role_ids,$department_id,$data,$total_data) {
-                if($item['status'] === 0) {
-                    // 判断当前用户是否有审核权限
-                    $sponsor_ids = explode(',', $item['sponsor_ids']);
-                    if (($item['auto_person'] === 4 && in_array($user_id, $sponsor_ids)) || ($item['auto_person'] === 5 && array_intersect($role_ids,$sponsor_ids)) || ($item['auto_person'] === 6 && in_array($department_id, $sponsor_ids))) {
-                        if ($item['from_table'] == 'order') {
-                            $order = Order::with('team')->where('id',$item['from_id'])->find();
-                            if ($order) {
-                                $title = $order->team->company . '销售订单';
-                                $type = 1;
-                                $status = 0;
-                            }
-                        } else {
-                            $incidental = Incidental::where('id', $item['from_id'])->find();
-                            if ($incidental) {
-                                $title = $incidental->project . '杂费收取';
-                                $type = 2;
-                                $status = 0;
-                            }
-                        }
+            ->each(function ($item) use ($check_data, $space) {
+                if ($item['from_table'] == 'order') {
+                    $order = Order::with('team')->where('id',$item['from_id'])->find();
+                    if ($order) {
+                        $title = $order->team->company . '销售订单';
                     }
                 } else {
-                    if ($item['uid'] === $user_id) {
-                        if ($item['btn'] !== 'Send') {
-                            if ($item['from_table'] == 'order') {
-                                $order = Order::with('team')->where('id',$item['from_id'])->find();
-                                if ($order) {
-                                    $title = $order->team->company . '销售订单';
-                                    $type = 1;
-                                }
-                            } else {
-                                $incidental = Incidental::where('id', $item['from_id'])->find();
-                                if ($incidental) {
-                                    $title = $incidental->project . '杂费收取';
-                                    $type = 2;
-                                }
-                            }
-                            // 审核状态
-                            switch ($item['btn']) {
-                                case 'ok' :
-                                    $status = 1;
-                                    break;
-                                case 'Back' :
-                                    $status = 2;
-                                    break;
-                                default :
-                                    break;
-                            }
-                        }
+                    $incidental = Incidental::where('id', $item['from_id'])->find();
+                    if ($incidental) {
+                        $title = $incidental->project . '杂费收取';
                     }
                 }
-                if (isset($order) || isset($incidental)) {
-                    $data['id'] = $item['from_id'];
-                    $data['title'] = $title;
-                    $data['type'] = $type;
-                    $data['user'] = $item['nickname'];
-                    $data['status'] = $status;
-                    // 发起时间
-                    $data['create_time'] = date('Y-m-d H:i:s', $item['dateline']);
-                    $data['space'] = $space;
-                    $data['content'] = $item['content'];
+                $item['title'] = $title;
+                $item['create_time'] = date('Y-m-d H:i:s', $item['dateline']);
+                $item['space'] = $space;
+                foreach ($check_data as $value) {
+                    if ($item['id'] === $value['run_id']){
+                        $item['status'] = $value['status'];
+                        $item['content'] = $value['content'];
+                    }
                 }
-                    $total_data[] = $data;
-                return $total_data;
+                unset($item['uid'],$item['from_table'],$item['from_id'],$item['dateline']);
+                return $item;
             });
-
-        return json(['code' => 200, 'message' => '获取信息成功', 'data' => $all_check_data]);
+        /* end */
+        return json(['code' => 200, 'message' => '获取信息成功', 'data' => $run]);
     }
 
     /**

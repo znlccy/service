@@ -141,17 +141,6 @@ class Consult extends BaseController {
         $status = request()->param('status', 1);
         $type_id = 1;
         $publisher = session('admin.mobile');
-        $rich_text = request()->param('rich_text');
-        $picture = request()->file('picture');
-
-        /* 移动图片 */
-        if ($picture) {
-            $info = $picture->move(ROOT_PATH . 'public' . DS . 'images');
-            if ($info) {
-                $sub_path = str_replace('\\', '/', $info->getSaveName());
-                $picture = '/images/' . $sub_path;
-            }
-        }
 
         //验证数据
         $validate_data = [
@@ -160,9 +149,7 @@ class Consult extends BaseController {
             'content'   => $content,
             'status'    => $status,
             'type_id'   => $type_id,
-            'publisher' => $publisher,
-            'rich_text' => $rich_text,
-            'picture'   => $picture
+            'publisher' => $publisher
         ];
 
         //验证结果
@@ -178,9 +165,6 @@ class Consult extends BaseController {
         if (empty($id)) {
             $operation = $this->consult_policy_model->save($validate_data);
         } else {
-            if (empty($picture)) {
-                unset($validate_data['picture']);
-            }
             $operation = $this->consult_policy_model->save($validate_data, ['id' => $id]);
         }
 
@@ -221,7 +205,7 @@ class Consult extends BaseController {
         $consult = $this->consult_policy_model
             ->where('id', $id)
             ->where('type_id = 1')
-            ->field('id,title,content,picture,rich_text,status,publisher,create_time,update_time')
+            ->field('id,title,content,status,publisher,create_time,update_time')
             ->find();
         if ($consult) {
             return json([

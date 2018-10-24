@@ -9,7 +9,7 @@
 namespace app\index\controller;
 
 use think\Controller;
-use think\Hook;
+use think\facade\Hook;
 use think\Request;
 use think\facade\Session;
 
@@ -23,13 +23,18 @@ class BasisController extends Controller {
     protected $action;
     // 无需验证方法
     protected  $except_auth = [
-        'User' => ['login', 'register', 'recover_pass', 'change_pass'],
-        'Image' => ['upload']
+        'User' => ['login', 'register', 'recover_pass', 'change_pass', 'logout'],
+        'Image' => ['upload'],
+        'Index' => ['index'],
+        'Verify' => ['attain'],
+        'Sms' => ['attain'],
+        'Charge' => ['pay', 'notify_return', 'success_return']
     ];
 
     public function __construct(Request $request = null)
     {
         parent::__construct();
+        Hook::listen('response_send');
         $this->controller =  $request->controller();
         $this->action =  $request->action();
 
@@ -66,9 +71,9 @@ class BasisController extends Controller {
         return false;
     }
 
-    public function listern() {
-        Hook::listen('response_send');
-    }
+//    public function listen() {
+//        Hook::listen('response_send');
+//    }
 
 
     /**

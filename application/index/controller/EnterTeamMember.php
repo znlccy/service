@@ -5,6 +5,7 @@ namespace app\index\controller;
 use think\Controller;
 use think\Request;
 use app\index\model\EnterTeamMember as EnterTeamMemberModel;
+use app\index\model\TeamChange;
 
 class EnterTeamMember extends BasisController
 {
@@ -104,22 +105,69 @@ class EnterTeamMember extends BasisController
             return json(['code' => 401, 'message' => $result]);
         }
 
-        if (empty($id)) {
-            $member = new EnterTeamMemberModel();
-            $result = $member->save($data);
-        } else {
-            $member = new EnterTeamMemberModel();
-            $result = $member->save($data,['id', $id]);
+        $team_member = new EnterTeamMemberModel();
+        $change = new TeamChange();
+        $team_member->startTrans();
+        try {
+            if (empty($id)) {
+                $team_member->save($data);
+                $data['id'] = $team_member->id;
+                $before = [];
+                $after = $data;
+                $change_data = [
+                    'enter_team_id' => $enter_team_id,
+                    'project' => 2,
+                    'before_change' => $before,
+                    'after_change' => $after,
+                    'status' => 0
+                ];
+                $change->save($change_data);
+            } else {
+                $status = EnterTeamMemberModel::where('id', $id)->value('status');
+                if (!$status) {
+                    return json(['code' => 401, 'message' => '正在审核中的成员不能修改']);
+                }
+                if (empty($picture)) {
+                    unset($data['picture']);
+                }
+                // 插入资料审核表
+                $member = EnterTeamMemberModel::get($id)->toArray();
+                $before = [];
+                $after = [];
+                $diff = array_diff($data, $member);
+                if (!empty($diff)) {
+                    $before = $member;
+                    $after = $data;
+                    $data['status'] = 0;
+                }
+                $team_member->save($data, ['id' => $id]);
+                if (!empty($after)) {
+                    $change_data = [
+                        'enter_team_id' => $member['enter_team_id'],
+                        'project' => 2,
+                        'before_change' => $before,
+                        'after_change' => $after,
+                        'status' => 0
+                    ];
+                    $result = $this->validate($data,'TeamChange.save');
+                    if (true !== $result) {
+                        return json(['code' => 401, 'message' => $result]);
+                    }
+                    $change->save($change_data);
+                }
+            }
+            $team_member->commit();
+            return json(['code' => 200, 'message' => '提交审核成功']);
+        } catch (\Exception $e) {
+            $team_member->rollback();
+            return json(['code' => 404, 'message' => $e->getMessage()]);
         }
-        if ($result) {
-            return json(['code' => 200, 'message' => '保存成功!']);
-        } else {
-            return json(['code' => 404, 'message' => '保存失败!']);
-        }
+
     }
 
     /**
      * 成员详情
+     *
      *
      */
     public function detail(){
@@ -129,7 +177,6 @@ class EnterTeamMember extends BasisController
         $data = [
             'id' => $id,
         ];
-
         $result   = $this->validate($data, 'EnterTeamMember.detail');
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);

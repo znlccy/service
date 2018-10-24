@@ -7,7 +7,7 @@ use think\Request;
 use app\index\model\Reservation as ReservationModel;
 use app\index\model\Venue;
 
-class Reservation extends Controller
+class Reservation extends BasisController
 {
     /**
      * 显示场馆预约列表
@@ -75,12 +75,20 @@ class Reservation extends Controller
             return json(['code' => 401, 'message' => $result]);
         }
         $reservation = new ReservationModel();
+        $is_res_time = ReservationModel::where(['venue_id' => $venue_id, 'date' => $date])->column('reservation_time');
+        $tmp_data = [];
+        foreach ($is_res_time as $value) {
+            $tmp_data = array_unique(array_merge($tmp_data, json_decode($value, true)));
+        }
+        $diff = array_intersect($reservation_time, $tmp_data);
+        if (!empty($diff)) {
+            return json(['code' => 402, 'message' => '预约时间段冲突']);
+        }
         if (empty($id)) {
             $result = $reservation->save($data);
         } else {
             $result = $reservation->save($data, ['id' => $id]);
         }
-
         if ($result) {
             return json(['code' => 200, 'message' => '保存成功']);
         } else {
@@ -121,7 +129,7 @@ class Reservation extends Controller
      * 删除指定资源
      *
      */
-    public function delete()
+    public function cancel()
     {
         $id = request()->param('id');
         /* 验证 */
@@ -134,9 +142,29 @@ class Reservation extends Controller
         }
         $result = ReservationModel::destroy($id);
         if ($result) {
-            return json(['code' => 200, 'message' => '删除成功!']);
+            return json(['code' => 200, 'message' => '取消成功!']);
         } else {
-            return json(['code' => 404, 'message' => '删除失败!']);
+            return json(['code' => 404, 'message' => '取消失败!']);
         }
+    }
+
+    /**
+     * 我的预约
+     */
+    public function my_reservation()
+    {
+        $date = request()->param('date');
+        // 组合过滤条件
+        $conditions = [];
+        if ($date) {
+            $conditions['date'] = $date;
+        }
+        $page = config('page.pagination');
+        $page_size = request()->param('page_size/d', $page['PAGE_SIZE']);
+        $jump_page = request()->param('jump_page/d', $page['JUMP_PAGE']);
+        $reservation = ReservationModel::where($conditions)->with(['venue'])->field('id,venue_id,date,reservation_time,status')
+            ->order('date', 'desc')
+            ->paginate($page_size, false, ['page' => $jump_page]);
+        return json(['code' => 200, 'data' => $reservation]);
     }
 }

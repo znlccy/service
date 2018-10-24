@@ -88,8 +88,6 @@ class EnterTeamMember extends BaseController
                 $sub_path     = str_replace('\\', '/', $info->getSaveName());
                 $picture = '/images/' . $sub_path;
             }
-        } else {
-            $picture = request()->param('picture');
         }
         // 验证
         $data = [
@@ -107,49 +105,53 @@ class EnterTeamMember extends BaseController
             return json(['code' => 401, 'message' => $result]);
         }
 
-        if (empty($id)) {
-            $member = new EnterTeamMemberModel();
-            $result = $member->save($data);
-        } else {
-            // 插入资料审核表
-            $member = EnterTeamMemberModel::get($id)->toArray();
-            $before = [];
-            $after = [];
-            $diff = array_diff($data, $member);
-            if (!empty($diff)) {
-                $before = $member;
+        $team_member = new EnterTeamMemberModel();
+        $team_member->startTrans();
+        try {
+            if (empty($id)) {
+                $result = $team_member->save($data);
+                $data['id'] = $team_member->id;
+                $before = [];
                 $after = $data;
-            }
-            if (!empty($after)) {
-                $change = new TeamChange();
-                $data = [
-                    'enter_team_id' => $member['enter_team_id'],
-                    'project' => 2,
-                    'before_change' => $before,
-                    'after_change' => $after,
-                    'status' => 0
-                ];
-                $result = $this->validate($data,'TeamChange.save');
-                if (true !== $result) {
-                    return json(['code' => 401, 'message' => $result]);
+            } else {
+                if (empty($picture)) {
+                    unset($data['picture']);
                 }
-                if ($change->save($data)) {
+                // 插入资料审核表
+                $member = EnterTeamMemberModel::get($id)->toArray();
+                $before = [];
+                $after = [];
+                $diff = array_diff($data, $member);
+                if (!empty($diff)) {
+                    $before = $member;
+                    $after = $data;
+                    $data['status'] = 0;
+                }
+                $team_member->save($data, ['id' => $id]);
+                if (!empty($after)) {
+                    $change = new TeamChange();
+                    $data = [
+                        'enter_team_id' => $member['enter_team_id'],
+                        'project' => 2,
+                        'before_change' => $before,
+                        'after_change' => $after,
+                        'status' => 0
+                    ];
+                    $result = $this->validate($data,'TeamChange.save');
+                    if (true !== $result) {
+                        return json(['code' => 401, 'message' => $result]);
+                    }
+                    $change->save($data);
                     return json(['code' => 200, 'message' => '提交审核成功']);
-                } else {
-                    return json(['code' => 200, 'message' => '保存失败']);
                 }
+                $team_member->commit();
             }
-            if (empty($picture)) {
-                unset($data['picture']);
-            }
-            $member = new EnterTeamMemberModel();
-            $result = $member->save($data,['id', $id]);
+            return json(['code' => 200, 'message' => '提交成功']);
+        } catch (\Exception $e) {
+            $team_member->rollback();
+            return json(['code' => 404, 'message' => $e->getMessage()]);
         }
-        if ($result) {
-            return json(['code' => 200, 'message' => '保存成功!']);
-        } else {
-            return json(['code' => 404, 'message' => '保存失败!']);
-        }
+
     }
 
     /**

@@ -21,12 +21,4 @@ class Investigate extends BaseModel {
     public function question() {
         return $this->hasMany('Question', 'investigate_id', 'id');
     }
-
-    public function setAnswerAttr($value) {
-        return json_encode($value);
-    }
-
-    public function getAnswerAttr($value) {
-        return json_decode($value,true);
-    }
 }

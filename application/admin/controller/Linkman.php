@@ -5,6 +5,7 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 use app\index\model\Linkman as LinkmanModel;
+use app\admin\model\VerificationCode;
 
 class Linkman extends Controller
 {
@@ -68,6 +69,10 @@ class Linkman extends Controller
         }
         // 验证码校验
         #code...
+        $codes = VerificationCode::whereIn('mobile', [$f_mobile,$e_mobile,$a_mobile])->column('code');
+        if (!in_array($a_mobile_code,$codes) || !in_array($f_mobile_code,$codes) || !in_array($e_mobile_code,$codes)) {
+            return json(['code' => 401, 'message' => '验证码不正确']);
+        }
         $linkman = new LinkmanModel();
         unset($data['f_mobile_code'],$data['e_mobile_code'],$data['f_mobile_code']);
         if (empty($id)) {

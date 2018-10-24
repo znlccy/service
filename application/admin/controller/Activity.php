@@ -183,7 +183,6 @@ class Activity extends Controller {
         $content     = $this->request->param('content');
         $recommend   = $this->request->param('recommend', 0);
         $picture     = $this->request->file('picture');
-        $start       = $this->request->param('start');
         $limit       = $this->request->param('limit');
         $register    = $this->request->param('register', 0);
         $status      = $this->request->param('status', 1);
@@ -211,7 +210,6 @@ class Activity extends Controller {
             'content'     => $content,
             'recommend'   => $recommend,
             'picture'     => $picture,
-            'start'       => $start,
             'limit'       => $limit,
             'register'    => $register,
             'status'      => $status,

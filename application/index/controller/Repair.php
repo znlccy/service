@@ -120,7 +120,7 @@ class Repair extends BasisController
      * 删除指定资源
      *
      */
-    public function delete()
+    public function cancel()
     {
         $id = request()->param('id');
         /* 验证 */
@@ -133,9 +133,9 @@ class Repair extends BasisController
         }
         $result = RepairModel::destroy($id);
         if ($result) {
-            return json(['code' => 200, 'message' => '删除成功!']);
+            return json(['code' => 200, 'message' => '取消成功!']);
         } else {
-            return json(['code' => 404, 'message' => '删除失败!']);
+            return json(['code' => 404, 'message' => '取消失败!']);
         }
     }
 }

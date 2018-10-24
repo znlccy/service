@@ -9,7 +9,7 @@
 
 namespace app\index\model;
 
-class ConsultPolicy extends BaseModel {
+class ConsultPolicy extends BasisModel {
 
     /**
      * 自动写入读取时间

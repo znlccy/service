@@ -5,8 +5,9 @@ namespace app\index\controller;
 use think\Controller;
 use think\Request;
 use app\index\model\Linkman as LinkmanModel;
+use app\index\model\VerificationCode;
 
-class Linkman extends Controller
+class Linkman extends BasisController
 {
     /**
      * 显示资源列表
@@ -66,13 +67,31 @@ class Linkman extends Controller
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
-        // 验证码校验
-        #code...
+
         $linkman = new LinkmanModel();
         unset($data['f_mobile_code'],$data['e_mobile_code'],$data['f_mobile_code']);
+        $codes = VerificationCode::whereIn('mobile', [$f_mobile,$e_mobile,$a_mobile])->column('code');
         if (empty($id)) {
+            // 验证码校验
+            #code...
+            if (!in_array($a_mobile_code,$codes) || !in_array($f_mobile_code,$codes) || !in_array($e_mobile_code,$codes)) {
+                return json(['code' => 401, 'message' => '验证码不正确']);
+            }
             $result = $linkman->save($data);
         } else {
+            $status = 0;
+            if(isset($a_mobile_code) && in_array($a_mobile_code, $codes)){
+                $status = 1;
+            }
+            if(isset($e_mobile_code) && in_array($e_mobile_code, $codes)){
+                $status = 1;
+            }
+            if(isset($f_mobile_code) && in_array($f_mobile_code, $codes)){
+                $status = 1;
+            }
+            if (!$status) {
+                return json(['code' => 401, 'message' => '验证码不正确']);
+            }
             $result = $linkman->save($data, ['id' => $id]);
         }
         if ($result) {
@@ -100,7 +119,14 @@ class Linkman extends Controller
             return json(['code' => 401, 'message' => $result]);
         }
         $detail = LinkmanModel::where('id', $id)->find();
-
+        $a_mobile_code = VerificationCode::whereIn('mobile', $detail['a_mobile'])->value('code');
+        $e_mobile_code = VerificationCode::whereIn('mobile', $detail['e_mobile'])->value('code');
+        $f_mobile_code = VerificationCode::whereIn('mobile', $detail['f_mobile'])->value('code');
+        $detail['codes'] = array(
+            'a_mobile_code' => $a_mobile_code,
+            'e_mobile_code' => $e_mobile_code,
+            'f_mobile_code' => $f_mobile_code,
+        );
         if ($detail) {
             return json(['code' => 200, 'message' => '获取详情成功!', 'data' => $detail]);
         } else {

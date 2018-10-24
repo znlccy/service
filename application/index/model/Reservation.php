@@ -22,7 +22,17 @@ class Reservation extends BasisModel
 
     public function venue()
     {
-        return $this->hasOne('Venue', 'id', 'venue_id');
+        return $this->hasOne('Venue', 'id', 'venue_id')->field('id,name');
+    }
+
+    public function setReservationTimeAttr($value)
+    {
+        return json_encode($value);
+    }
+
+    public function getReservationTimeAttr($value)
+    {
+        return json_decode($value, true);
     }
 
 }

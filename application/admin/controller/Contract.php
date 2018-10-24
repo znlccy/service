@@ -10,7 +10,7 @@ use app\admin\model\Order;
 use app\admin\model\OrderWorkplace;
 use app\admin\model\ContractTemplate;
 
-class Contract extends BaseController
+class Contract extends Controller
 {
     /**
      * 显示资源列表
@@ -191,6 +191,8 @@ class Contract extends BaseController
         $result = $this->validate($data,'Contract.download');
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
+
+
         }
         // 获取合同信息
         $contract = ContractModel::get($id);

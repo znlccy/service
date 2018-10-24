@@ -17,9 +17,7 @@ use think\facade\Session;
 use think\Validate;
 use app\index\model\User as UserModel;
 use app\index\model\VerificationCode as VerificationCodeModel;
-use app\index\model\UserForum as UserForumModel;
-use app\index\model\TeamCompetition as TeamCompetitionModel;
-use app\index\model\Team as TeamModel;
+use app\index\model\EnterTeam as EnterTeamModel;
 
 class User extends BasisController {
 
@@ -56,8 +54,16 @@ class User extends BasisController {
         Session::set('user', $user);
         $token = general_token($mobile, $password);
         Session::set('access_token', $token);
+        $team = EnterTeamModel::where('user_id', $user['id'])->find();
+        if ($team) {
+            $is_enter = 1;
+            $enter_team_id = $team['id'];
+        } else {
+            $is_enter = 0;
+            $enter_team_id = 0;
+        }
 
-        return json(['code' => 200, 'message'   => '登录成功',  'access_token' => $token, 'mobile' => $mobile ]);
+        return json(['code' => 200, 'message'   => '登录成功',  'access_token' => $token, 'mobile' => $mobile, 'is_enter' => $is_enter, 'enter_team_id' => $enter_team_id]);
     }
 
     /**
@@ -72,10 +78,10 @@ class User extends BasisController {
 
         /* 验证规则 */
         $validate_data = [
-            'mobile'        => $mobile,
             'password'      => $password,
             'verify'        => $verify,
             'code'          => $code,
+            'mobile'        => $mobile,
         ];
 
         $result = $this->validate($validate_data, 'User.register');
@@ -97,6 +103,10 @@ class User extends BasisController {
 
         if ($smsCode['code'] != $code) {
             return json(['code' => 408, 'message' => '短信验证码错误']);
+        }
+        // 判断手机号是否存在
+        if (UserModel::where('mobile', $mobile)->find()) {
+            return json(['code' => 401, 'message' => '该手机号已经注册']);
         }
 
         $user_data = [
@@ -128,7 +138,6 @@ class User extends BasisController {
                 'message'   => '注册失败'
             ]);
         }
-
     }
 
     /**
@@ -441,6 +450,7 @@ class User extends BasisController {
             return json([
                 'code'      => 402,
                 'message'   => '消息不存在',
+
             ]);
         }
 
