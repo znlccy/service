@@ -16,6 +16,8 @@ class Activity extends BaseValidate {
         'id'            => 'number',
         'title'         => 'max:255',
         'content'       => 'max:255',
+        'start'         => 'number|lt:limit',
+        'limit'         => 'number|min:0',
         'status'        => 'number|in:0,1',
         'recommend'     => 'number|in:0,1',
         'publisher'     => 'max:255',
@@ -51,9 +53,11 @@ class Activity extends BaseValidate {
     }
 
     public function sceneSave() {
-        return $this->only(['id', 'title', 'content', 'status', 'recommend', 'publisher', 'picture'])
+        return $this->only(['id', 'title', 'content','start', 'limit', 'status', 'recommend', 'publisher', 'picture'])
             ->append('title', 'require|max:255')
             ->append('content', 'require|max:255')
+            ->append('start', 'number|lt:limit')
+            ->append('limit', 'number|min:0')
             ->append('status', 'require|number|in:0,1')
             ->append('recommend', 'require|number|in:0,1');
     }

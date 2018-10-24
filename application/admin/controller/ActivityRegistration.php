@@ -71,7 +71,7 @@ class ActivityRegistration extends BaseController {
 
         if (true !== $result) {
             return json([
-                'code'      => 200,
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -198,7 +198,7 @@ class ActivityRegistration extends BaseController {
 
         if (empty($apply) || is_null($apply)) {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '你还没报名这项活动'
             ]);
         }
@@ -210,12 +210,12 @@ class ActivityRegistration extends BaseController {
         $res = $user->Activity()->detach($activity);
         if ($res) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '取消报名成功'
             ]);
         } else {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => '取消报名失败'
             ]);
         }
@@ -236,7 +236,7 @@ class ActivityRegistration extends BaseController {
         $result = $this->validate($validate_data, 'ActivityRegistration.detail');
         if (true !== $result) {
             return json([
-                'code'      => '401',
+                'code'      => 401,
                 'message'   => $result
             ]);
         }
@@ -246,13 +246,13 @@ class ActivityRegistration extends BaseController {
 
         if ($activity) {
             return json([
-                'code'      => '200',
+                'code'      => 200,
                 'message'   => '查询数据成功',
                 'data'      => $activity
             ]);
         } else {
             return json([
-                'code'      => '404',
+                'code'      => 404,
                 'message'   => '查询诗句就失败'
             ]);
         }

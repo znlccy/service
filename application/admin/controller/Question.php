@@ -62,7 +62,7 @@ class Question extends BaseController {
 
         if (true !== $result) {
             return json([
-                'code'      => 401,
+                'code'      => '401',
                 'message'   => $result
             ]);
         }
@@ -151,7 +151,7 @@ class Question extends BaseController {
             ]);
         } else {
             return json([
-                'code'      => 401,
+                'code'      => 404,
                 'message'   => '操作数据失败'
             ]);
         }

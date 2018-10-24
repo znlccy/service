@@ -31,4 +31,11 @@ class ConsultPolicy extends BaseModel {
         return $this->hasOne('Type', 'type_id', 'id');
     }*/
 
+    public function setRichTextAttr($value){
+        return htmlspecialchars($value);
+    }
+
+    public function getRichTextAttr($value) {
+        return htmlspecialchars_decode($value);
+    }
 }
