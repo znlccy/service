@@ -6,5 +6,7 @@ use think\Model;
 
 class Space extends Model
 {
-    protected $table = 'tb_space';
+   protected $table = 'tb_space';
+
+   protected $json = ['space_pictures'];
 }

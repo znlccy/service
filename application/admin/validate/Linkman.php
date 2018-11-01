@@ -83,4 +83,19 @@ class Linkman extends Validate
         return $this->only(['id'])
             ->append('id', 'require');
     }
+
+    public function sceneFlinkman()
+    {
+        return $this->only(['f_linkman', 'f_mobile', 'f_mobile_code', 'f_email', 'f_remind']);
+    }
+
+    public function sceneElinkman()
+    {
+        return $this->only(['e_linkman', 'e_mobile', 'e_mobile_code', 'e_email', 'e_remind']);
+    }
+
+    public function sceneAlinkman()
+    {
+        return $this->only(['a_linkman', 'a_mobile', 'a_mobile_code', 'a_email', 'a_remind']);
+    }
 }

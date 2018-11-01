@@ -18,7 +18,7 @@ class TeamChange extends BaseModel
 
     public function setBeforeChangeAttr($value)
     {
-        return json_encode($value);
+        return json_encode($value, JSON_FORCE_OBJECT);
     }
 
     public function getBeforeChangeAttr($value)
@@ -28,7 +28,7 @@ class TeamChange extends BaseModel
 
     public function setAfterChangeAttr($value)
     {
-        return json_encode($value);
+        return json_encode($value, JSON_FORCE_OBJECT);
     }
     public function getAfterChangeAttr($value)
     {

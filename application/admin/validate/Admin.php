@@ -18,9 +18,9 @@ class Admin extends BaseValidate {
     //验证规则
     protected $rule = [
         'id'            => 'number',
-        'mobile'        => 'length:11|mobile',
+        'mobile'        => 'requireCallback:id_null|length:11|mobile',
         'code'          => 'length:6|number',
-        'password'      => 'alphaDash|length:8,25',
+        'password'      => 'requireCallback:id_null|alphaDash|length:8,25',
         'username'      => 'max:60|alphaDash',
         'confirm_pass'  => 'alphaDash|length:8,25|confirm:password',
         'real_name'     => 'max:40',

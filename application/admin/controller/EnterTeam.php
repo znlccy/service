@@ -218,7 +218,9 @@ class EnterTeam extends BaseController
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
-        $detail = EnterTeamModel::with(['developments','members', 'linkman', 'user'])->where($data)->find();
+        $detail = EnterTeamModel::with(['developments'=> function($query) {
+            $query->order('date', 'desc');
+        },'members', 'linkman', 'user'])->where($data)->find();
 
         if ($detail) {
             return json(['code' => 200, 'message' => '获取详情成功!', 'data' => $detail]);

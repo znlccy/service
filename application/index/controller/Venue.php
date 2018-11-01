@@ -101,7 +101,7 @@ class Venue extends BasisController
     {
         // 获取前端传的参数
         $id = request()->param('id');
-        $date = request()->param('date_time');
+        $date = request()->param('date', date('Y-m-d', time()));
         /* 验证 */
         $data = [
             'id' => $id,
@@ -115,7 +115,7 @@ class Venue extends BasisController
             $query->field('id,name');
         }])->where('id', $id)->find();
 
-        $is_res_time = Reservation::where(['venue_id' => $id, 'date' => $date])->column('reservation_time');
+        $is_res_time = Reservation::where(['venue_id' => $id, 'date' => $date])->where('status', '<>', 2)->column('reservation_time');
         $data = [];
         foreach ($is_res_time as $value) {
             $data = array_unique(array_merge($data, json_decode($value, true)));

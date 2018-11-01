@@ -8,8 +8,10 @@ use app\admin\model\IncidentalOrder;
 use app\admin\model\Incidental as IncidentalModel;
 use app\admin\model\RecOrder;
 use app\admin\model\Invoice;
+use app\admin\model\Order;
+use app\admin\model\EnterTeam;
 
-class Incidental extends Controller
+class Incidental extends BaseController
 {
     /**
      * 显示资源列表
@@ -66,11 +68,12 @@ class Incidental extends Controller
         $project = request()->param('project');
         $pay_type = request()->param('pay_type');
         $teams = request()->param('teams/a');
+        $total_price = request()->param('total_price');
         $status = request()->param('status', 0);
         $data = [
             'project' => $project,
             'pay_type' => $pay_type,
-            'operator_id' => session('admin.id'),
+            'operator_id' => 16, //session('admin.id')
             'teams' => $teams,
             'status' => $status
         ];
@@ -94,33 +97,47 @@ class Incidental extends Controller
                 Invoice::whereIn('rec_order_id', $order_ids)->delete();
             }
             foreach ($teams as $key => $team) {
+                switch ($pay_type) {
+                    case 1:
+                        $count = count($teams);
+                        $price = bcdiv($total_price, $count, 2);
+                        break;
+                    case 2:
+                        $price = $team['price'];
+                        break;
+                    default:
+                        $price = 0;
+                        break;
+                }
                 $data = [
                     'order_no' => 'ZFDD' . time() . uniqid(),
                     'incidental_id' => $incidental->id,
                     'project' => $project,
                     'pay_type' => $pay_type,
                     'team_id' => $team['team_id'],
-                    'price' => $team['price'],
+                    'price' => $price,
                     'status' => $status
                 ];
                 $result = $this->validate($data, 'IncidentalOrder');
                 if (true !== $result) {
                     return json(['code' => 401, 'message' => $result]);
                 }
-                $incidental = new IncidentalOrder($data);
-                $incidental->save();
+                $incidental_order = new IncidentalOrder($data);
+                $incidental_order->save();
                 // 保存发票信息
                 $rec_order = RecOrder::where('team_id', $team['team_id'])->field('id')->find();
-                $invoice_data = Invoice::where('rec_order_id', $rec_order['id'])->find()->toArray();
+                $invoice_data = Invoice::where('rec_order_id', $rec_order['id'])->find();
                 if (empty($invoice_data)) {
                     return json(['code' => 401, 'message' => '收款对象还未签约租赁合同']);
+                } else {
+                    $invoice_data = $invoice_data->toArray();
                 }
                 unset($invoice_data['id'],$invoice_data['create_time'],$invoice_data['update_time'],$invoice_data['open_time']);
                 $invoice_datas[$key] = $invoice_data;
                 $invoice_datas[$key]['invoice_no'] = 'IN' . time() . uniqid();
                 $invoice_datas[$key]['sale_order_id'] = $incidental->id;
                 $invoice_datas[$key]['rec_order_id'] = $incidental->id;
-                $invoice_datas[$key]['price'] = $team['price'];
+                $invoice_datas[$key]['price'] = $price;
                 $invoice_datas[$key]['order_type'] = 2;
                 $invoice_datas[$key]['team_id'] = $team['team_id'];
             }
@@ -153,15 +170,20 @@ class Incidental extends Controller
         unset($incidental['operator_id']);
         $incidental_order = IncidentalOrder::with(['team','invoice' => function($query) {
             return $query->where('order_type', '=', 2);
-        }])->field('')->where('incidental_id', $id)->select();
+        }])->where('incidental_id', $id)->select();
         $order_info = [];
+        $total_price = 0;
         foreach ($incidental_order as $key => $value) {
-            unset($value['invoice']['rec_order_id']);
+            if(isset($value['invoice']['rec_order_id'])) {
+                unset($value['invoice']['rec_order_id']);
+            }
             $order_info[$key]['price'] = $value['price'];
             $order_info[$key]['team'] = $value['team'];
             $order_info[$key]['invoice'] = $value['invoice'];
+            $total_price = $total_price + $value['price'];
         }
         $detail['order_info'] = $order_info;
+        $detail['incidental']['total_price'] = $total_price;
 //        dump($incidental_order);die;
 
         return json(['code' => 200, 'message' => '获取成功', 'data' => $detail]);
@@ -233,6 +255,50 @@ class Incidental extends Controller
      */
     public function delete()
     {
-        //
+        $id = request()->param('id');
+        /* 验证 */
+        $data = [
+            'id' => $id,
+        ];
+        $result   = $this->validate($data, 'Incidental.delete');
+        if (true !== $result) {
+            return json(['code' => 401, 'message' => $result]);
+        }
+        $incidental = IncidentalModel::get($id);
+        if ($incidental) {
+            $incidental->startTrans();
+            try {
+                if ($incidental->status !== 0) {
+                    return json(['code' => 404, 'message' => '审核中或已审核的订单不可删除']);
+                }
+                // 删除订单
+                $incidental->delete();
+                // 删除收款订单
+                IncidentalOrder::where('incidental_id', '=', $id)->delete();
+                // 删除发票
+                Invoice::where('sale_order_id', '=', $id)->delete();
+                $incidental->commit();
+                return json(['code' => 200, 'message' => '删除成功!']);
+            } catch (\Exception $e) {
+                $incidental->rollback();
+                return json(['code' => 404, 'message' => '删除失败!']);
+            }
+        } else {
+            return json(['code' => 404, 'message' => '找不到该订单信息']);
+        }
+    }
+
+    public function enter_teams()
+    {
+        $team_ids = Order::where('status', '=', 2)->column('team_id');
+        $team_ids = array_unique($team_ids);
+
+        $team = EnterTeam::whereIn('id', $team_ids)->field('id,company')->select();
+        if (!empty($team)) {
+            return json(['code' => 200, 'message' => '获取下拉列表成功', 'data' => $team]);
+        } else {
+            return json(['code' => 404, 'message' => '获取下拉列表失败']);
+        }
+
     }
 }

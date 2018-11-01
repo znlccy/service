@@ -57,6 +57,7 @@ class Order extends Controller
         } else {
             $conditions[] = ['status', '=', $status];
         }
+        // 获取当前登录用户信息
         $order = OrderModel::where($conditions)
             ->with('team')
             ->order('status')
@@ -790,6 +791,7 @@ class Order extends Controller
             $order_workplaces = OrderWorkplace::where('order_id', $id)
                 ->with(['workplace.space'])
                 ->select();
+            $space_data = [];
             foreach ($order_workplaces as $order_workplace) {
                 // 获取工位所属空间
                 $space = $order_workplace->workplace->space;
@@ -903,18 +905,26 @@ class Order extends Controller
         $run = db('tb_run')->where(['from_table' => 'order', 'from_id' => $order_id])->field('id,flow_id')->find();
         $run_id = $run['id'];
         $flow_id = $run['flow_id'];
-        $flow_process = db('tb_flow_process')->where('flow_id', $flow_id)->select();
-        foreach ($flow_process as $process) {
-            $run_process = db('tb_run_process')->where(['run_flow_process' => $process['id'], 'run_id' => $run_id])->find();
+        $flow_process = db('tb_flow_process')->where('flow_id', $flow_id)->order('dateline', 'desc')->find();
+//        foreach ($flow_process as $process) {
+            $run_process = db('tb_run_process')
+                ->alias('p')
+                ->leftJoin('tb_admin a', 'p.uid = a.id')
+                ->field('a.nickname as user,p.dateline,p.status')
+                ->where(['run_flow_process' => $flow_process['id'], 'run_id' => $run_id])
+                ->find();
             if ($run_process['status'] === 2) {
-                $run_log = db('tb_run_log')
-                    ->alias('l')
-                    ->leftJoin('tb_admin a', 'l.uid = a.id')
-                    ->field('a.nickname as user,l.dateline')
-                    ->find();
-                $run_log['dateline'] = date('Y-m-d H:i:s', $run_log['dateline']);
-                $run_log['status'] = 1;
-                $data[] = $run_log;
+//                $run_log = db('tb_run_log')
+//                    ->alias('l')
+//                    ->where('l.status', '<>', 0)
+//                    ->leftJoin('tb_admin a', 'l.uid = a.id')
+//                    ->field('a.nickname as user,l.dateline,l.status')
+//                    ->find();
+//                foreach ($run_log as $value) {
+                    $run_process['dateline'] = date('Y-m-d H:i:s', $run_process['dateline']);
+                    $run_process['status'] = 1;
+                    $data[] = $run_process;
+//                }
             } elseif($run_process['status'] === 0) {
                 // 待审核(找出符合条件的审核人)
                 $run_process_data = [];
@@ -924,15 +934,15 @@ class Order extends Controller
                 $data[] = $run_process_data;
             } else {
                 $flow_process_data = [];
-                switch ($process['auto_person']) {
+                switch ($flow_process['auto_person']) {
                     case 4:
-                        $flow_process_data['user'] = $process['auto_sponsor_text'];
+                        $flow_process_data['user'] = $flow_process['auto_sponsor_text'];
                         break;
                     case 5:
-                        $flow_process_data['user'] = $process['auto_role_text'];
+                        $flow_process_data['user'] = $flow_process['auto_role_text'];
                         break;
                     case 6:
-                        $flow_process_data['user'] = $process['auto_dept_text'];
+                        $flow_process_data['user'] = $flow_process['auto_dept_text'];
                         break;
                 }
 
@@ -940,7 +950,7 @@ class Order extends Controller
                 $flow_process_data['status'] = 2;
                 $data[] = $flow_process_data;
             }
-        }
+//        }
         return json(['code' => 200, 'data' => $data]);
 
     }

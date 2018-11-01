@@ -72,6 +72,9 @@ class Role extends BaseController {
         if ($active_start || $active_end) {
             $conditions[] = ['create_time', 'between time', [$active_start, $active_end]];
         }
+        if (!$operation_team_id) {
+            $conditions[] = ['operation_team_id', '=', $operation_team_id];
+        }
         // 获取角色id
 //        $role_ids = OperationTeamRole::where('operation_team_id', $operation_team_id)->column('role_id');
 
@@ -122,6 +125,7 @@ class Role extends BaseController {
             'sort_num' => $sort,
             'create_time' => date('Y-m-d H:i:s', time()),
             'operation_team_id' => $operation_team_id,
+            'type' => $type,
             'parent_id' => 0
         ];
 

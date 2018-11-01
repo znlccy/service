@@ -6,7 +6,7 @@ use think\Controller;
 use think\Request;
 use app\admin\model\Repair as RepairModel;
 
-class Repair extends Controller
+class Repair extends BaseController
 {
     /**
      * 显示资源列表

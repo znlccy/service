@@ -14,7 +14,7 @@ use app\admin\model\Space;
 use app\admin\model\Workplace;
 use app\admin\model\OrderWorkplace;
 
-class Work extends Controller
+class Work extends BaseController
 {
     /**
      * 工作概览
@@ -37,14 +37,14 @@ class Work extends Controller
         $admin_info = Admin::with(['department', 'space'])->where('id', $admin['id'])->field('id,nickname,department_id,operation_team_id')->find();
         // 需要我进行的审核
         $data = [];
-        $total_data = [];
+        $check_data = [];
         $check = db('tb_run_process')
             ->alias('p')
             ->where('p.status', '=', 0)
             ->leftJoin('tb_run r', 'p.run_id = r.id')
             ->field('p.*,r.from_table,r.from_id')
             ->paginate($page_size, false, ['page' => $jump_page])
-            ->each(function($item) use ($admin, $role_ids, $data, $total_data) {
+            ->each(function($item) use ($admin, $role_ids, $data, &$check_data) {
                 // 判断当前用户是否有审核权限
                 $sponsor_ids = explode(',', $item['sponsor_ids']);
                 if (($item['auto_person'] === 4 && in_array($admin['id'], $sponsor_ids)) || ($item['auto_person'] === 5 && array_intersect($role_ids,$sponsor_ids)) || ($item['auto_person'] === 6 && in_array($admin['department_id'], $sponsor_ids))) {
@@ -72,13 +72,18 @@ class Work extends Controller
                     // 发起时间
                     $data['create_time'] = date('Y-m-d H:i:s', $item['dateline']);
                 }
-                $total_data[] = $data;
-                return $total_data;
+                if (!empty($data)) {
+                    $check_data[] = $data;
+                    return $check_data;
+                } else {
+                    unset($data, $item);
+                }
             });
         // 抄送我的
+        $copy_data = [];
         $copys = OrderCopy::where('user_id', $admin['id'])->with(['order.team'])
             ->paginate($page_size, false, ['page' => $jump_page])
-            ->each(function($item){
+            ->each(function($item) use (&$copy_data) {
                 $item['id'] = $item->order->id;
                 $item['title'] = $item->order->team->company . '销售订单';
                 $run = db('tb_run')
@@ -122,19 +127,41 @@ class Work extends Controller
                     $item['create_time'] = date('Y-m-d H:i:s', $run['dateline']);
                     unset($item['order']);
                     unset($item['update_time']);
+                    $copy_data[] = $item;
                 }
             });
         // 空间入驻率
-        $spaces = Space::field('id,name')->limit(2)->select();
+        $spaces = Space::field('id,name')->select();
         $space_data = [];
+
         foreach ($spaces as $space) {
             $rate = $this->rate($space->id);
             $space['enter_rate'] = $rate;
             $space_data[] = $space;
         }
-        // 销售额
+        /* 销售额start*/
+        // 获取已经完成的订单
+        $order_ids = Order::where('status', '=', 2)->column('id');
+        $order_workplaces = OrderWorkplace::whereIn('order_id', $order_ids)->field('order_id,workplace_id')->select();
 
-        return json(['code' => 200, 'data' => ['copy' => $copys, 'check' => $check, 'space' => $space_data]]);
+        // 空间
+//        $spaces = Space::field('id,name')->select();
+        $orders = [];
+        foreach ($spaces as $key => $space) {
+            foreach ($order_workplaces as $order_workplace) {
+                $space_id = Workplace::where('id', $order_workplace['workplace_id'])->value('space_id');
+                if ($space['id'] === $space_id) {
+                    $orders[] = $order_workplace['order_id'];
+                }
+
+            }
+            $orders = array_unique($orders);
+            $spaces[$key]['sale_price'] = Order::whereIn('id', $orders)->sum('total_price');
+        }
+        /*销售额end*/
+
+
+        return json(['code' => 200, 'data' => ['check_data' => $check_data, 'copy_data' => $copy_data, 'space_data' => $space_data]]);
     }
 
     /**
@@ -274,9 +301,7 @@ class Work extends Controller
                 $query->field('status,run_id,content')->table('tb_run_log')->where('status', '<>', 0);
             })->select();
         $run_ids = [];
-        foreach ($check_data as $value) {
-            $run_ids[] = $value['run_id'];
-        }
+        $run_ids = array_column($check_data, 'run_id');
         $run = db('tb_run')
             ->alias('r')
             ->whereIn('r.id', $run_ids)
@@ -289,23 +314,26 @@ class Work extends Controller
                     $order = Order::with('team')->where('id',$item['from_id'])->find();
                     if ($order) {
                         $title = $order->team->company . '销售订单';
+                        $order_type = 1;
                     }
                 } else {
                     $incidental = Incidental::where('id', $item['from_id'])->find();
                     if ($incidental) {
                         $title = $incidental->project . '杂费收取';
+                        $order_type = 2;
                     }
                 }
                 $item['title'] = $title;
                 $item['create_time'] = date('Y-m-d H:i:s', $item['dateline']);
                 $item['space'] = $space;
+                $item['order_type'] = $order_type;
                 foreach ($check_data as $value) {
                     if ($item['id'] === $value['run_id']){
                         $item['status'] = $value['status'];
                         $item['content'] = $value['content'];
                     }
                 }
-                unset($item['uid'],$item['from_table'],$item['from_id'],$item['dateline']);
+                unset($item['uid'],$item['from_table'],$item['dateline']);
                 return $item;
             });
         /* end */

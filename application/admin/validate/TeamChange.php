@@ -18,7 +18,7 @@ class TeamChange extends Validate
         'id' => 'number',
         'enter_team_id' => 'require|number',
         'project' => 'require|number',
-        'before_change' => 'require|array',
+        'before_change' => 'array',
         'after_change' => 'require|array',
         'status' => 'require|number',
         'check_user' => 'number',

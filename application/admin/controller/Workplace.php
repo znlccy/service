@@ -9,7 +9,7 @@ use app\admin\model\Space;
 use app\admin\model\OrderWorkplace;
 use app\admin\model\Contract;
 
-class Workplace extends Controller
+class Workplace extends BaseController
 {
     /**
      * 工位列表

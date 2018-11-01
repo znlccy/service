@@ -160,9 +160,11 @@ class Admin extends BaseController
         $status = request()->param('status');
         $role_id = request()->param('role_id/a');
         $operation_team_id = request()->param('operation_team_id', 0);
-        $department_id = request()->param('department_id', 0);
         if ($operation_team_id) {
             $department_id = Department::where('operation_team_id', $operation_team_id)->value('id');
+            if (empty($department_id)) {
+                $department_id = request()->param('department_id/d', 0);
+            }
         }
 
         $admin_model = new AdminModel();
@@ -440,7 +442,7 @@ class Admin extends BaseController
                 $query->withField("id,name");
             }, 'department' => function ($query) {
                 $query->withField("id,name");
-            }])->find();
+            }])->field('password',true)->find();
         if ($admin_data['operation_team_id'] === 0) {
             $admin_data['operation_team'] = ['id' => 0, 'name' => '公司'];
         }
@@ -553,6 +555,41 @@ class Admin extends BaseController
             return json([
                 'code' => 401,
                 'message' => '更新密码失败'
+            ]);
+        }
+    }
+
+    /*
+     * 管理员删除
+     */
+    public function delete()
+    {
+        /* 获取客户端提供的数据 */
+        $id = request()->param('id');
+
+        //验证的数据
+        $validate_data = [
+            'id' => $id
+        ];
+
+        $result = $this->validate($validate_data, 'Admin.detail');
+
+        if (true !== $result) {
+            return json(['code' => 401, 'message' => $result]);
+        }
+        $rbacObj = new Rbac();
+        $result = $rbacObj->delUser($id);
+        if ($result) {
+            // 删除部门成员
+            $department_member = DepartmentUser::where(['user_id' => $id])->delete();
+            return json([
+                'code' => 200,
+                'message' => '删除成功'
+            ]);
+        } else {
+            return json([
+                'code' => 404,
+                'message' => '删除失败'
             ]);
         }
     }

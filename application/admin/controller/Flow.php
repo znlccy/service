@@ -1,12 +1,12 @@
 <?php
 // 本类由系统自动生成，仅供测试用途
-namespace app\admin\Controller;
+namespace app\admin\controller;
 use think\Controller;
 use workflow\workflow;
 use think\facade\Session;
 use think\Db;
 
-class Flow extends BaseController {
+class Flow extends Controller {
 
     protected $uid;
     protected $role;

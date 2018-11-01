@@ -22,7 +22,7 @@ use think\db\exception\DataNotFoundException;
 use think\db\exception\ModelNotFoundException;
 use think\exception\DbException;
 
-class Investigate extends Controller {
+class Investigate extends BaseController {
 
     /* 声明调查模型 */
     protected $investigate_model;

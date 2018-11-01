@@ -42,9 +42,7 @@ class Space extends BaseController
         if ($name) {
             $conditions[] = ['name', 'like', '%' . $name . '%'];
         }
-        $space = SpaceModel::with(['OperationTeam' => function($query) {
-            $query->field('id,name');
-        }])->where($conditions)
+        $space = SpaceModel::with(['operation_team'])->where($conditions)
             ->order('id')
             ->paginate($page_size, false, ['page' => $jump_page])
             ->each(function($item){
@@ -58,15 +56,13 @@ class Space extends BaseController
     /**
      * 新增更新保存
      *
-     *
-     *
      */
     public function save()
     {
         // 获取前端传的参数
         $id  = request()->param('id');
         $name = request()->param('name');
-        $operation_team_id = request()->param('operation_team_id');
+        $operation_team_id = request()->param('operation_team_id', 0);
         $province_id = request()->param('province_id');
         $city_id = request()->param('city_id');
         $district_id = request()->param('district_id');
@@ -197,7 +193,7 @@ class Space extends BaseController
         $detail['enter_rate'] = $this->rate($detail['id']);
 
         if ($detail) {
-            unset($detail['operation_team_id'],$detail['province_id'],$detail['city_id'],$detail['district_id']);
+            unset($detail['province_id'],$detail['city_id'],$detail['district_id']);
             return json(['code' => 200, 'message' => '获取详情成功!', 'data' => $detail]);
         } else {
             return json(['code' => 404, 'message' => '获取详情失败!']);
@@ -233,7 +229,12 @@ class Space extends BaseController
      */
     public function select()
     {
-        $space = SpaceModel::field('id,name')->select();
+        $operation_team_id = session('admin.operation_team_id');
+        if ($operation_team_id) {
+            $space = SpaceModel::field('id,name')->where('operation_team_id', $operation_team_id)->select();
+        } else {
+            $space = SpaceModel::field('id,name')->select();
+        }
         if (!empty($space)) {
             return json(['code' => 200, 'message' => '获取下拉列表成功', 'data' => $space]);
         } else {

@@ -9,7 +9,7 @@ use app\admin\model\TeamChange as TeamChangeModel;
 use app\admin\model\Development;
 use app\admin\model\EnterTeamMember;
 
-class TeamChange extends Controller
+class TeamChange extends BaseController
 {
     /**
      * 显示资源列表

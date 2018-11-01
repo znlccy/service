@@ -10,7 +10,7 @@ use app\admin\model\Order;
 use app\admin\model\OrderWorkplace;
 use app\admin\model\ContractTemplate;
 
-class Contract extends Controller
+class Contract extends BaseController
 {
     /**
      * 显示资源列表
@@ -161,6 +161,7 @@ class Contract extends Controller
 
         $result = ContractModel::where(['id' => $id])->update($data);
         if ($result) {
+            // 更新订单状态为3
             return json(['code' => 200, 'message' => '确认签署成功']);
         }
         return json(['code' => 404, 'message' => '签署失败']);

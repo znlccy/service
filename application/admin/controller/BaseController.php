@@ -36,7 +36,8 @@ class BaseController extends Controller
         'Space' =>['select'],
         'User' => ['select'],
         'Image' => ['upload'],
-        'Contract' => ['download']
+        'Contract' => ['download'],
+        'Flow' => ['start_save', 'do_check_save']
     ];
 
     public function __construct(App $app = null)

@@ -4,8 +4,8 @@ namespace app\admin\controller;
 
 use think\Controller;
 use think\Request;
-use app\index\model\Development as DevelopmentModel;
-use app\index\model\TeamChange;
+use app\admin\model\Development as DevelopmentModel;
+use app\admin\model\TeamChange;
 
 class Development extends BaseController
 {

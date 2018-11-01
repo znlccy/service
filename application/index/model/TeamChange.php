@@ -10,21 +10,21 @@ class TeamChange extends Model
 
     public function setBeforeChangeAttr($value)
     {
-        return json_encode($value);
+        return json_encode($value, JSON_FORCE_OBJECT);
     }
 
     public function getBeforeChangeAttr($value)
     {
-        return json_decode($value, true);
+        return json_decode($value);
     }
 
     public function setAfterChangeAttr($value)
     {
-        return json_encode($value);
+        return json_encode($value, JSON_FORCE_OBJECT);
     }
     public function getAfterChangeAttr($value)
     {
-        return json_decode($value, true);
+        return json_decode($value);
     }
 
 }

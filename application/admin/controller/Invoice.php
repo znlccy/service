@@ -6,7 +6,7 @@ use think\Controller;
 use think\Request;
 use app\admin\model\Invoice as InvoiceModel;
 
-class Invoice extends Controller
+class Invoice extends BaseController
 {
     /**
      * 显示资源列表

@@ -51,7 +51,7 @@ class Carousel extends Controller {
      * @return \think\response\Json
      * @throws \think\exception\DbException
      */
-    public function entry() {
+    public function index() {
         //获取客户端提交过来的数据
         $id = request()->param('id');
         $title = request()->param('title');

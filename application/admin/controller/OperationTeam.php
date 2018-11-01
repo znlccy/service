@@ -107,6 +107,15 @@ class OperationTeam extends Controller
                 $department->save($department_data);
             } else {
                 $result = $team->save($data, ['id', $id]);
+                // 同时更新部门信息
+                $department = new Department();
+                $department_data = [
+                    'name' => $name,
+                    'p_id' => 0,
+                    'description' => $name,
+                    'team_id' => $team->id
+                ];
+                $department->save($department_data,['operation_team_id']);
             }
             if ($result) {
                 if (empty($id)) {

@@ -19,7 +19,7 @@ class Index
 
         // 空间数据
         $space = Space::order('id','desc')
-            ->field('id,name,short_description,description')
+            ->field('id,name,space_pictures,short_description,description')
             ->limit(11)
             ->select();
         // 咨询政策

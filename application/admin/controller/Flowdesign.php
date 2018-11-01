@@ -1,12 +1,12 @@
 <?php
-namespace app\admin\Controller;
-//use app\common\controller\admin;
+namespace app\admin\controller;
+
 use think\Controller;
 use think\Db;
 use app\admin\controller\Department;
 use app\admin\model\Admin;
 
-class Flowdesign extends BaseController {
+class Flowdesign extends Controller {
 	/**
 	 *前置方法
 	 */

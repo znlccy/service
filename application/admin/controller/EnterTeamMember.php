@@ -106,14 +106,27 @@ class EnterTeamMember extends BaseController
         }
 
         $team_member = new EnterTeamMemberModel();
+        $change = new TeamChange();
         $team_member->startTrans();
         try {
             if (empty($id)) {
-                $result = $team_member->save($data);
+                $team_member->save($data);
                 $data['id'] = $team_member->id;
                 $before = [];
                 $after = $data;
+                $change_data = [
+                    'enter_team_id' => $enter_team_id,
+                    'project' => 2,
+                    'before_change' => $before,
+                    'after_change' => $after,
+                    'status' => 0
+                ];
+                $change->save($change_data);
             } else {
+                $status = EnterTeamMemberModel::where('id', $id)->value('status');
+                if (!$status) {
+                    return json(['code' => 401, 'message' => '正在审核中的成员不能修改']);
+                }
                 if (empty($picture)) {
                     unset($data['picture']);
                 }
@@ -129,8 +142,7 @@ class EnterTeamMember extends BaseController
                 }
                 $team_member->save($data, ['id' => $id]);
                 if (!empty($after)) {
-                    $change = new TeamChange();
-                    $data = [
+                    $change_data = [
                         'enter_team_id' => $member['enter_team_id'],
                         'project' => 2,
                         'before_change' => $before,
@@ -141,12 +153,11 @@ class EnterTeamMember extends BaseController
                     if (true !== $result) {
                         return json(['code' => 401, 'message' => $result]);
                     }
-                    $change->save($data);
-                    return json(['code' => 200, 'message' => '提交审核成功']);
+                    $change->save($change_data);
                 }
-                $team_member->commit();
             }
-            return json(['code' => 200, 'message' => '提交成功']);
+            $team_member->commit();
+            return json(['code' => 200, 'message' => '提交审核成功']);
         } catch (\Exception $e) {
             $team_member->rollback();
             return json(['code' => 404, 'message' => $e->getMessage()]);

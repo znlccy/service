@@ -5,8 +5,9 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 use app\admin\model\Venue as VenueModel;
+use app\admin\model\Reservation;
 
-class Venue extends Controller
+class Venue extends BaseController
 {
     /**
      * 场馆列表
@@ -139,6 +140,7 @@ class Venue extends Controller
     {
         // 获取前端传的参数
         $id = request()->param('id');
+        $date = request()->param('date_time', date('Y-m-d', time()));
         /* 验证 */
         $data = [
             'id' => $id,
@@ -150,7 +152,21 @@ class Venue extends Controller
         }
         $detail = VenueModel::with(['space' => function ($query) {
             $query->field('id,name');
-        }, 'reservations.team'])->where('id', $id)->find();
+        }, 'reservations' => function ($query) use ($date){
+            $query->where('date',$date)->with('team');
+        }])->where('id', $id)->find();
+
+//        $detail = VenueModel::with(['space' => function ($query) {
+//            $query->field('id,name');
+//        }])->where('id', $id)->find();
+
+        $is_res_time = Reservation::where(['venue_id' => $id, 'date' => $date])->where('status', '<>', 2)->column('reservation_time');
+        $data = [];
+        foreach ($is_res_time as $value) {
+            $data = array_unique(array_merge($data, json_decode($value, true)));
+        }
+
+        $detail['is_res_time'] =  $data;
         if ($detail) {
             unset($detail['space_id']);
             return json(['code' => 200, 'message' => '获取详情成功!', 'data' => $detail]);

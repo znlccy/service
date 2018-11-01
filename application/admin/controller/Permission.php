@@ -34,7 +34,15 @@ class Permission extends BaseController {
             ->join('tb_permission tp', 'tp.id = rp.permission_id')
             ->select();
 
-        $tree = $this->buildTrees($node, 0);
+        $permission_ids = [];
+        $nodes = [];
+        foreach ($node as $value) {
+            if (!in_array($value['permission_id'], $permission_ids)) {
+                $nodes[] = $value;
+            }
+            $permission_ids[] = $value['permission_id'];
+        }
+        $tree = $this->buildTrees($nodes, 0);
 
         return json([
             'code'      => 200,

@@ -10,7 +10,7 @@ class RecOrder extends BaseModel
 
     public function invoice()
     {
-        return $this->belongsTo('Invoice','id', 'rec_order_id')->field('id,rec_order_id,status,invoice_no');
+        return $this->belongsTo('Invoice','id', 'rec_order_id')->field('id,rec_order_id,status,invoice_no,order_type');
     }
 
     public function team()

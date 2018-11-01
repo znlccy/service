@@ -7,7 +7,7 @@ use think\Request;
 use app\admin\model\Reservation as ReservationModel;
 use app\admin\model\Venue;
 
-class Reservation extends Controller
+class Reservation extends BaseController
 {
     /**
      * 显示场馆预约列表
@@ -67,7 +67,7 @@ class Reservation extends Controller
         $reservation_time = request()->param('reservation_time');
         $status = request()->param('status', 0);
         // 验证
-        $data = [
+        $insert_data = [
             'id' => $id,
             'venue_id' => $venue_id,
             'enter_team_id' => $enter_team_id,
@@ -75,7 +75,7 @@ class Reservation extends Controller
             'reservation_time' => $reservation_time,
             'status' => $status
         ];
-        $result = $this->validate($data, 'Reservation');
+        $result = $this->validate($insert_data, 'Reservation');
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
@@ -90,9 +90,9 @@ class Reservation extends Controller
         }
         $reservation = new ReservationModel();
         if (empty($id)) {
-            $result = $reservation->save($data);
+            $result = $reservation->save($insert_data);
         } else {
-            $result = $reservation->save($data, ['id' => $id]);
+            $result = $reservation->save($insert_data, ['id' => $id]);
         }
 
         if ($result) {

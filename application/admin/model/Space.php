@@ -17,7 +17,7 @@ class Space extends BaseModel
     }
 
     public function operationTeam() {
-        return $this->hasOne('OperationTeam', 'id', 'operation_team_id')->field('id,name');
+        return $this->hasOne('OperationTeam', 'id')->field('id,name');
     }
 
     /**
