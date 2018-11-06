@@ -11,7 +11,7 @@ namespace app\index\controller;
 
 use app\index\model\Service as ServiceModel;
 use app\index\model\Group as GroupModel;
-use think\Request;
+use think\App;
 
 class Service extends BasisController {
 
@@ -24,12 +24,14 @@ class Service extends BasisController {
     /* 声明服务分页 */
     protected $service_page;
 
-    public function __construct(Request $request = null) {
-        parent::__construct($request);
+    public function __construct(App $app = null)
+    {
+        parent::__construct($app);
         $this->service_model = new ServiceModel();
         $this->group_model = new GroupModel();
         $this->service_page = config('page.pagination');
     }
+
 
     /* 资源列表 */
     public function index() {
@@ -49,7 +51,7 @@ class Service extends BasisController {
     //验证结果
     $result   = $this->validate($validate_data, 'Service.index');
     if (!$result) {
-        return json(['code' => '401', 'message' => $result]);
+        return json(['code' => 401, 'message' => $result]);
     }
 
     //整理查询
@@ -73,7 +75,7 @@ class Service extends BasisController {
 
     /* 返回数据 */
     return json([
-        'code'      => '200',
+        'code'      => 200,
         'message'   => '获取服务列表成功',
         'data'      => $data
     ]);
@@ -111,9 +113,30 @@ class Service extends BasisController {
 
         /* 返回数据 */
         return json([
-            'code'      => '200',
+            'code'      => 200,
             'message'   => '查询成功',
             'data'      => $data
         ]);
+    }
+
+    /* 服务商下拉列表 */
+    public function spinner() {
+        $group = $this->group_model
+            ->order('sort', 'desc')
+            ->field('id, name')
+            ->select();
+
+        if ($group) {
+            return json([
+                'code'      => 200,
+                'message'   => '分组下拉获取成功',
+                'data'      => $group
+            ]);
+        } else {
+            return json([
+                'code'      => 404,
+                'message'   => '分组下拉获取失败',
+            ]);
+        }
     }
 }

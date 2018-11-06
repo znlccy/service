@@ -7,7 +7,6 @@ use think\Model;
 class Contract extends BaseModel
 {
     protected $table = 'tb_contract';
-
     /**
      * @return \think\model\relation\HasOne
      * 关联合同模板
@@ -17,16 +16,21 @@ class Contract extends BaseModel
         return $this->hasOne('ContractTemplate', 'template_no', 'contract_template_no');
     }
 
-    public function getContractTemplateNoAttr($value)
+    public function historyTemplate()
     {
-        $template = ContractTemplate::where('template_no', $value)->field('id,name,template_no')->find();
-        if ($template) {
-            return $template;
-        } else {
-            $template = HistoryTemplate::where('template_no', $value)->field('id,name,template_no')->find();
-            return $template;
-        }
+        return $this->hasOne('HistoryTemplate', 'template_no', 'contract_template_no');
     }
+
+//    public function getContractTemplateNoAttr($value)
+//    {
+//        $template = ContractTemplate::where('template_no', $value)->field('id,name,template_no')->find();
+//        if ($template) {
+//            return $template;
+//        } else {
+//            $template = HistoryTemplate::where('template_no', $value)->field('id,name,template_no')->find();
+//            return $template;
+//        }
+//    }
 
     /**
      * @return BaseModel|\think\model\relation\HasOne

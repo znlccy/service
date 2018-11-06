@@ -442,7 +442,7 @@ class Admin extends BaseController
                 $query->withField("id,name");
             }, 'department' => function ($query) {
                 $query->withField("id,name");
-            }])->field('password',true)->find();
+            }])->hidden('password')->find();
         if ($admin_data['operation_team_id'] === 0) {
             $admin_data['operation_team'] = ['id' => 0, 'name' => '公司'];
         }

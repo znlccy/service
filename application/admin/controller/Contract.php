@@ -181,6 +181,108 @@ class Contract extends BaseController
      * 合同下载
      *
      */
+    public function download_bak()
+    {
+        // 获取参数
+        $id = request()->param('id');
+        // 验证
+        $data = [
+            'id' => $id,
+        ];
+        $result = $this->validate($data,'Contract.download');
+        if (true !== $result) {
+            return json(['code' => 401, 'message' => $result]);
+
+
+        }
+        // 获取合同信息
+        $contract = ContractModel::get($id);
+        if (!empty($contract)) {
+            // 获取订单信息
+            $order_id = $contract->order_id;
+            $order = Order::where('id',$order_id)
+                ->with(['team'])
+                ->find();
+            if (!empty($order)) {
+                // 公司名称
+                $company_name = $order->team->company;
+                // 标的物
+                $order_workplaces = OrderWorkplace::where('order_id', $order->id)
+                    ->with(['workplace', 'workplace.space'])
+                    ->select();
+                $space_data = [];
+                foreach ($order_workplaces as $order_workplace) {
+                    // 获取工位所属空间
+                    $space = $order_workplace->workplace->space;
+                    $space_data[] = $space;
+                }
+                $space_data = array_unique($space_data);
+                // 拼接标的物
+                $target = [];
+                foreach ($space_data as $value) {
+                    $str = $value->name . '【' . $value->address . '】的工位:';
+                    $workplace_arr = [];
+                    foreach ($order_workplaces as $order_workplace) {
+                        $workplace = $order_workplace->workplace;
+                        if ($workplace->space_id == $value->id) {
+                            if ($workplace->type == 1) {
+                                $workplace_arr[] = $workplace->workplace_no .'/'. $order_workplace->workplace_area .'m<sup>2</sup>';
+                            } else {
+                                $workplace_arr[] = $workplace->workplace_no;
+                            }
+                        }
+                    }
+                    $str = $str . join(',',array_values($workplace_arr));
+                    $target[] = $str;
+                }
+                $target_str =join(';',array_values($target));
+                // 合同年限
+                $contract_years = $order->contract_years . '年';
+                // 签署日期
+                $sign_date = $contract->sign_date;
+                // 定金
+                $deposit = $order->deposit .'元';
+                // 自定义内容
+                $custom_contents = json_decode($contract->custom_content, true);
+                $custom = '';
+                if (!empty($custom_contents)) {
+                    foreach ($custom_contents as $k => $custom_content) {
+                        if (is_array($custom_content)) {
+                            foreach ($custom_content as $kk => $value) {
+                                $custom = $custom . $kk . ':'. $value .'<br>';
+                            }
+                        } else {
+                            $custom = $custom . $k . ':'. $custom_content .'<br>';
+                        }
+                    }
+                }
+            } else {
+                return json(['code' => 404, 'message' => '下载失败(未找到该合同相关订单信息)']);
+            }
+        } else {
+            return json(['code' => 404, 'message' => '下载失败(未找到该合同相关信息)']);
+        }
+        $mpdf = new Mpdf();
+        $mpdf->autoScriptToLang = true;
+        $mpdf->autoLangToFont = true;
+        $html = file_get_contents(PUBLIC_PATH . DS ."contract-temp". DS ."contract-template.html");
+        $rich_text = $contract->template->rich_text;
+        dummp($rich_text);die;
+        // 替换html中的占位符
+        $html = str_replace('{company_name}', $company_name, $html);
+        $html = str_replace('{workplace}', $target_str, $html);
+        $html = str_replace('{contract_years}', $contract_years, $html);
+        $html = str_replace('{deposit}', $deposit, $html);
+        $html = str_replace('{custom_content}', $custom, $html);
+        $html = str_replace('{sign_date}', $sign_date, $html);
+
+        $mpdf->WriteHTML($html);
+        $mpdf->Output('contract.pdf', 'D');
+    }
+
+    /**
+     * 合同下载
+     */
     public function download()
     {
         // 获取参数
@@ -243,11 +345,17 @@ class Contract extends BaseController
                 // 定金
                 $deposit = $order->deposit .'元';
                 // 自定义内容
-                $custom_content = json_decode($contract->custom_content, true);
+                $custom_contents = json_decode($contract->custom_content, true);
                 $custom = '';
-                if (!empty($custom_content)) {
-                    foreach ($custom_content as $k => $value) {
-                        $custom = $custom . $k . ':'. $value .'<br>';
+                if (!empty($custom_contents)) {
+                    foreach ($custom_contents as $k => $custom_content) {
+                        if (is_array($custom_content)) {
+                            foreach ($custom_content as $kk => $value) {
+                                $custom = $custom . $kk . ':'. $value .'<br>';
+                            }
+                        } else {
+                            $custom = $custom . $k . ':'. $custom_content .'<br>';
+                        }
                     }
                 }
             } else {
@@ -260,9 +368,10 @@ class Contract extends BaseController
         $mpdf->autoScriptToLang = true;
         $mpdf->autoLangToFont = true;
         $html = file_get_contents(PUBLIC_PATH . DS ."contract-temp". DS ."contract-template.html");
+//        $rich_text = $contract->template->rich_text;
+//        dummp($rich_text);die;
         // 替换html中的占位符
         $html = str_replace('{company_name}', $company_name, $html);
-
         $html = str_replace('{workplace}', $target_str, $html);
         $html = str_replace('{contract_years}', $contract_years, $html);
         $html = str_replace('{deposit}', $deposit, $html);

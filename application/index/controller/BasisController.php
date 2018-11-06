@@ -12,6 +12,7 @@ use think\Controller;
 use think\facade\Hook;
 use think\Request;
 use think\facade\Session;
+use think\App;
 
 class BasisController extends Controller {
 
@@ -28,15 +29,22 @@ class BasisController extends Controller {
         'Index' => ['index'],
         'Verify' => ['attain'],
         'Sms' => ['attain'],
-        'Charge' => ['pay', 'notify_return', 'success_return']
+        'Charge' => ['pay', 'notify_return', 'success_return'],
+        'Space' => ['index', 'detail', 'select'],
+        'Service' => ['index', 'detail'],
+        'Reservation' => ['index', 'detail'],
+        'Repair' => ['index', 'detail'],
+        'Venue' => ['index', 'detail'],
+        'Workplace' => ['index'],
+        'Activity' => ['index', 'detail'],
     ];
 
-    public function __construct(Request $request = null)
+    public function __construct(App $app = null)
     {
-        parent::__construct();
+        parent::__construct($app);
         Hook::listen('response_send');
-        $this->controller =  $request->controller();
-        $this->action =  $request->action();
+        $this->controller =  request()->controller();
+        $this->action =  request()->action();
 
         //过滤不需要登陆的行为
         if (isset($this->except_auth[$this->controller]) && in_array($this->action, $this->except_auth[$this->controller])) {
@@ -46,7 +54,7 @@ class BasisController extends Controller {
             if (session('?user')) {
                 /* 验证token */
                 // 获取客户端传来的token
-                $client_token = $request->header('access-token');
+                $client_token = request()->header('access-token');
                 if ( !(!empty($client_token) && $this->checkToken($client_token)) ) {
                     return $this->returnMsg(401, '请先登录系统');
                 }

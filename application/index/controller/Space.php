@@ -54,7 +54,7 @@ class Space extends BasisController
      */
     public function select()
     {
-        $space = SpaceModel::field('id,name')->select();
+        $space = SpaceModel::field('id,name,short_description,description')->select();
         if (!empty($space)) {
             return json(['code' => 200, 'message' => '获取下拉列表成功', 'data' => $space]);
         } else {

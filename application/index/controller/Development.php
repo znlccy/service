@@ -7,7 +7,7 @@ use think\Request;
 use app\index\model\Development as DevelopmentModel;
 use app\index\model\TeamChange;
 
-class Development extends Controller
+class Development extends BasisController
 {
     /**
      * 显示资源列表

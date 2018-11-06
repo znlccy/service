@@ -42,7 +42,7 @@ class Space extends BaseController
         if ($name) {
             $conditions[] = ['name', 'like', '%' . $name . '%'];
         }
-        $space = SpaceModel::with(['operation_team'])->where($conditions)
+        $space = SpaceModel::with('operation_team')->where($conditions)
             ->order('id')
             ->paginate($page_size, false, ['page' => $jump_page])
             ->each(function($item){
@@ -189,7 +189,7 @@ class Space extends BaseController
         if (true !== $result) {
             return json(['code' => 401, 'message' => $result]);
         }
-        $detail = SpaceModel::with(['operationTeam','province','city','district'])->where('id', $id)->find();
+        $detail = SpaceModel::with(['operation_team','province','city','district'])->where('id', $id)->find();
         $detail['enter_rate'] = $this->rate($detail['id']);
 
         if ($detail) {

@@ -12,7 +12,7 @@ use think\Db;
 use app\admin\model\Space;
 use app\admin\model\Department;
 
-class OperationTeam extends Controller
+class OperationTeam extends BaseController
 {
     /**
      * 运营团队列表
@@ -27,6 +27,7 @@ class OperationTeam extends Controller
         $id = request()->param('id');
         $name = request()->param('name');
         $leader_id = request()->param('leader_id');
+        $status = request()->param('status');
         // 参数验证
         $data = [
             'id' => $id,
@@ -52,9 +53,24 @@ class OperationTeam extends Controller
             $conditions[] = ['leader_id', '=', $leader_id];
         }
 
+        if (is_null($status)) {
+            $conditions[] = ['status', 'in',[0,1]];
+        } else {
+            switch ($status) {
+                case 0:
+                    $conditions[] = ['status', '=', $status];
+                    break;
+                case 1:
+                    $conditions[] = ['status', '=', $status];
+                    break;
+                default:
+                    break;
+            }
+        }
+
         $teams = OperationTeamModel::where($conditions)
             ->with(['space' => function ($query) {
-                $query->field("id,name");
+                $query->field("id,name,operation_team_id");
             },'leader' => function ($query) {
                 $query->field("id,nickname");
             }])
@@ -79,6 +95,7 @@ class OperationTeam extends Controller
         $leader_id = request()->param('leader_id/d', 0);
         $description = request()->param('description');
         $management_type = request()->param('management_type', 0);
+        $status = request()->param('status', 1);
         // 验证参数
         $data = [
             'id'               => $id,
@@ -86,6 +103,7 @@ class OperationTeam extends Controller
             'leader_id'        => $leader_id,
             'description'      => $description,
             'management_type'  => $management_type,
+            'status'  => $status,
         ];
 
         $result = $this->validate($data, 'OperationTeam');
@@ -115,7 +133,7 @@ class OperationTeam extends Controller
                     'description' => $name,
                     'team_id' => $team->id
                 ];
-                $department->save($department_data,['operation_team_id']);
+                $department->save($department_data,['operation_team_id' => $team->id]);
             }
             if ($result) {
                 if (empty($id)) {
@@ -155,7 +173,7 @@ class OperationTeam extends Controller
         }])->find();
 
         if ($detail) {
-            unset($detail->leader_id);
+//            unset($detail->leader_id);
             return json(['code' => 200, 'message' => '获取详情成功!', 'data' => $detail]);
         } else {
             return json(['code' => 404, 'message' => '获取详情失败!']);
@@ -306,7 +324,7 @@ class OperationTeam extends Controller
      * 运营团队下拉接口
      */
     public function select() {
-        $team = OperationTeamModel::field('id,name')->select()->toArray();
+        $team = OperationTeamModel::field('id,name')->where('status', '=', 1)->select()->toArray();
         array_unshift($team, ['id' => 0, 'name' => '公司']);
         if (!empty($team)) {
             return json(['code' => 200, 'message' => '获取列表成功', 'data' => $team]);

@@ -17,7 +17,7 @@ use think\Controller;
 use think\Db;
 use think\Exception;
 
-class Investigate extends Controller {
+class Investigate extends BasisController {
 
     /* 声明调查模型 */
     protected $investigate_model;

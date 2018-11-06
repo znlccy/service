@@ -10,7 +10,7 @@ namespace app\index\controller;
 
 use app\admin\model\Information;
 use app\index\model\UserInformation;
-use think\Config;
+use think\facade\Config;
 use think\Db;
 use think\Loader;
 use think\facade\Session;

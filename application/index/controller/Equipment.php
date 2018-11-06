@@ -6,7 +6,7 @@ use think\Controller;
 use think\Request;
 use app\admin\model\Equipment as EquipmentModel;
 
-class Equipment extends Controller
+class Equipment extends BasisController
 {
     /**
      * 显示资源列表

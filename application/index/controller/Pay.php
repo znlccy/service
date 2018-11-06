@@ -14,7 +14,7 @@ use app\index\model\Invoice;
 use think\Controller;
 use think\Db;
 
-class Pay extends Controller
+class Pay extends BasisController
 {
     public function index()
     {

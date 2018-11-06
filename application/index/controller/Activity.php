@@ -12,8 +12,9 @@ namespace app\index\controller;
 use app\index\model\Activity  as ActivityModel;
 use app\index\validate\Activity as ActivityValidate;
 use app\index\model\UserActivity as UserActivityModel;
-use think\Request;
-use think\Session;
+use think\App;
+use think\Controller;
+use think\facade\Session;
 
 class Activity extends BasisController {
     /**
@@ -40,11 +41,9 @@ class Activity extends BasisController {
      */
     protected $activity_page;
 
-    /**
-     * 默认构造函数
-     */
-    public function __construct(Request $request = null) {
-        parent::__construct($request);
+    public function __construct(App $app = null)
+    {
+        parent::__construct($app);
         $this->activity_model = new ActivityModel();
         $this->user_activity_model = new UserActivityModel();
         $this->activity_validate = new ActivityValidate();
@@ -69,7 +68,7 @@ class Activity extends BasisController {
         //验证结果
         $result   = $this->activity_validate->scene('index')->check($validate_data);
         if (!$result) {
-            return json(['code' => '401', 'message' => $this->activity_validate->getError()]);
+            return json(['code' => 401, 'message' => $this->activity_validate->getError()]);
         }
 
         //获取数据
@@ -78,7 +77,7 @@ class Activity extends BasisController {
             ->paginate($page_size, false, ['page' => $jump_page]);
 
         /* 返回客户端数据 */
-        return json(['code'=> '200', 'message' => '获取活动列表成功', 'data' => $active]);
+        return json(['code'=> 200, 'message' => '获取活动列表成功', 'data' => $active]);
     }
 
     /**
@@ -91,7 +90,7 @@ class Activity extends BasisController {
         // 检查token是否有效 获取当前用户id
         $user_id = NULL;
         $client_token = request()->header('access_token');
-        if ( $this ->check_token($client_token) ){
+        if ( $this ->checkToken($client_token) ){
             $user_id = session('user.id');
         }
 
@@ -103,7 +102,7 @@ class Activity extends BasisController {
         //验证结果
         $result   = $this->activity_validate->scene('detail')->check($validate_data);
         if (!$result) {
-            return json(['code' => '401', 'message' => $this->activity_validate->getError()]);
+            return json(['code' => 401, 'message' => $this->activity_validate->getError()]);
         }
 
         //获取该活动消息
@@ -194,7 +193,7 @@ class Activity extends BasisController {
         //验证结果
         $result   = $this->activity_validate->scene('apply')->check($validate_data);
         if (!$result) {
-            return json(['code' => '401', 'message' => $this->activity_validate->getError()]);
+            return json(['code' => 401, 'message' => $this->activity_validate->getError()]);
         }
 
         //判断用户是否已经登陆
@@ -203,7 +202,7 @@ class Activity extends BasisController {
             // 获取服务端存储的token
             $server_token = Session::get('access_token');
             if ($server_token != $client_token) {
-                return json(['code' => '302', 'message' => '请先登录']);
+                return json(['code' => 302, 'message' => '请先登录']);
             }
         }
 
@@ -211,7 +210,7 @@ class Activity extends BasisController {
         $user_id = session('user.id');
         $active_result  = $this->user_activity_model->where(['user_id' => $user_id, 'activity_id' => $activity_id])->find();
         if ($active_result) {
-            return json(['code' => '400', 'message' => '您已报名该活动,无需重复提交']);
+            return json(['code' => 400, 'message' => '您已报名该活动,无需重复提交']);
         }
 
         //获取活动消息
@@ -256,9 +255,9 @@ class Activity extends BasisController {
         if ($result) {
             // 活动人数+1
             $this->activity_model->where(['id' => $activity_id])->setInc('register');
-            return json(['code' => '200', 'message' => '提交成功']);
+            return json(['code' => 200, 'message' => '提交成功']);
         } else {
-            return json(['code' => '404', 'message' => '报名失败']);
+            return json(['code' => 404, 'message' => '报名失败']);
         }
     }
 }
